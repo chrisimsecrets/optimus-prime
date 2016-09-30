@@ -1,0 +1,8 @@
+/vendor
+.env
+/node_modules
+Homestead.yaml
+Homestead.json
+public/uploads
+public/skypephp_cache
+.idea

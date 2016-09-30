@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  },
+  "dependencies": {
+    "admin-lte": "^2.3.3",
+    "bootstrap-sass": "^3.0.0",
+    "font-awesome": "^4.6.3",
+    "jquery": "^1.11.3",
+    "laravel-elixir": "^4.0.0"
+  }
+}
