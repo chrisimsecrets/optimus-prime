@@ -18,13 +18,21 @@
             <li class="header">MAIN NAVIGATION</li>
 
             <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
-            <li><a href="{{ url('/write') }}"><i class="fa fa-edit"></i> <span>Write</span>
-                    <small class="label pull-right bg-blue-gradient">Pro</small>
-                </a></li>
+            <li><a href="{{ url('/write') }}"><i class="fa fa-edit"></i> <span>Write</span></a></li>
             <li><a href="{{ url('/allpost') }}"><i class="fa fa-copy"></i> <span>All posts</span></a></li>
-            <li><a href="{{ url('/chatbot') }}"><i class="fa fa-comment"></i> <span>FB Chat Bot</span>
-                    <small class="label pull-right bg-green">Exclusive</small>
-                </a></li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-comment"></i>
+                    <span>Chat Bot</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <ul class="treeview-menu" style="display: none">
+                    <li class="active"><a href="{{ url('/fb-bot') }}"><i class="fa fa-facebook"></i> <span>FB</span></a></li>
+                    <li><a href="{{ url('/slack-bot') }}"><i class="fa fa-slack"></i> <span>Slack</span></a></li>
+                </ul>
+            </li>
 
             <li class="treeview">
                 <a href="#">

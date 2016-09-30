@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title','Chat Bot')
+@section('title','FB Bot')
 @section('content')
     <div class="wrapper">
         @include('components.navigation')
         @include('components.sidebar')
-        <div id="chatbot"></div>
+        <div id="fb-bot"></div>
         <div class="content-wrapper">
             <section class="content">
                 <div class="row">
@@ -12,7 +12,7 @@
                         <!-- general form elements -->
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Chat Bot</h3>
+                                <h3 class="box-title">FB Bot</h3>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
@@ -48,7 +48,7 @@
                         <!-- /.box -->
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Chat Bot Config</h3>
+                                <h3 class="box-title">FB Bot Config</h3>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->

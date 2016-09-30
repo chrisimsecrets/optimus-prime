@@ -39119,19 +39119,19 @@ if (document.getElementById('slist')) {
     });
 }
 
-//chat bot
+// fb chat bot
 // add new question and ans
-if (document.getElementById('chatbot')) {
+if (document.getElementById('fb-bot')) {
     $('#addData').click(function () {
 
-        var quetion = $('#question').val();
+        var question = $('#question').val();
         var answer = $('#answer').val();
         var pageId = $('#pages').val();
         $.ajax({
             type: 'POST',
             url: 'addquestion',
             data: {
-                'question': quetion,
+                'question': question,
                 'answer': answer,
                 'pageId':pageId
             },
@@ -39148,7 +39148,7 @@ if (document.getElementById('chatbot')) {
     });
 }
 
-// delete question
+// delete fb bot question
 
 if (document.getElementById('chatbot')) {
     $('.chatbotdel').click(function () {
@@ -39186,6 +39186,68 @@ if (document.getElementById('chatbot')) {
         });
     });
 }
+
+// slack chat bot
+if (document.getElementById('slack-bot')) {
+    // add new question and ans
+    $('#add-slack-question').submit(function (e) {
+        if ($('#question').val() === '') {
+            swal("Error", 'Message field can not be empty.', "error");
+        } else if ($('#answer').val() == '') {
+            swal("Error", 'Reply field can not be empty.', "error");
+        } else if ($('#channel').val() == '') {
+            swal("Error", 'Channel field can not be empty.', "error");
+        } else {
+            $.post($(this).attr('action'), {
+                question: $('#question').val(),
+                answer: $('#answer').val(),
+                channel: $('#channel').val(),
+                accuracy: $('#accuracy').val()
+            }, function () {
+                swal('Success!', 'You question added', 'success');
+                location.reload();
+            });
+        }
+
+        e.preventDefault();
+    });
+
+    // delete question
+    $('.delete-slack-question').click(function (e) {
+        var $this = $(this);
+
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            $.post('delete-slack-question', {id: $this.data('id')}, function () {
+                swal("Done!", "Deleted successfully!", "success");
+                location.reload();
+            });
+        });
+
+        e.preventDefault();
+    });
+
+    // update bot config
+    $('#bot-config-form').submit(function (e) {
+        $.post($(this).attr('action'), {
+            matchAcc: $('#matchAcc')
+        }, function () {
+            swal('Success!', 'Slack bot config updated.', 'success');
+            location.reload();
+        });
+
+        e.preventDefault();
+    });
+}
+
 
 if (document.getElementById('slog')) {
     $('.logdel').click(function () {
@@ -39541,4 +39603,5 @@ if (document.getElementById('skypephone')) {
 
 
 }
+
 //# sourceMappingURL=app.js.map

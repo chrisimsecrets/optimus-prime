@@ -2,27 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
+use Validator;
 use App\chatbot;
+use App\SlackBot;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class ChatBotController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function fb()
     {
-        $data = \App\chatbot::all();
-        return view('chatbot', compact('data'));
+        $data = chatbot::all();
+
+        return view('fb_bot', compact('data'));
+    }
+
+    public function slack()
+    {
+        $data = SlackBot::all();
+
+        return view('slack_bot', compact('data'));
     }
 
     /**
      * @param Request $re
      * @return string
      */
-    public function addQuestion(Request $re)
+    public function addQuestion(Request $re, $bot)
     {
         /** @var string $question */
         $question = $re->question;
@@ -30,7 +39,7 @@ class ChatBotController extends Controller
         $answer = $re->answer;
 
         try {
-            $data = new \App\chatbot();
+            $data = new chatbot();
             $data->question = $question;
             $data->answer = $answer;
             $data->pageId = $re->pageId;
@@ -50,11 +59,54 @@ class ChatBotController extends Controller
         /** @var int $id */
         $id = $re->id;
         try {
-            \App\chatbot::where('id', $id)->delete();
+            chatbot::where('id', $id)->delete();
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public function addSlackQuestion(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'question' => 'required',
+            'answer' => 'required',
+            'channel' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return 'error';
+        }
+
+        SlackBot::create($request->all());
+    }
+
+    public function deleteSlackQuestion(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return 'error';
+        }
+
+        SlackBot::findOrFail($request->id)->delete();
+    }
+
+    public function updateBotConfig(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'matchAcc' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return 'error';
+        }
+
+        Setting::where('field', 'slackBotMatchAcc')->update([
+            'value' => $request->matchAcc
+        ]);
     }
 
     /**

@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\Data;
+use App\SlackBot;
+
 Route::get('/', function () {
     return redirect('home');
 });
-Route::any('/hook', 'Hook@index');
+
+Route::any('/hook', 'Hook@fb');
+
+Route::any('/slack-hook', 'Hook@slack');
 
 Route::get('/fbconnect', 'Settings@fbconnect');
 
@@ -121,9 +127,13 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/delete/fbpublicpage','FacebookController@deletePage');
 
 
-        Route::get('/chatbot', 'ChatBotController@index');
-        Route::post('/addquestion', 'ChatBotController@addQuestion');
-        Route::post('/delquestion', 'ChatBotController@delQuestion');
+        Route::get('/fb-bot', 'ChatBotController@fb');
+        Route::get('/slack-bot', 'ChatBotController@slack');
+        Route::post('/addquestion', 'ChatBotController@addQuestion'); // fb bot
+        Route::post('/delquestion', 'ChatBotController@delQuestion'); // fb bot
+        Route::post('/add-slack-question', 'ChatBotController@addSlackQuestion');
+        Route::post('/delete-slack-question', 'ChatBotController@deleteSlackQuestion');
+        Route::post('/update-slack-bot-config', 'ChatBotController@updateBotConfig');
 
 
         Route::get('/hook/test', 'Hook@test');

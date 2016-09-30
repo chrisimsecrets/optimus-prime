@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css">
     {{--Plugins CSS--}}
 
     <link rel="stylesheet" href="{{ url(elixir('css/plugins.css')) }}">
@@ -53,6 +54,8 @@
 </script>
 
 <script src="{{ url(elixir('js/app.js')) }}"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
@@ -60,6 +63,7 @@
 <script src="{{url('/opt/vfs_fonts.js')}}"></script>
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
 <script src="{{url('/opt/intro/intro.js')}}"></script>
 <script type="text/javascript" src="{{url('/opt/emoji/emojionearea.min.js')}}"></script>
 
@@ -171,6 +175,7 @@
 
 
         var table = $('#mytable').DataTable({
+            responsive: true,
 
             dom: '<""flB>tip',
             buttons: [

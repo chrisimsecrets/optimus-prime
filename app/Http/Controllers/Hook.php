@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\chatbot;
-use Guzzle\Http\Client;
+use App\SlackBot;
+use Facebook\HttpClients\FacebookGuzzleHttpClient;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class Hook extends Controller
 {
@@ -15,7 +13,7 @@ class Hook extends Controller
      * @return mixed
      * web hook for facebook chat bot
      */
-    public function index(Request $re)
+    public function fb(Request $re)
     {
 
 
@@ -91,6 +89,39 @@ class Hook extends Controller
             Prappo::notify('Notification', "You got a facebook notification", 'https://facebook.com/', 'fbnotify', $time);
         }
 
+    }
+
+    public function slack(Request $request)
+    {
+        if ($request->user_name === 'slackbot') {
+            return null;
+        }
+
+        $messages = SlackBot::where('channel', '#' . $request->channel_name)->get();
+
+        $defaultAccuracy = Data::get('slackBotMatchAcc');
+
+        $text = '';
+
+        foreach ($messages as $message) {
+            $questions = explode('|', $message->question);
+
+            foreach ($questions as $question) {
+                similar_text(strtolower($question), strtolower($request->text), $accuracy);
+
+                if (($message->accuracy !== '' && $accuracy >= $message->accuracy)
+                    || $accuracy >= $defaultAccuracy
+                ) {
+                    $text = "<@{$request->user_name}> {$message->answer}";
+                }
+            }
+        }
+
+        $response = [
+            'text' => $text
+        ];
+
+        return stripslashes(json_encode($response));
     }
 
 }
