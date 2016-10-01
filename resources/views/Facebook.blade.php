@@ -74,8 +74,8 @@
                                                     <span class="label label-warning pull-right">{{$group['privacy']}}
                                                         group</span></a>
                                                 <span class="product-description">
-                          Owner : <a href="http://facebook.com/{{$group['owner']['id']}}"
-                                     target="_blank"> {{$group['owner']['name']}}</a>
+                          Owner :<a href="http://facebook.com/@if(isset($group['owner']['id'])) {{$group['owner']['id']}} @endif"
+                                     target="_blank">@if(isset($group['owner']['name'])) {{$group['owner']['name']}} @endif</a>
                         </span>
                                             </div>
                                         </li>
