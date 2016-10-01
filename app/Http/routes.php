@@ -74,6 +74,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/tusave', 'Settings@tuSave');
         Route::post('/settings/notifications', 'Settings@notifySave');
         Route::post('/skypesave', 'Settings@skypeSave');
+        Route::post('/save/fb/bot/config','Settings@fbBotConfigSave');
 
         // deleting
         Route::post('/fbdel', 'FacebookController@fbDelete');
