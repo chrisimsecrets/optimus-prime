@@ -29,7 +29,7 @@
                 </a>
 
                 <ul class="treeview-menu" style="display: none">
-                    <li class="active"><a href="{{ url('/fb-bot') }}"><i class="fa fa-facebook"></i> <span>FB</span></a></li>
+                    <li><a href="{{ url('/fb-bot') }}"><i class="fa fa-facebook"></i> <span>FB</span></a></li>
                     <li><a href="{{ url('/slack-bot') }}"><i class="fa fa-slack"></i> <span>Slack</span></a></li>
                 </ul>
             </li>
@@ -89,6 +89,7 @@
                 </ul>
 
             </li>
+            
             <li><a href="{{ url('/tumblr') }}"><i class="fa fa-tumblr"></i> <span>Tumblr</span></a></li>
             <li><a href="{{ url('/wordpress') }}"><i class="fa fa-wordpress"></i> <span>Wordpress</span></a></li>
             {{--<li class="treeview">--}}

@@ -78,7 +78,25 @@ class ChatBotController extends Controller
             return 'error';
         }
 
-        SlackBot::create($request->all());
+        $channels = [];
+
+        foreach ($request->all() as $field => $value) {
+            if ($field === 'channel') {
+                $values = preg_split( "/,/", $value);
+
+                foreach ($values as $v) {
+                    $channels[] = '#' . ltrim(trim($v), '#');
+                }
+            }
+        }
+
+        $questions = [];
+
+        foreach ($channels as $channel) {
+            $questions[] = array_merge($request->all(), ['channel' => $channel]);
+        }
+
+        SlackBot::insert($questions);
     }
 
     public function deleteSlackQuestion(Request $request)

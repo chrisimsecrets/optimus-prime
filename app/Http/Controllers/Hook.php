@@ -104,10 +104,10 @@ class Hook extends Controller
         $text = '';
 
         foreach ($messages as $message) {
-            $questions = explode('|', $message->question);
+            $questions = preg_split( "/,/", $message->question);
 
             foreach ($questions as $question) {
-                similar_text(strtolower($question), strtolower($request->text), $accuracy);
+                similar_text(strtolower(trim($question)), strtolower(trim($request->text)), $accuracy);
 
                 if (($message->accuracy !== '' && $accuracy >= $message->accuracy)
                     || $accuracy >= $defaultAccuracy

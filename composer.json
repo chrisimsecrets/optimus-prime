@@ -11,7 +11,8 @@
         "dg/twitter-php": "^3.5",
         "tumblr/tumblr": "^0.2.0",
         "pusher/pusher-php-server": "^2.4",
-        "rachidlaasri/laravel-installer": "1.4.1"
+        "rachidlaasri/laravel-installer": "1.4.1",
+        "whatsapp/chat-api": "v3.2.0.1"
 
     },
     "require-dev": {

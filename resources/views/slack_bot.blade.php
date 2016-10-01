@@ -29,7 +29,7 @@
                                         <label for="question">Message</label>
                                         <input type="text" class="form-control" id="question" placeholder="User Message">
                                         <p class="help-block">
-                                            Separate using "|" (ex: hi | hello) for multiple message.
+                                            Separate using comma (ex: hi, hello) for multiple message.
                                         </p>
                                     </div>
 
@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <label for="channel">For Channel</label>
                                         <input type="text" class="form-control" id="channel" placeholder="#channel-name">
-                                        <p class="help-block">Must add # at the beginning of the channel name.</p>
+                                        <p class="help-block">Separate using comma (ex: #marketing, #developer) for multiple channel.</p>
                                     </div>
 
                                     <div class="form-group">
@@ -71,9 +71,9 @@
                             <div class="box-body">
                                 <ul>
                                     <li>
-                                        You can mention a user. You can also add a display name using pipe ( <strong>|</strong> ) sign.<br>
+                                        You can mention a user.<br>
 
-                                        <code>Hey <strong>{{ '<@john|Denver>' }}</strong>, did you see my file?</code>
+                                        <code>Hey <strong>{{ '<@john>' }}</strong>, did you see my file?</code>
                                     </li>
 
                                     <li>
