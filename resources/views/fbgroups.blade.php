@@ -40,8 +40,8 @@
                                             @if(isset($content['id']))
                                                 <div class="post">
                                                     <div class="user-block">
-                                                        <img class="img-circle img-bordered-sm"
-                                                             src="{{ $content['from']['picture']['data']['url'] }}"
+                                                         <img class="img-circle img-bordered-sm"
+                                                             src="@if(isset($content['from']['picture']['data']['url'])){{ $content['from']['picture']['data']['url'] }} @else /images/optimus/social/me.png @endif"
                                                              alt="user image">
                                                         <span class='username'>
                                       <a target="_blank"
