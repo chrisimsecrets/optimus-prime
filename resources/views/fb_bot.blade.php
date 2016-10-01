@@ -125,3 +125,29 @@
     <script src="{{url('/opt/sweetalert.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
 @endsection
+@section('js')
+<script>
+    $('#saveConfig').click(function () {
+        $.ajax({
+            type:'POST',
+            url:'{{url('/save/fb/bot/config')}}',
+            data:{
+                'matchAcc':$('#matchAcc').val(),
+                'exMsg':$('#exMsg').val()
+            },
+            success:function (data) {
+                if(data=='success'){
+                    swal('Success',"Settings updated",'success');
+                }
+                else{
+                    swal('Error',data,'error');
+                }
+            },
+            error:function(data){
+                swal('error',data,'error');
+            }
+        })
+    })
+</script>
+@endsection
+
