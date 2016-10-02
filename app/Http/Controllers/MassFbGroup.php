@@ -81,7 +81,7 @@ class MassFbGroup extends Controller
             \App\MassFbGroup::where('id',$re->id)->delete();
             return "success";
         }
-        } catch (\Exception $e) {
+        catch (\Exception $e) {
             return $e->getMessage();
         }
     }
