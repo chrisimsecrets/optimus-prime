@@ -53,7 +53,8 @@
                                         <td>
                                             {{$group->groupId}}
                                         </td>
-                                        <td><a href="#"><span class="badge bg-red"><i class="fa fa-times"></i> Delete</span></a></td>
+                                         <td><a href=""><span class="badge bg-red" data-id={{$group->id}}><i class="fa fa-times"></i> Delete</span></a></td>
+                                    </tr>
                                     </tr>
                                         @endforeach
 
@@ -96,4 +97,29 @@
 @section('css')
     <script src="{{url('/opt/sweetalert.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
+@endsection
+@section('js')
+<script>
+    $('.bg-red').click(function(){
+        var id = $(this).attr('data-id');
+        $.ajax({
+            type:'POST',
+            url:'{{url('/fbmassgroupdel')}}',
+            data:{
+                'id':id
+            },
+            success:function(data){
+                if(data == "success"){
+                    swal("Success","Deleted",'success');
+                }
+                else{
+                    swal('Error',data,'error');
+                }
+            },
+            error:function(data){
+                console.log(data);
+            }
+        });
+    });
+</script>
 @endsection
