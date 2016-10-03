@@ -106,6 +106,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/tusync', 'Settings@tuSync');
         Route::get('/fbmassgrouppost', 'MassFbGroup@index');
         Route::post('/savepublicgroup', 'MassFbGroup@saveGroup');
+        Route::post('/fbmassgroupdel', 'MassFbGroup@deleteGroup');
         Route::post('/posttomassgroup', 'MassFbGroup@massPost');
 
         Route::get('/conversations', 'Conversation@index');
