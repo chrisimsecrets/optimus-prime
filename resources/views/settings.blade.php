@@ -14,39 +14,39 @@
                     <div class="col-md-6">
                         <div class="box box-primary">
                             <div class="box-header with-border" align="center">
-                                <h3 class="box-title"><i class="fa fa-tumblr"></i> Tumblr configuration</h3>
+                                <h3 class="box-title"><i class="fa fa-tumblr"></i> Tumblr Settings</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
 
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="tuConKey">Tumblr Consumer Key</label>
+                                    <label for="tuConKey">Consumer Key</label>
                                     <input class="form-control" id="tuConKey" value="{{ $tuConKey }}"
-                                           placeholder="Tumblr Consumer Key" type="text" required>
+                                           placeholder="Your tumblr consumer key" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tuConSec">Tumblr Consumer Secret</label>
+                                    <label for="tuConSec">Consumer Secret</label>
                                     <input class="form-control" value="{{ $tuConSec }}" id="tuConSec"
-                                           placeholder="Tumblr Consumer Secret" type="text">
+                                           placeholder="Your tumblr consumer secret" type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tuToken">Tumblr Token</label>
+                                    <label for="tuToken">Token</label>
                                     <input class="form-control" value="{{ $tuToken }}" id="tuToken"
-                                           placeholder="Tumblr Token"
+                                           placeholder="Your tumblr token"
                                            type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tuTokenSec">Tumblr Token Secret</label>
+                                    <label for="tuTokenSec">Token Secret</label>
                                     <input class="form-control" value="{{ $tuTokenSec }}" id="tuTokenSec"
-                                           placeholder="Tumblr Token Secret" type="text">
+                                           placeholder="Your tumblr token secret" type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tuDefBlog">Tumblr Defautl Blog name</label>
+                                    <label for="tuDefBlog">Default Blog Name</label>
                                     <input disabled class="form-control" value="{{ $tuDefBlog }}" id=""
-                                           placeholder="Tumblr Defautl blog name" type="text">
+                                           placeholder="Your tumblr default blog name" type="text">
 
                                 </div>
 
@@ -72,39 +72,39 @@
                     <div class="col-md-6">
                         <div class="box box-primary">
                             <div class="box-header with-border" align="center">
-                                <h3 class="box-title"><i class="fa fa-twitter"></i> Twitter configuration</h3>
+                                <h3 class="box-title"><i class="fa fa-twitter"></i> Twitter Settings</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
 
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="twConKey">Twitter Consumer Key</label>
+                                    <label for="twConKey">Consumer Key</label>
                                     <input class="form-control" value="{{ $twConKey }}" id="twConKey"
-                                           placeholder="Twitter Consumer Key" type="text">
+                                           placeholder="Your twitter consumer key" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <label for="twConSec">Twitter Consumer Secret</label>
+                                    <label for="twConSec">Consumer Secret</label>
                                     <input class="form-control" value="{{ $twConSec }}" id="twConSec"
-                                           placeholder="Twitter Consumer Secret" type="text">
+                                           placeholder="Your twitter consumer secret" type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="twToken">Twitter Token</label>
+                                    <label for="twToken">Token</label>
                                     <input class="form-control" value="{{ $twToken }}" id="twToken"
-                                           placeholder="Twitter Token"
+                                           placeholder="Your twitter token"
                                            type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="twTokenSec">Twitter Token Secret</label>
+                                    <label for="twTokenSec">Token Secret</label>
                                     <input class="form-control" value="{{ $twTokenSec }}" id="twTokenSec"
-                                           placeholder="Twitter Token Secret" type="text">
+                                           placeholder="Your twitter token secret" type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="twUser">Twitter User Name</label>
+                                    <label for="twUser">Username</label>
                                     <input class="form-control" value="{{ $twUser }}" id="twUser"
-                                           placeholder="Twitter User name"
+                                           placeholder="Your twitter username"
                                            type="text">
                                 </div>
 
@@ -121,32 +121,32 @@
                     <div class="col-md-6">
                         <div class="box box-primary">
                             <div class="box-header with-border" align="center">
-                                <h3 class="box-title"><i class="fa fa-facebook"></i> Facebook configuration</h3>
+                                <h3 class="box-title"><i class="fa fa-facebook"></i> Facebook Settings</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
 
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="fbAppId">Facebook App ID</label>
+                                    <label for="fbAppId">App ID</label>
                                     <input class="form-control" value="{{ $fbAppId }}" id="fbAppId"
-                                           placeholder="Facebook App ID"
+                                           placeholder="Your facebook app id"
                                            type="text">
                                 </div>
                                 <div class="form-group">
-                                    <label for=fbAppSec">Facebook App Secret</label>
+                                    <label for=fbAppSec">App Secret</label>
                                     <input class="form-control" value="{{ $fbAppSec }}" id="fbAppSec"
-                                           placeholder="Facebook App Secret" type="text">
+                                           placeholder="Your facebook app secret" type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for=fbAppSec">Facebook Token</label>
+                                    <label for=fbAppSec">Token</label>
                                     <input class="form-control" value="{{ $fbToken }}" id="fbToken"
-                                           placeholder="Facebook Token"
+                                           placeholder="Your facebook token"
                                            type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="fbPages">Facebook Default page</label>
+                                    <label for="fbPages">Default page</label>
                                     <select id="fbPages">
                                         @foreach($fbPages as $pages)
                                             <option value="{{ $pages->pageId }}">{{ $pages->pageName }}</option>
@@ -166,28 +166,28 @@
                     <div class="col-md-6">
                         <div class="box box-primary">
                             <div class="box-header with-border" align="center">
-                                <h3 class="box-title"><i class="fa fa-wordpress"></i> Wordpress configuration</h3>
+                                <h3 class="box-title"><i class="fa fa-wordpress"></i> Wordpress Settings</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
 
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="wpUrl">Wordpress Site Url</label>
+                                    <label for="wpUrl">Site Url</label>
                                     <input class="form-control" value="{{$wpUrl}}" id="wpUrl"
-                                           placeholder="Wordpress Site Url"
+                                           placeholder="Your wordpress site url"
                                            type="text">
                                 </div>
                                 <div class="form-group">
-                                    <label for="wpUser">Wordpress Username</label>
+                                    <label for="wpUser">Username</label>
                                     <input class="form-control" id="wpUser" value="{{$wpUser}}"
-                                           placeholder="Wordpress Username"
+                                           placeholder="Your wordpress username"
                                            type="text">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="wpPassword">Wordpress Password</label>
+                                    <label for="wpPassword">Password</label>
                                     <input class="form-control" value="{{$wpPassword}}" id="wpPassword"
-                                           placeholder="Wordpress Password" type="password">
+                                           placeholder="Your wordpress password" type="password">
                                 </div>
 
                             </div><!-- /.box-body -->
@@ -212,14 +212,17 @@
 
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="skypeUser">Skype username</label>
+                                    <label for="skypeUser">Username</label>
                                     <input class="form-control" type="text"
-                                           value="{{ \App\Http\Controllers\Data::get('skypeUser') }}" id="skypeUser">
+                                           value="{{ $skypeUser }}"
+                                           placeholder="Your skype password"
+                                           id="skypeUser">
                                 </div>
                                 <div class="form-group">
-                                    <label for="skypePass">Skype password</label>
+                                    <label for="skypePass">Password</label>
                                     <input class="form-control"
-                                           value="{{ \App\Http\Controllers\Data::get('skypePass') }}"
+                                           value="{{ $skypePass }}"
+                                           placeholder="Your skype password"
                                            type="password" id="skypePass">
                                 </div>
 
@@ -229,6 +232,37 @@
                                 <button id="skypeSave" class="btn btn-primary">Save</button>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form method="post" action="/linkedinsave" id="linkedin">
+                            <div class="box box-primary">
+                                <div class="box-header with-border" align="center">
+                                    <h3 class="box-title"><i class="fa fa-linkedin"></i> Linkedin Settings</h3>
+                                </div><!-- /.box-header -->
+                                <!-- form start -->
+
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="linkedin_client_id">Client ID</label>
+                                        <input class="form-control" type="text"
+                                               value="{{ $linkedinClientId }}" placeholder="Your linkedin client id"
+                                               id="linkedin_client_id">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="linkedin_client_secret">Client Secret</label>
+                                        <input class="form-control"
+                                               value="{{ $linkedinClientSecret }}" placeholder="Your linkedin client secret"
+                                               type="text" id="linkedin_client_secret">
+                                    </div>
+
+                                </div><!-- /.box-body -->
+
+                                <div class="box-footer">
+                                    <button class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </section>{{--End content--}}

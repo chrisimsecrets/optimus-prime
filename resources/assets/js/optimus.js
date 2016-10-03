@@ -1471,7 +1471,6 @@ if (document.getElementById('settingspage')) {
             success: function (data) {
                 if (data == 'success') {
                     swal('Success', 'Settings updated', 'success');
-
                 }
                 else {
                     swal('Error', data, 'error');
@@ -1479,6 +1478,19 @@ if (document.getElementById('settingspage')) {
             }
         })
     });
+}
+
+if (document.getElementById('settingspage')) {
+    $('#linkedin').submit(function (e) {
+        $.post($(this).attr('action'), {
+            clientId: $('#linkedin_client_id').val(),
+            clientSecret: $('#linkedin_client_secret').val()
+        });
+
+        swal('Success', 'Settings updated', 'success');
+
+        e.preventDefault();
+    })
 }
 
 // if(document.getElementById('scraper')){

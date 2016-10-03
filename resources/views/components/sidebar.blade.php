@@ -89,7 +89,7 @@
                 </ul>
 
             </li>
-            
+
             <li><a href="{{ url('/tumblr') }}"><i class="fa fa-tumblr"></i> <span>Tumblr</span></a></li>
             <li><a href="{{ url('/wordpress') }}"><i class="fa fa-wordpress"></i> <span>Wordpress</span></a></li>
             {{--<li class="treeview">--}}

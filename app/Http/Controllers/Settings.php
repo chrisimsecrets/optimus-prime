@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\facebookGroups;
-use App\FacebookPages;
+use DB;
 use App\Setting;
 use App\TuBlogs;
+use Tumblr\API\Client;
+use App\FacebookPages;
+use Facebook\Facebook;
+use App\facebookGroups;
+use Illuminate\Http\Request;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
-use Facebook\Facebook;
-use Illuminate\Http\Request;
-use DB;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Mockery\CountValidator\Exception;
-use Tumblr\API\Client;
 
 class Settings extends Controller
 {
@@ -28,29 +25,36 @@ class Settings extends Controller
         session_start();
 
         // Wordpress
-        $wpUser = DB::table('settings')->where('field', 'wpUser')->value('value');
-        $wpPassword = DB::table('settings')->where('field', 'wpPassword')->value('value');
-        $wpUrl = DB::table('settings')->where('field', 'wpUrl')->value('value');
+        $wpUser = Data::get('wpUser');
+        $wpPassword = Data::get('wpPassword');
+        $wpUrl = Data::get('wpUrl');
 
         //Twitter
-
-        $twConKey = DB::table('settings')->where('field', 'twConKey')->value('value');
-        $twConSec = DB::table('settings')->where('field', 'twConSec')->value('value');
-        $twToken = DB::table('settings')->where('field', 'twToken')->value('value');
-        $twTokenSec = DB::table('settings')->where('field', 'twTokenSec')->value('value');
-        $twUser = DB::table('settings')->where('field', 'twUser')->value('value');
+        $twConKey = Data::get('twConKey');
+        $twConSec = Data::get('twConSec');
+        $twToken = Data::get('twToken');
+        $twTokenSec = Data::get('twTokenSec');
+        $twUser = Data::get('twUser');
 
         //Tumblr
-        $tuConKey = DB::table('settings')->where('field', 'tuConKey')->value('value');
-        $tuConSec = DB::table('settings')->where('field', 'tuConSec')->value('value');
-        $tuToken = DB::table('settings')->where('field', 'tuToken')->value('value');
-        $tuTokenSec = DB::table('settings')->where('field', 'tuTokenSec')->value('value');
-        $tuDefBlog = DB::table('settings')->where('field', 'tuDefBlog')->value('value');
+        $tuConKey = Data::get('tuConKey');
+        $tuConSec = Data::get('tuConSec');
+        $tuToken = Data::get('tuToken');
+        $tuTokenSec = Data::get('tuTokenSec');
+        $tuDefBlog = Data::get('tuDefBlog');
 
         //Facebook
-        $fbAppId = DB::table('settings')->where('field', 'fbAppId')->value('value');
-        $fbAppSec = DB::table('settings')->where('field', 'fbAppSec')->value('value');
-        $fbToken = DB::table('settings')->where('field', 'fbAppToken')->value('value');
+        $fbAppId = Data::get('fbAppId');
+        $fbAppSec = Data::get('fbAppSec');
+        $fbToken = Data::get('fbAppToken');
+
+        //skype
+        $skypeUser = Data::get('skypeUser');
+        $skypePass = Data::get('skypeUser');
+
+        //linkedin
+        $linkedinClientId = Data::get('linkedinClientId');
+        $linkedinClientSecret = Data::get('linkedinClientSecret');
 
         try {
             $fb = new Facebook([
@@ -86,7 +90,32 @@ class Settings extends Controller
             $l = $lang->value;
         }
 
-        return view('settings', compact('l', 'twUser', 'tuDefBlog', 'wpUser', 'wpPassword', 'wpUrl', 'twConKey', 'twConSec', 'twToken', 'twTokenSec', 'tuConKey', 'tuConSec', 'tuToken', 'tuTokenSec', 'fbAppId', 'fbAppSec', 'fbToken', 'loginUrl', 'fbPages', 'tuBlogs'));
+        return view('settings', compact(
+            'l',
+            'twUser',
+            'tuDefBlog',
+            'wpUser',
+            'wpPassword',
+            'wpUrl',
+            'twConKey',
+            'twConSec',
+            'twToken',
+            'twTokenSec',
+            'tuConKey',
+            'tuConSec',
+            'tuToken',
+            'tuTokenSec',
+            'fbAppId',
+            'fbAppSec',
+            'fbToken',
+            'loginUrl',
+            'fbPages',
+            'tuBlogs',
+            'skypeUser',
+            'skypePass',
+            'linkedinClientId',
+            'linkedinClientSecret'
+        ));
     }
 
     /**
@@ -470,6 +499,12 @@ class Settings extends Controller
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public function linkedSave(Request $request)
+    {
+        Setting::where('field', 'linkedinClientId')->update(['value' => $request->clientId]);
+        Setting::where('field', 'linkedinClientSecret')->update(['value' => $request->clientSecret]);
     }
 
     /**

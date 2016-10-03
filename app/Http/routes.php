@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Data;
-use App\SlackBot;
-
 Route::get('/', function () {
     return redirect('home');
 });
@@ -72,8 +69,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/fbsave', 'Settings@fbSave');
         Route::post('/twsave', 'Settings@twSave');
         Route::post('/tusave', 'Settings@tuSave');
-        Route::post('/settings/notifications', 'Settings@notifySave');
         Route::post('/skypesave', 'Settings@skypeSave');
+        Route::post('/linkedinsave', 'Settings@linkedSave');
+        Route::post('/settings/notifications', 'Settings@notifySave');
         Route::post('/save/fb/bot/config','Settings@fbBotConfigSave');
 
         // deleting
