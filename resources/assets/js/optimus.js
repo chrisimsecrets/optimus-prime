@@ -1523,6 +1523,12 @@ if (document.getElementById('settingspage')) {
     })
 }
 
+function liGoBackToAllUpdates() {
+    $('#in_last').val('');
+    $('.in_all').show(200);
+    $('.in_last').addClass('hidden');
+}
+
 if (document.getElementById('linkedin')) {
     $('#in_all').change(function () {
         if (! $('#in_all').is(':checked')) {
@@ -1534,10 +1540,12 @@ if (document.getElementById('linkedin')) {
     $('#in_last').keyup(function (e) {
         // if ESC key pressed
         if (e.keyCode == 27) {
-            $('#in_last').val('');
-            $('.in_all').show(200);
-            $('.in_last').addClass('hidden');
+            liGoBackToAllUpdates();
         }
+    });
+
+    $('#go_back').click(function () {
+        liGoBackToAllUpdates();
     });
 
     $('form').submit(function (e) {

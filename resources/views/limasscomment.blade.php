@@ -16,7 +16,8 @@
                             <div class="alert hidden"></div>
 
                             <div class="form-group">
-                                <textarea class="form-control" name="comment" rows="4" placeholder="Type your comment here ..."></textarea>
+                                <textarea class="form-control" name="comment" rows="4"
+                                          placeholder="Type your comment here ..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -39,8 +40,14 @@
 
                             <div class="in_last hidden">
                                 <label for="in_last">In Last</label>
-                                <input type="number" name="in_last" id="in_last" placeholder="0"> <strong>Update(s)</strong>
-                                <p class="help-block">Press ESC to go back</p>
+                                <input type="number" name="in_last" id="in_last" placeholder="0"
+                                style="width: 15%"> <strong>Update(s)</strong>
+
+                                <p class="help-block visible-lg">Press ESC to go back</p>
+
+                                <div class="hidden-lg">
+                                    <a href="#" id="go_back"><< go back</a>
+                                </div>
                             </div>
 
                         </div>
