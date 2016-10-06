@@ -19,6 +19,7 @@ use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
 use Facebook\FacebookApp;
 use Facebook\FacebookRequest;
+use Happyr\LinkedIn\LinkedIn;
 use Illuminate\Http\Request;
 use Tumblr\API;
 use App\Http\Requests;
@@ -1080,6 +1081,13 @@ class Write extends Controller
         $link = $re->link;
         $image = $re->image;
         $data = $re->status;
+    }
+
+    public function liWrite(Request $request)
+    {
+        $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
+
+
     }
 
 }

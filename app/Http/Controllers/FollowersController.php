@@ -155,4 +155,9 @@ class FollowersController extends Controller
         }
     }
 
+    public function liCompanyFollowers()
+    {
+
+    }
+
 }

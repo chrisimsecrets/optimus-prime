@@ -31,7 +31,7 @@ class ChatBotController extends Controller
      * @param Request $re
      * @return string
      */
-    public function addQuestion(Request $re, $bot)
+    public function addQuestion(Request $re)
     {
         /** @var string $question */
         $question = $re->question;

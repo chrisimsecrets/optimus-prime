@@ -8,8 +8,6 @@ Route::any('/hook', 'Hook@fb');
 
 Route::any('/slack-hook', 'Hook@slack');
 
-Route::get('/fbconnect', 'Settings@fbconnect');
-
 Route::get('/prappo','Prappo@test');
 
 Route::group(['middleware' => 'web'], function () {
@@ -19,6 +17,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/home', 'HomeController@index');
         Route::get('/write', 'Write@index');
         Route::get('/posttest', 'Write@postTest');
+
+        // OAuth 2 callback urls
+        Route::get('/fbconnect', 'Settings@fbconnect');
+        Route::get('/linkedin/callback', 'LinkedinController@callback');
 
         // settings pages
         Route::get('/settings', 'Settings@index');
@@ -34,6 +36,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/fblikes', 'HomeController@fbLikes');
         Route::get('/twfollowers', 'HomeController@twFollowers');
         Route::get('/tufollowers', 'HomeController@tuFollowers');
+        Route::get('/liTotalCompanies', 'HomeController@liTotalCompanies');
+        Route::get('/companyFollowers', 'HomeController@companyFollowers');
+        Route::get('/liCompanyUpdates', 'HomeController@liCompanyUpdates');
+        Route::get('/liPostedJobs', 'HomeController@liPostedJobs');
 
         Route::get('/allpost', 'AllpostController@index');
 
@@ -58,6 +64,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/fbwrite', 'Write@fbWrite');
         Route::post('/fbgwrite', 'Write@fbgwrite');
         Route::post('/tuwrite', 'Write@tuWrite');
+        Route::post('/liwrite', 'write@liWrite');
         Route::post('/post/save', 'Write@postSave');
 
         Route::post('/delpost', 'Write@delPost');
@@ -70,7 +77,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/twsave', 'Settings@twSave');
         Route::post('/tusave', 'Settings@tuSave');
         Route::post('/skypesave', 'Settings@skypeSave');
-        Route::post('/linkedinsave', 'Settings@linkedSave');
+        Route::post('/lisave', 'Settings@liSave');
         Route::post('/settings/notifications', 'Settings@notifySave');
         Route::post('/save/fb/bot/config','Settings@fbBotConfigSave');
 
@@ -161,6 +168,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/skype/phone/del', 'SkypeController@del');
         Route::post('/skype/phone/del/all', 'SkypeController@delAll');
 
+        //linkedin specific routes
+        Route::get('/linkedin/mass_comment', 'LinkedinController@massComment');
+        Route::post('/linkedin/do_mass_comment', 'LinkedinController@doMassComment');
 
         Route::get('/profile', 'ProfileController@index');
         Route::post('/profile','ProfileController@update');

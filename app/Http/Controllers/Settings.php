@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Setting;
 use App\TuBlogs;
+use Happyr\LinkedIn\LinkedIn;
 use Tumblr\API\Client;
 use App\FacebookPages;
 use Facebook\Facebook;
@@ -53,8 +54,9 @@ class Settings extends Controller
         $skypePass = Data::get('skypeUser');
 
         //linkedin
-        $linkedinClientId = Data::get('linkedinClientId');
-        $linkedinClientSecret = Data::get('linkedinClientSecret');
+        $liClientId = Data::get('liClientId');
+        $liClientSecret = Data::get('liClientSecret');
+        $liAccessToken = Data::get('liAccessToken');
 
         try {
             $fb = new Facebook([
@@ -90,6 +92,12 @@ class Settings extends Controller
             $l = $lang->value;
         }
 
+        $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
+
+        $liLoginUrl = $linkedIn->getLoginUrl([
+            'redirect_uri' => url('linkedin/callback')
+        ]);
+
         return view('settings', compact(
             'l',
             'twUser',
@@ -113,8 +121,10 @@ class Settings extends Controller
             'tuBlogs',
             'skypeUser',
             'skypePass',
-            'linkedinClientId',
-            'linkedinClientSecret'
+            'liClientId',
+            'liClientSecret',
+            'liAccessToken',
+            'liLoginUrl'
         ));
     }
 
@@ -501,10 +511,10 @@ class Settings extends Controller
         }
     }
 
-    public function linkedSave(Request $request)
+    public function liSave(Request $request)
     {
-        Setting::where('field', 'linkedinClientId')->update(['value' => $request->clientId]);
-        Setting::where('field', 'linkedinClientSecret')->update(['value' => $request->clientSecret]);
+        Setting::where('field', 'liClientId')->update(['value' => $request->clientId]);
+        Setting::where('field', 'liClientSecret')->update(['value' => $request->clientSecret]);
     }
 
     /**

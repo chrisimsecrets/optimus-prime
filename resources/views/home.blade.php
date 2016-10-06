@@ -12,20 +12,20 @@
 
             <section data-step="1" data-intro="You will see summary of your sites and posts" class="content">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
-                            <span class="info-box-icon bg-light-blue"><i class="fa fa-facebook"></i></span>
+                            <span class="info-box-icon bg-blue"><i class="fa fa-facebook"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Likes</span>
+                                <span class="info-box-text">page likes</span>
                                 <span id="dFbLikes" class="info-box-number">Loading ..</span>
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div><!-- /.col -->
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
-                            <span class="info-box-icon bg-blue-dark"><i class="fa fa-tumblr"></i></span>
+                            <span class="info-box-icon bg-purple"><i class="fa fa-tumblr"></i></span>
 
                             <div class="info-box-content">
                                 <span class="info-box-text">followers</span>
@@ -33,13 +33,23 @@
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div><!-- /.col -->
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
-                            <span class="info-box-icon bg-light-blue-gradient"><i class="fa fa-twitter"></i></span>
+                            <span class="info-box-icon bg-light-blue"><i class="fa fa-twitter"></i></span>
 
                             <div class="info-box-content">
                                 <span class="info-box-text">followers</span>
                                 <span id="dTwFollowers" class="info-box-number">Loading ..</span>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div><!-- /.col -->
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-light-blue-active"><i class="fa fa-linkedin"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">company followers</span>
+                                <span id="companyFollowers" class="info-box-number">Loading ..</span>
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div><!-- /.col -->
@@ -48,60 +58,23 @@
                 {{-- show how many page or groups exists--}}
 
                 <div class="row">
-                    <div class="col-lg-4 col-xs-6">
+                    <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
-                        <div class="small-box bg-blue">
+                        <div class="small-box bg-red">
                             <div class="inner">
-                                <h3>{{$fbPages}}</h3>
+                                <h3>{{$user}}</h3>
 
-                                <p>Facebook Pages</p>
+                                <p>Users</p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-facebook"></i>
+                                <i class="fa fa-user"></i>
                             </div>
 
                         </div>
                     </div>
                     <!-- ./col -->
 
-
-
-                    <div class="col-lg-4 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-gray">
-                            <div class="inner">
-                                <h3>{{$tuBlogs}}</h3>
-
-                                <p>Tumblr Blogs</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-tumblr"></i>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- ./col -->
-
-                    <div class="col-lg-4 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-yellow">
-                            <div class="inner">
-                                <h3>{{$fbGroups}}</h3>
-
-                                <p>Facebook Groups</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-facebook"></i>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- ./col -->
-
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-xs-6">
+                    <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
                         <div class="small-box bg-aqua">
                             <div class="inner">
@@ -119,7 +92,7 @@
 
 
 
-                    <div class="col-lg-4 col-xs-6">
+                    <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
                         <div class="small-box bg-fuchsia">
                             <div class="inner">
@@ -135,16 +108,80 @@
                     </div>
                     <!-- ./col -->
 
-                    <div class="col-lg-4 col-xs-6">
+                    <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
-                        <div class="small-box bg-red">
+                        <div class="small-box bg-purple">
                             <div class="inner">
-                                <h3>{{$user}}</h3>
+                                <h3>{{$tuBlogs}}</h3>
 
-                                <p>Users</p>
+                                <p>Tumblr Blogs</p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-tumblr"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-blue">
+                            <div class="inner">
+                                <h3>{{$fbPages}}</h3>
+
+                                <p>Facebook Pages</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-facebook"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-teal">
+                            <div class="inner">
+                                <h3>{{$fbGroups}}</h3>
+
+                                <p>Facebook Groups</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-facebook"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-light-blue-active">
+                            <div class="inner">
+                                <h3 id="liPostedJobs">0</h3>
+
+                                <p>Posted Jobs</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-linkedin"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-maroon">
+                            <div class="inner">
+                                <h3 id="liCompanyUpdates">0</h3>
+
+                                <p>Company Updates</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-linkedin"></i>
                             </div>
 
                         </div>

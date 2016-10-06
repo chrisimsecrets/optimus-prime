@@ -37,8 +37,9 @@ class SettingsSeeder extends Seeder
         DB::table('settings')->insert(['field' => 'notifyAppSecret']);
         DB::table('settings')->insert(['field' => 'skypeUser']);
         DB::table('settings')->insert(['field' => 'skypePass']);
-        DB::table('settings')->insert(['field' => 'linkedinClientId']);
-        DB::table('settings')->insert(['field' => 'linkedinClientSecret']);
+        DB::table('settings')->insert(['field' => 'liClientId']);
+        DB::table('settings')->insert(['field' => 'liClientSecret']);
+        DB::table('settings')->insert(['field' => 'liAccessToken']);
         DB::table('settings')->insert(['field' => 'matchAcc','value'=>'75']);
         DB::table('settings')->insert(['field' => 'exMsg','value'=>"Sorry I don't understand"]);
         DB::table('settings')->insert(['field' => 'slackBotMatchAcc','value'=>'75']);

@@ -90,6 +90,18 @@
 
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-linkedin"></i>
+                    <span>Linkedin</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu" style="display: none">
+                    <li><a href="{{ url('/linkedin/mass_comment') }}"><i class="fa fa-twitter"></i> <span>Mass Comment</span></a></li>
+                </ul>
+
+            </li>
+
             <li><a href="{{ url('/tumblr') }}"><i class="fa fa-tumblr"></i> <span>Tumblr</span></a></li>
             <li><a href="{{ url('/wordpress') }}"><i class="fa fa-wordpress"></i> <span>Wordpress</span></a></li>
             {{--<li class="treeview">--}}

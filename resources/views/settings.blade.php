@@ -235,7 +235,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <form method="post" action="/linkedinsave" id="linkedin">
+                        <form method="post" action="/lisave" id="linkedin">
                             <div class="box box-primary">
                                 <div class="box-header with-border" align="center">
                                     <h3 class="box-title"><i class="fa fa-linkedin"></i> Linkedin Settings</h3>
@@ -246,19 +246,32 @@
                                     <div class="form-group">
                                         <label for="linkedin_client_id">Client ID</label>
                                         <input class="form-control" type="text"
-                                               value="{{ $linkedinClientId }}" placeholder="Your linkedin client id"
+                                               value="{{ $liClientId }}" placeholder="Your linkedin client id"
                                                id="linkedin_client_id">
                                     </div>
+
                                     <div class="form-group">
                                         <label for="linkedin_client_secret">Client Secret</label>
                                         <input class="form-control"
-                                               value="{{ $linkedinClientSecret }}" placeholder="Your linkedin client secret"
+                                               value="{{ $liClientSecret }}" placeholder="Your linkedin client secret"
                                                type="text" id="linkedin_client_secret">
                                     </div>
 
+                                    <div class="form-group">
+                                        <label for="linkedin_access_token">Access Token</label>
+                                        <input class="form-control"
+                                               value="{{ $liAccessToken }}" placeholder="Your linkedin access token"
+                                               type="text" id="linkedin_access_token">
+
+                                        <p class="help-block">
+                                            Add the following url to your linked app's <strong>Authorized Redirect URLs</strong> <br>
+                                            <code>{!! url('/linkedin/callback') !!}</code>
+                                        </p>
+                                    </div>
                                 </div><!-- /.box-body -->
 
                                 <div class="box-footer">
+                                    <a href="{!! $liLoginUrl !!}" class="btn btn-linkedin">Connect with linkedin</a>
                                     <button class="btn btn-primary">Save</button>
                                 </div>
                             </div>

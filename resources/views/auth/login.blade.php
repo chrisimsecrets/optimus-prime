@@ -15,7 +15,7 @@
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <div class="form-group has-feedback">
                         <input type="email" placeholder="Your email" class="form-control" name="email"
-                               value="{{ old('email') }}">
+                               value="{{ old('email') }}" autofocus>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
 

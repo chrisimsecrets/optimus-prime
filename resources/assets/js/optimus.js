@@ -956,11 +956,39 @@ function tuFollowers() {
         $('#dTuFollowers').html(data);
     });
 }
+
+function liTotalCompanies() {
+    $.get('/liTotalCompanies', function (total) {
+        $('#liCompanies').html(total);
+    });
+}
+
+function liPostedJobs() {
+    $.get('/liPostedJobs', function (total) {
+        $('#liPostedJobs').html(total);
+    });
+}
+
+function companyFollowers() {
+    $.get('/companyFollowers', function (total) {
+        $('#companyFollowers').html(total);
+    });
+}
+
+function liCompanyUpdates() {
+    $.get('/liCompanyUpdates', function (total) {
+        $('#liCompanyUpdates').html(total);
+    });
+}
+
 $(function () {
     if (document.getElementById('dFbLikes')) {
         fbLikes();
         twFollowers();
         tuFollowers();
+        liPostedJobs();
+        companyFollowers();
+        liCompanyUpdates();
     }
 });
 
@@ -1489,8 +1517,44 @@ if (document.getElementById('settingspage')) {
 
         swal('Success', 'Settings updated', 'success');
 
+        setTimeout(location.reload.bind(location), 1000);
+
         e.preventDefault();
     })
+}
+
+if (document.getElementById('linkedin')) {
+    $('#in_all').change(function () {
+        if (! $('#in_all').is(':checked')) {
+            $('.in_all').hide(200);
+            $('.in_last').removeClass('hidden');
+        }
+    });
+
+    $('#in_last').keyup(function (e) {
+        // if ESC key pressed
+        if (e.keyCode == 27) {
+            $('#in_last').val('');
+            $('.in_all').show(200);
+            $('.in_last').addClass('hidden');
+        }
+    });
+
+    $('form').submit(function (e) {
+        $.post($(this).attr('action'), $(this).serialize(), function (response) {
+            $('#send').button('reset');
+
+            if (response.status === 'error') {
+                return $('.alert').removeClass().addClass('alert alert-danger').html(response.error).removeClass('hidden');
+            }
+
+            return $('.alert').removeClass().addClass('alert alert-success').html(response.msg).removeClass('hidden');
+        });
+
+        $('#send').button('loading');
+
+        e.preventDefault();
+    });
 }
 
 // if(document.getElementById('scraper')){
