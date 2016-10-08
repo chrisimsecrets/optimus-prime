@@ -17,14 +17,14 @@ class ChatBotController extends Controller
     {
         $data = chatbot::all();
 
-        return view('fb_bot', compact('data'));
+        return view('fbbot', compact('data'));
     }
 
     public function slack()
     {
         $data = SlackBot::all();
 
-        return view('slack_bot', compact('data'));
+        return view('slackbot', compact('data'));
     }
 
     /**

@@ -29,8 +29,8 @@
                 </a>
 
                 <ul class="treeview-menu" style="display: none">
-                    <li><a href="{{ url('/fb-bot') }}"><i class="fa fa-facebook"></i> <span>FB</span></a></li>
-                    <li><a href="{{ url('/slack-bot') }}"><i class="fa fa-slack"></i> <span>Slack</span></a></li>
+                    <li><a href="{{ url('/fb/bot') }}"><i class="fa fa-facebook"></i> <span>FB</span></a></li>
+                    <li><a href="{{ url('/slack/bot') }}"><i class="fa fa-slack"></i> <span>Slack</span></a></li>
                 </ul>
             </li>
 
@@ -97,7 +97,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none">
-                    <li><a href="{{ url('/linkedin/mass_comment') }}"><i class="fa fa-twitter"></i> <span>Mass Comment</span></a></li>
+                    <li><a href="{{ url('/linkedin/mass_comment') }}"><i class="fa fa-comment"></i> <span>Mass Comment</span></a></li>
                 </ul>
 
             </li>

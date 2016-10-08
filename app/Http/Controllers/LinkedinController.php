@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Setting;
 use Happyr\LinkedIn\LinkedIn;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class LinkedinController extends Controller
     {
         $linkedIn = app('linkedin');
 
-        if ($request->to[0] === 'all') {
+        if ($request->has('to') && $request->to[0] === 'all') {
             $companies = self::companies($linkedIn);
         } elseif($request->has('to') && is_array($request->to)) {
             $companies = array_reduce($request->to, function ($carry, $to) {
@@ -68,7 +69,6 @@ class LinkedinController extends Controller
                 'error' => 'No company selected'
             ];
         }
-
         try {
             $this->sendCommentToCompanies($request, $companies, $linkedIn);
 
@@ -76,7 +76,7 @@ class LinkedinController extends Controller
                 'status' => 'success',
                 'msg' => 'Mass comment successful'
             ];
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return [
                 'status' => 'error',
                 'error' => $e->getMessage()
@@ -89,13 +89,12 @@ class LinkedinController extends Controller
      *
      * @param Request $request
      * @param $companies
-     * @param $linkedIn
+     * @param LinkedIn $linkedIn
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     protected function sendCommentToCompanies(Request $request, $companies, $linkedIn)
     {
-        dd($request->all());
         $body = [
             'json' => [
                 'comment' => $request->comment
@@ -105,6 +104,10 @@ class LinkedinController extends Controller
         foreach ($companies['values'] as $company) {
             $allUpdates = $linkedIn->get("/v1/companies/{$company['id']}/updates?format=json");
 
+            if ($allUpdates['_total'] === 0) {
+                throw new Exception('No update to add comment');
+            }
+
             if ($request->has('in_all')) {
                 $updates = $allUpdates['values'];
             } elseif (is_numeric($request->in_last)) {
@@ -112,7 +115,7 @@ class LinkedinController extends Controller
             }
 
             if (empty($updates)) {
-                throw new \Exception('Check in all updates or enter in last update(s) field');
+                throw new Exception('Check in all updates or enter in last update(s) field');
             }
 
             foreach ($updates as $update) {

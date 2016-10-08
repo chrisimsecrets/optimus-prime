@@ -43,7 +43,7 @@
                                 <input type="number" name="in_last" id="in_last" placeholder="0"
                                 style="width: 15%"> <strong>Update(s)</strong>
 
-                                <p class="help-block visible-lg">Press ESC to go back</p>
+                                <p class="help-block visible-lg">Press ESC in last update(s) input field to go back</p>
 
                                 <div class="hidden-lg">
                                     <a href="#" id="go_back"><< go back</a>
@@ -56,7 +56,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <button id="send" class="btn btn-success"
-                                    data-loading-text="<i class='fa fa-spinner fa-spin '></i> Sending ..."
+                                    data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please Wait..."
                             ><i class="fa fa-rocket"></i> Send</button>
                         </div>
                     </div>

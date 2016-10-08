@@ -119,6 +119,19 @@ $("#tuCheck").change(function () {
     }
 });
 
+$("#linkedinCheck").change(function () {
+    if (this.checked) {
+        $('#linkedinl').show(400);
+        $('#liCompanySelection').show(400);
+        count = count + 1;
+
+    } else {
+        $('#linkedinl').hide(400);
+        $('#liCompanySelection').hide(400);
+        count = count - 1;
+    }
+});
+
 
 $('#write').click(function () {
 
@@ -131,7 +144,7 @@ $('#write').click(function () {
     var sharepost = "no";
     var textpost = "no";
     var title = $('#dataTitle').val();
-    var caption = $('#caption').val();
+    var caption = $('#imgCaption').val();
     var link = $('#link').val();
     var image = $('#image').val();
     var description = $('#description').val();
@@ -145,7 +158,7 @@ $('#write').click(function () {
 
     if ($('#imagetype').is(':checked')) {
         if (image == "") {
-            return swal("You must have upload an image file to write an image type post")
+            return swal("You must have upload an image file for image post")
         }
         imagepost = "yes";
     }
@@ -416,6 +429,45 @@ $('#write').click(function () {
             }
         });
     }
+
+    if ($('#linkedinCheck').is(":checked")) {
+        var to = [];
+
+        $('#liCompanies :selected').each(function(i, selected){
+            to[i] = $(selected).val();
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: appPath() + '/linkedin/share',
+            data: {
+                'content': data,
+                'titleForImage': caption,
+                'descriptionOfLink': description,
+                'linkOfContent': link,
+                'image': image,
+                'companies': JSON.stringify(to),
+                'sharepost': sharepost
+            },
+            success: function (response) {
+                if (response.status === 'error') {
+                    var error = $.isArray(response.error) ? response.error[0] : response.error;
+
+                    $('#liMsgSu').hide(300);
+                    $('#liMsgEr').html(error).hide(300).show(300);
+                } else {
+                    $('#liMsgEr').hide(300)
+                    $('#liMsgSu').hide(300).show(300);
+                }
+
+                count = count - 1;
+
+                if (count == 0) {
+                    loading.hide(100);
+                }
+            }
+        });
+    }
 });
 ////////////////////////////////////////////////////
 //        extra
@@ -557,7 +609,7 @@ $('#fbwrite').click(function () {
     var accesstoken = $('#fbPages option:selected').attr('value');
     var imagepost = "no";
     var title = $('#dataTitle').val();
-    var caption = $('#caption').val();
+    var caption = $('#imgCaption').val();
     var link = $('#link').val();
     var image = $('#image').val();
     var description = $('#description').val();
@@ -847,7 +899,7 @@ $('#saveschedule').click(function () {
 
 
     var title = $('#dataTitle').val();
-    var caption = $('#caption').val();
+    var caption = $('#imgCaption').val();
     var link = $('#link').val();
     var image = $('#image').val();
     var description = $('#description').val();
@@ -1534,6 +1586,7 @@ if (document.getElementById('linkedin')) {
         if (! $('#in_all').is(':checked')) {
             $('.in_all').hide(200);
             $('.in_last').removeClass('hidden');
+            $('#in_last').focus();
         }
     });
 

@@ -130,7 +130,6 @@ class Prappo extends Controller
             DB::table('settings')->insert(['field' => 'skypePass']);
         }
 
-
     }
 
 

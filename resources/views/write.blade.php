@@ -22,9 +22,13 @@
                         <h3 class="box-title">Write post <i class="fa fa-edit"></i></h3>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-
-                            <div style="padding: 20px" class="row">
+                        <div class="col-md-6"
+                             data-step="1"
+                             data-intro="Facebook post preview"
+                        >
+                            <div style="padding: 0 20px 20px;" class="row">
+                                {{--<h4>Facebook post preview</h4>--}}
+                                {{--<hr>--}}
                                 <div class="postPreview">
                                     <div class="postPreview">
                                         <div class="wpost">
@@ -38,7 +42,7 @@
                                             </div>
                                             <p class="message"><span class="defaultMessage"></span></p>
 
-                                            <a href="#" class="previewPostLink">
+                                            <div class="previewPostLink">
                                                 <div class="previewLink">
                                                     <img id="imgPreview"
                                                          src="{{url('/images/optimus/placeholder.png')}}">
@@ -56,7 +60,7 @@
                                                     </p>
                                                     <p class="caption"><span class="defaultCaption"></span></p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -75,42 +79,43 @@
                                 {{--Press Ctrl+g to change <br><br>--}}
                                 {{--</div>--}}
                                 {{--@endif--}}
-                                <div data-step="1"
-                                     data-intro="Title for your post , Title only available for facebook ,wordpress and tumblr"
+                                <div data-step="2"
+                                     data-intro="Title for your post, Title is not available for linkedin, twitter and skype"
                                      class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input id="dataTitle" class="form-control"
-                                                   placeholder="Title .. "
+                                                   placeholder="Title"
                                                    type="text">
                                         </div>
 
                                     </div>
                                 </div>
-                                <div data-step="2"
-                                     data-intro="Caption for facebook post , This is available only for shared type post"
+                                <div data-step="3"
+                                     data-intro="Caption for image, This is available only for image and link post"
                                      class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <input id="caption" type="text" class="form-control"
-                                                   placeholder="Caption for facebook ">
+                                            <input id="caption" class="form-control"
+                                                   placeholder="Title for image"
+                                                   type="text">
                                         </div>
 
                                     </div>
                                 </div>
-                                <div id="linkoption" data-step="3"
-                                     data-intro="Link that you want to share on facebook , This is only avilable for facebook shared type post"
+                                <div id="linkoption" data-step="4"
+                                     data-intro="Link that you want to share, This is only available for facebook & linkedin"
                                      class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input id="link" type="text" class="form-control"
-                                                   placeholder="Link for facebook ">
+                                                   placeholder="Link of content">
                                         </div>
 
                                     </div>
                                 </div>
-                                <div id="imgoption" data-step="4"
-                                     data-intro="Select your image file that you want to post , You can post image on Facebook , Twitter & Thumblr . Image posting is not avialbale for wordpress and skype"
+                                <div id="imgoption" data-step="5"
+                                     data-intro="Select your image file that you want to post. Image posting is not available for wordpress and skype"
                                      class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -127,13 +132,13 @@
 
                                     </div>
                                 </div>
-                                <div id="desOption" data-step="5"
-                                     data-intro="Description for facebook shared type post . Only avilable for facebook shared type post"
+                                <div id="desOption" data-step="6"
+                                     data-intro="Description of content. Only for link post"
                                      class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input id="description" type="text" class="form-control"
-                                                   placeholder="Description for facebook">
+                                                   placeholder="Description of link">
                                         </div>
 
                                     </div>
@@ -141,8 +146,8 @@
                                 </div>
 
 
-                                <div data-step="6"
-                                     data-intro="Select your post type . Shared Post only for facebook , And image type post is not avialable for wordpress and skype . That means you can't post image on wordpress and skype right now . May be we can add this feature later"
+                                <div data-step="7"
+                                     data-intro="Select your post type. Image post is not available for wordpress, skype, linkedin. And link post is available only for facebook & linkedin. Maybe later we can add link post feature for others"
                                      class="form-group">
                                     <div class="radio">
                                         <label>
@@ -153,7 +158,7 @@
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="r" id="sharetype" value="sharetype">
-                                            Link Post ( facebook only )
+                                            Link Post ( facebook & linkedin )
                                         </label>
                                     </div>
                                     <div class="radio">
@@ -165,94 +170,76 @@
                                     </div>
 
                                 </div>
-                                <div data-step="7"
-                                     data-intro="Write whatever you want to post . You can use emoji by simply clicking emoji button on top right"
+                                <div data-step="8"
+                                     data-intro="Write whatever you want to post. You can use emoji by simply clicking emoji button on top right or pressing tab key"
                                      class="form-group">
                                     <input type="hidden" id="postId">
                                     <textarea class="form-control" rows="4"
                                               id="status"
-                                              placeholder="Type your content here ..."></textarea>
+                                              placeholder="Type your content here"></textarea>
                                 </div>
 
 
                             </div>
-                            <div data-step="8" data-intro="Options available for your post according to your seetings"
+                            <div data-step="9" data-intro="Options available according to your settings"
                                  style="padding-left: 10px" class="form-group">
                                 <div class="btn-group btn-group-xs" data-toggle="buttons">
-                                    @if(\App\Setting::where('field','fbAppToken')->exists())
-                                        @foreach(\App\Setting::where('field','fbAppToken')->get() as $d)
-                                            @if($d->value != "")
-                                                <label class="btn btn-primary bg-blue">
-                                                    <input id="fbCheck" type="checkbox" autocomplete="off"><i
-                                                            class="fa fa-facebook"></i>
-                                                    Facebook page
-                                                </label>
-                                            @endif
-                                        @endforeach
-                                    @endif
 
-                                    @if(\App\Setting::where('field','fbAppToken')->exists())
-                                        @foreach(\App\Setting::where('field','fbAppToken')->get() as $d)
-                                            @if($d->value != "")
-                                                <label class="btn btn-primary bg-blue">
-                                                    <input id="fbgCheck" type="checkbox" autocomplete="off"><i
-                                                            class="fa fa-users"></i>
-                                                    Facebook group
-                                                </label>
+                                    @if(!empty(\App\Http\Controllers\Data::get('fbAppToken')))
+                                        <label class="btn btn-primary bg-blue">
+                                            <input id="fbCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-facebook"></i>
+                                            Facebook page
+                                        </label>
 
-
-                                            @endif
-                                        @endforeach
-                                    @endif
-
-                                    @if(\App\Setting::where('field','twTokenSec')->exists())
-                                        @foreach(\App\Setting::where('field','twTokenSec')->get() as $d)
-                                            @if($d->value != "")
-                                                <label class="btn btn-primary bg-light-blue">
-                                                    <input id="twCheck" type="checkbox" autocomplete="off"><i
-                                                            class="fa fa-twitter"></i>
-                                                    Twitter
-                                                </label>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                    @if(\App\Setting::where('field','wpPassword')->exists())
-                                        @foreach(\App\Setting::where('field','wpPassword')->get() as $d)
-                                            @if($d->value != "")
-                                                <label class="btn btn-primary bg-blue-gradient">
-                                                    <input id="wpCheck" type="checkbox" autocomplete="off"><i
-                                                            class="fa fa-wordpress"></i>
-                                                    Wordpress
-                                                </label>
-                                            @endif
-                                        @endforeach
-
-                                    @endif
-
-                                    @if(\App\Setting::where('field','tuTokenSec'))
-                                        @foreach(\App\Setting::where('field','tuTokenSec')->get() as $d)
-                                            @if($d->value != "")
-                                                <label class="btn btn-primary bg-gray">
-                                                    <input id="tuCheck" type="checkbox" autocomplete="off"><i
-                                                            class="fa fa-tumblr"></i>
-                                                    Tumblr
-                                                </label>
-                                            @endif
-                                        @endforeach
+                                        <label class="btn btn-primary bg-blue">
+                                            <input id="fbgCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-users"></i>
+                                            Facebook group
+                                        </label>
                                     @endif
 
 
-                                    @if(\App\Setting::where('field','skypePass'))
-                                        @foreach(\App\Setting::where('field','skypePass')->get() as $d)
-                                            @if($d->value != "")
-                                                <label class="btn btn-primary bg-light-blue">
-                                                    <input id="skypeCheck" type="checkbox" autocomplete="off"><i
-                                                            class="fa fa-skype"></i>
-                                                    Skype
-                                                </label>
-                                            @endif
-                                        @endforeach
+                                    @if(!empty(\App\Http\Controllers\Data::get('twTokenSec')))
+                                        <label class="btn btn-primary bg-light-blue">
+                                            <input id="twCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-twitter"></i>
+                                            Twitter
+                                        </label>
                                     @endif
+
+                                    @if(!empty(\App\Http\Controllers\Data::get('wpPassword')))
+                                        <label class="btn btn-primary bg-blue-gradient">
+                                            <input id="wpCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-wordpress"></i>
+                                            Wordpress
+                                        </label>
+                                    @endif
+
+                                    @if(!empty(\App\Http\Controllers\Data::get('tuTokenSec')))
+                                        <label class="btn btn-primary bg-gray">
+                                            <input id="tuCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-tumblr"></i>
+                                            Tumblr
+                                        </label>
+                                    @endif
+
+                                    @if(!empty(\App\Http\Controllers\Data::get('skypePass')))
+                                        <label class="btn btn-primary bg-light-blue">
+                                            <input id="skypeCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-skype"></i>
+                                            Skype
+                                        </label>
+                                    @endif
+
+                                    @if(!empty(\App\Http\Controllers\Data::get('liAccessToken')))
+                                        <label class="btn btn-primary bg-light-blue-active">
+                                            <input id="linkedinCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-linkedin"></i>
+                                            Linkedin
+                                        </label>
+                                    @endif
+
                                 </div>
 
                             </div>
@@ -276,6 +263,8 @@
                                             class="fa fa-tumblr"></i> Tumblr selected</span>
                                 <span style="display: none" id="skypel" class="label label-default"><i
                                             class="fa fa-skype"></i> Skype selected</span>
+                                <span style="display: none" id="linkedinl" class="label label-default"><i
+                                            class="fa fa-linkedin"></i> Linkedin selected</span>
                             </div>
                             <div class="form-group" style="padding-left:10px">
 
@@ -300,7 +289,8 @@
 
                                 <div id="fbPages" style="display: none;" class="form-group">
                                     <fieldset class="scheduler-border">
-                                        Select your page
+                                        Select facebook your page{{ count($fbPages) > 1 ? 's' : null }} list
+
                                         <select id="fbPages">
                                             @foreach($fbPages as $fb)
                                                 <option id="{{$fb->pageId}}"
@@ -315,11 +305,27 @@
                             <div class="form-group" style="padding-left:10px">
                                 <div id="fbGroupsSection" style="display: none">
                                     <fieldset class="scheduler-border">
-                                        Your groups list
+                                        Your facebook group{{ count($fbGroups) > 1 ? 's' : null }} list
 
                                         <select id="fbgroups">
                                             @foreach($fbGroups as $fbg)
                                                 <option value="{{$fbg->pageId}}">{{$fbg->pageName}}</option>
+                                            @endforeach
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="padding-left:10px">
+                                <div id="liCompanySelection" style="display: none">
+                                    <fieldset class="scheduler-border">
+                                        Your linkedin {{ count($liCompanies) > 1 ? 'companies' : 'company' }} list
+
+                                        <select id="liCompanies" multiple>
+                                            <option value="all" selected>All Companies</option>
+
+                                            @foreach($liCompanies as $liCompany)
+                                                <option value="{{ $liCompany['id'] }}">{{ $liCompany['name'] }}</option>
                                             @endforeach
                                         </select>
                                     </fieldset>
@@ -332,8 +338,8 @@
 
                             <div style="padding-left: 10px" class="form-group">
                                 <br>
-                                <button data-step="10" data-intro="Click here to post Your article" id="write"
-                                        id="write" class="btn btn-success"><i class="fa fa-send"></i>
+                                <button data-step="10" data-intro="Hit me to give me permission for posting" id="write"
+                                        class="btn btn-success"><i class="fa fa-send"></i>
                                     Post
                                 </button>
 
@@ -384,49 +390,57 @@
 
                                             <span id="fbMsgSu" style="display: none"
                                                   class="label label-success"><i
-                                                        class="fa fa-facebook"></i> successfully wrote on facebook Page</span>
+                                                        class="fa fa-facebook"></i> Successfully wrote on facebook Page</span>
 
                                             <span id="fbgMsgSu" style="display: none"
                                                   class="label label-success"><i
-                                                        class="fa fa-facebook"></i> successfully wrote on facebook Group</span>
+                                                        class="fa fa-facebook"></i> Successfully wrote on facebook Group</span>
 
                                             <span id="twMsgSu" style="display: none"
                                                   class="label label-success"><i
-                                                        class="fa fa-twitter"></i> successfully wrote on twitter</span>
+                                                        class="fa fa-twitter"></i> Successfully wrote on twitter</span>
 
                                             <span id="wpMsgSu" style="display: none"
                                                   class="label label-success"><i
-                                                        class="fa fa-wordpress"></i> successfully wrote on wordpress</span>
+                                                        class="fa fa-wordpress"></i> Successfully wrote on wordpress</span>
                                             <span id="skypeMsgSu" style="display: none"
                                                   class="label label-success"><i
-                                                        class="fa fa-skype"></i> successfully sent to skype</span>
+                                                        class="fa fa-skype"></i> Successfully sent to skype</span>
 
                                             <span id="tuMsgSu" style="display: none"
                                                   class="label label-success"><i
-                                                        class="fa fa-tumblr"></i> successfully wrote on tumblr</span>
+                                                        class="fa fa-tumblr"></i> Successfully wrote on tumblr</span>
+
+                                            <span id="liMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-linkedin"></i> Successfully wrote on linkedin</span>
 
                                             <span id="fbMsgEr" style="display: none"
                                                   class="label label-danger"><i
-                                                        class="fa fa-facebook"></i> error while trying to writing on facebook page</span>
+                                                        class="fa fa-facebook"></i> Error occurred while trying to write on facebook page</span>
                                             <span id="fbgMsgEr" style="display: none"
                                                   class="label label-danger"><i
-                                                        class="fa fa-facebook"></i> error while trying to writing on facebook group</span>
+                                                        class="fa fa-facebook"></i> Error occurred while trying to write on facebook group</span>
 
                                             <span id="twMsgEr" style="display: none"
                                                   class="label label-danger"><i
-                                                        class="fa fa-twitter"></i> error while trying to writing on twitter</span>
+                                                        class="fa fa-twitter"></i> Error occurred while trying to write on twitter</span>
 
                                             <span id="wpMsgEr" style="display: none"
                                                   class="label label-danger"><i
-                                                        class="fa fa-wordpress"></i> error while trying to writing on wordpress</span>
+                                                        class="fa fa-wordpress"></i> Error occurred while trying to write on wordpress</span>
 
                                             <span id="skypeMsgEr" style="display: none"
                                                   class="label label-danger"><i
-                                                        class="fa fa-skype"></i> error while trying to sent messsage to skype</span>
+                                                        class="fa fa-skype"></i> Error occurred while trying to send messsage on skype</span>
 
                                             <span id="tuMsgEr" style="display: none"
                                                   class="label label-danger"><i
-                                                        class="fa fa-tumblr"></i> error while trying to writing on tumblr</span>
+                                                        class="fa fa-tumblr"></i> Error occurred while trying to write on tumblr</span>
+
+                                            <span id="liMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-linkedin"></i> Error occurred while trying to write on linkedin</span>
                                         </div>
                                     </div>
                                 </div>

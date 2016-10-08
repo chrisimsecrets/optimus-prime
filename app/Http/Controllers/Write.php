@@ -2,28 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Allpost;
-use App\facebookGroups;
-use App\FacebookPages;
+use DB;
 use App\Fb;
-use App\Fbgr;
-use App\OptLog;
-use App\OptSchedul;
-use App\Setting;
 use App\Tu;
 use App\Tw;
 use App\Wp;
-use DB;
+use App\Fbgr;
+use Exception;
+use Tumblr\API;
+use App\OptLog;
+use App\Allpost;
+use App\Setting;
+use Facebook\Facebook;
+use App\FacebookPages;
+use App\facebookGroups;
+use Illuminate\Http\Request;
+use Happyr\LinkedIn\LinkedIn;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
-use Facebook\Facebook;
-use Facebook\FacebookApp;
-use Facebook\FacebookRequest;
-use Happyr\LinkedIn\LinkedIn;
-use Illuminate\Http\Request;
-use Tumblr\API;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class Write extends Controller
 {
@@ -35,13 +31,6 @@ class Write extends Controller
 
     public function index()
     {
-        Prappo::writeCheck();
-        if (Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "" || Data::get('skypePass')) {
-
-        } else {
-            return redirect('/settings');
-        }
-
         $consumerKey = self::get_value('tuConKey');
         $consumerSecret = self::get_value('tuConSec');
         $token = self::get_value('tuToken');
@@ -51,7 +40,7 @@ class Write extends Controller
         try {
             $tuBlogName = $tuClient->getUserInfo()->user->blogs;
             $tuMsg = "success";
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $tuMsg = "error";
         }
 
@@ -62,7 +51,17 @@ class Write extends Controller
 
         $fbPages = FacebookPages::all();
         $fbGroups = facebookGroups::all();
-        return view('write', compact('l', 'tuBlogName', 'fbPages', 'fbGroups', 'tuMsg'));
+
+        $liCompanies = LinkedinController::companies()['values'];
+
+        return view('write', compact(
+            'l',
+            'tuBlogName',
+            'fbPages',
+            'fbGroups',
+            'tuMsg',
+            'liCompanies'
+        ));
     }
 
     public function postWrite(Request $re)
@@ -88,7 +87,7 @@ class Write extends Controller
         try {
             Allpost::where('id', $id)->delete();
             echo "success";
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -321,7 +320,7 @@ class Write extends Controller
             $tu->save();
             return "success";
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
 
@@ -371,7 +370,7 @@ class Write extends Controller
             $log->type = $type;
 
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $e->getMessage();
             $log->postId = $postId;
             $log->from = "Tumblr";
@@ -397,7 +396,7 @@ class Write extends Controller
         try {
             $client->deletePost($blogName, $id, $reBlogKey);
             echo "success";
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             echo $ex->getMessage();
         }
 
@@ -420,7 +419,7 @@ class Write extends Controller
                 $client->deletePost($blogName, $tuId, "");
                 Tu::where('postId',$id)->delete();
                 return "success";
-            } catch (\Exception $ex) {
+            } catch (Exception $ex) {
                 echo $ex->getMessage();
             }
         }
@@ -442,7 +441,7 @@ class Write extends Controller
             $reblogKey = $re->reblogKey;
             $client->reblogPost($blogName, $postId, $reblogKey);
             echo "success";
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             echo $ex->getMessage();
         }
     }
@@ -465,7 +464,7 @@ class Write extends Controller
             $blogName = $re->blogName;
             $client->editPost($blogName, $postId, $data);
             echo "success";
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             echo $ex->getMessage();
         }
     }
@@ -482,7 +481,7 @@ class Write extends Controller
             $reblogKey = $re->reblogKey;
             $client->like($postId, $reblogKey);
             echo "success";
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             echo $ex->getMessage();
         }
     }
@@ -498,7 +497,7 @@ class Write extends Controller
         try {
             $client->follow($re->blogName);
             return "success";
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $e->getMessage();
         }
 
@@ -663,7 +662,7 @@ class Write extends Controller
             } catch (FacebookSDKException $fse) {
                 return $fse->getMessage();
             }
-            catch (\Exception $e){
+            catch (Exception $e){
                 return $e->getMessage();
             }
         } else if ($sharepost == 'yes') {
@@ -719,6 +718,104 @@ class Write extends Controller
         }
     }
 
+    /**
+     * Write on linkedin companies.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function liWrite(Request $request)
+    {
+        if ($request->sharepost == 'yes') {
+            $validator = validator($request->all(), [
+                'linkOfContent' => 'required',
+                'companies' => 'required',
+            ]);
+        } else {
+            $validator = validator($request->all(), [
+                'content' => 'required'
+            ]);
+        }
+
+        if ($validator->fails()) {
+            return [
+                'status' => 'error',
+                'error' => $validator->getMessageBag()->all()
+            ];
+        }
+
+        $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
+
+        $linkedIn = app('linkedin');
+
+        $request->merge([
+            'to' => json_decode(stripcslashes($request->companies))
+        ]);
+
+        if ($request->has('to') && $request->to[0] === 'all') {
+            $companies = LinkedinController::companies($linkedIn);
+        } elseif($request->has('to') && is_array($request->to)) {
+            $companies = array_reduce($request->to, function ($carry, $to) {
+                $carry['values'][]['id'] = $to;
+
+                return $carry;
+            });
+        }
+
+        if (!isset($companies)) {
+            return [
+                'status' => 'error',
+                'error' => 'No company selected'
+            ];
+        }
+
+        try {
+            $this->sendUpdateToLiCompanies($request, $companies, $linkedIn);
+        } catch (Exception $e) {
+            return [
+                'status' => 'error',
+                'error' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * Send update to companies in linkedin API.
+     *
+     * @param $request
+     * @param $companies
+     * @param LinkedIn $linkedIn
+     * @throws Exception
+     */
+    protected function sendUpdateToLiCompanies($request, $companies, $linkedIn)
+    {
+        if ($request->has('image') && $request->sharepost == 'no') {
+            throw new Exception('Only image posting is not available for linkedin. Rather try Link Post');
+        }
+
+        $body = [
+            'json' => [
+                'visibility' => [
+                    'code' => 'anyone'
+                ],
+                'comment' => $request->content
+            ]
+        ];
+
+        if ($request->sharepost === 'yes') {
+            $body['json']['content'] = [
+                'title' => $request->titleForImage,
+                'description' => $request->descriptionOfLink,
+                'submitted-url' => $request->linkOfContent,
+                'submitted-image-url' => asset("uploads/{$request->image}")
+            ];
+        }
+
+        foreach ($companies['values'] as $company) {
+            $linkedIn->post("/v1/companies/{$company['id']}/shares?format=json", $body);
+        }
+    }
+    
     /**
      * @param $spostId
      * @param $spageId
@@ -1004,7 +1101,7 @@ class Write extends Controller
             echo "success";
         } catch (\TwitterException $te) {
             echo $te->getMessage();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
 
@@ -1027,7 +1124,7 @@ class Write extends Controller
             } catch (\TwitterException $te) {
                 return "Delete form twitter : error";
 //                return $te->getMessage();
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return "Delete form twitter : error";
 //                return $e->getMessage();
             }
@@ -1068,7 +1165,7 @@ class Write extends Controller
             $add->postId = $postId;
             $add->save();
             return "success";
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
@@ -1081,13 +1178,6 @@ class Write extends Controller
         $link = $re->link;
         $image = $re->image;
         $data = $re->status;
-    }
-
-    public function liWrite(Request $request)
-    {
-        $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
-
-
     }
 
 }

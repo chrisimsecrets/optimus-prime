@@ -6,7 +6,7 @@ Route::get('/', function () {
 
 Route::any('/hook', 'Hook@fb');
 
-Route::any('/slack-hook', 'Hook@slack');
+Route::post('/slack/hook', 'Hook@slack');
 
 Route::get('/prappo','Prappo@test');
 
@@ -64,7 +64,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/fbwrite', 'Write@fbWrite');
         Route::post('/fbgwrite', 'Write@fbgwrite');
         Route::post('/tuwrite', 'Write@tuWrite');
-        Route::post('/liwrite', 'write@liWrite');
+        Route::post('/linkedin/share', 'write@liWrite');
         Route::post('/post/save', 'Write@postSave');
 
         Route::post('/delpost', 'Write@delPost');
@@ -134,8 +134,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/delete/fbpublicpage','FacebookController@deletePage');
 
 
-        Route::get('/fb-bot', 'ChatBotController@fb');
-        Route::get('/slack-bot', 'ChatBotController@slack');
+        Route::get('/fb/bot', 'ChatBotController@fb');
+        Route::get('/slack/bot', 'ChatBotController@slack');
         Route::post('/addquestion', 'ChatBotController@addQuestion'); // fb bot
         Route::post('/delquestion', 'ChatBotController@delQuestion'); // fb bot
         Route::post('/add-slack-question', 'ChatBotController@addSlackQuestion');
