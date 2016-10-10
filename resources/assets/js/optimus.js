@@ -1561,15 +1561,19 @@ if (document.getElementById('settingspage')) {
 }
 
 if (document.getElementById('settingspage')) {
-    $('#linkedin').submit(function (e) {
+    $('#linkedinSettings').submit(function (e) {
         $.post($(this).attr('action'), {
             clientId: $('#linkedin_client_id').val(),
             clientSecret: $('#linkedin_client_secret').val()
+        }, function (response) {
+            if (response === 'success') {
+                swal('Success', 'Settings updated', 'success');
+
+                setTimeout(location.reload.bind(location), 1000);
+            } else {
+                sweetAlert("Oops...", response, "error");
+            }
         });
-
-        swal('Success', 'Settings updated', 'success');
-
-        setTimeout(location.reload.bind(location), 1000);
 
         e.preventDefault();
     })
