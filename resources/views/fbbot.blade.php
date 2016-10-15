@@ -147,6 +147,27 @@
                 swal('error',data,'error');
             }
         })
+    });
+    $('.chatbotdel').click(function () {
+        var id = $(this).attr('data-id');
+        $.ajax({
+           type:'POST',
+            url:'{{url('/fb/delquestion')}}',
+            data:{
+                'id':id
+            },
+            success:function (data) {
+                if(data=="success"){
+                    swal('Success',"Deleted !",'success');
+                    location.reload();
+                }else {
+                    swal("Error",data,'error');
+                }
+            },
+            error:function (data) {
+                swal('Error',data,'error');
+            }
+        });
     })
 </script>
 @endsection

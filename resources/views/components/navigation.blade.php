@@ -16,14 +16,14 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <li class="dropdown messages-menu">
+                {{--<li class="dropdown messages-menu">--}}
 
-                    <a id="intro" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-question"></i>
-                        Help
-                    </a>
+                    {{--<a id="intro" href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
+                        {{--<i class="fa fa-question"></i>--}}
+                        {{--Help--}}
+                    {{--</a>--}}
 
-                </li>
+                {{--</li>--}}
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
 

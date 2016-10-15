@@ -136,8 +136,8 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/fb/bot', 'ChatBotController@fb');
         Route::get('/slack/bot', 'ChatBotController@slack');
-        Route::post('/addquestion', 'ChatBotController@addQuestion'); // fb bot
-        Route::post('/delquestion', 'ChatBotController@delQuestion'); // fb bot
+        Route::post('/fb/addquestion', 'ChatBotController@addQuestion'); // fb bot
+        Route::post('/fb/delquestion', 'ChatBotController@delQuestion'); // fb bot
         Route::post('/add-slack-question', 'ChatBotController@addSlackQuestion');
         Route::post('/delete-slack-question', 'ChatBotController@deleteSlackQuestion');
         Route::post('/update-slack-bot-config', 'ChatBotController@updateBotConfig');
