@@ -10,7 +10,7 @@
         <div class="content-wrapper" id="linkedin">
             <section class="content">
 
-                <form method="POST" action="{{ url('/linkedin/do_mass_comment') }}">
+                <form method="POST" action="{{ url('/linkedin/mass_comment') }}">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="alert hidden"></div>

@@ -142,8 +142,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/delete-slack-question', 'ChatBotController@deleteSlackQuestion');
         Route::post('/update-slack-bot-config', 'ChatBotController@updateBotConfig');
 
-
-        Route::get('/hook/test', 'Hook@test');
         Route::post('/langsave', 'Settings@lang');
 
         Route::get('/scraper', 'Scraper@index');
@@ -170,7 +168,8 @@ Route::group(['middleware' => 'web'], function () {
 
         //linkedin specific routes
         Route::get('/linkedin/mass_comment', 'LinkedinController@massComment');
-        Route::post('/linkedin/do_mass_comment', 'LinkedinController@doMassComment');
+        Route::post('/linkedin/mass_comment', 'LinkedinController@fireMassComment');
+        Route::get('/linkedin/updates', 'LinkedinController@updates');
 
         Route::get('/profile', 'ProfileController@index');
         Route::post('/profile','ProfileController@update');

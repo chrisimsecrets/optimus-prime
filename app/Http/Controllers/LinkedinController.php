@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Setting;
-use Happyr\LinkedIn\LinkedIn;
 use Illuminate\Http\Request;
+use Happyr\LinkedIn\LinkedIn;
 
 class LinkedinController extends Controller
 {
@@ -34,10 +34,34 @@ class LinkedinController extends Controller
     }
 
     /**
+     * Get companies list with it's followers.
+     *
+     * @return array
+     */
+    public static function companiesWithDetails()
+    {
+        /** @var LinkedIn $linkedIn */
+        $linkedIn = app('linkedin');
+
+        $companies = self::companies($linkedIn)['values'];
+
+        // Getting followers for the companies and merging tho the companies list array.
+        return array_reduce($companies, function ($carry, $company) use ($linkedIn) {
+            $carry[] = $linkedIn->get("/v1/companies/{$company['id']}:(id,name,logo-url,num-followers)?format=json");
+
+            return $carry;
+        });
+    }
+
+    /**
      * Show linkedin mass comment page.
      */
     public function massComment()
     {
+        if (!Data::get('liAccessToken')) {
+            return redirect('/settings');
+        }
+
         $companies = self::companies()['values'];
 
         return view('limasscomment', compact('companies'));
@@ -49,7 +73,7 @@ class LinkedinController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function doMassComment(Request $request)
+    public function fireMassComment(Request $request)
     {
         $linkedIn = app('linkedin');
 
@@ -129,5 +153,21 @@ class LinkedinController extends Controller
                 );
             }
         }
+    }
+
+    /**
+     * Show company updates.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function updates()
+    {
+        if (!Data::get('liAccessToken')) {
+            return redirect('/settings');
+        }
+
+        $companies = self::companiesWithDetails();
+
+        return view('liupdates', compact('companies'));
     }
 }

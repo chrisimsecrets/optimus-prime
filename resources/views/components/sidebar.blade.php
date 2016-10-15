@@ -97,6 +97,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none">
+                    <li><a href="{{ url('/linkedin/updates') }}"><i class="fa fa-refresh"></i> <span>All updates</span></a></li>
                     <li><a href="{{ url('/linkedin/mass_comment') }}"><i class="fa fa-comment"></i> <span>Mass Comment</span></a></li>
                 </ul>
 
