@@ -58,7 +58,7 @@
                     <li><a href="{{ url('/facebook') }}"><i class="fa fa-file"></i> Facebook Pages</a></li>
                     <li><a href="{{ url('/fbgroups') }}"><i class="fa fa-users"></i> Facebook Groups</a></li>
                     <li><a href="{{ url('/conversations') }}"><i class="fa fa-comments"></i> Conversations</a></li>
-                    <li><a href="{{ url('/fbreport') }}"><i class="fa fa-pie-chart"></i> Facebook Report</a></li>
+                    {{--<li><a href="{{ url('/fbreport') }}"><i class="fa fa-pie-chart"></i> Facebook Report</a></li>--}}
                     <li><a href="{{ url('/fbmassgrouppost') }}"><i class="fa fa-bolt"></i> Facebook Mass Group Post</a>
                     </li>
                     <li><a href="{{ url('/facebook/masscomment') }}"><i class="fa fa-comment"></i> Facebook Mass Comment</a>
@@ -118,17 +118,17 @@
                 {{--</ul>--}}
             {{--</li>--}}
 
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-pie-chart"></i>
-                    <span>Reports</span><i class="fa fa-angle-left pull-right"></i>
+            {{--<li class="treeview">--}}
+                {{--<a href="#">--}}
+                    {{--<i class="fa fa-pie-chart"></i>--}}
+                    {{--<span>Reports</span><i class="fa fa-angle-left pull-right"></i>--}}
 
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href="{{ url('/fbreport') }}"><i class="fa fa-files-o"></i> <span>Facebook reports</span></a>
-                    </li>
-                </ul>
-            </li>
+                {{--</a>--}}
+                {{--<ul class="treeview-menu" style="display: none;">--}}
+                    {{--<li><a href="{{ url('/fbreport') }}"><i class="fa fa-files-o"></i> <span>Facebook reports</span></a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+            {{--</li>--}}
 
             <li class="treeview">
                 <a href="#">

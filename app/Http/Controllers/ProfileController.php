@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,10 @@ class ProfileController extends Controller
                 'email'=>$email,
                 'name'=>$name
             ]) ;
+
+            Setting::where('email',Auth::user()->email)->update([
+               'email'=>$email
+            ]);
             return "success";
         }
         else{

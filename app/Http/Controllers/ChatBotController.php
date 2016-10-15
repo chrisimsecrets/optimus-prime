@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\chatbot;
 use App\SlackBot;
@@ -15,14 +16,14 @@ class ChatBotController extends Controller
      */
     public function fb()
     {
-        $data = chatbot::all();
+        $data = chatbot::where('email',Auth::user()->email)->get();
 
         return view('fbbot', compact('data'));
     }
 
     public function slack()
     {
-        $data = SlackBot::all();
+        $data = SlackBot::where('email',Auth::user()->email)->get();
 
         return view('slackbot', compact('data'));
     }
@@ -43,6 +44,7 @@ class ChatBotController extends Controller
             $data->question = $question;
             $data->answer = $answer;
             $data->pageId = $re->pageId;
+            $data->email = Auth::user()->email;
             $data->save();
             return "success";
         } catch (\Exception $e) {
@@ -59,7 +61,7 @@ class ChatBotController extends Controller
         /** @var int $id */
         $id = $re->id;
         try {
-            chatbot::where('id', $id)->delete();
+            chatbot::where('id', $id)->where('email',Auth::user()->email)->delete();
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -122,7 +124,7 @@ class ChatBotController extends Controller
             return 'error';
         }
 
-        Setting::where('field', 'slackBotMatchAcc')->update([
+        Setting::where('field', 'slackBotMatchAcc')->where('email',Auth::user()->email)->update([
             'value' => $request->matchAcc
         ]);
     }
@@ -138,7 +140,7 @@ class ChatBotController extends Controller
         }
         $per =0;
         $reply = "";
-        $text = chatbot::where('pageId',$pageId)->get();
+        $text = chatbot::where('pageId',$pageId)->where('email',Auth::user()->email)->get();
         foreach($text as $t){
             similar_text($t->question,$inputText,$per);
             if($per >= Data::get('matchAcc')){

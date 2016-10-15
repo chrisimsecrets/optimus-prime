@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use Illuminate\Support\Facades\Auth;
 use Tumblr\API;
 use Illuminate\Http\Request;
 use DB;
@@ -18,8 +19,8 @@ class FollowersController extends Controller
     public function index()
     {
         set_time_limit(120);
-        if (Setting::where('field', 'twTokenSec')->exists()) {
-            foreach (Setting::where('field', 'twAppToken')->get() as $d) {
+        if (Setting::where('field', 'twTokenSec')->where('email',Auth::user()->email)->exists()) {
+            foreach (Setting::where('field', 'twAppToken')->where('email',Auth::user()->email)->get() as $d) {
                 if ($d->value == "") {
                     return redirect('/settings');
                 }
@@ -91,7 +92,7 @@ class FollowersController extends Controller
      */
     public static function get_value($field)
     {
-        return DB::table('settings')->where('field', $field)->value('value');
+        return DB::table('settings')->where('email',Auth::user()->email)->where('email',Auth::user()->email)->where('field', $field)->value('value');
     }
 
     /**

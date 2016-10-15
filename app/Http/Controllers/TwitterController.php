@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TwitterController extends Controller
 {
@@ -15,8 +16,8 @@ class TwitterController extends Controller
      */
     public function index()
     {
-        if (Setting::where('field', 'twTokenSec')->exists()) {
-            foreach (Setting::where('field', 'twTokenSec')->get() as $d) {
+        if (Setting::where('field', 'twTokenSec')->where('email',Auth::user()->email)->exists()) {
+            foreach (Setting::where('field', 'twTokenSec')->where('email',Auth::user()->email)->get() as $d) {
                 if ($d->value == "") {
                     return redirect('/settings');
                 }

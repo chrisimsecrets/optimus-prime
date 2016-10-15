@@ -43,6 +43,7 @@ class SettingsSeeder extends Seeder
         DB::table('settings')->insert(['field' => 'matchAcc','value'=>'75']);
         DB::table('settings')->insert(['field' => 'exMsg','value'=>"Sorry I don't understand"]);
         DB::table('settings')->insert(['field' => 'slackBotMatchAcc','value'=>'75']);
+        DB::table('settings')->insert(['field' => 'email','value'=>'admin@email.com']);
 
         User::create([
             'name' => 'Super Admin',

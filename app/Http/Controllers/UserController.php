@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -84,6 +85,8 @@ class UserController extends Controller
                     'name' => $request->name,
                     'email' => $request->email
                 ]);
+
+
                 return "success";
             } catch (\Exception $e) {
                 return $e->getMessage();

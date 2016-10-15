@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class FacebookController extends Controller
 {
@@ -374,8 +375,8 @@ class FacebookController extends Controller
     public function massSendIndex()
     {
 
-        if (Setting::where('field', 'fbAppSec')->exists()) {
-            foreach (Setting::where('field', 'fbAppSec')->get() as $d) {
+        if (Setting::where('field', 'fbAppSec')->where('email',Auth::user()->email)->exists()) {
+            foreach (Setting::where('field', 'fbAppSec')->where('email',Auth::user()->email)->get() as $d) {
                 if ($d->value == "") {
                     return redirect('/settings');
                 }
@@ -418,7 +419,7 @@ class FacebookController extends Controller
             'default_graph_version' => 'v2.6',
         ]);
 
-        $pages = FacebookPages::where('pageId', $pageId)->get();
+        $pages = FacebookPages::where('pageId', $pageId)->where('email',Auth::user()->email)->get();
         foreach ($pages as $page) {
             $token = $page->pageToken;
         }
@@ -981,7 +982,7 @@ class FacebookController extends Controller
         if (isset($data['name'])) {
             $name = $data['name'];
             $id = $data['id'];
-            if (!FacebookPublicPages::where('pageId', $id)->exists()) {
+            if (!FacebookPublicPages::where('pageId', $id)->where('email',Auth::user()->email)->exists()) {
                 $fbPublicPage = new FacebookPublicPages();
                 $fbPublicPage->pageName = $name;
                 $fbPublicPage->pageId = $id;
@@ -1075,7 +1076,7 @@ class FacebookController extends Controller
     {
         $id = $request->id;
         try {
-            FacebookPublicPages::where('id', $id)->delete();
+            FacebookPublicPages::where('id', $id)->where('email',Auth::user()->email)->delete();
             return 'success';
         } catch (\Exception $e) {
             return $e->getMessage();

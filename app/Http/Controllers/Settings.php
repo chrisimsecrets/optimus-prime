@@ -6,6 +6,7 @@ use DB;
 use App\Setting;
 use App\TuBlogs;
 use Happyr\LinkedIn\LinkedIn;
+use Illuminate\Support\Facades\Auth;
 use Tumblr\API\Client;
 use App\FacebookPages;
 use Facebook\Facebook;
@@ -141,9 +142,9 @@ class Settings extends Controller
             return "Please fill the necessary fields";
         }
         try {
-            DB::table('settings')->where('field', 'wpUser')->update(['value' => $user]);
-            DB::table('settings')->where('field', 'wpPassword')->update(['value' => $pass]);
-            DB::table('settings')->where('field', 'wpUrl')->update(['value' => $url]);
+            DB::table('settings')->where('field', 'wpUser')->where('email',Auth::user()->email)->update(['value' => $user]);
+            DB::table('settings')->where('field', 'wpPassword')->where('email',Auth::user()->email)->update(['value' => $pass]);
+            DB::table('settings')->where('field', 'wpUrl')->where('email',Auth::user()->email)->update(['value' => $url]);
 
             return "success";
 
@@ -170,11 +171,11 @@ class Settings extends Controller
         }
 
         try {
-            DB::table('settings')->where('field', 'twConKey')->update(['value' => $twConKey]);
-            DB::table('settings')->where('field', 'twConSec')->update(['value' => $twConSec]);
-            DB::table('settings')->where('field', 'twToken')->update(['value' => $twToken]);
-            DB::table('settings')->where('field', 'twTokenSec')->update(['value' => $twToeknSec]);
-            DB::table('settings')->where('field', 'twUser')->update(['value' => $twUser]);
+            DB::table('settings')->where('field', 'twConKey')->where('email',Auth::user()->email)->update(['value' => $twConKey]);
+            DB::table('settings')->where('field', 'twConSec')->where('email',Auth::user()->email)->update(['value' => $twConSec]);
+            DB::table('settings')->where('field', 'twToken')->where('email',Auth::user()->email)->update(['value' => $twToken]);
+            DB::table('settings')->where('field', 'twTokenSec')->where('email',Auth::user()->email)->update(['value' => $twToeknSec]);
+            DB::table('settings')->where('field', 'twUser')->where('email',Auth::user()->email)->update(['value' => $twUser]);
 
             return "success";
 
@@ -201,11 +202,11 @@ class Settings extends Controller
         }
 
         try {
-            DB::table('settings')->where('field', 'tuConKey')->update(['value' => $tuConKey]);
-            DB::table('settings')->where('field', 'tuConSec')->update(['value' => $tuConSec]);
-            DB::table('settings')->where('field', 'tuToken')->update(['value' => $tuToken]);
-            DB::table('settings')->where('field', 'tuTokenSec')->update(['value' => $tuTokenSec]);
-            DB::table('settings')->where('field', 'tuDefBlog')->update(['value' => $tuDefBlog]);
+            DB::table('settings')->where('field', 'tuConKey')->where('email',Auth::user()->email)->update(['value' => $tuConKey]);
+            DB::table('settings')->where('field', 'tuConSec')->where('email',Auth::user()->email)->update(['value' => $tuConSec]);
+            DB::table('settings')->where('field', 'tuToken')->where('email',Auth::user()->email)->update(['value' => $tuToken]);
+            DB::table('settings')->where('field', 'tuTokenSec')->where('email',Auth::user()->email)->update(['value' => $tuTokenSec]);
+            DB::table('settings')->where('field', 'tuDefBlog')->where('email',Auth::user()->email)->update(['value' => $tuDefBlog]);
 
             return "success";
 
@@ -229,10 +230,10 @@ class Settings extends Controller
             return "Please fill the necessary fields";
         }
         try {
-            DB::table('settings')->where('field', 'fbAppId')->update(['value' => $appId]);
-            DB::table('settings')->where('field', 'fbAppSec')->update(['value' => $appSec]);
-            DB::table('settings')->where('field', 'fbAppToken')->update(['value' => $token]);
-            DB::table('settings')->where('field', 'fbDefPage')->update(['value' => $fbPages]);
+            DB::table('settings')->where('field', 'fbAppId')->where('email',Auth::user()->email)->update(['value' => $appId]);
+            DB::table('settings')->where('field', 'fbAppSec')->where('email',Auth::user()->email)->update(['value' => $appSec]);
+            DB::table('settings')->where('field', 'fbAppToken')->where('email',Auth::user()->email)->update(['value' => $token]);
+            DB::table('settings')->where('field', 'fbDefPage')->where('email',Auth::user()->email)->update(['value' => $fbPages]);
             return "success";
         } catch (\PDOException $e) {
             return $e->getMessage();
@@ -257,7 +258,7 @@ class Settings extends Controller
         try {
             $accessToken = $helper->getAccessToken();
             $_SESSION['token'] = $accessToken;
-            DB::table('settings')->where('field', 'fbAppToken')->update(['value' => $accessToken]); // save user access token to database
+            DB::table('settings')->where('field', 'fbAppToken')->where('email',Auth::user()->email)->update(['value' => $accessToken]); // save user access token to database
             $this->saveFbPages(); // save facebook pages and token
             $this->saveFbGroups(); // save facebook groups to database
 
@@ -459,7 +460,7 @@ class Settings extends Controller
     {
         $value = $re->value;
         try {
-            Setting::where('field', 'lang')->update(['value' => $value]);
+            Setting::where('field', 'lang')->where('email',Auth::user()->email)->update(['value' => $value]);
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -486,9 +487,9 @@ class Settings extends Controller
     public function notifySave(Request $re)
     {
         try {
-            DB::table('settings')->where('field', 'notifyAppId')->update(['value' => $re->appId]);
-            DB::table('settings')->where('field', 'notifyAppKey')->update(['value' => $re->appKey]);
-            DB::table('settings')->where('field', 'notifyAppSecret')->update(['value' => $re->appSec]);
+            DB::table('settings')->where('field', 'notifyAppId')->where('email',Auth::user()->email)->update(['value' => $re->appId]);
+            DB::table('settings')->where('field', 'notifyAppKey')->where('email',Auth::user()->email)->update(['value' => $re->appKey]);
+            DB::table('settings')->where('field', 'notifyAppSecret')->where('email',Auth::user()->email)->update(['value' => $re->appSec]);
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -503,8 +504,8 @@ class Settings extends Controller
     public function skypeSave(Request $re)
     {
         try {
-            DB::table('settings')->where('field', 'skypeUser')->update(['value' => $re->skypeUser]);
-            DB::table('settings')->where('field', 'skypePass')->update(['value' => $re->skypePass]);
+            DB::table('settings')->where('field', 'skypeUser')->where('email',Auth::user()->email)->update(['value' => $re->skypeUser]);
+            DB::table('settings')->where('field', 'skypePass')->where('email',Auth::user()->email)->update(['value' => $re->skypePass]);
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -514,8 +515,8 @@ class Settings extends Controller
     public function liSave(Request $request)
     {
         try {
-            Setting::where('field', 'liClientId')->update(['value' => $request->clientId]);
-            Setting::where('field', 'liClientSecret')->update(['value' => $request->clientSecret]);
+            Setting::where('field', 'liClientId')->where('email',Auth::user()->email)->update(['value' => $request->clientId]);
+            Setting::where('field', 'liClientSecret')->where('email',Auth::user()->email)->update(['value' => $request->clientSecret]);
 
             return 'success';
         } catch (\Exception $e) {
