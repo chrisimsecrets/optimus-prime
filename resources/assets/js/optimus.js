@@ -1222,6 +1222,7 @@ if (document.getElementById('fbmassgroup')) {
             success: function (data) {
                 if (data == 'success') {
                     swal('Success!', 'Group Information saved', 'success');
+                    location.reload();
                 }
                 else {
                     swal('Error!', data, 'error');
