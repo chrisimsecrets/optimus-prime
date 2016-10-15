@@ -21,7 +21,7 @@
                             <!-- /.box-header -->
                             <!-- form start -->
 
-                            <form method="POST" action="add-slack-question" id="add-slack-question">
+                            <form method="POST" action="{{ url('/add-slack-question') }}" id="add-slack-question">
                                 {{ csrf_field() }}
 
                                 <div class="box-body">

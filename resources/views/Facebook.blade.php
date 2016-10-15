@@ -367,14 +367,6 @@
 
 @endsection
 
-@section('js')
-    <script>
-        $(document).ready(function () {
-
-        });
-    </script>
-@endsection
-
 @section('css')
     <script src="{{url('/opt/sweetalert.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
