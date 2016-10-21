@@ -2,17 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\FacebookPages;
-
-<<<<<<< HEAD
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-=======
->>>>>>> 7bb5360ab9d5fc21c54898805ca3e6cbf3e18527
-use Illuminate\Support\Facades\DB;
 
 class Data extends Controller
 {

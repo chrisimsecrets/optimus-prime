@@ -13,7 +13,26 @@ class LinkedinController extends Controller
     {
         $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
 
-        Setting::where('field', 'liAccessToken')->update(['value' => $linkedIn->getAccessToken()]);
+        $exists = Setting::where([
+            'email' => $request->user()->email,
+            'field' => 'liAccessToken'
+        ])->exists();
+
+        if (!$exists) {
+            Setting::create([
+                'field' => 'liAccessToken',
+                'value' => $linkedIn->getAccessToken(),
+                'email' => $request->user()->email
+            ]);
+        } else {
+            Setting::where([
+                'email' => $request->user()->email,
+                'field' => 'liAccessToken'
+            ])->update([
+                'value' => $linkedIn->getAccessToken(),
+                'email' => $request->user()->email
+            ]);
+        }
 
         return redirect('/settings');
     }
@@ -38,10 +57,12 @@ class LinkedinController extends Controller
      *
      * @return array
      */
-    public static function companiesWithDetails()
+    public static function companiesWithDetails($linkedIn = '')
     {
-        /** @var LinkedIn $linkedIn */
-        $linkedIn = app('linkedin');
+        if ($linkedIn === '') {
+            /** @var LinkedIn $linkedIn */
+            $linkedIn = app('linkedin');
+        }
 
         $companies = self::companies($linkedIn)['values'];
 
@@ -166,8 +187,14 @@ class LinkedinController extends Controller
             return redirect('/settings');
         }
 
-        $companies = self::companiesWithDetails();
+        $linkedIn = app('linkedin');
+        $companies = self::companies($linkedIn)['values'];
 
-        return view('liupdates', compact('companies'));
+        $updates = [];
+        foreach ($companies as $company) {
+            $updates[] = $linkedIn->get("/v1/companies/{$company['id']}/updates?format=json");
+        }
+
+        return view('liupdates', compact('updates'));
     }
 }

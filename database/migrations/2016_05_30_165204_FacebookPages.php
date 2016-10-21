@@ -18,7 +18,6 @@ class FacebookPages extends Migration
             $table->string('pageId');
             $table->string('pageName');
             $table->string('pageToken');
-
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class FacebookPages extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('facebookPages');
     }
 }

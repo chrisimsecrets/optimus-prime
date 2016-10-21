@@ -515,8 +515,15 @@ class Settings extends Controller
     public function liSave(Request $request)
     {
         try {
-            Setting::where('field', 'liClientId')->where('email',Auth::user()->email)->update(['value' => $request->clientId]);
-            Setting::where('field', 'liClientSecret')->where('email',Auth::user()->email)->update(['value' => $request->clientSecret]);
+            Setting::where('field', 'liClientId')->update([
+                'email' => $request->user()->email,
+                'value' => $request->clientId
+            ]);
+
+            Setting::where('field', 'liClientSecret')->update([
+                'email' => $request->user()->email,
+                'value' => $request->clientSecret
+            ]);
 
             return 'success';
         } catch (\Exception $e) {
