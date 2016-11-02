@@ -45,7 +45,7 @@
                                                              alt="user image">
                                                         <span class='username'>
                                       <a target="_blank"
-                                         href="http://facebook.com/{{$content['from']['id']}}">{{ $content['from']['name'] }}</a>
+                                         href="http://facebook.com/@if(isset($content['from']['id'])){{$content['from']['id']}} @endif">@if(isset($content['from']['name'])) {{ $content['from']['name'] }} @endif</a>
 
 
                                         <div class="optimusfbcom" data-id="{{$content['id']}}"
