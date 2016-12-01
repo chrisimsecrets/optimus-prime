@@ -7,8 +7,10 @@ use App\Fbgr;
 use App\Phones;
 use App\Setting;
 use App\Tu;
+use App\User;
 use Facebook\Facebook;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
@@ -272,7 +274,7 @@ class Prappo extends Controller
 
     public function test(){
 
-
+       
     }
 
     public static function comment($id,$text){

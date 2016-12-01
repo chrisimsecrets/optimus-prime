@@ -15,7 +15,8 @@
         "php-http/curl-client": "^1.6",
         "guzzlehttp/psr7": "^1.3",
         "php-http/message": "^1.3",
-        "happyr/linkedin-api-client": "^1.0"
+        "happyr/linkedin-api-client": "^1.0",
+        "barryvdh/laravel-debugbar": "^2.3"
 
     },
     "require-dev": {

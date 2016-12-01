@@ -16,7 +16,7 @@ class Data extends Controller
      */
     public static function get($valueOf)
     {
-        return DB::table('settings')->where('email',Auth::user()->email)->value($valueOf);
+        return DB::table('settings')->where('userId',Auth::user()->id)->value($valueOf);
 
 
     }
@@ -28,7 +28,7 @@ class Data extends Controller
      */
     public static function getToken($pageId)
     {
-        return DB::table('facebookPages')->where('email',Auth::user()->email)->where('pageId', $pageId)->value('pageToken');
+        return DB::table('facebookPages')->where('userId',Auth::user()->id)->where('pageId', $pageId)->value('pageToken');
 
     }
 
@@ -39,7 +39,7 @@ class Data extends Controller
      */
     public static function getPageName($pageId)
     {
-        $data = FacebookPages::where('pageId', $pageId)->where('email',Auth::user()->email)->value('pageName');
+        $data = FacebookPages::where('pageId', $pageId)->where('userId',Auth::user()->id)->value('pageName');
 
         return $data;
     }
