@@ -8,12 +8,12 @@ Route::any('/hook', 'Hook@fb');
 
 Route::post('/slack/hook', 'Hook@slack');
 
-Route::get('/prappo','Prappo@test');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::group(['middleware' => 'auth'], function () {
+        Route::get('/prappo', 'Prappo@test');
         Route::get('/home', 'HomeController@index');
         Route::get('/write', 'Write@index');
         Route::get('/posttest', 'Write@postTest');
@@ -25,7 +25,7 @@ Route::group(['middleware' => 'web'], function () {
         // settings pages
         Route::get('/settings', 'Settings@index');
         Route::get('/settings/notifications', 'Settings@notifyIndex');
-        Route::get('/settings/config','Settings@configIndex');
+        Route::get('/settings/config', 'Settings@configIndex');
         Route::get('/reports', 'Reports@index');
 
         Route::get('/followers', 'FollowersController@index');
@@ -45,17 +45,17 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/facebook', 'FacebookController@index');
         Route::get('/twitter', 'TwitterController@index');
-        Route::post('/twitter/retweet','TwitterController@retweet');
-        Route::post('/twitter/message','TwitterController@twSendMsg');
-        Route::get('/twitter/masssend','TwitterController@massSend');
-        Route::post('/twitter/masssend/action','TwitterController@massMessageSend');
-        Route::get('/twitter/message/send','TwitterController@sendMessage');
-        Route::post('/twitter/reply','TwitterController@twReply');
-        Route::post('/twitter/autoretweet','TwitterController@autoRetweet');
-        Route::get('/twitter/autoretweet','TwitterController@autoRetweetIndex');
-        Route::get('/twitter/autoreply','TwitterController@autoReplyIndex');
-        Route::post('/twitter/autoreply','TwitterController@autoReply');
-        Route::post('/twitter/autoreplyall','TwitterController@autoReplyAll');
+        Route::post('/twitter/retweet', 'TwitterController@retweet');
+        Route::post('/twitter/message', 'TwitterController@twSendMsg');
+        Route::get('/twitter/masssend', 'TwitterController@massSend');
+        Route::post('/twitter/masssend/action', 'TwitterController@massMessageSend');
+        Route::get('/twitter/message/send', 'TwitterController@sendMessage');
+        Route::post('/twitter/reply', 'TwitterController@twReply');
+        Route::post('/twitter/autoretweet', 'TwitterController@autoRetweet');
+        Route::get('/twitter/autoretweet', 'TwitterController@autoRetweetIndex');
+        Route::get('/twitter/autoreply', 'TwitterController@autoReplyIndex');
+        Route::post('/twitter/autoreply', 'TwitterController@autoReply');
+        Route::post('/twitter/autoreplyall', 'TwitterController@autoReplyAll');
         Route::get('/tumblr', 'TumblrController@index');
         Route::get('/wordpress', 'WordpressController@index');
 
@@ -79,11 +79,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/skypesave', 'Settings@skypeSave');
         Route::post('/lisave', 'Settings@liSave');
         Route::post('/settings/notifications', 'Settings@notifySave');
-        Route::post('/save/fb/bot/config','Settings@fbBotConfigSave');
+        Route::post('/save/fb/bot/config', 'Settings@fbBotConfigSave');
 
         // deleting
         Route::post('/fbdel', 'FacebookController@fbDelete');
-        Route::post('/wpdel','WordpressController@wpDelete');
+        Route::post('/wpdel', 'WordpressController@wpDelete');
 
         // commenting
         Route::post('/fbcom', 'FacebookController@fbComment');
@@ -119,19 +119,19 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/conversations', 'Conversation@index');
         Route::get('/conversations/{pageId}', 'Conversation@getConversations');
         Route::get('/conversations/{pageId}/{cId}', 'Conversation@inbox');
-        Route::get('/conversations/message/{pageId}/{mId}','Conversation@message');
+        Route::get('/conversations/message/{pageId}/{mId}', 'Conversation@message');
         Route::get('/ajaxchat/{pageId}/{cId}', 'Conversation@ajaxGetConversations');
         Route::post('/chat', 'Conversation@chat');
 
         Route::get('/masssend/{pageId}', 'FacebookController@massSend');
         Route::get('/masssend', 'FacebookController@massSendIndex');
         Route::post('/massreplay', 'FacebookController@massReplay');
-        Route::get('/facebook/masscomment','FacebookController@massComment');
-        Route::post('/facebook/masscomment','FacebookController@massCommentAction');
-        Route::post('/facebook/page/masscomment','FacebookController@massCommentPageAction');
+        Route::get('/facebook/masscomment', 'FacebookController@massComment');
+        Route::post('/facebook/masscomment', 'FacebookController@massCommentAction');
+        Route::post('/facebook/page/masscomment', 'FacebookController@massCommentPageAction');
 
-        Route::post('/facebook/addpublicpage','FacebookController@publicPageAdd');
-        Route::post('/delete/fbpublicpage','FacebookController@deletePage');
+        Route::post('/facebook/addpublicpage', 'FacebookController@publicPageAdd');
+        Route::post('/delete/fbpublicpage', 'FacebookController@deletePage');
 
 
         Route::get('/fb/bot', 'ChatBotController@fb');
@@ -172,13 +172,14 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/linkedin/updates', 'LinkedinController@updates');
 
         Route::get('/profile', 'ProfileController@index');
-        Route::post('/profile','ProfileController@update');
-        Route::post('/user/delete','UserController@userDel');
-        Route::get('/user/add','UserController@addUserIndex');
-        Route::post('/user/add','UserController@userAdd');
-        Route::get('/user/list','UserController@userList');
-        Route::get('/user/{id}','UserController@userEdit');
-        Route::post('/user/update','UserController@userUpdate');
+        Route::post('/profile', 'ProfileController@update');
+        Route::post('/user/delete', 'UserController@userDel');
+        Route::get('/user/add', 'UserController@addUserIndex');
+        Route::post('/user/add', 'UserController@userAdd');
+        Route::get('/user/list', 'UserController@userList');
+        Route::get('/user/{id}', 'UserController@userEdit');
+        Route::post('/user/update', 'UserController@userUpdate');
     });
+
 
 });

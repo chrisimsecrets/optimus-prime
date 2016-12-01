@@ -23,7 +23,7 @@ class Settings extends Controller
      */
     public function index()
     {
-        Prappo::index();
+//        Prappo::index();
         session_start();
 
         // Wordpress
@@ -88,10 +88,7 @@ class Settings extends Controller
         // get tumblr blogs
 
         $tuBlogs = TuBlogs::all();
-        $getLang = Setting::where('userId', Auth::user()->id)->value('lang');
-        foreach ($getLang as $lang) {
-            $l = $lang->value;
-        }
+
 
         $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
 
@@ -100,7 +97,6 @@ class Settings extends Controller
         ]);
 
         return view('settings', compact(
-            'l',
             'twUser',
             'tuDefBlog',
             'wpUser',
@@ -527,6 +523,11 @@ class Settings extends Controller
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public function fbBotConfigSave(Request $request)
+    {
+        return $request->all();
     }
 
     /**

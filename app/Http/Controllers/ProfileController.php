@@ -30,9 +30,6 @@ class ProfileController extends Controller
                 'name'=>$name
             ]) ;
 
-            Setting::where('email',Auth::user()->email)->update([
-               'email'=>$email
-            ]);
             return "success";
         }
         else{

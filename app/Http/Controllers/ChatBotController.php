@@ -16,7 +16,7 @@ class ChatBotController extends Controller
      */
     public function fb()
     {
-        $data = chatbot::where('email',Auth::user()->email)->get();
+        $data = chatbot::where('userId',Auth::user()->id)->get();
 
         return view('fbbot', compact('data'));
     }
