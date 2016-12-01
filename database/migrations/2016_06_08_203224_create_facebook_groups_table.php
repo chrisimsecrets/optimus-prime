@@ -17,6 +17,7 @@ class CreateFacebookGroupsTable extends Migration
             $table->string('pageId');
             $table->string('pageName');
             $table->string('privacy');
+            $table->string('userId');
             $table->timestamps();
         });
     }

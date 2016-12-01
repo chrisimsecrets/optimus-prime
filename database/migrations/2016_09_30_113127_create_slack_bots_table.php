@@ -18,7 +18,7 @@ class CreateSlackBotsTable extends Migration
             $table->text('answer');
             $table->string('channel');
             $table->string('accuracy')->nullable()->default(null);
-            $table->string('email')->nullable();
+            $table->string('userId')->nullable();
             $table->timestamps();
         });
     }

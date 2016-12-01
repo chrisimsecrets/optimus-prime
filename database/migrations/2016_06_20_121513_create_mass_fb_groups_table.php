@@ -16,6 +16,7 @@ class CreateMassFbGroupsTable extends Migration
             $table->increments('id');
             $table->string('groupId');
             $table->string('groupName');
+            $table->string('userId');
             $table->timestamps();
         });
     }

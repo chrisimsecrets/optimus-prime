@@ -16,6 +16,7 @@ class CreatePhonesTable extends Migration
             $table->increments('id');
             $table->string('username');
             $table->string('phone');
+            $table->string('userId');
             $table->timestamps();
         });
     }

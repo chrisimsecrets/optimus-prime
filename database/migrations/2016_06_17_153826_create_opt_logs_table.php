@@ -18,6 +18,7 @@ class CreateOptLogsTable extends Migration
             $table->string('status');
             $table->string('type');
             $table->string('from');
+            $table->string('userId');
             $table->timestamps();
         });
     }

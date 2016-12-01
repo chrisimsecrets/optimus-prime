@@ -16,6 +16,7 @@ class CreateFacebookPublicPagesTable extends Migration
             $table->increments('id');
             $table->string('pageName');
             $table->string('pageId');
+            $table->string('userId');
             $table->timestamps();
         });
     }

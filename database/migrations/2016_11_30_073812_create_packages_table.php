@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FacebookPages extends Migration
+class CreatePackagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,8 @@ class FacebookPages extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('facebookPages', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('pageId');
-            $table->string('userId');
-            $table->string('pageName');
-            $table->string('pageToken');
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ class FacebookPages extends Migration
      */
     public function down()
     {
-        Schema::drop('facebookPages');
+        Schema::drop('packages');
     }
 }

@@ -21,6 +21,7 @@ class CreateNotifiesTable extends Migration
             $table->string('time');
             $table->string('type');
             $table->string('status')->nullable();
+            $table->string('userId');
             $table->timestamps();
         });
     }

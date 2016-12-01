@@ -18,6 +18,7 @@ class CreateTusTable extends Migration
             $table->string('tuId');
             $table->string('blogName');
             $table->string('reBlogKey');
+            $table->string('userId');
             $table->timestamps();
         });
     }

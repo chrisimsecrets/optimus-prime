@@ -986,6 +986,7 @@ class FacebookController extends Controller
                 $fbPublicPage = new FacebookPublicPages();
                 $fbPublicPage->pageName = $name;
                 $fbPublicPage->pageId = $id;
+                $fbPublicPage->email = Auth::user()->email;
                 $fbPublicPage->save();
                 return "success";
             } else {

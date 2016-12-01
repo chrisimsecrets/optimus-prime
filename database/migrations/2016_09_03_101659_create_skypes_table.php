@@ -15,6 +15,7 @@ class CreateSkypesTable extends Migration
         Schema::create('skypes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('postId');
+            $table->string('userId');
             $table->timestamps();
         });
     }

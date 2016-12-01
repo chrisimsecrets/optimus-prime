@@ -25,6 +25,7 @@ class CreateDashboardsTable extends Migration
             $table->string('tu');
             $table->string('wed');
             $table->string('thu');
+            $table->string('userId');
 
             $table->timestamps();
         });

@@ -17,7 +17,7 @@ class CreateAllpostsTable extends Migration
             $table->string('title');
             $table->string('content');
             $table->string('postId');
-
+            $table->string('userId');
             $table->timestamps();
         });
     }

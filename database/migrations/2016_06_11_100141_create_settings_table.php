@@ -14,9 +14,36 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('field')->nullable();
-            $table->string('value')->nullable();
-            $table->string('email')->nullable();
+            $table->string('wpUser')->nullable();
+            $table->string('wpPassword')->nullable();
+            $table->string('wpUrl')->nullable();
+            $table->string('tuConKey')->nullable();
+            $table->string('tuConSec')->nullable();
+            $table->string('tuToken')->nullable();
+            $table->string('tuTokenSec')->nullable();
+            $table->string('twConKey')->nullable();
+            $table->string('twConSec')->nullable();
+            $table->string('twToken')->nullable();
+            $table->string('twTokenSec')->nullable();
+            $table->string('fbAppId')->nullable();
+            $table->string('fbAppToken')->nullable();
+            $table->string('fbAppSec')->nullable();
+            $table->string('tuDefBlog')->nullable();
+            $table->string('twUser')->nullable();
+            $table->string('fbDefPage')->nullable();
+            $table->string('notifyAppId')->nullable();
+            $table->string('notifyAppKey')->nullable();
+            $table->string('notifyAppSecret')->nullable();
+            $table->string('skypeUser')->nullable();
+            $table->string('skypePass')->nullable();
+            $table->string('liClientId')->nullable();
+            $table->string('liClientSecret')->nullable();
+            $table->string('liAccessToken')->nullable();
+            $table->string('matchAcc')->nullable();
+            $table->string('exMsg')->nullable();
+            $table->string('slackBotMatchAcc')->nullable();
+            $table->string('userId')->nullable();
+            $table->string('lang')->nullable();
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ class CreateTwsTable extends Migration
             $table->increments('id');
             $table->string('postId');
             $table->string('twId');
+            $table->string('userId');
             $table->timestamps();
         });
     }

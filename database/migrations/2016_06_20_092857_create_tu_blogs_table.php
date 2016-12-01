@@ -16,6 +16,7 @@ class CreateTuBlogsTable extends Migration
             $table->increments('id');
             $table->string('blogName');
             $table->string('blogTitle');
+            $table->string('userId');
             $table->timestamps();
         });
     }

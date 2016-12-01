@@ -16,7 +16,8 @@ class Data extends Controller
      */
     public static function get($valueOf)
     {
-        return DB::table('settings')->where('email',Auth::user()->email)->where('field', $valueOf)->value('value');
+        return DB::table('settings')->where('email',Auth::user()->email)->value($valueOf);
+
 
     }
 

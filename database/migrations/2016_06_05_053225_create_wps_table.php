@@ -18,6 +18,7 @@ class CreateWpsTable extends Migration
             $table->string('wpId');
             $table->string('title');
             $table->string('content');
+            $table->string('userId');
             $table->timestamps();
         });
     }

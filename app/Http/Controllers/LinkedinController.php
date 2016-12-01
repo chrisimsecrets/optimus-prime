@@ -12,7 +12,6 @@ class LinkedinController extends Controller
     public function callback(Request $request)
     {
         $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
-
         $exists = Setting::where([
             'email' => $request->user()->email,
             'field' => 'liAccessToken'

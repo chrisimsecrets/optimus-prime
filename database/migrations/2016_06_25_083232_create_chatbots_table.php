@@ -17,6 +17,7 @@ class CreateChatbotsTable extends Migration
             $table->string('question');
             $table->string('answer');
             $table->string('pageId');
+            $table->string('userId');
             $table->timestamps();
         });
     }
