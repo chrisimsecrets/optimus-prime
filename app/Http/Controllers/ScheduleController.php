@@ -6,6 +6,7 @@ use App\OptSchedul;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
@@ -16,7 +17,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $data = OptSchedul::all();
+        $data = OptSchedul::where('userId',Auth::user()->id)->get();
         return view('schedule', compact('data'));
     }
 
@@ -73,6 +74,7 @@ class ScheduleController extends Controller
             $schedule->blogName = $blogName;
             $schedule->imagetype = $imagetype;
             $schedule->sharetype = $sharetype;
+            $schedule->userId = Auth::user()->id;
             $schedule->save();
             echo "success";
         } catch (\Exception $e) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class Notify extends Controller
 {
@@ -23,6 +24,7 @@ class Notify extends Controller
             $notify->time = $re->time;
             $notify->url = $re->url;
             $notify->type = $re->type;
+            $notify->userId = Auth::user()->id;
             $notify->save();
             return "success";
 
@@ -36,7 +38,7 @@ class Notify extends Controller
      */
     public function show()
     {
-        $data = \App\Notify::all();
+        $data = \App\Notify::where('userId',Auth::user()->id)->get();
         return view('notify', compact('data'));
     }
 
@@ -46,7 +48,7 @@ class Notify extends Controller
     public function delAll()
     {
         try {
-            \App\Notify::truncate();
+            \App\Notify::where('userId',Auth::user()->id)->truncate();
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();

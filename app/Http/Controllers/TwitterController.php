@@ -16,20 +16,16 @@ class TwitterController extends Controller
      */
     public function index()
     {
-        if (Setting::where('field', 'twTokenSec')->where('email',Auth::user()->email)->exists()) {
-            foreach (Setting::where('field', 'twTokenSec')->where('email',Auth::user()->email)->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+
+
+        if (Data::get('twTokenSec') == "" || Data::get('twConKey') == "") {
             return redirect('/settings');
         }
 
-        $consumerKey = FollowersController::get_value('twConKey');
-        $consumerSecret = FollowersController::get_value('twConSec');
-        $accessToken = FollowersController::get_value('twToken');
-        $tokenSecret = FollowersController::get_value('twTokenSec');
+        $consumerKey = Data::get('twConKey');
+        $consumerSecret = Data::get('twConSec');
+        $accessToken = Data::get('twToken');
+        $tokenSecret = Data::get('twTokenSec');
 
         $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
 

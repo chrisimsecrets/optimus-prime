@@ -9,6 +9,7 @@ use App\Tw;
 use App\Wp;
 use App\Fbgr;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Tumblr\API;
 use App\OptLog;
 use App\Allpost;
@@ -26,7 +27,7 @@ class Write extends Controller
 
     public static function get_value($field)
     {
-        return DB::table('settings')->where('field', $field)->value('value');
+        return DB::table('settings')->where('userId', Auth::user()->id)->value($field);
     }
 
     public function index()
@@ -44,10 +45,7 @@ class Write extends Controller
             $tuMsg = "error";
         }
 
-        $getLang = Setting::where('field', 'lang')->get();
-        foreach ($getLang as $lang) {
-            $l = $lang->value;
-        }
+
 
         $fbPages = FacebookPages::all();
         $fbGroups = facebookGroups::all();

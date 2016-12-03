@@ -33,20 +33,20 @@
                     <li><a href="{{ url('/slack/bot') }}"><i class="fa fa-slack"></i> <span>Slack</span></a></li>
                 </ul>
             </li>
+            <!-- skype deprecated -->
+            {{--<li class="treeview">--}}
+                {{--<a href="#">--}}
+                    {{--<i class="fa fa-skype"></i>--}}
+                    {{--<span>Skype</span>--}}
+                    {{--<i class="fa fa-angle-left pull-right"></i>--}}
+                {{--</a>--}}
+                {{--<ul class="treeview-menu" style="display: none">--}}
+                    {{--<li><a href="{{ url('/skype') }}"><i class="fa fa-home"></i> <span>Skype</span></a></li>--}}
+                    {{--<li><a href="{{ url('/skype/phone/list') }}"><i class="fa fa-phone"></i> Collected Phone numbers</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
 
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-skype"></i>
-                    <span>Skype</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu" style="display: none">
-                    <li><a href="{{ url('/skype') }}"><i class="fa fa-home"></i> <span>Skype</span></a></li>
-                    <li><a href="{{ url('/skype/phone/list') }}"><i class="fa fa-phone"></i> Collected Phone numbers</a>
-                    </li>
-                </ul>
-
-            </li>
+            {{--</li>--}}
 
             <li class="treeview">
                 <a href="#">

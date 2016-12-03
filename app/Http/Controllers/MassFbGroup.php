@@ -8,6 +8,7 @@ use Facebook\Facebook;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class MassFbGroup extends Controller
 {
@@ -16,7 +17,7 @@ class MassFbGroup extends Controller
      */
     public function index()
     {
-        $groups = \App\MassFbGroup::all();
+        $groups = \App\MassFbGroup::where('userId',Auth::user()->id)->get();
         return view('fbmassgroup', compact('groups'));
     }
 
@@ -35,7 +36,7 @@ class MassFbGroup extends Controller
             'app_secret' => Data::get('fbAppSec'),
             'default_graph_version' => 'v2.6',
         ]);
-        $publicGroups = \App\MassFbGroup::all();
+        $publicGroups = \App\MassFbGroup::where('userId',Auth::user()->id)->get();
 
         try {
             foreach ($publicGroups as $group) {
@@ -67,6 +68,7 @@ class MassFbGroup extends Controller
             $group = new \App\MassFbGroup();
             $group->groupId = $id;
             $group->groupName = $name;
+            $group->userId = Auth::user()->id;
             $group->save();
             return "success";
 

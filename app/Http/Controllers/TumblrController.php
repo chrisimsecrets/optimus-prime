@@ -16,22 +16,16 @@ class TumblrController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(){
-        if(Setting::where('field','tuTokenSec')->exists()){
-            foreach (Setting::where('field','tuTokenSec')->get() as $d){
-                if($d->value == ""){
-                    return redirect('/settings');
-                }
-            }
-        }
-        else{
+
+        if(Data::get('tuTokenSec') == "" || Data::get('tuConSec')==""){
             return redirect('/settings');
         }
 
-        $blogName = self::get_value('tuDefBlog');
-        $consumerKey = self::get_value('tuConKey');
-        $consumerSecret = self::get_value('tuConSec');
-        $token = self::get_value('tuToken');
-        $tokenSecret = self::get_value('tuTokenSec');
+        $blogName = Data::get('tuDefBlog');
+        $consumerKey = Data::get('tuConKey');
+        $consumerSecret = Data::get('tuConSec');
+        $token = Data::get('tuToken');
+        $tokenSecret = Data::get('tuTokenSec');
 
         $client = new Client($consumerKey, $consumerSecret, $token, $tokenSecret);
         try {
@@ -61,8 +55,5 @@ class TumblrController extends Controller
      * @param $field
      * @return mixed
      */
-    public static function get_value($field)
-    {
-        return DB::table('settings')->where('field', $field)->value('value');
-    }
+
 }

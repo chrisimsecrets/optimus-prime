@@ -1,4 +1,4 @@
-@extends('layouts.app')
+s@extends('layouts.app')
 @section('title','Skype')
 @section('content')
     <div class="wrapper">

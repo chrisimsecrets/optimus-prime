@@ -58,36 +58,23 @@
                 {{-- show how many page or groups exists--}}
 
                 <div class="row">
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-red">
-                            <div class="inner">
-                                <h3>{{$user}}</h3>
 
-                                <p>Users</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-user"></i>
-                            </div>
-
-                        </div>
-                    </div>
                     <!-- ./col -->
 
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-aqua">
-                            <div class="inner">
-                                <h3>{{$schedules}}</h3>
+                    {{--<div class="col-lg-3 col-xs-6">--}}
+                        {{--<!-- small box -->--}}
+                        {{--<div class="small-box bg-aqua">--}}
+                            {{--<div class="inner">--}}
+                                {{--<h3>{{$schedules}}</h3>--}}
 
-                                <p>Total Schedules</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-list"></i>
-                            </div>
+                                {{--<p>Total Schedules</p>--}}
+                            {{--</div>--}}
+                            {{--<div class="icon">--}}
+                                {{--<i class="fa fa-list"></i>--}}
+                            {{--</div>--}}
 
-                        </div>
-                    </div>
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <!-- ./col -->
 
 

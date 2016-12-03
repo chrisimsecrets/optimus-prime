@@ -23,7 +23,7 @@ class ChatBotController extends Controller
 
     public function slack()
     {
-        $data = SlackBot::where('email',Auth::user()->email)->get();
+        $data = SlackBot::where('userId',Auth::user()->id)->get();
 
         return view('slackbot', compact('data'));
     }
@@ -44,7 +44,7 @@ class ChatBotController extends Controller
             $data->question = $question;
             $data->answer = $answer;
             $data->pageId = $re->pageId;
-            $data->email = Auth::user()->email;
+            $data->userId = Auth::user()->userId;
             $data->save();
             return "success";
         } catch (\Exception $e) {
@@ -61,7 +61,7 @@ class ChatBotController extends Controller
         /** @var int $id */
         $id = $re->id;
         try {
-            chatbot::where('id', $id)->where('email',Auth::user()->email)->delete();
+            chatbot::where('id', $id)->where('userId',Auth::user()->id)->delete();
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -70,6 +70,7 @@ class ChatBotController extends Controller
 
     public function addSlackQuestion(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'question' => 'required',
             'answer' => 'required',
@@ -99,6 +100,7 @@ class ChatBotController extends Controller
         }
 
         SlackBot::insert($questions);
+
     }
 
     public function deleteSlackQuestion(Request $request)
@@ -124,8 +126,8 @@ class ChatBotController extends Controller
             return 'error';
         }
 
-        Setting::where('field', 'slackBotMatchAcc')->where('email',Auth::user()->email)->update([
-            'value' => $request->matchAcc
+        Setting::where('userId',Auth::user()->id)->update([
+            'slackBotMatchAcc' => $request->matchAcc
         ]);
     }
 
@@ -140,7 +142,7 @@ class ChatBotController extends Controller
         }
         $per =0;
         $reply = "";
-        $text = chatbot::where('pageId',$pageId)->where('email',Auth::user()->email)->get();
+        $text = chatbot::where('pageId',$pageId)->where('userId',Auth::user()->id)->get();
         foreach($text as $t){
             similar_text($t->question,$inputText,$per);
             if($per >= Data::get('matchAcc')){

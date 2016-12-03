@@ -6,32 +6,18 @@ use Exception;
 use App\Setting;
 use Illuminate\Http\Request;
 use Happyr\LinkedIn\LinkedIn;
+use Illuminate\Support\Facades\Auth;
 
 class LinkedinController extends Controller
 {
     public function callback(Request $request)
     {
         $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
-        $exists = Setting::where([
-            'email' => $request->user()->email,
-            'field' => 'liAccessToken'
-        ])->exists();
 
-        if (!$exists) {
-            Setting::create([
-                'field' => 'liAccessToken',
-                'value' => $linkedIn->getAccessToken(),
-                'email' => $request->user()->email
-            ]);
-        } else {
-            Setting::where([
-                'email' => $request->user()->email,
-                'field' => 'liAccessToken'
-            ])->update([
-                'value' => $linkedIn->getAccessToken(),
-                'email' => $request->user()->email
-            ]);
-        }
+        Setting::where('userId', Auth::user()->id)->update([
+            'liAccessToken' => $linkedIn->getAccessToken()
+        ]);
+
 
         return redirect('/settings');
     }
@@ -99,7 +85,7 @@ class LinkedinController extends Controller
 
         if ($request->has('to') && $request->to[0] === 'all') {
             $companies = self::companies($linkedIn);
-        } elseif($request->has('to') && is_array($request->to)) {
+        } elseif ($request->has('to') && is_array($request->to)) {
             $companies = array_reduce($request->to, function ($carry, $to) {
                 $carry['values'][]['id'] = $to;
 
@@ -182,7 +168,7 @@ class LinkedinController extends Controller
      */
     public function updates()
     {
-        if (!Data::get('liAccessToken')) {
+        if (Data::get('liAccessToken')=="") {
             return redirect('/settings');
         }
 
@@ -190,9 +176,14 @@ class LinkedinController extends Controller
         $companies = self::companies($linkedIn)['values'];
 
         $updates = [];
+        $profile = [];
         foreach ($companies as $company) {
             $updates[] = $linkedIn->get("/v1/companies/{$company['id']}/updates?format=json");
+            $profile = $linkedIn->get("/v1/companies/{$company['id']}?format=json");
         }
+        $otherCompany = $linkedIn->get("/v1/companies/1035/updates?format=json");
+        print_r($updates);
+        exit;
 
         return view('liupdates', compact('updates'));
     }

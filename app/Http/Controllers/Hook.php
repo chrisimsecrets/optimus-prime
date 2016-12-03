@@ -20,7 +20,7 @@ class Hook extends Controller
         $challenge = $re->hub_challenge;
         $verify_token = $re->hub_verify_token;
 
-        if ($verify_token === 'prappo') {
+        if ($verify_token === 'optimus') {
             return $challenge;
         }
 

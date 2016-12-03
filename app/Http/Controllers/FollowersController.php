@@ -19,13 +19,9 @@ class FollowersController extends Controller
     public function index()
     {
         set_time_limit(120);
-        if (Setting::where('field', 'twTokenSec')->where('email',Auth::user()->email)->exists()) {
-            foreach (Setting::where('field', 'twAppToken')->where('email',Auth::user()->email)->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+
+
+        if(Data::get('twTokenSec')==""){
             return redirect('/settings');
         }
         $data = new HomeController();
@@ -43,10 +39,10 @@ class FollowersController extends Controller
      */
     public static function twFollowers()
     {
-        $consumerKey = self::get_value('twConKey');
-        $consumerSecret = self::get_value('twConSec');
-        $accessToken = self::get_value('twToken');
-        $tokenSecret = self::get_value('twTokenSec');
+        $consumerKey =Data::get('twConKey');
+        $consumerSecret = Data::get('twConSec');
+        $accessToken = Data::get('twToken');
+        $tokenSecret = Data::get('twTokenSec');
 
         try {
 
@@ -66,13 +62,13 @@ class FollowersController extends Controller
      */
     public static function tuFollowers()
     {
-        $blogName = self::get_value('tuDefBlog');
+        $blogName = Data::get('tuDefBlog');
 
 
-        $consumerKey = self::get_value('tuConKey');
-        $consumerSecret = self::get_value('tuConSec');
-        $token = self::get_value('tuToken');
-        $tokenSecret = self::get_value('tuTokenSec');
+        $consumerKey = Data::get('tuConKey');
+        $consumerSecret = Data::get('tuConSec');
+        $token = Data::get('tuToken');
+        $tokenSecret = Data::get('tuTokenSec');
 
         $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
 
@@ -92,7 +88,7 @@ class FollowersController extends Controller
      */
     public static function get_value($field)
     {
-        return DB::table('settings')->where('email',Auth::user()->email)->where('email',Auth::user()->email)->where('field', $field)->value('value');
+        return DB::table('settings')->where('userId',Auth::user()->id)->value($field);
     }
 
     /**

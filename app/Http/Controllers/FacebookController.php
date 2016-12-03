@@ -27,18 +27,14 @@ class FacebookController extends Controller
     public function index()
     {
 //        check if fbAppSec exists
-        if (Setting::where('field', 'fbAppSec')->exists()) {
-            foreach (Setting::where('field', 'fbAppSec')->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+
+
+        if (Data::get('fbAppSec') == "" || Data::get('fbAppId') == "") {
             return redirect('/settings');
         }
 
         $defPage = Data::get('fbDefPage');
-        $fbPages = FacebookPages::all();
+        $fbPages = FacebookPages::where('userId',Auth::user()->id)->get();
         $likes = 0;
         $love = 0;
         $sad = 0;
@@ -81,18 +77,14 @@ class FacebookController extends Controller
     public function fbGroupIndex()
     {
         $message = "";
-        if (facebookGroups::count() <= 0) {
+        if (facebookGroups::where('userId',Auth::user()->id)->count() <= 0) {
             $message = "nogroup";
             return view('fbgroups', compact('message'));
         }
 
-        if (Setting::where('field', 'fbAppSec')->exists()) {
-            foreach (Setting::where('field', 'fbAppSec')->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+
+
+        if(Setting::where('userId',Auth::user()->id)->value('fbAppSec') == ""){
             return redirect('/settings');
         }
 
@@ -167,7 +159,7 @@ class FacebookController extends Controller
      */
     public static function fbDel($id)
     {
-        if (Fb::where('postId', $id)->exists()) {
+        if (Fb::where('postId', $id)->where('userId', Auth::user()->id)->exists()) {
             $fbPostId = Fb::where('postId', $id)->value('fbId');
             $pageId = Fb::where('postId', $id)->value('pageId');
 
@@ -297,13 +289,7 @@ class FacebookController extends Controller
      */
     public function fbReport()
     {
-        if (Setting::where('field', 'fbAppSec')->exists()) {
-            foreach (Setting::where('field', 'fbAppSec')->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+        if(Setting::where('userId',Auth::user()->id)->value('fbAppSec') == ""){
             return redirect('/settings');
         }
 
@@ -340,7 +326,7 @@ class FacebookController extends Controller
      */
     public function fbReportView()
     {
-        $datas = FacebookPages::all();
+        $datas = FacebookPages::where('userId',Auth::user()->id)->get();
         return view('facebookreport', compact('datas'));
     }
 
@@ -375,13 +361,7 @@ class FacebookController extends Controller
     public function massSendIndex()
     {
 
-        if (Setting::where('field', 'fbAppSec')->where('email',Auth::user()->email)->exists()) {
-            foreach (Setting::where('field', 'fbAppSec')->where('email',Auth::user()->email)->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+        if(Setting::where('userId',Auth::user()->id)->value('fbAppSec') == ""){
             return redirect('/settings');
         }
 
@@ -419,7 +399,7 @@ class FacebookController extends Controller
             'default_graph_version' => 'v2.6',
         ]);
 
-        $pages = FacebookPages::where('pageId', $pageId)->where('email',Auth::user()->email)->get();
+        $pages = FacebookPages::where('pageId', $pageId)->where('email', Auth::user()->email)->get();
         foreach ($pages as $page) {
             $token = $page->pageToken;
         }
@@ -960,7 +940,7 @@ class FacebookController extends Controller
      */
     public function massComment()
     {
-        $pages = FacebookPublicPages::all();
+        $pages = FacebookPublicPages::where('userId',Auth::user()->id)->get();
         return view('fbmasspage', compact('pages'));
     }
 
@@ -982,11 +962,11 @@ class FacebookController extends Controller
         if (isset($data['name'])) {
             $name = $data['name'];
             $id = $data['id'];
-            if (!FacebookPublicPages::where('pageId', $id)->where('email',Auth::user()->email)->exists()) {
+            if (!FacebookPublicPages::where('pageId', $id)->where('email', Auth::user()->email)->exists()) {
                 $fbPublicPage = new FacebookPublicPages();
                 $fbPublicPage->pageName = $name;
                 $fbPublicPage->pageId = $id;
-                $fbPublicPage->email = Auth::user()->email;
+                $fbPublicPage->userId = Auth::user()->id;
                 $fbPublicPage->save();
                 return "success";
             } else {
@@ -1012,7 +992,7 @@ class FacebookController extends Controller
         $token = Data::get('fbAppToken');
         $pageCount = 0;
         $commentCount = 0;
-        $publicPages = FacebookPublicPages::all();
+        $publicPages = FacebookPublicPages::user('userId',Auth::user()->id)->get();
         foreach ($publicPages as $page) {
             $pageCount++;
             $data = $fb->get($page->pageId . '/feed?limit=1', $token)->getDecodedBody();
@@ -1077,7 +1057,7 @@ class FacebookController extends Controller
     {
         $id = $request->id;
         try {
-            FacebookPublicPages::where('id', $id)->where('email',Auth::user()->email)->delete();
+            FacebookPublicPages::where('id', $id)->where('email', Auth::user()->email)->delete();
             return 'success';
         } catch (\Exception $e) {
             return $e->getMessage();

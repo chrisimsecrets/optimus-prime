@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AllpostController extends Controller
 {
@@ -16,7 +17,7 @@ class AllpostController extends Controller
      */
     public function index()
     {
-        $posts = \App\Allpost::all();
+        $posts = \App\Allpost::where('userId',Auth::user()->id)->get();
         return view('allpost', compact('posts'));
     }
 
@@ -32,7 +33,7 @@ class AllpostController extends Controller
         $twDel = Write::twDel($re->postId);
         $wpDel = WordpressController::wpDel($re->postId);
         $tuDel = Write::tuDel($re->postId);
-        Allpost::where('postId', $re->postId)->delete();
+        Allpost::where('postId', $re->postId)->where('userId',Auth::user()->id)->delete();
 //        return "Facebook Page : " .$fbDel . "Facebook Grouup ".$fbgDel." | ".$twDel." | ".$wpDel." | ".$tuDel;
         return "Done";
 
@@ -44,7 +45,7 @@ class AllpostController extends Controller
     public function delAll()
     {
         try {
-            Allpost::truncate();
+            Allpost::where('userId',Auth::user()->id)->truncate();
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();

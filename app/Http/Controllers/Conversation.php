@@ -10,6 +10,7 @@ use Facebook\Facebook;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class Conversation extends Controller
 {
@@ -20,13 +21,7 @@ class Conversation extends Controller
     {
 //        check if fbAppSec exists
 
-        if (Setting::where('field', 'fbAppSec')->exists()) {
-            foreach (Setting::where('field', 'fbAppSec')->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+        if(Setting::where('userId',Auth::user()->id)->value('fbAppSec') == ""){
             return redirect('/settings');
         }
         /** @var object $fb */

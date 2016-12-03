@@ -23,7 +23,7 @@
 
                             <form method="POST" action="{{ url('/add-slack-question') }}" id="add-slack-question">
                                 {{ csrf_field() }}
-
+                                <input type="hidden" id="userId" name="userId" value="{{Auth::user()->id}}">
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="question">Message</label>

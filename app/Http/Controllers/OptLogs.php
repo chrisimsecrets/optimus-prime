@@ -6,6 +6,7 @@ use App\OptLog;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 
 class OptLogs extends Controller
@@ -15,7 +16,7 @@ class OptLogs extends Controller
      */
     public function index()
     {
-        $datas = OptLog::all();
+        $datas = OptLog::where('userId',Auth::user()->id)->get();
         return view('schedules_log', compact('datas'));
     }
 
@@ -40,7 +41,7 @@ class OptLogs extends Controller
     public function delAll()
     {
         try {
-            OptLog::truncate();
+            OptLog::where('userId',Auth::user()->id)->truncate();
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();

@@ -15,13 +15,8 @@ class Scraper extends Controller
      */
     public function index()
     {
-        if (Setting::where('field', 'fbAppSec')->exists()) {
-            foreach (Setting::where('field', 'fbAppSec')->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+        
+        if (Data::get('fbAppSec') == "") {
             return redirect('/settings');
         }
 

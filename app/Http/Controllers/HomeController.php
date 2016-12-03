@@ -17,6 +17,7 @@ use App\User;
 use App\Wp;
 use Facebook\FacebookRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomeController extends Controller
@@ -38,26 +39,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "") {
+//        if (Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "") {
+//
+//        } else {
+//            return redirect('/settings');
+//        }
 
-        } else {
-            return redirect('/settings');
-        }
+        $fbPostCount = Fb::where('userId',Auth::user()->id)->count();
+        $twPostCount = Tw::where('userId',Auth::user()->id)->count();
+        $tuPostCount = Tu::where('userId',Auth::user()->id)->count();
+        $wpPostCount = Wp::where('userId',Auth::user()->id)->count();
+        $fbgCount = facebookGroups::where('userId',Auth::user()->id)->count();
+        $fbPageCount = FacebookPages::where('userId',Auth::user()->id)->count();
+        $allPost = Allpost::where('userId',Auth::user()->id)->count();
 
-        $fbPostCount = Fb::all()->count();
-        $twPostCount = Tw::all()->count();
-        $tuPostCount = Tu::all()->count();
-        $wpPostCount = Wp::all()->count();
-        $fbgCount = facebookGroups::all()->count();
-        $fbPageCount = FacebookPages::all()->count();
-        $allPost = Allpost::all()->count();
+        $fbPages = FacebookPages::where('userId',Auth::user()->id)->count();
+        $fbGroups = facebookGroups::where('userId',Auth::user()->id)->count();
+        $tuBlogs = TuBlogs::where('userId',Auth::user()->id)->count();
+        $schedules = OptSchedul::where('userId',Auth::user()->id)->count();
+        $logs = OptLog::where('userId',Auth::user()->id)->count();
 
-        $fbPages = FacebookPages::all()->count();
-        $fbGroups = facebookGroups::all()->count();
-        $tuBlogs = TuBlogs::all()->count();
-        $schedules = OptSchedul::all()->count();
-        $logs = OptLog::all()->count();
-        $user = User::all()->count();
 
         return view('home', compact(
             'fbPostCount',
@@ -71,8 +72,8 @@ class HomeController extends Controller
             'fbGroups',
             'tuBlogs',
             'schedules',
-            'logs',
-            'user'
+            'logs'
+
         ));
     }
 

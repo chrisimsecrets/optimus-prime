@@ -18,13 +18,8 @@ class SkypeController extends Controller
      */
     public function index()
     {
-        if (Setting::where('field', 'skypePass')->exists()) {
-            foreach (Setting::where('field', 'skypePass')->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+        if(Data::get('skypePass') == "")
+        {
             return redirect('/settings');
         }
         $skype = new \App\Http\Controllers\Skype(Data::get('skypeUser'), Data::get('skypePass'));

@@ -52,7 +52,7 @@ class Settings extends Controller
 
         //skype
         $skypeUser = Data::get('skypeUser');
-        $skypePass = Data::get('skypeUser');
+        $skypePass = Data::get('skypePass');
 
         //linkedin
         $liClientId = Data::get('liClientId');
@@ -79,7 +79,7 @@ class Settings extends Controller
 
 
         try {
-            $fbPages = FacebookPages::all();
+            $fbPages = FacebookPages::where('userId',Auth::user()->id)->get();
         } catch (\Exception $h) {
             $fbPages = "none";
         }
@@ -87,7 +87,7 @@ class Settings extends Controller
 
         // get tumblr blogs
 
-        $tuBlogs = TuBlogs::all();
+        $tuBlogs = TuBlogs::where('userId',Auth::user()->id)->get();
 
 
         $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
@@ -327,6 +327,7 @@ class Settings extends Controller
                 $facebookPages->pageId = $filed['id'];
                 $facebookPages->pageName = $filed['name'];
                 $facebookPages->pageToken = $filed['access_token'];
+                $facebookPages->userId = Auth::user()->id;
                 $facebookPages->save();
 
             }
@@ -367,6 +368,7 @@ class Settings extends Controller
                 $facebookGroup->pageId = $field['id'];
                 $facebookGroup->pageName = $field['name'];
                 $facebookGroup->privacy = $field['privacy'];
+                $facebookGroup->userId = Auth::user()->id;
                 $facebookGroup->save();
             }
 
@@ -436,6 +438,7 @@ class Settings extends Controller
                     $blogs = new TuBlogs();
                     $blogs->blogName = $de->name;
                     $blogs->blogTitle = $de->title;
+                    $blogs->userId = Auth::user()->id;
                     $blogs->save();
                 }
 
