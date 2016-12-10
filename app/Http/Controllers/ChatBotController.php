@@ -16,14 +16,14 @@ class ChatBotController extends Controller
      */
     public function fb()
     {
-        $data = chatbot::where('userId',Auth::user()->id)->get();
+        $data = chatbot::where('userId', Auth::user()->id)->get();
 
         return view('fbbot', compact('data'));
     }
 
     public function slack()
     {
-        $data = SlackBot::where('userId',Auth::user()->id)->get();
+        $data = SlackBot::where('userId', Auth::user()->id)->get();
 
         return view('slackbot', compact('data'));
     }
@@ -39,12 +39,19 @@ class ChatBotController extends Controller
         /** @var string $answer */
         $answer = $re->answer;
 
+        if ($question == "") {
+            return "Write some question ";
+        }
+
+        if ($answer == "") {
+            return "Write question's answer";
+        }
         try {
             $data = new chatbot();
             $data->question = $question;
             $data->answer = $answer;
             $data->pageId = $re->pageId;
-            $data->userId = Auth::user()->userId;
+            $data->userId = Auth::user()->id;
             $data->save();
             return "success";
         } catch (\Exception $e) {
@@ -61,7 +68,7 @@ class ChatBotController extends Controller
         /** @var int $id */
         $id = $re->id;
         try {
-            chatbot::where('id', $id)->where('userId',Auth::user()->id)->delete();
+            chatbot::where('id', $id)->where('userId', Auth::user()->id)->delete();
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -85,7 +92,7 @@ class ChatBotController extends Controller
 
         foreach ($request->all() as $field => $value) {
             if ($field === 'channel') {
-                $values = preg_split( "/,/", $value);
+                $values = preg_split("/,/", $value);
 
                 foreach ($values as $v) {
                     $channels[] = '#' . ltrim(trim($v), '#');
@@ -126,7 +133,7 @@ class ChatBotController extends Controller
             return 'error';
         }
 
-        Setting::where('userId',Auth::user()->id)->update([
+        Setting::where('userId', Auth::user()->id)->update([
             'slackBotMatchAcc' => $request->matchAcc
         ]);
     }
@@ -136,20 +143,20 @@ class ChatBotController extends Controller
      * @param $pageId
      * @return mixed|string
      */
-    public static function compile($inputText, $pageId){
-        if($pageId == ""){
+    public static function compile($inputText, $pageId)
+    {
+        if ($pageId == "") {
             return Data::get('exMsg');
         }
-        $per =0;
+        $per = 0;
         $reply = "";
-        $text = chatbot::where('pageId',$pageId)->where('userId',Auth::user()->id)->get();
-        foreach($text as $t){
-            similar_text($t->question,$inputText,$per);
-            if($per >= Data::get('matchAcc')){
+        $text = chatbot::where('pageId', $pageId)->where('userId', Auth::user()->id)->get();
+        foreach ($text as $t) {
+            similar_text($t->question, $inputText, $per);
+            if ($per >= Data::get('matchAcc')) {
                 $reply = $t->answer;
                 break;
-            }
-            else{
+            } else {
                 $reply = Data::get('exMsg');
             }
         }

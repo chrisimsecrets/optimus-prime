@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class WordpressController extends Controller
 {
@@ -15,7 +16,7 @@ class WordpressController extends Controller
      */
     public function index()
     {
-        $data = Wp::all();
+        $data = Wp::where('userId',Auth::user()->id)->get();
         return view('Wordpress', compact('data'));
     }
 

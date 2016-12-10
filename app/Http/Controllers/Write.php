@@ -46,7 +46,6 @@ class Write extends Controller
         }
 
 
-
         $fbPages = FacebookPages::all();
         $fbGroups = facebookGroups::all();
 
@@ -73,6 +72,7 @@ class Write extends Controller
         $write->title = $title;
         $write->content = $content;
         $write->postId = $postId;
+        $write->userId = Auth::user()->id;
         $write->save();
         echo "success";
 
@@ -93,8 +93,8 @@ class Write extends Controller
     public function wpWrite(Request $re)
     {
         $content = $re->data;
-        if($re->imagepost=='yes'){
-            $content = $re->data . "<br>"."<img src='".url('/')."/uploads/".$re->image."'>";
+        if ($re->imagepost == 'yes') {
+            $content = $re->data . "<br>" . "<img src='" . url('/') . "/uploads/" . $re->image . "'>";
         }
 
         $title = $re->title;
@@ -125,6 +125,7 @@ class Write extends Controller
             $wp->wpId = $postId;
             $wp->title = $title;
             $wp->content = $content;
+            $wp->userId = Auth::user()->id;
             $wp->save();
             echo "success";
         }
@@ -168,6 +169,7 @@ class Write extends Controller
             $wp = new Wp();
             $wp->postId = $pId;
             $wp->wpId = $postId;
+            $wp->userId = Auth::user()->id;
             $wp->save();
             $log->postId = $postId;
             $log->from = "Wordpress";
@@ -200,6 +202,7 @@ class Write extends Controller
                     $tw = new Tw();
                     $tw->postId = $postId;
                     $tw->twId = $data->id;
+                    $tw->userId = Auth::user()->id;
                     $tw->save();
                 }
 
@@ -220,6 +223,7 @@ class Write extends Controller
                     $tw = new Tw();
                     $tw->postId = $postId;
                     $tw->twId = $data->id;
+                    $tw->userId = Auth::user()->id;
                     $tw->save();
                 }
 
@@ -259,6 +263,7 @@ class Write extends Controller
                 $tw = new Tw();
                 $tw->postId = $postId;
                 $tw->twId = $data->id;
+                $tw->userId = Auth::user()->id;
                 $tw->save();
                 $log->postId = $postId;
                 $log->status = "success";
@@ -274,7 +279,7 @@ class Write extends Controller
             $log->type = $type;
             echo $e->getMessage();
         }
-
+        $log->userId = Auth::user()->id;
         $log->save();
     }
 
@@ -315,6 +320,7 @@ class Write extends Controller
             $tu->tuId = $postId;
             $tu->postId = $pId;
             $tu->blogName = $blogName;
+            $tu->userId = Auth::user()->id;
             $tu->save();
             return "success";
 
@@ -361,6 +367,7 @@ class Write extends Controller
             $tw = new Tw();
             $tw->twId = $postId;
             $tw->postId = $pId;
+            $tw->userID = Auth::user()->id;
             $tw->save();
             $log->postId = $postId;
             $log->from = "Tumblr";
@@ -376,6 +383,7 @@ class Write extends Controller
             $log->type = $type;
 
         }
+        $log->userId = Auth::user()->id;
         $log->save();
     }
 
@@ -410,12 +418,12 @@ class Write extends Controller
             $consumerSecret = self::get_value('tuConSec');
             $token = self::get_value('tuToken');
             $tokenSecret = self::get_value('tuTokenSec');
-            $tuId = Tu::where('postId',$id)->value('tuId');
-            $blogName = Tu::where('postId',$id)->value('blogName');
+            $tuId = Tu::where('postId', $id)->value('tuId');
+            $blogName = Tu::where('postId', $id)->value('blogName');
             $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
             try {
                 $client->deletePost($blogName, $tuId, "");
-                Tu::where('postId',$id)->delete();
+                Tu::where('postId', $id)->delete();
                 return "success";
             } catch (Exception $ex) {
                 echo $ex->getMessage();
@@ -552,6 +560,7 @@ class Write extends Controller
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
                     $fbPost->pageId = $pageId;
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 return "success";
@@ -580,6 +589,7 @@ class Write extends Controller
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
                     $fbPost->pageId = $pageId;
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 return "success";
@@ -602,6 +612,7 @@ class Write extends Controller
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
                     $fbPost->pageId = $pageId;
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 return "success";
@@ -653,14 +664,14 @@ class Write extends Controller
                     $fbg->postId = $postId;
                     $fbg->fbId = $id['id'];
                     $fbg->fbGroupId = $groupId;
+                    $fbg->userId = Auth::user()->id;
                     $fbg->save();
                     return "success";
                 }
 
             } catch (FacebookSDKException $fse) {
                 return $fse->getMessage();
-            }
-            catch (Exception $e){
+            } catch (Exception $e) {
                 return $e->getMessage();
             }
         } else if ($sharepost == 'yes') {
@@ -681,6 +692,7 @@ class Write extends Controller
                     $fbg->postId = $postId;
                     $fbg->fbId = $id['id'];
                     $fbg->fbGroupId = $groupId;
+                    $fbg->userId = Auth::user()->id;
                     $fbg->save();
 
                 }
@@ -704,6 +716,7 @@ class Write extends Controller
                     $fbg->postId = $postId;
                     $fbg->fbId = $id['id'];
                     $fbg->fbGroupId = $groupId;
+                    $fbg->userId = Auth::user()->id;
                     $fbg->save();
                 }
                 return "success";
@@ -752,7 +765,7 @@ class Write extends Controller
 
         if ($request->has('to') && $request->to[0] === 'all') {
             $companies = LinkedinController::companies($linkedIn);
-        } elseif($request->has('to') && is_array($request->to)) {
+        } elseif ($request->has('to') && is_array($request->to)) {
             $companies = array_reduce($request->to, function ($carry, $to) {
                 $carry['values'][]['id'] = $to;
 
@@ -813,7 +826,7 @@ class Write extends Controller
             $linkedIn->post("/v1/companies/{$company['id']}/shares?format=json", $body);
         }
     }
-    
+
     /**
      * @param $spostId
      * @param $spageId
@@ -865,6 +878,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -900,6 +914,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -930,6 +945,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -949,6 +965,7 @@ class Write extends Controller
                 $log->status = "error";
             }
         }
+        $log->userId = Auth::user()->id;
         $log->save();
 
     }
@@ -1005,6 +1022,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -1037,6 +1055,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -1064,6 +1083,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->userId = Auth::user()->id;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -1080,6 +1100,7 @@ class Write extends Controller
                 $log->from = "Facebook Group";
             }
         }
+        $log->userId = Auth::user()->id;
         $log->save();
 
     }
@@ -1117,7 +1138,7 @@ class Write extends Controller
             $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
             try {
                 $twitter->destroy($twPostId);
-                Tw::where('postId',$id)->delete();
+                Tw::where('postId', $id)->delete();
                 return "Delete form twitter : success";
             } catch (\TwitterException $te) {
                 return "Delete form twitter : error";
@@ -1161,6 +1182,7 @@ class Write extends Controller
             $add->title = $title;
             $add->content = $content;
             $add->postId = $postId;
+            $add->userId = Auth::user()->id;
             $add->save();
             return "success";
         } catch (Exception $e) {

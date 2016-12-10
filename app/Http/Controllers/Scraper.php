@@ -15,7 +15,7 @@ class Scraper extends Controller
      */
     public function index()
     {
-        
+
         if (Data::get('fbAppSec') == "") {
             return redirect('/settings');
         }
@@ -28,27 +28,9 @@ class Scraper extends Controller
      */
     public function twScraper()
     {
-        if (Setting::where('field', 'twTokenSec')->exists()) {
-            foreach (Setting::where('field', 'twTokenSec')->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
+        if(Data::get('twTokenSec')==""){
             return redirect('/settings');
         }
-
-
-        if (Setting::where('field', 'twTokenSec')->exists()) {
-            foreach (Setting::where('field', 'twTokenSec')->get() as $d) {
-                if ($d->value == "") {
-                    return redirect('/settings');
-                }
-            }
-        } else {
-            return redirect('/settings');
-        }
-
         return view('twscraper');
 
 

@@ -30,7 +30,7 @@
                                 <div class="form-group">
                                     <label for="answer">For</label>
                                     <select class="form-control" id="pages">
-                                        @foreach(\App\FacebookPages::all() as $fbpage)
+                                        @foreach(\App\FacebookPages::where('userId',Auth::user()->id)->get() as $fbpage)
                                         <option value="{{$fbpage->pageId}}">{{$fbpage->pageName}}</option>
                                         @endforeach
                                     </select>

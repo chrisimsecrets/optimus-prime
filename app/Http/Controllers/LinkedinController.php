@@ -181,8 +181,27 @@ class LinkedinController extends Controller
             $updates[] = $linkedIn->get("/v1/companies/{$company['id']}/updates?format=json");
             $profile = $linkedIn->get("/v1/companies/{$company['id']}?format=json");
         }
-        $otherCompany = $linkedIn->get("/v1/companies/1035/updates?format=json");
-        print_r($updates);
+
+        if($updates[0]['_total']==0){
+            return "No data found";
+        }
+//        print_r($updates);
+//        exit;
+        $datas = $updates[0]['values'];
+        foreach ($datas as $data){
+            echo $data['updateContent']['companyStatusUpdate']['share']['comment']."<br>";
+            echo $data['numLikes']."<br>";
+            if($data['updateComments']['_total'] == 0){
+                echo "No comments";
+            }else{
+                foreach($data['updateComments']['values'] as $comment){
+                    echo "<ul>";
+                    echo "<li>".$comment['comment']." ". Data::time($comment['timestamp'])."</li>";
+                    echo "</ul>";
+                }
+            }
+            echo "<hr>";
+        }
         exit;
 
         return view('liupdates', compact('updates'));
