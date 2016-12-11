@@ -17,7 +17,21 @@
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             @if(Auth::user()->type == 'admin')
-            <li><a href="{{ url('/admin') }}"><i class="fa fa-th"></i> <span>Admin panel</span></a></li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-th"></i>
+                        <span>Admin Panel</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+
+                    <ul class="treeview-menu" style="display: none">
+                        <li><a href="{{ url('/admin') }}"><i class="fa fa-dashboard"></i> <span>Admin Dashboard</span></a></li>
+                        <li><a href="{{ url('/user/add') }}"><i class="fa fa-plus-circle"></i> <span>Add User</span></a></li>
+                        <li><a href="{{ url('/user/list') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+
+                    </ul>
+                </li>
+
             @endif
             <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
             <li><a href="{{ url('/write') }}"><i class="fa fa-edit"></i> <span>Write</span></a></li>
@@ -166,21 +180,21 @@
 
                 </ul>
             </li>
-            @if(Auth::user()->type == 'admin')
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-users"></i>
-                        <span>Users</span><i class="fa fa-angle-left pull-right"></i>
+            {{--@if(Auth::user()->type == 'admin')--}}
+                {{--<li class="treeview">--}}
+                    {{--<a href="#">--}}
+                        {{--<i class="fa fa-users"></i>--}}
+                        {{--<span>Users</span><i class="fa fa-angle-left pull-right"></i>--}}
 
-                    </a>
-                    <ul class="treeview-menu" style="display: none;">
-                        <li><a href="{{ url('/user/add') }}"><i class="fa fa-user-plus"></i> <span>Add user</span></a>
-                        </li>
-                        <li><a href="{{ url('/user/list') }}"><i class="fa fa-user"></i><span>User List</span></a></li>
-                    </ul>
-                </li>
+                    {{--</a>--}}
+                    {{--<ul class="treeview-menu" style="display: none;">--}}
+                        {{--<li><a href="{{ url('/user/add') }}"><i class="fa fa-user-plus"></i> <span>Add user</span></a>--}}
+                        {{--</li>--}}
+                        {{--<li><a href="{{ url('/user/list') }}"><i class="fa fa-user"></i><span>User List</span></a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
 
-            @endif
+            {{--@endif--}}
             <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
             <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
 

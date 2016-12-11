@@ -36,6 +36,63 @@
                                            placeholder="Password" type="password">
                                 </div>
 
+                                <hr>
+
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Packages</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="fb" type="checkbox" @if(\App\Http\Controllers\Data::myPackage('fb')) checked @endif>
+                                            <i class="fa fa-facebook"></i> Facebook
+                                        </label>
+                                    </div>
+
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="tw" type="checkbox" @if(\App\Http\Controllers\Data::myPackage('tw')) checked @endif>
+                                            <i class="fa fa-twitter"></i> Twitter
+                                        </label>
+                                    </div><div class="checkbox">
+                                        <label>
+                                            <input id="tu" type="checkbox" @if(\App\Http\Controllers\Data::myPackage('tu')) checked @endif>
+                                            <i class="fa fa-tumblr"></i> Tumblr
+                                        </label>
+                                    </div><div class="checkbox">
+                                        <label>
+                                            <input id="wp" type="checkbox" @if(\App\Http\Controllers\Data::myPackage('wp')) checked @endif>
+                                            <i class="fa fa-wordpress"></i> Wordpress
+                                        </label>
+                                    </div><div class="checkbox">
+                                        <label>
+                                            <input id="ln" type="checkbox" @if(\App\Http\Controllers\Data::myPackage('ln')) checked @endif>
+                                            <i class="fa fa-linkedin"></i> Linkedin
+                                        </label>
+                                    </div><div class="checkbox">
+                                        <label>
+                                            <input id="in" type="checkbox" @if(\App\Http\Controllers\Data::myPackage('in')) checked @endif>
+                                            <i class="fa fa-instagram"></i> Instagram
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="fbBot" type="checkbox" @if(\App\Http\Controllers\Data::myPackage('fbBot')) checked @endif>
+                                            <i class="fa fa-comment"></i> Facebook Messenger Bot
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="slackBot" type="checkbox" @if(\App\Http\Controllers\Data::myPackage('slackBot')) checked @endif>
+                                            <i class="fa fa-slack"></i> Slack Bot
+                                        </label>
+                                    </div>
+
+                                </div>
+
                             </div><!-- /.box-body -->
 
                             <div class="box-footer">
@@ -58,6 +115,81 @@
 @endsection
 @section('js')
     <script>
+        var fb,tw,tu,wp,ln,ins,fbBot,slackBot = "no";
+        if($('#fb').is(':checked')){
+            fb = 'yes';
+        }
+        if($('#tw').is(':checked')){
+            tw = 'yes';
+        }
+        if($('#tu').is(':checked')){
+            tu = 'yes';
+        }
+        if($('#wp').is(':checked')){
+            wp = 'yes';
+        }
+        if($('#in').is(':checked')){
+            ins = 'yes';
+        }
+        if($('#ln').is(':checked')){
+            ln = 'yes';
+        }
+        if($('#fbBot').is(':checked')){
+            fbBot = 'yes';
+        }
+        if($('#slackBot').is(':checked')){
+            slackBot = 'yes';
+        }
+
+//        changing stuff
+        $('#fb').on('change',function () {
+           if(this.checked){
+               fb = 'yes';
+           }
+        });
+
+        $('#tw').on('change',function () {
+            if(this.checked){
+                tw = 'yes';
+            }
+        });
+
+        $('#tu').on('change',function () {
+            if(this.checked){
+                tu = 'yes';
+            }
+        });
+
+        $('#ln').on('change',function () {
+            if(this.checked){
+                ln = 'yes';
+            }
+        });
+
+        $('#in').on('change',function () {
+            if(this.checked){
+                ins = 'yes';
+            }
+        });
+
+        $('#wp').on('change',function () {
+            if(this.checked){
+                wp = 'yes';
+            }
+        });
+
+        $('#fbBot').on('change',function () {
+            if(this.checked){
+                fbBot = 'yes';
+            }
+        });
+
+        $('#slackBot').on('change',function () {
+            if(this.checked){
+                slackBot = 'yes';
+            }
+        });
+
         $('#save').click(function () {
             $.ajax({
                 type:'POST',
@@ -66,7 +198,15 @@
                     'id':'{{$id}}',
                     'name':$('#name').val(),
                     'email':$('#email').val(),
-                    'password':$('#pass').val()
+                    'password':$('#pass').val(),
+                    'fb':fb,
+                    'tw':tw,
+                    'tu':tu,
+                    'wp':wp,
+                    'in':ins,
+                    'ln':ln,
+                    'fbBot':fbBot,
+                    'slackBot':slackBot
 
                 },
                 success:function (data) {

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Profile | Optimus')
+@section('title','Add new user | Optimus')
 
 @section('content')
     <div class="wrapper">
@@ -35,11 +35,63 @@
                                     <input class="form-control" value="" id="pass"
                                            placeholder="Password" type="password">
                                 </div>
+                                <hr>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Packages</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="fb" type="checkbox">
+                                            <i class="fa fa-facebook"></i> Facebook
+                                        </label>
+                                    </div>
 
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="tw" type="checkbox">
+                                            <i class="fa fa-twitter"></i> Twitter
+                                        </label>
+                                    </div><div class="checkbox">
+                                        <label>
+                                            <input id="tu" type="checkbox">
+                                            <i class="fa fa-tumblr"></i> Tumblr
+                                        </label>
+                                    </div><div class="checkbox">
+                                        <label>
+                                            <input id="wp" type="checkbox">
+                                            <i class="fa fa-wordpress"></i> Wordpress
+                                        </label>
+                                    </div><div class="checkbox">
+                                        <label>
+                                            <input id="ln" type="checkbox">
+                                            <i class="fa fa-linkedin"></i> Linkedin
+                                        </label>
+                                    </div><div class="checkbox">
+                                        <label>
+                                            <input id="in" type="checkbox">
+                                            <i class="fa fa-instagram"></i> Instagram
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="fbBot" type="checkbox">
+                                            <i class="fa fa-comment"></i> Facebook Messenger Bot
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="slackBot" type="checkbox">
+                                            <i class="fa fa-slack"></i> Slack Bot
+                                        </label>
+                                    </div>
+
+                                </div>
                             </div><!-- /.box-body -->
 
                             <div class="box-footer">
-                                <button id="save" class="btn btn-primary">Save</button>
+                                <button id="save" class="btn btn-primary">Add user</button>
                             </div>
 
                         </div>

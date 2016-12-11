@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Package;
 use App\Setting;
 use App\User;
 use Illuminate\Http\Request;
@@ -43,14 +44,42 @@ class UserController extends Controller
         if (User::where('email', $request->email)->exists()) {
             return "Email already exists";
         }
+        if($request->name == ""){
+            return "Name required";
+        }
+        if($request->password==""){
+            return "Password required";
+        }
         try {
-            User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'type' => 'user',
-            ]);
+            /*
+             * Creating new user
+             *
+             * */
+
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->type = 'user';
+            $user->status = 'active';
+            $user->save();
+            //create pakcage for user
+
+            $package = new Package();
+            $package->userId = User::where('email',$request->email)->value('id');
+            $package->fb = $request->fb;
+            $package->tw = $request->tw;
+            $package->tu = $request->tu;
+            $package->wp = $request->wp;
+            $package->ln = $request->ln;
+            $package->in = $request->in;
+            $package->fbBot = $request->fbBot;
+            $package->slackBot = $request->slackBot;
+            $package->save();
+
             return "success";
+
+
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -113,11 +142,13 @@ class UserController extends Controller
     {
         $userType = User::where('id', $request->id)->value('type');
         if ($userType == 'admin') {
-            return "You can't delete admin account";
+            return "You can't deactive admin account";
         }
 
         try {
-            User::where('id', $request->id)->delete();
+            User::where('id', $request->id)->update([
+                'status'=>'deactive'
+            ]);
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();

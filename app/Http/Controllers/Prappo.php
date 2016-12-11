@@ -273,12 +273,7 @@ class Prappo extends Controller
     }
 
     public function test(){
-        User::create([
-            'name' => 'Prappo',
-            'email' => 'prappo.prince@gmail.com',
-            'password' => bcrypt('bangladesh'),
-            'type' => 'user',
-        ]);
+
        
     }
 

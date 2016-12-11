@@ -19,6 +19,8 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Type</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -28,9 +30,11 @@
                                 <tr>
                                     <td>{{$d->name}}</td>
                                     <td>{{$d->email}}</td>
+                                    <td>{{$d->type}}</td>
+                                    <td>@if($d->status == 'deactive') Deactive @else Active @endif</td>
                                     <td>
                                         <button data-id="{{$d->id}}" class="btn btn-xs btn-danger"><i
-                                                    class="fa fa-trash"></i> Delete
+                                                    class="fa fa-trash"></i> Deactive
                                         </button>
                                         <a href="{{url('/user')}}/{{$d->id}}" class="btn btn-xs btn-default"><i
                                                     class="fa fa-edit"> Edit</i> </a></td>
@@ -41,10 +45,10 @@
 
                             <tfoot>
                             <tr>
-                                <th>Post ID</th>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th>Available on</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Type</th>
+                                <th>Deactive</th>
                                 <th>Action</th>
                             </tr>
                             </tfoot>
@@ -57,47 +61,42 @@
     </div>{{--End wrapper--}}
 @endsection
 @section('css')
-    <script src="{{url('/opt/sweetalert.min.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
+    {{--<script src="{{url('/opt/sweetalert.min.js')}}"></script>--}}
+    {{--<link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">--}}
 @endsection
 
 @section('js')
     <script>
         $('.btn-danger').click(function () {
             var id = $(this).attr('data-id');
-            swal({
-                title: "Are you sure?",
-                text: "Do you wan't to delete this user ?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-            }, function () {
-                $.ajax({
-                    type: 'POST',
-                    url: '{{url('/user/delete')}}',
-                    data: {
-                        'id': id
-                    },
-                    success: function (data) {
-                        if (data == 'success') {
-                            swal('Success', 'Deleted', 'success');
-                            location.reload();
-                        }
-                        else {
-                            swal('Error', data, 'error');
-                            console.log(data.responseText);
-                        }
-                    },
-                    error: function (data) {
-                        swal('Error', data, 'error');
-                        console.log(data.responseText);
-                    }
+             var action = confirm("Do you want to deactive this user ?");
+             if(action) {
 
-                });
-            });
+                 $.ajax({
+                     type: 'POST',
+                     url: '{{url('/user/delete')}}',
+                     data: {
+                         'id': id
+                     },
+                     success: function (data) {
+                         if (data == 'success') {
+                             swal('Success', 'User deactivated', 'success');
+                             location.reload();
+                         }
+                         else {
+                             swal('Error', data, 'error');
+                             console.log(data.responseText);
+                         }
+                     },
+                     error: function (data) {
+                         swal('Error', data, 'error');
+                         console.log(data.responseText);
+                     }
+
+                 });
+             }
+
+
 
         });
     </script>

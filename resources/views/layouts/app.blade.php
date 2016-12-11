@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="{{url('/opt/css/custom.css')}}">
     <link rel="stylesheet" href="{{url('/opt/intro/introjs.css')}}">
 
+    <script src="{{url('/opt/sweetalert.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

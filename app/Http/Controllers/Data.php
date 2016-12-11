@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Package;
 use DateTime;
 use DB;
 use App\FacebookPages;
@@ -111,5 +112,23 @@ class Data extends Controller
 
         if (!$full) $string = array_slice($string, 0, 1);
         return $string ? implode(', ', $string) . ' ago' : 'just now';
+    }
+
+    public static function hasPackage($userId,$packageName){
+        if(Package::where('userId',$userId)->value($packageName)=='yes'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function myPackage($packageName){
+
+            if(Package::where('userId',Auth::user()->id)->value($packageName) == 'yes'){
+                return true;
+            }else{
+                return false;
+            }
+
     }
 }
