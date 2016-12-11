@@ -16,7 +16,9 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-
+            @if(Auth::user()->type == 'admin')
+            <li><a href="{{ url('/admin') }}"><i class="fa fa-th"></i> <span>Admin panel</span></a></li>
+            @endif
             <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
             <li><a href="{{ url('/write') }}"><i class="fa fa-edit"></i> <span>Write</span></a></li>
             <li><a href="{{ url('/allpost') }}"><i class="fa fa-copy"></i> <span>All posts</span></a></li>
@@ -181,6 +183,7 @@
             @endif
             <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
             <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+
         </ul>
     </section>
     <!-- /.sidebar -->

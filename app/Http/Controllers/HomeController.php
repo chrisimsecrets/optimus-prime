@@ -39,11 +39,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        if (Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "") {
-//
-//        } else {
-//            return redirect('/settings');
-//        }
+        if (Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "") {
+
+        } else {
+            return redirect('/settings');
+        }
 
         $fbPostCount = Fb::where('userId',Auth::user()->id)->count();
         $twPostCount = Tw::where('userId',Auth::user()->id)->count();
