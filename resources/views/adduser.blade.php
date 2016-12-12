@@ -110,6 +110,83 @@
 @endsection
 @section('js')
     <script>
+
+        var fb,tw,tu,wp,ln,ins,fbBot,slackBot = "no";
+        if($('#fb').is(':checked')){
+            fb = 'yes';
+        }
+        if($('#tw').is(':checked')){
+            tw = 'yes';
+        }
+        if($('#tu').is(':checked')){
+            tu = 'yes';
+        }
+        if($('#wp').is(':checked')){
+            wp = 'yes';
+        }
+        if($('#in').is(':checked')){
+            ins = 'yes';
+        }
+        if($('#ln').is(':checked')){
+            ln = 'yes';
+        }
+        if($('#fbBot').is(':checked')){
+            fbBot = 'yes';
+        }
+        if($('#slackBot').is(':checked')){
+            slackBot = 'yes';
+        }
+
+        //        changing stuff
+        $('#fb').on('change',function () {
+            if(this.checked){
+                fb = 'yes';
+            }
+        });
+
+        $('#tw').on('change',function () {
+            if(this.checked){
+                tw = 'yes';
+            }
+        });
+
+        $('#tu').on('change',function () {
+            if(this.checked){
+                tu = 'yes';
+            }
+        });
+
+        $('#ln').on('change',function () {
+            if(this.checked){
+                ln = 'yes';
+            }
+        });
+
+        $('#in').on('change',function () {
+            if(this.checked){
+                ins = 'yes';
+            }
+        });
+
+        $('#wp').on('change',function () {
+            if(this.checked){
+                wp = 'yes';
+            }
+        });
+
+        $('#fbBot').on('change',function () {
+            if(this.checked){
+                fbBot = 'yes';
+            }
+        });
+
+        $('#slackBot').on('change',function () {
+            if(this.checked){
+                slackBot = 'yes';
+            }
+        });
+
+
         $('#save').click(function () {
             $.ajax({
                 type:'POST',
