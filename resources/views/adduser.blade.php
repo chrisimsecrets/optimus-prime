@@ -111,7 +111,7 @@
 @section('js')
     <script>
 
-        var fb,tw,tu,wp,ln,ins,fbBot,slackBot = "no";
+        var fb="no",tw="no",tu="no",wp="no",ln="no",ins="no",fbBot="no",slackBot = "no";
         if($('#fb').is(':checked')){
             fb = 'yes';
         }
@@ -141,48 +141,64 @@
         $('#fb').on('change',function () {
             if(this.checked){
                 fb = 'yes';
+            }else{
+                fb='no';
             }
         });
 
         $('#tw').on('change',function () {
             if(this.checked){
                 tw = 'yes';
+            }else{
+                tw='no';
             }
         });
 
         $('#tu').on('change',function () {
             if(this.checked){
                 tu = 'yes';
+            }else{
+                tu='no';
             }
         });
 
         $('#ln').on('change',function () {
             if(this.checked){
                 ln = 'yes';
+            }else{
+                ln = 'no';
             }
         });
 
         $('#in').on('change',function () {
             if(this.checked){
                 ins = 'yes';
+            }else{
+                ins = 'no';
             }
         });
 
         $('#wp').on('change',function () {
             if(this.checked){
                 wp = 'yes';
+            }else{
+                wp='no';
             }
         });
 
         $('#fbBot').on('change',function () {
             if(this.checked){
                 fbBot = 'yes';
+            }else{
+                fbBot = 'no';
             }
         });
 
         $('#slackBot').on('change',function () {
             if(this.checked){
                 slackBot = 'yes';
+            }else{
+                slackBot = 'no';
             }
         });
 
@@ -195,11 +211,20 @@
                     'name':$('#name').val(),
                     'email':$('#email').val(),
                     'password':$('#pass').val(),
+                    'fb':fb,
+                    'tw':tw,
+                    'tu':tu,
+                    'wp':wp,
+                    'in':ins,
+                    'ln':ln,
+                    'fbBot':fbBot,
+                    'slackBot':slackBot
 
                 },
                 success:function (data) {
                     if(data=='success'){
                         swal('Success','User added','success');
+                        location.reload();
                     }
                     else{
                         swal('Error',data,'error');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Setting;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -50,6 +51,14 @@ class SettingsSeeder extends Seeder
             'email' => 'admin@email.com',
             'password' => bcrypt('123456'),
             'type' => 'admin',
+        ]);
+
+        Setting::create([
+            'userId' => User::where('email', 'admin@email.com')->value('id')
+        ]);
+
+        \App\Package::create([
+            'userId' => User::where('email', 'admin@email.com')->value('id')
         ]);
     }
 }

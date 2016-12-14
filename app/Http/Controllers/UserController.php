@@ -35,6 +35,13 @@ class UserController extends Controller
         return view('adduser');
     }
 
+    public function adminDashboard(){
+        if(Auth::user()->type != 'admin'){
+            return "forbidden";
+        }
+        return view('admin');
+    }
+
     /**
      * @param Request $request
      * @return string
@@ -44,10 +51,10 @@ class UserController extends Controller
         if (User::where('email', $request->email)->exists()) {
             return "Email already exists";
         }
-        if($request->name == ""){
+        if ($request->name == "") {
             return "Name required";
         }
-        if($request->password==""){
+        if ($request->password == "") {
             return "Password required";
         }
         try {
@@ -66,7 +73,7 @@ class UserController extends Controller
             //create pakcage for user
 
             $package = new Package();
-            $package->userId = User::where('email',$request->email)->value('id');
+            $package->userId = User::where('email', $request->email)->value('id');
             $package->fb = $request->fb;
             $package->tw = $request->tw;
             $package->tu = $request->tu;
@@ -76,6 +83,11 @@ class UserController extends Controller
             $package->fbBot = $request->fbBot;
             $package->slackBot = $request->slackBot;
             $package->save();
+
+            // creating settings data for this user
+            $settings = new Setting();
+            $settings->userId = User::where('email',$request->email)->value('id');
+            $settings->save();
 
             return "success";
 
@@ -105,6 +117,7 @@ class UserController extends Controller
      */
     public function userUpdate(Request $request)
     {
+
         if ($request->name == "" || $request->email == "") {
             return "Name and Email field can't be empty";
         }
@@ -116,7 +129,6 @@ class UserController extends Controller
                 ]);
 
 
-                return "success";
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
@@ -127,11 +139,26 @@ class UserController extends Controller
                     'email' => $request->email,
                     'password' => bcrypt($request->password)
                 ]);
-                return "success";
+
             } catch (\Exception $e) {
                 return $e->getMessage();
             }
         }
+
+
+        Package::where('userId', $request->id)->update([
+            'fb' => $request->fb,
+            'tw' => $request->tw,
+            'tu' => $request->tu,
+            'wp' => $request->wp,
+            'ln' => $request->ln,
+            'in' => $request->in,
+            'fbBot' => $request->fbBot,
+            'slackBot' => $request->slackBot
+        ]);
+
+
+        return "success";
     }
 
     /**
@@ -147,11 +174,16 @@ class UserController extends Controller
 
         try {
             User::where('id', $request->id)->update([
-                'status'=>'deactive'
+                'status' => 'deactive'
             ]);
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public function adminIndex()
+    {
+        return view('admin');
     }
 }

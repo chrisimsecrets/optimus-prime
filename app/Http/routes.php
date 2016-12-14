@@ -179,6 +179,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/user/list', 'UserController@userList');
         Route::get('/user/{id}', 'UserController@userEdit');
         Route::post('/user/update', 'UserController@userUpdate');
+        Route::get('/admin','UserController@adminIndex');
     });
 
 
