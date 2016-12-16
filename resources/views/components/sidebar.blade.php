@@ -40,6 +40,26 @@
             <li><a href="{{ url('/write') }}"><i class="fa fa-edit"></i> <span>Write</span></a></li>
             <li><a href="{{ url('/allpost') }}"><i class="fa fa-copy"></i> <span>All posts</span></a></li>
 
+            {{--contacts menu--}}
+            @if(\App\Http\Controllers\Data::myPackage('contacts'))
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-list-ul"></i>
+                    <span>Contacts</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <ul class="treeview-menu" style="display: none">
+
+                        <li><a href="{{ url('/contact/create') }}"><i class="fa fa-user-plus"></i> <span>New Contact</span></a></li>
+
+                        <li><a href="{{ url('/contact') }}"><i class="fa fa-list-alt"></i> <span>Contact List</span></a></li>
+
+                </ul>
+            </li>
+            @endif
+            {{-- chat bot menu--}}
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-comment"></i>

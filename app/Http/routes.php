@@ -13,6 +13,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::group(['middleware' => 'auth'], function () {
+        Route::resource('/contact','ContactController');
+
         Route::get('/prappo', 'Prappo@test');
         Route::get('/home', 'HomeController@index');
         Route::get('/write', 'Write@index');

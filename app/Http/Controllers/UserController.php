@@ -82,6 +82,7 @@ class UserController extends Controller
             $package->in = $request->in;
             $package->fbBot = $request->fbBot;
             $package->slackBot = $request->slackBot;
+            $package->contacts = $request->contacts;
             $package->save();
 
             // creating settings data for this user
@@ -154,7 +155,8 @@ class UserController extends Controller
             'ln' => $request->ln,
             'in' => $request->in,
             'fbBot' => $request->fbBot,
-            'slackBot' => $request->slackBot
+            'slackBot' => $request->slackBot,
+            'contacts'=>$request->contacts
         ]);
 
 

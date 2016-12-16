@@ -86,6 +86,12 @@
                                             <i class="fa fa-slack"></i> Slack Bot
                                         </label>
                                     </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="contacts" type="checkbox">
+                                            <i class="fa fa-list-alt"></i> Contacts
+                                        </label>
+                                    </div>
 
                                 </div>
                             </div><!-- /.box-body -->
@@ -111,7 +117,7 @@
 @section('js')
     <script>
 
-        var fb="no",tw="no",tu="no",wp="no",ln="no",ins="no",fbBot="no",slackBot = "no";
+        var fb="no",tw="no",tu="no",wp="no",ln="no",ins="no",fbBot="no",slackBot = "no",contacts = "no";
         if($('#fb').is(':checked')){
             fb = 'yes';
         }
@@ -135,6 +141,9 @@
         }
         if($('#slackBot').is(':checked')){
             slackBot = 'yes';
+        }
+        if($('#contacts').is(':checked')){
+            contacts = "yes";
         }
 
         //        changing stuff
@@ -202,6 +211,14 @@
             }
         });
 
+        $('#contacts').on('chnage',function () {
+            if(this.checked){
+                contacts = "yes";
+            }else{
+                contacts = "no";
+            }
+        });
+
 
         $('#save').click(function () {
             $.ajax({
@@ -218,7 +235,8 @@
                     'in':ins,
                     'ln':ln,
                     'fbBot':fbBot,
-                    'slackBot':slackBot
+                    'slackBot':slackBot,
+                    'contacts':contacts
 
                 },
                 success:function (data) {
