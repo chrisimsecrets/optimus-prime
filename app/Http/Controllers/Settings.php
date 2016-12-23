@@ -59,6 +59,13 @@ class Settings extends Controller
         $liClientSecret = Data::get('liClientSecret');
         $liAccessToken = Data::get('liAccessToken');
 
+        //instagram
+
+        $inClientId = Data::get('inClientId');
+        $inClientSec = Data::get('inClientSec');
+        $inAccessToken = Data::get('inAccessToken');
+        $inLoginUrl = "https://api.instagram.com/oauth/authorize/?client_id={$inClientId}&redirect_uri=".url('/instagram/callback')."&scope=basic+public_content+follower_list+comments+relationships+likes&response_type=token";
+
         try {
             $fb = new Facebook([
                 'app_id' => $fbAppId,
@@ -79,7 +86,7 @@ class Settings extends Controller
 
 
         try {
-            $fbPages = FacebookPages::where('userId',Auth::user()->id)->get();
+            $fbPages = FacebookPages::where('userId', Auth::user()->id)->get();
         } catch (\Exception $h) {
             $fbPages = "none";
         }
@@ -87,7 +94,7 @@ class Settings extends Controller
 
         // get tumblr blogs
 
-        $tuBlogs = TuBlogs::where('userId',Auth::user()->id)->get();
+        $tuBlogs = TuBlogs::where('userId', Auth::user()->id)->get();
 
 
         $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
@@ -121,7 +128,11 @@ class Settings extends Controller
             'liClientId',
             'liClientSecret',
             'liAccessToken',
-            'liLoginUrl'
+            'liLoginUrl',
+            'inClientId',
+            'inClientSec',
+            'inAccessToken',
+            'inLoginUrl'
         ));
     }
 
@@ -233,6 +244,26 @@ class Settings extends Controller
             return "success";
         } catch (\PDOException $e) {
             return $e->getMessage();
+        }
+    }
+
+    /**
+     * Instagram settings save
+     * @param Request $request
+     * @return string
+     */
+    public function inSave(Request $request)
+    {
+        try {
+            Setting::where('userId', Auth::user()->id)->update([
+                'inClientId' => $request->inClientId,
+                'inClientSec' => $request->inClientSec,
+                'inAccessToken' => $request->inAccessToken
+            ]);
+            return "success";
+
+        }catch (\Exception $exception){
+            return $exception->getMessage();
         }
     }
 

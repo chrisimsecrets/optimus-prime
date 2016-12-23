@@ -80,6 +80,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/tusave', 'Settings@tuSave');
         Route::post('/skypesave', 'Settings@skypeSave');
         Route::post('/lisave', 'Settings@liSave');
+        Route::post('/insave','Settings@inSave');
         Route::post('/settings/notifications', 'Settings@notifySave');
         Route::post('/save/fb/bot/config', 'Settings@fbBotConfigSave');
 
@@ -182,6 +183,12 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/user/{id}', 'UserController@userEdit');
         Route::post('/user/update', 'UserController@userUpdate');
         Route::get('/admin','UserController@adminIndex');
+
+        Route::get('/instagram/me','InstagramController@index');
+        Route::get('/instagram/followers','InstagramController@followers');
+        Route::get('/instagram/following','InstagramController@following');
+
+        Route::get('/instagram/test','InstagramController@test');
     });
 
 

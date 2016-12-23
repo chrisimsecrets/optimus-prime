@@ -39,6 +39,9 @@ class CreateSettingsTable extends Migration
             $table->string('liClientId')->nullable();
             $table->string('liClientSecret')->nullable();
             $table->string('liAccessToken')->nullable();
+            $table->string('inUser')->nullable();
+            $table->string('inPass')->nullable();
+            $table->string('inAccessToken')->nullable();
             $table->string('matchAcc')->nullable();
             $table->string('exMsg')->nullable();
             $table->string('slackBotMatchAcc')->nullable();

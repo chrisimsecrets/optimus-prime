@@ -33,6 +33,7 @@
 
     <script src="{{url('/opt/sweetalert.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
+    {{--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-ios.min.css">--}}
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

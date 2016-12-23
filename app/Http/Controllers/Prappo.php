@@ -8,6 +8,7 @@ use App\Phones;
 use App\Setting;
 use App\Tu;
 use App\User;
+use DateTime;
 use Facebook\Facebook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -132,6 +133,11 @@ class Prappo extends Controller
             DB::table('settings')->insert(['field' => 'skypePass']);
         }
 
+    }
+
+    public static function time($seconds,$full = false)
+    {
+        return strtotime($seconds);
     }
 
 

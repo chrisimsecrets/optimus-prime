@@ -264,7 +264,7 @@
                     {{--instagram settings--}}
                     @if(\App\Http\Controllers\Data::myPackage('in'))
                         <div class="col-md-6">
-                            <form method="post" action="/lisave" id="linkedinSettings">
+
                                 <div class="box box-primary">
                                     <div class="box-header with-border" align="center">
                                         <h3 class="box-title"><i class="fa fa-instagram"></i> Instagram Settings</h3>
@@ -273,40 +273,42 @@
 
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="linkedin_client_id">Client ID</label>
+                                            <label for="instagramClientId">Client ID</label>
                                             <input class="form-control" type="text"
-                                                   value="{{ $liClientId }}" placeholder="Your linkedin client id"
-                                                   id="linkedin_client_id">
+                                                   value="{{ $inClientId }}" placeholder="Your Instagram client id"
+                                                   id="instagramClientId">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="linkedin_client_secret">Client Secret</label>
+                                            <label for="instagramCLinetSec">Client Secret</label>
                                             <input class="form-control"
-                                                   value="{{ $liClientSecret }}"
-                                                   placeholder="Your linkedin client secret"
-                                                   type="text" id="linkedin_client_secret">
+                                                   value="{{ $inClientSec }}"
+                                                   placeholder="Your instagram client secret"
+                                                   type="text" id="instagramCLinetSec">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="linkedin_access_token">Access Token</label>
+                                            <label for="inAccessToken">Access Token</label>
                                             <input class="form-control"
-                                                   value="{{ $liAccessToken }}" placeholder="Your linkedin access token"
-                                                   type="text" id="linkedin_access_token">
+                                                   value="{{ $inAccessToken }}"
+                                                   placeholder="Your Instagram access token"
+                                                   type="text" id="instagramAccessToken">
 
                                             <p class="help-block">
                                                 Add the following url to your linked app's <strong>Authorized Redirect
                                                     URLs</strong> <br>
-                                                <code>{!! url('/linkedin/callback') !!}</code>
+                                                <code>{!! url('/instagram/callback') !!}</code>
                                             </p>
                                         </div>
                                     </div><!-- /.box-body -->
 
                                     <div class="box-footer">
-                                        <a href="{!! $liLoginUrl !!}" class="btn btn-linkedin">Connect with linkedin</a>
-                                        <button class="btn btn-primary">Save</button>
+                                        <a href="{!! $inLoginUrl !!}" class="btn btn-linkedin">Connect with
+                                            Instagram</a>
+                                        <button id="inSave" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
-                            </form>
+
                         </div>
                     @endif
                 </div>
@@ -316,7 +318,29 @@
     </div>{{--End wrapper--}}
 @endsection
 
-@section('css')
-    <script src="{{url('/opt/sweetalert.min.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
+@section('js')
+<script>
+    $('#inSave').click(function () {
+        $.ajax({
+            url:'{{url('/insave')}}',
+            type:'POST',
+            data:{
+                'inClientId':$('#instagramClientId').val(),
+                'inClientSec':$('#instagramCLinetSec').val(),
+                'inAccessToken':$('#instagramAccessToken').val()
+            },success:function (data) {
+                if(data=='success'){
+                    swal('Success','Instagram settings saved','success');
+                    location.reload();
+
+                }else{
+                    swal('Error',data,'error');
+                }
+            },error:function (data) {
+                swal('Error','Something went wrong , Please check console message','error');
+                console.log(data.responseText);
+            }
+        })
+    })
+</script>
 @endsection

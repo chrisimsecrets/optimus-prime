@@ -185,25 +185,27 @@ class LinkedinController extends Controller
         if($updates[0]['_total']==0){
             return "No data found";
         }
+
+
 //        print_r($updates);
 //        exit;
-////        $datas = $updates[0]['values'];
-////        foreach ($datas as $data){
-////            echo $data['updateContent']['companyStatusUpdate']['share']['comment']."<br>";
-////            echo $data['numLikes']."<br>";
-////            if($data['updateComments']['_total'] == 0){
-////                echo "No comments";
-////            }else{
-////                foreach($data['updateComments']['values'] as $comment){
-////                    echo "<ul>";
-////                    echo "<li>".$comment['comment']." ". Data::time($comment['timestamp'])."</li>";
-////                    echo "</ul>";
-////                }
-////            }
-////            echo "<hr>";
-////        }
+        $datas = $updates[0]['values'];
+//        foreach ($datas as $data){
+//            echo $data['updateContent']['companyStatusUpdate']['share']['comment']."<br>";
+//            echo $data['numLikes']."<br>";
+//            if($data['updateComments']['_total'] == 0){
+//                echo "No comments";
+//            }else{
+//                foreach($data['updateComments']['values'] as $comment){
+//                    echo "<ul>";
+//                    echo "<li>".$comment['comment']." ". $comment['timestamp']."</li>";
+//                    echo "</ul>";
+//                }
+//            }
+//            echo "<hr>";
+//        }
 ////        exit;
 ////
-        return view('liupdates', compact('updates','companies'));
+        return view('lnupdates', compact('datas'));
     }
 }
