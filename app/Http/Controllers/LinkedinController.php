@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LinkedinController extends Controller
 {
-    public function callback(Request $request)
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function callback()
     {
         $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
 
         Setting::where('userId', Auth::user()->id)->update([
             'liAccessToken' => $linkedIn->getAccessToken()
         ]);
-
 
         return redirect('/settings');
     }
@@ -51,7 +53,7 @@ class LinkedinController extends Controller
 
         $companies = self::companies($linkedIn)['values'];
 
-        // Getting followers for the companies and merging tho the companies list array.
+        // Getting followers for the companies and merging to the companies list array.
         return array_reduce($companies, function ($carry, $company) use ($linkedIn) {
             $carry[] = $linkedIn->get("/v1/companies/{$company['id']}:(id,name,logo-url,num-followers)?format=json");
 
@@ -125,11 +127,7 @@ class LinkedinController extends Controller
      */
     protected function sendCommentToCompanies(Request $request, $companies, $linkedIn)
     {
-        $body = [
-            'json' => [
-                'comment' => $request->comment
-            ]
-        ];
+        $body = $this->formatComment($request->comment);
 
         foreach ($companies['values'] as $company) {
             $allUpdates = $linkedIn->get("/v1/companies/{$company['id']}/updates?format=json");
@@ -153,18 +151,38 @@ class LinkedinController extends Controller
                     continue;
                 }
 
-                $linkedIn->post(
-                    "/v1/companies/{$company['id']}/updates/key={$update['updateKey']}/update-comments-as-company/",
-                    $body
-                );
+                $this->commentOnUpdate($company['id'], $update['updateKey'], $body);
             }
         }
     }
 
     /**
+     * @param Request $request
+     * @param $companyId
+     * @param updateKey
+     */
+    public function fireComment(Request $request, $companyId, $updateKey)
+    {
+        $this->commentOnUpdate($companyId, $updateKey, $this->formatComment($request->comment));
+    }
+
+    /**
+     * @param $companyId
+     * @param $updateKey
+     * @param $body
+     */
+    public function commentOnUpdate($companyId, $updateKey, $body)
+    {
+        app('linkedin')->post(
+            "/v1/companies/{$companyId}/updates/key={$updateKey}/update-comments-as-company/",
+            $body
+        );
+    }
+
+    /**
      * Show company updates.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function updates()
     {
@@ -182,8 +200,8 @@ class LinkedinController extends Controller
             $profile = $linkedIn->get("/v1/companies/{$company['id']}?format=json");
         }
 
-        if($updates[0]['_total']==0){
-            return "No data found";
+        if($updates[0]['_total'] == 0){
+            return 'No data found';
         }
 
 
@@ -207,5 +225,17 @@ class LinkedinController extends Controller
 ////        exit;
 ////
         return view('lnupdates', compact('datas'));
+    }
+
+    /**
+     * @return array
+     */
+    protected function formatComment($comment)
+    {
+        return [
+            'json' => [
+                'comment' => $comment
+            ]
+        ];
     }
 }

@@ -172,6 +172,7 @@ Route::group(['middleware' => 'web'], function () {
         //linkedin specific routes
         Route::get('/linkedin/mass_comment', 'LinkedinController@massComment');
         Route::post('/linkedin/mass_comment', 'LinkedinController@fireMassComment');
+        Route::post('/linkedin/comment/{companyId}/{updateKey}', 'LinkedinController@fireComment');
         Route::get('/linkedin/updates', 'LinkedinController@updates');
 
         Route::get('/profile', 'ProfileController@index');
