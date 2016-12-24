@@ -273,38 +273,25 @@
 
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="instagramClientId">Client ID</label>
+                                            <label for="inUser">Username</label>
                                             <input class="form-control" type="text"
-                                                   value="{{ $inClientId }}" placeholder="Your Instagram client id"
-                                                   id="instagramClientId">
+                                                   value="{{ $inUser }}" placeholder="Your Instagram username"
+                                                   id="inUser">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="instagramCLinetSec">Client Secret</label>
+                                            <label for="inPass">Password</label>
                                             <input class="form-control"
-                                                   value="{{ $inClientSec }}"
+                                                   value="{{ $inPass }}"
                                                    placeholder="Your instagram client secret"
-                                                   type="text" id="instagramCLinetSec">
+                                                   type="password" id="inPass">
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="inAccessToken">Access Token</label>
-                                            <input class="form-control"
-                                                   value="{{ $inAccessToken }}"
-                                                   placeholder="Your Instagram access token"
-                                                   type="text" id="instagramAccessToken">
 
-                                            <p class="help-block">
-                                                Add the following url to your linked app's <strong>Authorized Redirect
-                                                    URLs</strong> <br>
-                                                <code>{!! url('/instagram/callback') !!}</code>
-                                            </p>
-                                        </div>
                                     </div><!-- /.box-body -->
 
                                     <div class="box-footer">
-                                        <a href="{!! $inLoginUrl !!}" class="btn btn-linkedin">Connect with
-                                            Instagram</a>
+
                                         <button id="inSave" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
@@ -325,9 +312,8 @@
             url:'{{url('/insave')}}',
             type:'POST',
             data:{
-                'inClientId':$('#instagramClientId').val(),
-                'inClientSec':$('#instagramCLinetSec').val(),
-                'inAccessToken':$('#instagramAccessToken').val()
+                'inUser':$('#inUser').val(),
+                'inPass':$('#inPass').val()
             },success:function (data) {
                 if(data=='success'){
                     swal('Success','Instagram settings saved','success');

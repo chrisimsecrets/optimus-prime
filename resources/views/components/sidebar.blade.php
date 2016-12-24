@@ -42,21 +42,23 @@
 
             {{--contacts menu--}}
             @if(\App\Http\Controllers\Data::myPackage('contacts'))
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-list-ul"></i>
-                    <span>Contacts</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-list-ul"></i>
+                        <span>Contacts</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
 
-                <ul class="treeview-menu" style="display: none">
+                    <ul class="treeview-menu" style="display: none">
 
-                        <li><a href="{{ url('/contact/create') }}"><i class="fa fa-user-plus"></i> <span>New Contact</span></a></li>
+                        <li><a href="{{ url('/contact/create') }}"><i class="fa fa-user-plus"></i>
+                                <span>New Contact</span></a></li>
 
-                        <li><a href="{{ url('/contact') }}"><i class="fa fa-list-alt"></i> <span>Contact List</span></a></li>
+                        <li><a href="{{ url('/contact') }}"><i class="fa fa-list-alt"></i> <span>Contact List</span></a>
+                        </li>
 
-                </ul>
-            </li>
+                    </ul>
+                </li>
             @endif
             {{-- chat bot menu--}}
 
@@ -149,7 +151,11 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none">
-                        <li><a href="{{ url('/instagram') }}"><i class="fa fa-user"></i> <span>My account</span></a>
+                        <li><a href="{{ url('/instagram/me') }}"><i class="fa fa-user"></i> <span>My account</span></a>
+                        <li><a href="{{ url('/instagram/home') }}"><i class="fa fa-home"></i> <span>Home</span></a>
+                        <li><a href="{{ url('/instagram/popular') }}"><i class="fa fa-heart"></i>
+                                <span> Popular Feed</span></a>
+                        <li><a href="{{ url('/instagram/scraper') }}"><i class="fa fa-search"></i> <span>Scraper</span></a>
                         </li>
 
                     </ul>
@@ -229,14 +235,14 @@
 
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    @if(Auth::user()->type == 'admin')
-                        <li><a href="{{ url('/settings') }}"><i class="fa fa-gear"></i> <span>Social</span></a></li>
-                        <li><a href="{{ url('/settings/notifications') }}"><i class="fa fa-bell"></i>
-                                <span>Notifications</span></a></li>
-                        {{--<li><a href="{{ url('/settings/config') }}"><i class="fa fa-gears"></i>--}}
-                        {{--<span>Configurations</span></a>--}}
-                        {{--</li>--}}
-                    @endif
+
+                    <li><a href="{{ url('/settings') }}"><i class="fa fa-gear"></i> <span>Social</span></a></li>
+                    <li><a href="{{ url('/settings/notifications') }}"><i class="fa fa-bell"></i>
+                            <span>Notifications</span></a></li>
+                    {{--<li><a href="{{ url('/settings/config') }}"><i class="fa fa-gears"></i>--}}
+                    {{--<span>Configurations</span></a>--}}
+                    {{--</li>--}}
+
                     <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
 
 

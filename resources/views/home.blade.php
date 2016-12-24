@@ -61,22 +61,21 @@
 
                     <!-- ./col -->
 
-                    {{--<div class="col-lg-3 col-xs-6">--}}
-                        {{--<!-- small box -->--}}
-                        {{--<div class="small-box bg-aqua">--}}
-                            {{--<div class="inner">--}}
-                                {{--<h3>{{$schedules}}</h3>--}}
+                {{--<div class="col-lg-3 col-xs-6">--}}
+                {{--<!-- small box -->--}}
+                {{--<div class="small-box bg-aqua">--}}
+                {{--<div class="inner">--}}
+                {{--<h3>{{$schedules}}</h3>--}}
 
-                                {{--<p>Total Schedules</p>--}}
-                            {{--</div>--}}
-                            {{--<div class="icon">--}}
-                                {{--<i class="fa fa-list"></i>--}}
-                            {{--</div>--}}
+                {{--<p>Total Schedules</p>--}}
+                {{--</div>--}}
+                {{--<div class="icon">--}}
+                {{--<i class="fa fa-list"></i>--}}
+                {{--</div>--}}
 
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    <!-- ./col -->
-
+                {{--</div>--}}
+                {{--</div>--}}
+                <!-- ./col -->
 
 
                     <div class="col-lg-3 col-xs-6">
@@ -142,7 +141,8 @@
                         </div>
                     </div>
                     <!-- ./col -->
-
+                </div>
+                <div class="row">
                     <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
                         <div class="small-box bg-light-blue-active">
@@ -169,6 +169,38 @@
                             </div>
                             <div class="icon">
                                 <i class="fa fa-linkedin"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    {{--instagram followers--}}
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-gray-active">
+                            <div class="inner">
+                                <h3 id="inFollowers">Loading ..</h3>
+
+                                <p>Instagram Followers</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-instagram"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    {{-- instagram following --}}
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-gray-light">
+                            <div class="inner">
+                                <h3 id="inFollosing">Loading..</h3>
+
+                                <p>Instagram Fllowing</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-instagram"></i>
                             </div>
 
                         </div>
@@ -239,4 +271,33 @@
 
         @include('components.footer')
     </div>
+@endsection
+@section('js')
+<script>
+    $.ajax({
+        type:'GET',
+        url:'{{url('/instagram/followers/get')}}',
+        data:{},
+        success:function (data) {
+            $('#inFollowers').html(data);
+        },
+        error:function (data) {
+            console.log(data.responseText);
+            $('#inFollowers').html('X');
+        }
+    });
+
+    $.ajax({
+        type:'GET',
+        url:'{{url('/instagram/following/get')}}',
+        data:{},
+        success:function (data) {
+            $('#inFollosing').html(data);
+        },
+        error:function (data) {
+            console.log(data.responseText);
+            $('#inFollosing').html('X');
+        }
+    });
+</script>
 @endsection

@@ -61,10 +61,10 @@ class Settings extends Controller
 
         //instagram
 
-        $inClientId = Data::get('inClientId');
-        $inClientSec = Data::get('inClientSec');
-        $inAccessToken = Data::get('inAccessToken');
-        $inLoginUrl = "https://api.instagram.com/oauth/authorize/?client_id={$inClientId}&redirect_uri=".url('/instagram/callback')."&scope=basic+public_content+follower_list+comments+relationships+likes&response_type=token";
+        $inUser = Data::get('inUser');
+        $inPass = Data::get('inPass');
+
+
 
         try {
             $fb = new Facebook([
@@ -129,10 +129,8 @@ class Settings extends Controller
             'liClientSecret',
             'liAccessToken',
             'liLoginUrl',
-            'inClientId',
-            'inClientSec',
-            'inAccessToken',
-            'inLoginUrl'
+            'inUser',
+            'inPass'
         ));
     }
 
@@ -256,9 +254,8 @@ class Settings extends Controller
     {
         try {
             Setting::where('userId', Auth::user()->id)->update([
-                'inClientId' => $request->inClientId,
-                'inClientSec' => $request->inClientSec,
-                'inAccessToken' => $request->inAccessToken
+                'inUser' => $request->inUser,
+                'inPass' => $request->inPass
             ]);
             return "success";
 

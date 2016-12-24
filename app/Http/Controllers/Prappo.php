@@ -135,7 +135,7 @@ class Prappo extends Controller
 
     }
 
-    public static function time($seconds,$full = false)
+    public static function time($seconds, $full = false)
     {
         return strtotime($seconds);
     }
@@ -274,29 +274,59 @@ class Prappo extends Controller
      * @param $user
      * @return string
      */
-    public static function getSkypeImg($user){
+    public static function getSkypeImg($user)
+    {
         return 'https://api.skype.com/users/' . $user . '/profile/avatar';
     }
 
-    public function test(){
+    public function test()
+    {
 
-       
+
     }
 
-    public static function comment($id,$text){
+    public static function comment($id, $text)
+    {
         $fb = new Facebook([
             'app_id' => Data::get('fbAppId'),
             'app_secret' => Data::get('fbAppSec'),
             'default_graph_version' => 'v2.6',
         ]);
         $token = Data::get('fbAppToken');
-        try{
-            $fb->post($id.'/comments',array('message'=>$text),$token);
-        }
-        catch(\Exception $e){
+        try {
+            $fb->post($id . '/comments', array('message' => $text), $token);
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
 
+    }
+
+    public static function humanTiming($givenTime)
+    {
+        $time = strtotime($givenTime);
+        $time = time() - $time; // to get the time since that moment
+        $time = ($time < 1) ? 1 : $time;
+        $tokens = array(
+            31536000 => 'year',
+            2592000 => 'month',
+            604800 => 'week',
+            86400 => 'day',
+            3600 => 'hour',
+            60 => 'minute',
+            1 => 'second'
+        );
+
+        foreach ($tokens as $unit => $text) {
+            if ($time < $unit) continue;
+            $numberOfUnits = floor($time / $unit);
+            return $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's' : '');
+        }
+
+    }
+    public static function convertTime($time){
+        $date = new DateTime();
+        $date->setTimestamp($time);
+        return $date->format('U = Y-m-d H:i:s');
     }
 
 

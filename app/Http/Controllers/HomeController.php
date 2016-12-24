@@ -39,7 +39,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "") {
+        if (Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "" || Data::get('inPass') != "") {
 
         } else {
             return redirect('/settings');

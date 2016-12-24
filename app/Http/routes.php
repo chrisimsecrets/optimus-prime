@@ -188,6 +188,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/instagram/me','InstagramController@index');
         Route::get('/instagram/followers','InstagramController@followers');
         Route::get('/instagram/following','InstagramController@following');
+        Route::get('/instagram/popular','InstagramController@popular');
+        Route::get('/instagram/home','InstagramController@home');
+        Route::get('/instagram/followers/get','InstagramController@getFollowers');
+        Route::get('/instagram/following/get','InstagramController@getFollowing');
 
         Route::get('/instagram/test','InstagramController@test');
     });

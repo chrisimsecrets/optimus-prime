@@ -12,25 +12,83 @@ use App\Http\Requests;
 class InstagramController extends Controller
 {
     public $instagram;
+
     public function __construct()
     {
         $this->instagram = new \InstagramAPI\Instagram();
-        $username = "prappo_prince";
-        $password = "bangladesh1993";
-        $this->instagram->setUser($username,$password);
-        $this->instagram->login();
+        $username = Data::get('inUser');
+        $password = Data::get('inPass');
+
+        try {
+            $this->instagram->setUser($username, $password);
+            $this->instagram->login();
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+
 
     }
 
-    public function index(){
+    public function index()
+    {
+
 
         $i = $this->instagram;
 
-        print_r($i->getSelfUserFollowers());
+        $datas = $i->getSelfUserFeed();
+        return view('instagram', compact('datas'));
     }
 
-    public function test(){
-        print_r($this->instagram->getSelfUsersFollowing());
+
+    public function popular()
+    {
+
+        $i = $this->instagram;
+        $datas = $i->getPopularFeed();
+
+        return view('instagramPopular', compact('datas'));
+    }
+
+    public function getFollowers()
+    {
+        try {
+            return $this->instagram->getSelfUsernameInfo()->user->follower_count;
+        } catch (\Exception $exception) {
+            return "Error";
+        }
+
+    }
+
+    public function getFollowing()
+    {
+        try {
+            return $this->instagram->getSelfUsernameInfo()->user->following_count;
+        } catch (\Exception $exception) {
+            return "Error";
+        }
+
+    }
+
+    public function getFollowingUserActivity()
+    {
+        $datas = $this->instagram->getFollowingRecentActivity();
+        return view('instagramFollowingActivity', compact('datas'));
+    }
+
+    public function home()
+    {
+        $datas = $this->instagram->timelineFeed();
+
+        return view('instagramTimeline', compact('datas'));
+    }
+
+
+    public function test()
+    {
+        $i = $this->instagram;
+
+        $datas = $i->timelineFeed();
+        print_r($datas);
     }
 
 }
