@@ -40,13 +40,36 @@
                                         <img class="img-responsive pad"
                                              src="{{$data->image_versions2->candidates[0]->url}}" alt="Photo">
                                     @elseif($data->media_type == 2)
-                                        Video will be here
+                                        <video width="400" controls>
+                                            <source src="{{$data->video_versions[2]->url}}" type="video/mp4">
+
+                                            Your browser does not support HTML5 video.
+                                        </video>
                                     @endif
                                     @if($data->caption != "")
                                         <p>{{$data->caption->text}}</p>
                                     @endif
                                     <br>
 
+
+                                    @foreach($data->image_versions2->candidates as $imgs)
+                                        <a target="_blank" href="{{$imgs->url}}" class="label label-default"><i
+                                                    class="fa fa-download"></i> {{$imgs->width." X ".$imgs->height}} <i
+                                                    class="fa fa-image"></i> </a>
+                                    @endforeach
+                                    <br>
+                                    @if($data->media_type == 2)
+
+
+                                        <a target="_blank" href="{{$data->video_versions[0]->url}}"
+                                           class="label label-primary"><i
+                                                    class="fa fa-download"></i> {{$data->video_versions[0]->width." X ".$data->video_versions[0]->height}}
+                                            Download video <i class="fa fa-video-camera"></i>
+                                        </a>
+
+                                    @endif
+
+                                    <br>
                                     <div class="pull-left"> Top Likers</div>
                                     <br>
                                     @foreach($data->top_likers as $liker)
@@ -74,7 +97,7 @@
 
                                             <div class="comment-text">
                       <span class="username">
-                        {{$comment->user->full_name}}
+                       <a href="https://instagram.com/{{$comment->user->username}}" target="_blank">{{$comment->user->full_name}}</a>
                           <span class="text-muted pull-right"><div class="time">
                                   {{--{{$comment->created_at}}--}}
                               </div> </span>
@@ -92,14 +115,14 @@
                                 <!-- /.box-footer -->
                                 <div class="box-footer">
 
-                                        <img class="img-responsive img-circle img-sm"
-                                             src="{{$data->user->profile_pic_url}}"
-                                             alt="Alt Text">
-                                        <!-- .img-push is used to add margin to elements next to floating images -->
-                                        <div class="img-push">
-                                            <input type="text" class="form-control input-sm"
-                                                   placeholder="Press enter to post comment">
-                                        </div>
+                                    <img class="img-responsive img-circle img-sm"
+                                         src="{{$data->user->profile_pic_url}}"
+                                         alt="Alt Text">
+                                    <!-- .img-push is used to add margin to elements next to floating images -->
+                                    <div class="img-push">
+                                        <input type="text" class="form-control input-sm"
+                                               placeholder="Press enter to post comment">
+                                    </div>
 
                                 </div>
                                 <!-- /.box-footer -->

@@ -36,6 +36,8 @@ class InstagramController extends Controller
         $i = $this->instagram;
 
         $datas = $i->getSelfUserFeed();
+//        print_r($datas);
+//        exit;
         return view('instagram', compact('datas'));
     }
 
@@ -72,6 +74,8 @@ class InstagramController extends Controller
     public function getFollowingUserActivity()
     {
         $datas = $this->instagram->getFollowingRecentActivity();
+//        var_dump($datas);
+//        exit;
         return view('instagramFollowingActivity', compact('datas'));
     }
 

@@ -20,7 +20,8 @@
                                         <div class="user-block">
                                             <img class="img-circle" src="{{$data->media_or_ad->user->profile_pic_url}}"
                                                  alt="User Image">
-                                            <span class="username"><a href="#">{{$data->media_or_ad->user->full_name}}</a></span>
+                                            <span class="username"><a
+                                                        href="https://www.instagram.com/{{$data->media_or_ad->user->username}}">{{$data->media_or_ad->user->full_name}}</a></span>
                                             {{--<span class="description time">Shared - {{$data->taken_at}}</span>--}}
                                         </div>
                                         <!-- /.user-block -->
@@ -39,31 +40,40 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
+
                                         @if($data->media_or_ad->media_type == 1)
                                             <img class="img-responsive pad"
                                                  src="{{$data->media_or_ad->image_versions2->candidates[0]->url}}" alt="Photo">
                                         @elseif($data->media_or_ad->media_type == 2)
-                                            Video will be here
+                                            <video width="400" controls>
+                                                <source src="{{$data->media_or_ad->video_versions[2]->url}}" type="video/mp4">
+
+                                                Your browser does not support HTML5 video.
+                                            </video>
                                         @endif
                                         @if($data->media_or_ad->caption != "")
                                             <p>{{$data->media_or_ad->caption->text}}</p>
                                         @endif
                                         <br>
 
-                                        <div class="pull-left"> Top Likers</div>
-                                        <br>
-                                        @foreach($data->media_or_ad->top_likers as $liker)
-                                            <span class="pull-left badge bg-blue">{{$liker}}</span>
-                                        @endforeach
 
+                                        @foreach($data->media_or_ad->image_versions2->candidates as $imgs)
+                                            <a target="_blank" href="{{$imgs->url}}" class="label label-default"><i
+                                                        class="fa fa-download"></i> {{$imgs->width." X ".$imgs->height}} <i
+                                                        class="fa fa-image"></i> </a>
+                                        @endforeach
                                         <br>
-                                        {{--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>--}}
-                                        {{--Share--}}
-                                        {{--</button>--}}
-                                        {{--<button type="button" class="btn btn-default btn-xs"><i--}}
-                                        {{--class="fa fa-thumbs-o-up"></i>--}}
-                                        {{--Like--}}
-                                        {{--</button>--}}
+                                        @if($data->media_or_ad->media_type == 2)
+
+
+                                            <a target="_blank" href="{{$data->media_or_ad->video_versions[0]->url}}"
+                                               class="label label-primary"><i
+                                                        class="fa fa-download"></i> {{$data->media_or_ad->video_versions[0]->width." X ".$data->media_or_ad->video_versions[0]->height}}
+                                                Download video <i class="fa fa-video-camera"></i>
+                                            </a>
+
+                                        @endif
+
                                         <span class="pull-right text-muted">{{$data->media_or_ad->like_count}}
                                             likes - {{$data->media_or_ad->comment_count}} comments</span>
                                     </div>
@@ -72,12 +82,11 @@
                                         @foreach($data->media_or_ad->preview_comments as $comment)
                                             <div class="box-comment">
                                                 <!-- User image -->
-                                                <img class="img-circle img-sm" src="{{$comment->user->profile_pic_url}}"
-                                                     alt="User Image">
+
 
                                                 <div class="comment-text">
                       <span class="username">
-                        {{$comment->user->full_name}}
+                          <a href="https://www.instagram.com/{{$comment->user->username}}">{{$comment->user->full_name}}</a>
                           <span class="text-muted pull-right"><div class="time">
                                   {{--{{$comment->created_at}}--}}
                               </div> </span>
@@ -95,9 +104,7 @@
                                     <!-- /.box-footer -->
                                     <div class="box-footer">
 
-                                        <img class="img-responsive img-circle img-sm"
-                                             src="{{$data->media_or_ad->user->profile_pic_url}}"
-                                             alt="Alt Text">
+
                                         <!-- .img-push is used to add margin to elements next to floating images -->
                                         <div class="img-push">
                                             <input type="text" class="form-control input-sm"

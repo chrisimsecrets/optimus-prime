@@ -35,11 +35,16 @@
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
+
                                     @if($data['media_type'] == 1)
                                         <img class="img-responsive pad"
                                              src="{{$data['image_versions2']['candidates'][0]['url']}}" alt="Photo">
                                     @elseif($data['media_type'] == 2)
-                                        Video will be here
+                                        <video width="400" controls>
+                                            <source src="{{$data['video_versions'][2]['url']}}" type="video/mp4">
+
+                                            Your browser does not support HTML5 video.
+                                        </video>
                                     @endif
                                     @if($data['caption'] != "")
                                         <p>{{$data['caption']['text']}}</p>
@@ -47,13 +52,23 @@
                                     <br>
 
 
-                                    {{--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>--}}
-                                    {{--Share--}}
-                                    {{--</button>--}}
-                                    {{--<button type="button" class="btn btn-default btn-xs"><i--}}
-                                    {{--class="fa fa-thumbs-o-up"></i>--}}
-                                    {{--Like--}}
-                                    {{--</button>--}}
+                                    @foreach($data['image_versions2']['candidates'] as $imgs)
+                                        <a target="_blank" href="{{$imgs['url']}}" class="label label-default"><i
+                                                    class="fa fa-download"></i> {{$imgs['width']." X ".$imgs['height']}} <i
+                                                    class="fa fa-image"></i> </a>
+                                    @endforeach
+                                    <br>
+                                    @if($data['media_type'] == 2)
+
+
+                                        <a target="_blank" href="{{$data['video_versions'][0]['url']}}"
+                                           class="label label-primary"><i
+                                                    class="fa fa-download"></i> {{$data['video_versions'][0]['width']." X ".$data['video_versions'][0]['height']}}
+                                            Download video <i class="fa fa-video-camera"></i>
+                                        </a>
+
+                                    @endif
+
                                     <span class="pull-right text-muted">{{$data['like_count']}}
                                         likes - {{$data['comment_count']}} comments</span>
                                 </div>
@@ -67,7 +82,7 @@
 
                                             <div class="comment-text">
                       <span class="username">
-                       <a href="https://www.instagram.com/@if(isset($comment['user']['username'])){{$comment['user']['username']}}@endif">{{$comment['user']['full_name']}}</a>
+                       <a target="_blank" href="https://www.instagram.com/@if(isset($comment['user']['username'])){{$comment['user']['username']}}@endif">{{$comment['user']['full_name']}}</a>
                           <span class="text-muted pull-right"><div class="time">
                                   {{--{{$comment->created_at}}--}}
                               </div> </span>
