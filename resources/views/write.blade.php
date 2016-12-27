@@ -208,6 +208,15 @@
                                         </label>
                                     @endif
 
+                                    @if(!empty(\App\Http\Controllers\Data::get('inPass')))
+                                        <label class="btn btn-primary bg-light-blue">
+                                            <input id="iCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-instagram"></i>
+                                            Instagram
+                                        </label>
+                                    @endif
+
+
                                     @if(!empty(\App\Http\Controllers\Data::get('wpPassword')))
                                         <label class="btn btn-primary bg-blue-gradient">
                                             <input id="wpCheck" type="checkbox" autocomplete="off"><i
@@ -255,6 +264,9 @@
 
                                 <span style="display: none" id="twl" class="label label-default"><i
                                             class="fa fa-twitter"></i> Twitter selected</span>
+
+                                <span style="display: none" id="inl" class="label label-default"><i
+                                            class="fa fa-instagram"></i> Instagram selected</span>
 
                                 <span style="display: none" id="wpl" class="label label-default"><i
                                             class="fa fa-wordpress"></i> Wordpress selected</span>
@@ -323,10 +335,11 @@
 
                                         <select id="liCompanies" multiple>
                                             <option value="all" selected>All Companies</option>
-
-                                            @foreach($liCompanies as $liCompany)
-                                                <option value="{{ $liCompany['id'] }}">{{ $liCompany['name'] }}</option>
-                                            @endforeach
+                                            @if($liCompanies != "")
+                                                @foreach($liCompanies as $liCompany)
+                                                    <option value="{{ $liCompany['id'] }}">{{ $liCompany['name'] }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </fieldset>
                                 </div>
@@ -344,9 +357,9 @@
                                 </button>
 
                                 {{--<button data-step="11" data-intro="Click here to schedule your post" id="addschedule"--}}
-                                        {{--class="btn btn-default"><i class="fa fa-calendar"></i> Add--}}
-                                    {{--to--}}
-                                    {{--schedule--}}
+                                {{--class="btn btn-default"><i class="fa fa-calendar"></i> Add--}}
+                                {{--to--}}
+                                {{--schedule--}}
                                 {{--</button>--}}
                             </div>
                             <div id="ss" style="display: none;" class="form-group">
@@ -400,6 +413,10 @@
                                                   class="label label-success"><i
                                                         class="fa fa-twitter"></i> Successfully wrote on twitter</span>
 
+                                            <span id="iMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-instagram"></i> Successfully Posted on Instagram</span>
+
                                             <span id="wpMsgSu" style="display: none"
                                                   class="label label-success"><i
                                                         class="fa fa-wordpress"></i> Successfully wrote on wordpress</span>
@@ -425,6 +442,10 @@
                                             <span id="twMsgEr" style="display: none"
                                                   class="label label-danger"><i
                                                         class="fa fa-twitter"></i> Error occurred while trying to write on twitter</span>
+
+                                            <span id="iMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-instagram"></i> Error occurred while trying to write on instagram</span>
 
                                             <span id="wpMsgEr" style="display: none"
                                                   class="label label-danger"><i
@@ -550,22 +571,22 @@
 
             var count = 0;
             setTimeout(
-                    function () {
-                        if (count <= 3) {
-                            $('.emojionearea-editor').bind("DOMSubtreeModified", function () {
-                                if ($(this).text().length == 0) {
-                                    $('.message').html('<span class="defaultMessage"></span>');
-                                }
-                                else {
-                                    $('.message').html($(this).html());
-                                }
+                function () {
+                    if (count <= 3) {
+                        $('.emojionearea-editor').bind("DOMSubtreeModified", function () {
+                            if ($(this).text().length == 0) {
+                                $('.message').html('<span class="defaultMessage"></span>');
+                            }
+                            else {
+                                $('.message').html($(this).html());
+                            }
 
 
-                            });
-                        }
-                        count++;
+                        });
+                    }
+                    count++;
 
-                    }, 1000);
+                }, 1000);
 
 
         });

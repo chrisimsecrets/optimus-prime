@@ -26,6 +26,8 @@
                                         </div>
                                         <!-- /.user-block -->
                                         <div class="box-tools">
+                                            <button class="btn btn-xs btn-danger">Delete</button>
+                                            <a target="_blank" href="{{url('/instagram/info')."/".$data->media_or_ad->id}}" class="btn btn-xs btn-default">View Details</a>
                                             <button type="button" class="btn btn-box-tool" data-toggle="tooltip"
                                                     title=""
                                                     data-original-title="Instagram Post">
@@ -33,8 +35,7 @@
                                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                                         class="fa fa-minus"></i>
                                             </button>
-                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                                        class="fa fa-times"></i></button>
+
                                         </div>
                                         <!-- /.box-tools -->
                                     </div>

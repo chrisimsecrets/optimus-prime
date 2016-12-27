@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Instagram | My Account')
+@section('title','Instagram | Following activity')
 
 @section('content')
     <div class="wrapper">

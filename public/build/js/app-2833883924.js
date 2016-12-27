@@ -12,6 +12,7 @@
  * Date: 2016-05-20T17:17Z
  */
 
+
 (function( global, factory ) {
 
 	if ( typeof module === "object" && typeof module.exports === "object" ) {
@@ -37978,6 +37979,17 @@ $("#twCheck").change(function () {
     }
 });
 
+$('#iCheck').change(function(){
+    if (this.checked) {
+        $('#inl').show(400);
+        count = count + 1;
+    }
+    else {
+        $('#inl').hide(400);
+        count = count - 1;
+    }
+});
+
 $("#wpCheck").change(function () {
     if (this.checked) {
         $('#wpl').show(400);
@@ -38086,6 +38098,8 @@ $('#write').click(function () {
     $('#fbgMsgSu').hide();
     $('#twMsgSu').hide();
     $('#twMsgEr').hide();
+    $('#iMsgEr').hide();
+    $('#iMsgSu').hide();
     $('#tuMsgSu').hide();
     $('#tuMsgEr').hide();
     $('#wpMsgSu').hide();
@@ -38116,6 +38130,40 @@ $('#write').click(function () {
 
         }
     });
+
+    if($('#iCheck').is(':checked')){
+        $.ajax({
+            type:'POST',
+            url:'instagram/write',
+            data:{
+                'caption':status,
+                'image':image
+            },
+            success:function (data) {
+                count = count - 1;
+                if (count == 0) {
+                    loading.hide(100);
+                }
+
+
+                if (data == 'success') {
+                    $('#iMsgSu').show(300);
+                }
+                else {
+                    $('#iMsgEr').html(data);
+                    $('#iMsgEr').show(300);
+                }
+                console.log(data);
+                count = count - 1;
+                if (count == 0) {
+                    loading.hide(100);
+                    var sentData = fbId + '_' + twId + '_' + tuId + '_' + wpId;
+                    postSave(sentData);
+                    $('#final').val(sentData);
+                }
+            }
+        });
+    }
 
     if ($('#fbCheck').is(":checked")) {
 

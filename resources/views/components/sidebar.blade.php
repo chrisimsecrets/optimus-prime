@@ -154,7 +154,10 @@
                         <li><a href="{{ url('/instagram/me') }}"><i class="fa fa-user"></i> <span>My account</span></a>
                         <li><a href="{{ url('/instagram/home') }}"><i class="fa fa-home"></i> <span>Home</span></a>
                         <li><a href="{{ url('/instagram/popular') }}"><i class="fa fa-heart"></i><span> Popular Feed</span></a>
+                        <li><a href="{{ url('/instagram/followers') }}"><i class="fa fa-star"></i><span> Followers</span></a>
+                        <li><a href="{{ url('/instagram/following') }}"><i class="fa fa-star"></i><span> Following</span></a>
                         <li><a href="{{ url('/instagram/following/activity') }}"><i class="fa fa-users"></i><span> Following Activity</span></a>
+                        <li><a href="{{ url('/instagram/autofollow') }}"><i class="fa fa-rocket"></i><span> Autofollow</span></a>
                         <li><a href="{{ url('/instagram/scraper') }}"><i class="fa fa-search"></i> <span>Scraper</span></a>
                         </li>
 

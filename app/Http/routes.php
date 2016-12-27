@@ -192,7 +192,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/instagram/home','InstagramController@home');
         Route::get('/instagram/followers/get','InstagramController@getFollowers');
         Route::get('/instagram/following/get','InstagramController@getFollowing');
-        Route::get('/instagram/following/activity','InstagramController@getFollowingUserActivity');
+        Route::post('/instagram/write','InstagramController@write');
+        Route::get('/instagram/delete','InstagramController@delete');
+        Route::get('/instagram/delete','InstagramController@delete');
+        Route::get('/instagram/info/{id}','InstagramController@getMediaInfo');
 
         Route::get('/instagram/test','InstagramController@test');
     });

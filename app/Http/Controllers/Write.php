@@ -48,8 +48,12 @@ class Write extends Controller
 
         $fbPages = FacebookPages::all();
         $fbGroups = facebookGroups::all();
+        if(Data::get('liAccessToken') != ""){
+            $liCompanies = LinkedinController::companies()['values'];
+        }else{
+            $liCompanies = "";
+        }
 
-        $liCompanies = LinkedinController::companies()['values'];
 
         return view('write', compact(
             'l',
