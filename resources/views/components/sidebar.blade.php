@@ -157,7 +157,10 @@
                         <li><a href="{{ url('/instagram/followers') }}"><i class="fa fa-star"></i><span> Followers</span></a>
                         <li><a href="{{ url('/instagram/following') }}"><i class="fa fa-star"></i><span> Following</span></a>
                         <li><a href="{{ url('/instagram/following/activity') }}"><i class="fa fa-users"></i><span> Following Activity</span></a>
-                        <li><a href="{{ url('/instagram/autofollow') }}"><i class="fa fa-rocket"></i><span> Autofollow</span></a>
+                        <li><a href="{{ url('/instagram/auto/follow') }}"><i class="fa fa-user-plus"></i><span> Auto follow</span></a>
+                        <li><a href="{{ url('/instagram/auto/unfollow') }}"><i class="fa fa-user-times"></i><span> Auto unfollow</span></a>
+                        <li><a href="{{ url('/instagram/auto/comments') }}"><i class="fa fa-comment"></i><span> Auto comment</span></a>
+                        <li><a href="{{ url('/instagram/auto/message') }}"><i class="fa fa-envelope"></i><span> Auto Message</span></a>
                         <li><a href="{{ url('/instagram/scraper') }}"><i class="fa fa-search"></i> <span>Scraper</span></a>
                         </li>
 

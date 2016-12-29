@@ -11,7 +11,7 @@
         <div class="content-wrapper">
             <section class="content">
                 @foreach($datas->items as $data)
-                    <div class="row">
+                    <div id="{{$data->id}}" class="row">
                         <div class="col-md-6">
                             <!-- Box Comment -->
                             <div class="box box-widget">
@@ -23,7 +23,7 @@
                                     </div>
                                     <!-- /.user-block -->
                                     <div class="box-tools">
-                                        <button class="btn btn-xs btn-danger">Delete</button>
+                                        <button data-id="{{$data->id}}" class="btn btn-xs btn-danger">Delete</button>
                                         <a target="_blank" href="{{url('/instagram/info')."/".$data->id}}" class="btn btn-xs btn-default">View Details</a>
                                         <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title=""
                                                 data-original-title="Instagram Post">
@@ -109,6 +109,8 @@
                                             <!-- /.comment-text -->
                                         </div>
                                 @endforeach
+
+
                                 <!-- /.box-comment -->
 
                                     <!-- /.box-comment -->
@@ -121,7 +123,7 @@
                                          alt="Alt Text">
                                     <!-- .img-push is used to add margin to elements next to floating images -->
                                     <div class="img-push">
-                                        <input type="text" class="form-control input-sm"
+                                        <input data-id="{{$data->id}}" type="text" class="form-control input-sm comment"
                                                placeholder="Press enter to post comment">
                                     </div>
 
@@ -138,7 +140,62 @@
     </div>{{--End wrapper--}}
 @endsection
 @section('js')
+<script>
+    $('.btn-danger').click(function () {
+        var id = $(this).attr('data-id');
+        var del = confirm("Do you want to delete ?");
+        if(del){
+            $.ajax({
+                type:'POST',
+                url:'{{url('/instagram/delete')}}',
+                data:{
+                    'id':id
+                },
+                success:function (data) {
+                    if(data=="success"){
+                        swal('Success','Deleted','success');
+                        $('#'+id).hide(200);
+                    }else{
+                        swal('Error',data,'error');
+                    }
+                },
+                error:function (data) {
+                    swal('Error','Something went wrong check console messgae','error');
+                    console.log(data.responseText);
+                }
+            });
+        }
+    });
+    $(".comment").on( "keydown", function(event) {
+        if(event.which == 13){
 
+            var id = $(this).attr('data-id');
+            var text = $(this).val();
+            $.toast('Wait trying to post comment');
+            $.ajax({
+                type:'POST',
+                url:'{{url('/instagram/comment')}}',
+                data:{
+                    'id':id,
+                    'text':text
+                },
+                success:function (data) {
+                    if(data=="success"){
+                        $.toast('Success ! Comment posted');
+                    }else{
+                        $.toast(data);
+                    }
+                },
+                error:function (data) {
+                    swal('Error','Something went wrong please check console message','error');
+                    console.log(data.responseText);
+                }
+            })
+
+        }
+
+    });
+</script>
 @endsection
 
 

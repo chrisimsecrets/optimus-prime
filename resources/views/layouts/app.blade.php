@@ -71,7 +71,7 @@
 <script src="{{url('/opt/intro/intro.js')}}"></script>
 <script type="text/javascript" src="{{url('/opt/emoji/emojionearea.min.js')}}"></script>
 
-
+<script type="text/javascript" src="{{url('/opt/toast.js')}}"></script>
 <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
 
 <script>

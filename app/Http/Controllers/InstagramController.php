@@ -110,7 +110,7 @@ class InstagramController extends Controller
     {
         $i = $this->instagram;
 
-        $datas = $i->timelineFeed();
+        $datas = $i->searchUsers("adam");
         print_r($datas);
     }
 
@@ -119,46 +119,235 @@ class InstagramController extends Controller
      * @param Request $request
      * @return string
      */
-    public function write(Request $request){
-        try{
-            $this->instagram->uploadPhoto(public_path()."/uploads/".$request->image,$request->caption);
+    public function write(Request $request)
+    {
+        try {
+            $this->instagram->uploadPhoto(public_path() . "/uploads/" . $request->image, $request->caption);
             return "success";
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception->getMessage();
         }
 
     }
 
-    public function delete(){
-        print_r($this->instagram->deleteMedia('1412975252606226869_4310486200'));
+    public function writef($image, $caption)
+    {
+        try {
+            $this->instagram->uploadPhoto(public_path() . "/uploads/" . $image, $caption);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 
-    public function getMediaInfoIndex(){
+    public function delete(Request $request)
+    {
+        try {
+            $this->instagram->deleteMedia($request->id);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+
+    }
+
+    public function deletef($id)
+    {
+        try {
+            $this->instagram->deleteMedia($id);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function like(Request $request)
+    {
+        try {
+            $this->instagram->like($request->id);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function likef($id)
+    {
+        try {
+            $this->instagram->like($id);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function comment(Request $request)
+    {
+        try {
+            $this->instagram->comment($request->id, $request->text);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function commentf($id, $text)
+    {
+        try {
+            $this->instagram->comment($id, $text);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function follow(Request $request)
+    {
+        try {
+            $this->instagram->follow($request->userId);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function followf($userId)
+    {
+        try {
+            $this->instagram->follow($userId);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+    public function unfollow(Request $request)
+    {
+        try {
+            $this->instagram->unfollow($request->userId);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+
+    public function messagef($ids = array(), $messgae)
+    {
+        if ($messgae == "") {
+            return "Message can't be empty";
+        }
+        try {
+            $this->instagram->direct_message($ids, $messgae);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+
+
+    }
+
+    public function message(Request $request)
+    {
+        if ($request->messgae == "") {
+            return "Message can't be empty";
+        }
+        try {
+            $this->instagram->direct_message($request->ids, $request->messgae);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+
+
+    public function getMediaInfoIndex()
+    {
         return view('instagramMediaInfo');
     }
 
-    public function getMediaInfo($mediaId){
+    public function getMediaInfo($mediaId)
+    {
         $datas = $this->instagram->mediaInfo($mediaId);
 //        print_r($datas);
 //        exit;
         $data = $datas->items[0];
-        return view('instagramMediaInfo',compact('data'));
+        return view('instagramMediaInfo', compact('data'));
     }
 
-    public function followers(){
+    public function followers()
+    {
         $datas = $this->instagram->getSelfUserFollowers();
 
-        return view('instagramFollowers',compact('datas'));
+        return view('instagramFollowers', compact('datas'));
     }
 
-    public function following(){
+    public function following()
+    {
         $datas = $this->instagram->getSelfUsersFollowing();
 
-        return view('instagramFollowing',compact('datas'));
+        return view('instagramFollowing', compact('datas'));
     }
 
-    public function autoFollowIndex(){
-        return view('instagramAutoFollow');
+    public function followBack()
+    {
+        $insta = $this->instagram;
+        $datas = $insta->getSelfUserFollowers();
+        $count = 0;
+        foreach ($datas->users as $data) {
+            try {
+                $insta->follow($data->pk);
+                $count++;
+            } catch (\Exception $exception) {
+
+            }
+
+
+        }
+        return "Now you are following $count users";
+    }
+
+    public function followByTag(Request $request)
+    {
+
+        $insta = $this->instagram;
+        $datas = $insta->getHashtagFeed($request->tag);
+        $numberOfResults = $datas->num_results;
+        $count = 0;
+        foreach ($datas->ranked_items as $data) {
+            try {
+                $insta->follow($data->user->pk);
+                $count++;
+            } catch (\Exception $exception) {
+            }
+
+
+        }
+        return "Number of top ranked results $numberOfResults and you are following $count user";
+
+    }
+
+    public function unfollowAll()
+    {
+        $insta = $this->instagram;
+        $datas = $insta->getSelfUsersFollowing();
+        $count = 0;
+        foreach ($datas->fullResponse->users as $data) {
+            try {
+                $insta->unfollow($data->pk);
+                $count++;
+            } catch (\Exception $exception) {
+
+            }
+
+        }
+        return "Unfollowed $count users";
+    }
+
+
+    public function getTagFeed()
+    {
+
     }
 
 }

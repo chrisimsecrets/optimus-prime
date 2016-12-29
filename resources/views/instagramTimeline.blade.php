@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Instagram | My Account')
+@section('title','Instagram | Home')
 
 @section('content')
     <div class="wrapper">
@@ -26,7 +26,7 @@
                                         </div>
                                         <!-- /.user-block -->
                                         <div class="box-tools">
-                                            <button class="btn btn-xs btn-danger">Delete</button>
+                                            {{--<button class="btn btn-xs btn-danger">Delete</button>--}}
                                             <a target="_blank" href="{{url('/instagram/info')."/".$data->media_or_ad->id}}" class="btn btn-xs btn-default">View Details</a>
                                             <button type="button" class="btn btn-box-tool" data-toggle="tooltip"
                                                     title=""
@@ -108,7 +108,7 @@
 
                                         <!-- .img-push is used to add margin to elements next to floating images -->
                                         <div class="img-push">
-                                            <input type="text" class="form-control input-sm"
+                                            <input data-id="{{$data->media_or_ad->id}}" type="text" class="form-control input-sm comment"
                                                    placeholder="Press enter to post comment">
                                         </div>
 
@@ -126,7 +126,37 @@
     </div>{{--End wrapper--}}
 @endsection
 @section('js')
+<script>
+    $(".comment").on( "keydown", function(event) {
+        if(event.which == 13){
 
+            var id = $(this).attr('data-id');
+            var text = $(this).val();
+            $.toast('Wait trying to post comment');
+            $.ajax({
+                type:'POST',
+                url:'{{url('/instagram/comment')}}',
+                data:{
+                    'id':id,
+                    'text':text
+                },
+                success:function (data) {
+                    if(data=="success"){
+                        $.toast('Success ! Comment posted');
+                    }else{
+                        $.toast(data);
+                    }
+                },
+                error:function (data) {
+                    swal('Error','Something went wrong please check console message','error');
+                    console.log(data.responseText);
+                }
+            })
+
+        }
+
+    });
+</script>
 @endsection
 
 

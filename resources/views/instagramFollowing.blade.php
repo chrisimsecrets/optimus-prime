@@ -25,7 +25,7 @@
                                         <li>
                                             <img src="{{$data->profile_pic_url}}" alt="User Image">
                                             <a target="_blank" class="users-list-name" href="https://instagram.com/{{$data->username}}">{{$data->username}}</a>
-                                            <span class="users-list-date"><button data-id="{{$data->username}}" class="btn btn-default unfollow">Unfollow</button> </span>
+                                            <span class="users-list-date"><button data-user="{{$data->username}}" data-id="{{$data->pk}}" class="btn btn-default unfollow">Unfollow</button> </span>
                                         </li>
 
                                     @endforeach
@@ -45,7 +45,32 @@
     </div>{{--End wrapper--}}
 @endsection
 @section('js')
+    <script>
+        $('.unfollow').click(function () {
+            var id = $(this).attr('data-id');
+            var user = $(this).attr('data-user');
+            $.toast("Wait .. ");
+            $.ajax({
+                type:'POST',
+                url:'{{url('/instagram/unfollow')}}',
+                data:{
+                    'userId':id
+                },
+                success:function (data) {
+                    if(data=='success'){
+                        $.toast("Done ! Now you are not following "+user);
+                    }else{
+                        $.toast(data);
+                    }
+                },
+                error:function (data) {
+                    swal('Error',"Something went wrong , Please check console message");
+                    console.log(data.responseText);
+                }
 
+            })
+        })
+    </script>
 @endsection
 
 

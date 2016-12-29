@@ -193,9 +193,31 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/instagram/followers/get','InstagramController@getFollowers');
         Route::get('/instagram/following/get','InstagramController@getFollowing');
         Route::post('/instagram/write','InstagramController@write');
-        Route::get('/instagram/delete','InstagramController@delete');
-        Route::get('/instagram/delete','InstagramController@delete');
+//        Route::get('/instagram/delete','InstagramController@delete');
+
         Route::get('/instagram/info/{id}','InstagramController@getMediaInfo');
+
+        // instagram post
+
+        Route::post('/instagram/follow','InstagramController@follow');
+        Route::post('/instagram/unfollow','InstagramController@unfollow');
+        Route::post('/instagram/like','InstagramController@like');
+        Route::post('/instagram/comment','InstagramController@comment');
+        Route::post('/instagram/delete','InstagramController@delete');
+
+        //auto
+
+        Route::get('/instagram/auto/follow','InstagramIndex@autoFollowIndex');
+        Route::get('/instagram/auto/unfollow','InstagramIndex@autoUnfollowIndex');
+        Route::get('/instagram/auto/comments','InstagramIndex@autoCommentsIndex');
+        Route::get('/instagram/auto/likes','InstagramIndex@autoLikesIndex');
+        Route::get('/instagram/auto/message','InstagramIndex@autoMessageIndex');
+
+        //auto post
+
+        Route::post('/instagram/followback','InstagramController@followback');
+        Route::post('/instagram/followbytag','InstagramController@followByTag');
+        Route::post('/instagram/unfollowall','InstagramController@unfollowAll');
 
         Route::get('/instagram/test','InstagramController@test');
     });
