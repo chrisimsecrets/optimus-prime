@@ -36,4 +36,8 @@ class InstagramIndex extends Controller
     {
         return view('instagramAutoMessage');
     }
+
+    public function scraper(){
+        return view('instagramScraper');
+    }
 }

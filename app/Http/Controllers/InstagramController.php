@@ -40,6 +40,17 @@ class InstagramController extends Controller
         return view('instagram', compact('datas'));
     }
 
+    /**
+     * Home page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function home()
+    {
+        $datas = $this->instagram->timelineFeed();
+
+        return view('instagramTimeline', compact('datas'));
+    }
+
 
     /**
      * Popular feed according to user likes and views
@@ -88,21 +99,11 @@ class InstagramController extends Controller
      */
     public function getFollowingUserActivity()
     {
-        $datas = $this->instagram->getFollowingRecentActivity();
-//        var_dump($datas);
-//        exit;
+        $data = $this->instagram->getFollowingRecentActivity();
+        $datas = $data->fullResponse->stories;
+//        print_r($datas->fullResponse->stories);
+////        exit;
         return view('instagramFollowingActivity', compact('datas'));
-    }
-
-    /**
-     * Home page
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function home()
-    {
-        $datas = $this->instagram->timelineFeed();
-
-        return view('instagramTimeline', compact('datas'));
     }
 
 
@@ -110,7 +111,7 @@ class InstagramController extends Controller
     {
         $i = $this->instagram;
 
-        $datas = $i->searchUsers("adam");
+        $datas = $i->searchFBLocation('dhaka');
         print_r($datas);
     }
 
@@ -342,6 +343,60 @@ class InstagramController extends Controller
 
         }
         return "Unfollowed $count users";
+    }
+
+    public function autoComment(Request $request)
+    {
+        $insta = $this->instagram;
+        $count = 0;
+        if ($request->type == "home") {
+            $datas = $insta->timelineFeed();
+            foreach ($datas->feed_items as $data) {
+                if (isset($data->media_or_ad)) {
+                    $insta->comment($data->media_or_ad->id, $request->comment);
+                    $count++;
+                }
+
+            }
+            return "Commented on $count home posts";
+        } elseif ($request->type == "popular") {
+            $datas = $insta->getPopularFeed();
+            foreach ($datas['items'] as $data) {
+                $insta->comment($data['id'], $request->comment);
+                $count++;
+            }
+            return "Commented on $count popular posts";
+        } elseif ($request->type == "self") {
+            $datas = $insta->getSelfUserFeed();
+            foreach ($datas->items as $data) {
+                $insta->comment($data->id, $request->comment);
+                $count++;
+            }
+            return "Commented on $count self posts";
+        } elseif ($request->type == "hashtag") {
+            $datas = $insta->getHashtagFeed($request->tag);
+            foreach ($datas->ranked_items as $data){
+                $insta->comment($data->id,$request->comment);
+                $count++;
+            }
+            return "Commented on $count hashtag posts";
+        }
+    }
+
+    public function scraper(Request $request){
+        $insta = $this->instagram;
+        if($request->type == "tag"){
+            $datas = $insta->getHashtagFeed($request->data);
+            return view('instaGetHashTagFeed',compact('datas'));
+        }
+        elseif ($request->type == "user"){
+            $datas = $insta->searchUsers($request->data);
+            return view('instaSearchUsers',compact('datas'));
+        }
+        elseif($request->type == "location"){
+            $datas = $insta->searchFBLocation($request->data);
+            return view('instaSearchLocation',compact('datas'));
+        }
     }
 
 

@@ -193,6 +193,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/instagram/followers/get','InstagramController@getFollowers');
         Route::get('/instagram/following/get','InstagramController@getFollowing');
         Route::post('/instagram/write','InstagramController@write');
+        Route::get('/instagram/following/activity','InstagramController@getFollowingUserActivity');
 //        Route::get('/instagram/delete','InstagramController@delete');
 
         Route::get('/instagram/info/{id}','InstagramController@getMediaInfo');
@@ -212,12 +213,15 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/instagram/auto/comments','InstagramIndex@autoCommentsIndex');
         Route::get('/instagram/auto/likes','InstagramIndex@autoLikesIndex');
         Route::get('/instagram/auto/message','InstagramIndex@autoMessageIndex');
+        Route::get('/instagram/scraper','InstagramIndex@scraper');
 
         //auto post
 
         Route::post('/instagram/followback','InstagramController@followback');
         Route::post('/instagram/followbytag','InstagramController@followByTag');
         Route::post('/instagram/unfollowall','InstagramController@unfollowAll');
+        Route::post('/instagram/auto/comment','InstagramController@autoComment');
+        Route::post('/instagram/scraper','InstagramController@scraper');
 
         Route::get('/instagram/test','InstagramController@test');
     });

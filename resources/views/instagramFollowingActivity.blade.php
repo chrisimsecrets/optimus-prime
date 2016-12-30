@@ -6,24 +6,33 @@
         @include('components.navigation')
         @include('components.sidebar')
 
-        <div id="settingspage"></div>
 
         <div class="content-wrapper">
             <section class="content">
-                @foreach($datas->stories as $data)
-                    <div class="row">
-                        <div class="timeline-item">
+                <ul class="timeline">
+                    @foreach($datas as $data)
 
-                            <h3 class="timeline-header"><a href="#">{{$data->args->text}}</a></h3>
 
-                            <div class="timeline-body">
-                                @foreach($data->args->media as $media)
-                                    <img src="{{$media->image}}" alt="..." class="margin">
-                                @endforeach
+
+                        <li>
+                            <i class="fa fa-feed bg-aqua"></i>
+                            <div class="timeline-item">
+
+                                <h3 class="timeline-header">{{$data->args->text}}</h3>
+
+                                <div class="timeline-body">
+                                    @if(isset($data->args->media))
+                                        @foreach($data->args->media as $media)
+                                            <img src="{{$media->image}}" alt="..." class="margin">
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                @endforeach
+                        </li>
+
+
+                    @endforeach
+                </ul>
             </section>{{--End content--}}
         </div>{{--End content-wrapper--}}
         @include('components.footer')

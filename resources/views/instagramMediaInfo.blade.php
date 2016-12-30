@@ -139,7 +139,7 @@
                             <div class="box-footer">
 
                                 <div class="img-push">
-                                    <input type="text" class="form-control input-sm"
+                                    <input data-id="{{$data->id}}" type="text" class="form-control input-sm comment"
                                            placeholder="Press enter to post comment">
                                 </div>
 
@@ -156,7 +156,37 @@
     </div>{{--End wrapper--}}
 @endsection
 @section('js')
+<script>
+    $(".comment").on( "keydown", function(event) {
+        if(event.which == 13){
 
+            var id = $(this).attr('data-id');
+            var text = $(this).val();
+            $.toast('Wait trying to post comment');
+            $.ajax({
+                type:'POST',
+                url:'{{url('/instagram/comment')}}',
+                data:{
+                    'id':id,
+                    'text':text
+                },
+                success:function (data) {
+                    if(data=="success"){
+                        $.toast('Success ! Comment posted');
+                    }else{
+                        $.toast(data);
+                    }
+                },
+                error:function (data) {
+                    swal('Error','Something went wrong please check console message','error');
+                    console.log(data.responseText);
+                }
+            })
+
+        }
+
+    });
+</script>
 @endsection
 
 
