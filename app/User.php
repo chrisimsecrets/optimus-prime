@@ -24,5 +24,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    public function slackQuestions()
+    {
+        return $this->hasMany(SlackBot::class);
+    }
 }
