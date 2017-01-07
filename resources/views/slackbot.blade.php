@@ -23,7 +23,7 @@
 
                             <form method="POST" action="{{ url('/add-slack-question') }}" id="add-slack-question">
                                 {{ csrf_field() }}
-                                <input type="hidden" id="userId" name="userId" value="{{Auth::user()->id}}">
+
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="question">Message</label>
@@ -32,7 +32,7 @@
                                             Separate using comma (ex: hi, hello) for multiple message.
                                         </p>
                                     </div>
-
+                                    <input type="text" id="userId" name="userId" value="{{Auth::user()->id}}">
                                     <div class="form-group">
                                         <label for="answer">Reply</label>
                                         <textarea type="text" class="form-control" id="answer" placeholder="Message's Reply"></textarea>

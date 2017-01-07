@@ -215,7 +215,7 @@
                     {{-- linkedin settings--}}
                     @if(\App\Http\Controllers\Data::myPackage('ln'))
                         <div class="col-md-6">
-                            <form method="post" action="/lisave" id="linkedinSettings">
+                            <form method="post" action="{{url('/lisave')}}" id="linkedinSettings">
                                 <div class="box box-primary">
                                     <div class="box-header with-border" align="center">
                                         <h3 class="box-title"><i class="fa fa-linkedin"></i> Linkedin Settings</h3>
