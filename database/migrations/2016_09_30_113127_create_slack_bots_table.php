@@ -14,6 +14,7 @@ class CreateSlackBotsTable extends Migration
     {
         Schema::create('slack_bots', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('question');
             $table->text('answer');
             $table->string('channel');

@@ -23,7 +23,7 @@ class ChatBotController extends Controller
 
     public function slack()
     {
-        $data = SlackBot::where('userId', Auth::user()->id)->get();
+        $data = auth()->user()->slackQuestions;
 
         return view('slackbot', compact('data'));
     }

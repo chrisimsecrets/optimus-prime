@@ -137,6 +137,7 @@
                                 <table class="table table-striped table-bordered dt-responsive slack-bot-messages" id="mytable">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Message</th>
                                             <th>Reply</th>
                                             <th>Channel</th>
@@ -146,21 +147,27 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach($data as $d)
+                                        @foreach($data as $index => $d)
                                             <tr>
+                                                <td>{{ $index + 1 }}</td>
                                                 <td>{{ $d->question }}</td>
                                                 <td>{{ $d->answer }}</td>
                                                 <td>{{ $d->channel }}</td>
                                                 <td>{{ !empty($d->accuracy) ? $d->accuracy : 'Default' }}</td>
-                                                <td><a class="delete-slack-question"data-id="{{$d->id}}" href="#"><span
-                                                                class="badge bg-red"><i
-                                                                    class="fa fa-times"></i> Delete</span></a></td>
+                                                <td>
+                                                    <a class="delete-slack-question"data-id="{{$d->id}}" href="#">
+                                                        <span class="badge bg-red">
+                                                            <i class="fa fa-times"></i> Delete
+                                                        </span>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
 
                                     <tfoot>
                                         <tr>
+                                            <th>#</th>
                                             <th>Message</th>
                                             <th>Reply</th>
                                             <th>Channel</th>
