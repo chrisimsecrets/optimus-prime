@@ -32,7 +32,7 @@
                                             Separate using comma (ex: hi, hello) for multiple message.
                                         </p>
                                     </div>
-                                    <input type="text" id="userId" name="userId" value="{{Auth::user()->id}}">
+
                                     <div class="form-group">
                                         <label for="answer">Reply</label>
                                         <textarea type="text" class="form-control" id="answer" placeholder="Message's Reply"></textarea>

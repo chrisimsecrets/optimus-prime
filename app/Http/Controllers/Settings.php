@@ -558,7 +558,15 @@ class Settings extends Controller
 
     public function fbBotConfigSave(Request $request)
     {
-        return $request->all();
+        try{
+            Setting::where('userId',Auth::user()->id)->update([
+               'exMsg'=>$request->exMsg,
+                'matchAcc'=>$request->matchAcc
+            ]);
+            return "success";
+        }catch (\Exception $exception){
+            return $exception->getMessage();
+        }
     }
 
     /**

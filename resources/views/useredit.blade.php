@@ -91,12 +91,12 @@
                                         </label>
                                     </div>
 
-                                    <div class="checkbox">
-                                        <label>
-                                            <input id="contacts" type="checkbox" @if(\App\Http\Controllers\Data::hasPackage($id,'contacts')) checked @endif>
-                                            <i class="fa fa-list-alt"></i> Contacts
-                                        </label>
-                                    </div>
+                                    {{--<div class="checkbox">--}}
+                                        {{--<label>--}}
+                                            {{--<input id="contacts" type="checkbox" @if(\App\Http\Controllers\Data::hasPackage($id,'contacts')) checked @endif>--}}
+                                            {{--<i class="fa fa-list-alt"></i> Contacts--}}
+                                        {{--</label>--}}
+                                    {{--</div>--}}
 
                                 </div>
 

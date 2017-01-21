@@ -137,14 +137,17 @@
             },
             success:function (data) {
                 if(data=='success'){
-                    swal('Success',"Settings updated",'success');
+                    alert("Settings updated");
+                    location.reload();
                 }
                 else{
-                    swal('Error',data,'error');
+                    alert(data);
+                    console.log(data);
                 }
             },
             error:function(data){
-                swal('error',data,'error');
+                alert("Something went wrong, Please check the console message");
+                console.log(data.responseText);
             }
         })
     });

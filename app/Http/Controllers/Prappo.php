@@ -282,7 +282,7 @@ class Prappo extends Controller
     public function test()
     {
 
-
+       return Data::getToken(1735656266753183);
     }
 
     public static function comment($id, $text)

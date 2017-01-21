@@ -146,18 +146,18 @@ class ChatBotController extends Controller
     public static function compile($inputText, $pageId)
     {
         if ($pageId == "") {
-            return Data::get('exMsg');
+            return Data::getExceptionMessage($pageId);
         }
         $per = 0;
         $reply = "";
-        $text = chatbot::where('pageId', $pageId)->where('userId', Auth::user()->id)->get();
+        $text = chatbot::where('pageId', $pageId)->get();
         foreach ($text as $t) {
             similar_text($t->question, $inputText, $per);
-            if ($per >= Data::get('matchAcc')) {
+            if ($per >= Data::getMatchAcc($pageId)) {
                 $reply = $t->answer;
                 break;
             } else {
-                $reply = Data::get('exMsg');
+                $reply = Data::getExceptionMessage($pageId);
             }
         }
         return $reply;

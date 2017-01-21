@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Package;
+use App\Setting;
 use DateTime;
 use DB;
 use App\FacebookPages;
@@ -20,6 +21,21 @@ class Data extends Controller
     {
         return DB::table('settings')->where('userId',Auth::user()->id)->value($valueOf);
 
+    }
+
+    public static function getExceptionMessage($pageId){
+        $userId = FacebookPages::where('pageId',$pageId)->value('userId');
+        $exMsg = Setting::where('userId',$userId)->value('exMsg');
+        return $exMsg;
+    }
+
+    public static function getMatchAcc($pageId){
+        $userId = FacebookPages::where('pageId',$pageId)->value('userId');
+        $matchAcc = Setting::where('userId',$userId)->value('matchAcc');
+        return $matchAcc;
+    }
+
+    public static function getSlackExceptionMessage(){
 
     }
 
@@ -30,7 +46,8 @@ class Data extends Controller
      */
     public static function getToken($pageId)
     {
-        return DB::table('facebookPages')->where('userId',Auth::user()->id)->where('pageId', $pageId)->value('pageToken');
+        return DB::table('facebookPages')->where('pageId', $pageId)->value('pageToken');
+
 
     }
 
@@ -41,7 +58,7 @@ class Data extends Controller
      */
     public static function getPageName($pageId)
     {
-        $data = FacebookPages::where('pageId', $pageId)->where('userId',Auth::user()->id)->value('pageName');
+        $data = FacebookPages::where('pageId', $pageId)->value('pageName');
 
         return $data;
     }
