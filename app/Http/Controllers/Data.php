@@ -36,7 +36,7 @@ class Data extends Controller
     }
 
     public static function getSlackExceptionMessage(){
-
+    
     }
 
     /**

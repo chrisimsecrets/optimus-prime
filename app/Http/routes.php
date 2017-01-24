@@ -224,6 +224,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/instagram/scraper','InstagramController@scraper');
 
         Route::get('/instagram/test','InstagramController@test');
+
+        //youtube
+
+        Route::get('/youtube/download','Youtube@downloadIndex');
+        Route::post('/youtube/download','Youtube@download');
     });
 
 

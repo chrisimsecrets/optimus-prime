@@ -4,9 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a00ad878af75d20191f79307f3acc793",
-    "content-hash": "44d03f65a2dcdb289992a32a1d872930",
+    "hash": "08c46e03b753d1531f3dddb000e648a2",
+    "content-hash": "9ea2f6c79ce131341e20d8260b321cc1",
     "packages": [
+        {
+            "name": "athlon1600/youtube-downloader",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Athlon1600/youtube-downloader.git",
+                "reference": "19292f0510ff8f0f20f555d9b1bbb8c55cd1cbd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Athlon1600/youtube-downloader/zipball/19292f0510ff8f0f20f555d9b1bbb8c55cd1cbd1",
+                "reference": "19292f0510ff8f0f20f555d9b1bbb8c55cd1cbd1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/YouTubeDownloader.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP powered alternative for youtube-dl",
+            "keywords": [
+                "download youtube",
+                "download youtube videos",
+                "youtube downloader"
+            ],
+            "time": "2016-12-27 20:06:20"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.1.0",
