@@ -38965,25 +38965,25 @@ function tuFollowers() {
 }
 
 function liTotalCompanies() {
-    $.get('/liTotalCompanies', function (total) {
+    $.get('liTotalCompanies', function (total) {
         $('#liCompanies').html(total);
     });
 }
 
 function liPostedJobs() {
-    $.get('/liPostedJobs', function (total) {
+    $.get('liPostedJobs', function (total) {
         $('#liPostedJobs').html(total);
     });
 }
 
 function companyFollowers() {
-    $.get('/companyFollowers', function (total) {
+    $.get('companyFollowers', function (total) {
         $('#companyFollowers').html(total);
     });
 }
 
 function liCompanyUpdates() {
-    $.get('/liCompanyUpdates', function (total) {
+    $.get('liCompanyUpdates', function (total) {
         $('#liCompanyUpdates').html(total);
     });
 }
