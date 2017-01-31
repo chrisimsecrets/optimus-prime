@@ -398,11 +398,9 @@ class FacebookController extends Controller
             'app_secret' => Data::get('fbAppSec'),
             'default_graph_version' => 'v2.6',
         ]);
+        $token = FacebookPages::where('pageId',$pageId)->value('pageToken');
+        
 
-        $pages = FacebookPages::where('pageId', $pageId)->where('email', Auth::user()->email)->get();
-        foreach ($pages as $page) {
-            $token = $page->pageToken;
-        }
         $conCount = 0;
         $msgCount = 0;
 

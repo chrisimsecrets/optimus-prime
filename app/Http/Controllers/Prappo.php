@@ -282,7 +282,8 @@ class Prappo extends Controller
     public function test()
     {
 
-       return Data::getToken(1735656266753183);
+       $instagram = new InstagramController();
+       $instagram->instagram->logout();
     }
 
     public static function comment($id, $text)

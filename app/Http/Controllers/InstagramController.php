@@ -21,7 +21,7 @@ class InstagramController extends Controller
 
         try {
             $this->instagram->setUser($username, $password);
-            $this->instagram->login();
+            $this->instagram->login(true);
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
