@@ -356,34 +356,35 @@
                                     Post
                                 </button>
 
-                                {{--<button data-step="11" data-intro="Click here to schedule your post" id="addschedule"--}}
-                                {{--class="btn btn-default"><i class="fa fa-calendar"></i> Add--}}
-                                {{--to--}}
-                                {{--schedule--}}
-                                {{--</button>--}}
+                                <button data-step="11" data-intro="Click here to schedule your post" id="addschedule"
+                                class="btn btn-default"><i class="fa fa-calendar"></i> Add
+                                to
+                                schedule
+                                </button>
                             </div>
                             <div id="ss" style="display: none;" class="form-group">
                                 <div style="padding-left: 10px">
-                                    <select class="form-control" id="type">
-                                        <option value="everyMinute">Every Minute</option>
-                                        <option value="everyFiveMinutes">Every Five Minutes</option>
-                                        <option value="everyTenMinutes">Every Ten Minutes</option>
-                                        <option value="everyThirtyMinutes">Every Thirty Minutes</option>
-                                        <option value="hourly">Hourly</option>
-                                        <option value="daily">Daily</option>
-                                        <option value="weekly">Weekly</option>
-                                        <option value="monthly">Monthly</option>
-                                        <option value="quarterly">Quarterly</option>
-                                        <option value="yearly">Yearly</option>
-                                        <option value="fridays">Fridays</option>
-                                        <option value="saturdays">Saturdays</option>
-                                        <option value="sundays">Sundays</option>
-                                        <option value="mondays">Mondays</option>
-                                        <option value="tuesdays">Tuesdays</option>
-                                        <option value="wednesdays">Wednesdays</option>
-                                        <option value="thursdays">Thursdays</option>
+                                    {{--<select class="form-control" id="type">--}}
+                                        {{--<option value="everyMinute">Every Minute</option>--}}
+                                        {{--<option value="everyFiveMinutes">Every Five Minutes</option>--}}
+                                        {{--<option value="everyTenMinutes">Every Ten Minutes</option>--}}
+                                        {{--<option value="everyThirtyMinutes">Every Thirty Minutes</option>--}}
+                                        {{--<option value="hourly">Hourly</option>--}}
+                                        {{--<option value="daily">Daily</option>--}}
+                                        {{--<option value="weekly">Weekly</option>--}}
+                                        {{--<option value="monthly">Monthly</option>--}}
+                                        {{--<option value="quarterly">Quarterly</option>--}}
+                                        {{--<option value="yearly">Yearly</option>--}}
+                                        {{--<option value="fridays">Fridays</option>--}}
+                                        {{--<option value="saturdays">Saturdays</option>--}}
+                                        {{--<option value="sundays">Sundays</option>--}}
+                                        {{--<option value="mondays">Mondays</option>--}}
+                                        {{--<option value="tuesdays">Tuesdays</option>--}}
+                                        {{--<option value="wednesdays">Wednesdays</option>--}}
+                                        {{--<option value="thursdays">Thursdays</option>--}}
 
-                                    </select>
+                                    {{--</select>--}}
+                                    <input type="text" id="type">
                                 </div>
                                 <br>
                                 <div style="padding-left: 10px" class="form-group">
@@ -504,6 +505,15 @@
 @section('js')
     <script>
         $(document).ready(function () {
+            flatpickr("#type", {
+                minDate: new Date(), // "today" / "2016-12-20" / 1477673788975
+                maxDate: "2017-12-20",
+                enableTime: true,
+
+                // create an extra input solely for display purposes
+                altInput: true,
+                altFormat: "F j, Y h:i K"
+            });
 
             $('#caption').hide(200);
             $('#imgoption').hide(200);

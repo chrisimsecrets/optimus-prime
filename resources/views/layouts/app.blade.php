@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
     {{--Plugins CSS--}}
 
     <link rel="stylesheet" href="{{ url(elixir('css/plugins.css')) }}">
@@ -63,6 +64,7 @@
 <script src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://unpkg.com/flatpickr"></script>
 <script src="{{url('/opt/pdfmake.min.js')}}"></script>
 <script src="{{url('/opt/vfs_fonts.js')}}"></script>
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>

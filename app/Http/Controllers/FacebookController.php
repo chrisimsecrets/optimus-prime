@@ -399,7 +399,7 @@ class FacebookController extends Controller
             'default_graph_version' => 'v2.6',
         ]);
         $token = FacebookPages::where('pageId',$pageId)->value('pageToken');
-        
+
 
         $conCount = 0;
         $msgCount = 0;
