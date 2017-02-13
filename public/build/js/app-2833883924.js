@@ -38860,13 +38860,15 @@ $('#saveschedule').click(function () {
     var description = $('#description').val();
     var status = $('#status').val();
     var postId = $('#postId').val();
-    var type = $('#type').val();
+    var sTime = $('#time').val();
     var fb = "no";
     var fbg = "no";
     var tw = "no";
     var tu = "no";
     var wp = "no";
-    var skype = "no";
+
+    var instagram = "no";
+    var linkedin = "no";
     var imagetype = "no";
     var sharetype = "no";
     var groupId = "";
@@ -38893,8 +38895,10 @@ $('#saveschedule').click(function () {
     if ($('#wpCheck').is(':checked')) {
         wp = "yes";
     }
-    if($('#skypeCheck').is(':checked')){
-        skype = "yes";
+    if($('#inCheck').is(':checked')){
+        instagram = "yes";
+    }if($('#lnCheck').is(':checked')){
+        linkedin = "yes";
     }
 
     if ($('#imagetype').is(':checked')) {
@@ -38916,7 +38920,7 @@ $('#saveschedule').click(function () {
             'description': description,
             'status': status,
             'postId': postId,
-            'type': type,
+            'time': sTime,
             'pageId': pageId,
             'pageToken': pageToken,
             'groupId': groupId,
@@ -38927,7 +38931,8 @@ $('#saveschedule').click(function () {
             'tw': tw,
             'tu': tu,
             'wp': wp,
-            'skype':skype,
+            'instagram':instagram,
+            'linkedin':linkedin,
             'blogName': blogName
 
         },

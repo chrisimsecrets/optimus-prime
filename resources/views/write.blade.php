@@ -384,7 +384,7 @@
                                         {{--<option value="thursdays">Thursdays</option>--}}
 
                                     {{--</select>--}}
-                                    <input type="text" id="type">
+                                    <input type="text" id="time">
                                 </div>
                                 <br>
                                 <div style="padding-left: 10px" class="form-group">
@@ -505,7 +505,7 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            flatpickr("#type", {
+            flatpickr("#time", {
                 minDate: new Date(), // "today" / "2016-12-20" / 1477673788975
                 maxDate: "2017-12-20",
                 enableTime: true,

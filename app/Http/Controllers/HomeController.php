@@ -88,7 +88,7 @@ class HomeController extends Controller
             $total_likes = $likes->total_likes();
             return $total_likes;
         } catch (\Exception $e) {
-            return 'error';
+            return 'N/A';
         }
 
     }
@@ -104,7 +104,7 @@ class HomeController extends Controller
             $twFollowers = FollowersController::twFollowers();
             return $twFollowers;
         } catch (\Exception $e) {
-            return 'error';
+            return 'N/A';
         }
     }
 
@@ -118,7 +118,7 @@ class HomeController extends Controller
             $tuFollowers = FollowersController::tuFollowers();
             return $tuFollowers;
         } catch (\Exception $e) {
-            return 'error';
+            return 'N/A';
         }
     }
 
@@ -132,7 +132,7 @@ class HomeController extends Controller
         try {
             return LinkedinController::companies()['_total'];
         } catch (\Exception $e) {
-            return 'error';
+            return 'N/A';
         }
     }
 
@@ -156,7 +156,7 @@ class HomeController extends Controller
 
             return $followers;
         } catch (\Exception $e) {
-            return 'error';
+            return 'N/A';
         }
     }
 
@@ -178,7 +178,7 @@ class HomeController extends Controller
 
             return $total;
         } catch (\Exception $e) {
-            return 'error';
+            return 'N/A';
         }
     }
 
@@ -199,7 +199,7 @@ class HomeController extends Controller
 
             return $total;
         } catch (\Exception $e) {
-            return 'error';
+            return 'N/A';
         }
     }
 }
