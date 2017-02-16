@@ -117,4 +117,8 @@ class ScheduleController extends Controller
             return $e->getMessage();
         }
     }
+
+    public function scheduleDay(){
+        return view('scheduleDay');
+    }
 }

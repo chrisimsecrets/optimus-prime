@@ -104,6 +104,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/addschedule', 'ScheduleController@addSchedule');
         Route::get('/schedules', 'ScheduleController@index');
         Route::get('/scheduleslog', 'OptLogs@index');
+
+        Route::get('/schedule/day','ScheduleController@scheduleDay');
+
         Route::post('/logdel', 'OptLogs@logDel');
         Route::post('/alllogdel', 'OptLogs@delAll');
         Route::post('/sdel', 'ScheduleController@sdel');

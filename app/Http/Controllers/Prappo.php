@@ -8,6 +8,7 @@ use App\Phones;
 use App\Setting;
 use App\Tu;
 use App\User;
+use Carbon\Carbon;
 use DateTime;
 use Facebook\Facebook;
 use Illuminate\Http\Request;
@@ -282,8 +283,8 @@ class Prappo extends Controller
     public function test()
     {
 
-       $instagram = new InstagramController();
-       $instagram->instagram->logout();
+       $now = Carbon::parse('February 17, 2017 12:00 PM');
+       echo $now->format('l');
     }
 
     public static function comment($id, $text)

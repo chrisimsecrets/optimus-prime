@@ -512,7 +512,8 @@
 
                 // create an extra input solely for display purposes
                 altInput: true,
-                altFormat: "F j, Y h:i K"
+                altFormat: "F j, Y h:i K",
+                time_24hr:false
             });
 
             $('#caption').hide(200);

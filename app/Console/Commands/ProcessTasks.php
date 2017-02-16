@@ -50,8 +50,8 @@ class ProcessTasks extends Command
     {
         $tasks = OptSchedul::all();
         
-        foreach ($taks as $task) {
-            if ($this->carbon->parse($task->time)->) {
+        foreach ($tasks as $task) {
+            if ($this->carbon->parse($task->time)) {
                 $postTime = $this->carbon->parse($tasks[0]->time);
                 $currentTime = $this->carbon->now();
                 

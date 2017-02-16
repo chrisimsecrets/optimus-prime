@@ -39,7 +39,22 @@
             <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
             <li><a href="{{ url('/write') }}"><i class="fa fa-edit"></i> <span>Write</span></a></li>
             <li><a href="{{ url('/allpost') }}"><i class="fa fa-copy"></i> <span>All posts</span></a></li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-clock-o"></i>
+                    <span>Schedule</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
 
+                <ul class="treeview-menu" style="display: none">
+
+                    <li><a href="{{ url('/schedule') }}"><i class="fa fa-list-ul"></i>
+                            <span>Posts</span></a></li>
+
+
+
+                </ul>
+            </li>
             {{--contacts menu--}}
             @if(\App\Http\Controllers\Data::myPackage('contacts'))
                 <li class="treeview">
