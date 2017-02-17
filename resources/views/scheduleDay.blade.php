@@ -73,7 +73,7 @@
                         </div>
                         <div class="row">
                             <div class="sContainer colorTw">
-                                <span class="sTime">2017-01-11 12:30</span>
+                                <span class="sTime">2017-01-19 12:30</span>
                                 <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-0/p480x480/16684388_1453736817978720_1889951800592650817_n.png?oh=4645b6b4c051d7a56180b0a9c002afeb&oe=59393FEB">
                                 <h4><i class="fa fa-twitter"></i> Some Title</h4>
                                 <p>
@@ -83,6 +83,34 @@
 
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="sContainer colorTw">
+                                <span class="sTime">2017-01-15 3:30</span>
+                                <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-0/p480x480/16684388_1453736817978720_1889951800592650817_n.png?oh=4645b6b4c051d7a56180b0a9c002afeb&oe=59393FEB">
+                                <h4><i class="fa fa-twitter"></i> Some Title</h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet.
+                                </p>
+                                <button type="button" class="btn btn-block btn-xs bg-olive">Published</button>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="sContainer colorTw">
+                                <span class="sTime">2017-01-11 01:30</span>
+                                <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-0/p480x480/16684388_1453736817978720_1889951800592650817_n.png?oh=4645b6b4c051d7a56180b0a9c002afeb&oe=59393FEB">
+                                <h4><i class="fa fa-twitter"></i> Some Title</h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet.
+                                </p>
+                                <button type="button" class="btn btn-block btn-xs bg-olive">Published</button>
+
+                            </div>
+                        </div>
+
 
 
                     </div>

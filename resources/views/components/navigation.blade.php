@@ -29,14 +29,14 @@
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">{{ \App\Notify::where('type','message')->count() }}</span>
+                        <span class="label label-success">{{ \App\Notify::where('type','message')->where('userId',Auth::user()->id)->count() }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have {{ \App\Notify::where('type','message')->count() }} messages</li>
+                        <li class="header">You have {{ \App\Notify::where('type','message')->where('userId',Auth::user()->id)->count() }} messages</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
-                                @foreach(\App\Notify::where('type','message')->get() as $msg)
+                                @foreach(\App\Notify::where('type','message')->where('userId',Auth::user()->id)->get() as $msg)
                                     <li><!-- start message -->
                                         <a target="_blank" href="{{$msg->url}}">
                                             <div class="pull-left">
@@ -63,14 +63,14 @@
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">{{ \App\Notify::where('type','fbnotify')->count() }}</span>
+                        <span class="label label-warning">{{ \App\Notify::where('type','fbnotify')->where('userId',Auth::user()->id)->count() }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have {{ \App\Notify::where('type','fbnotify')->count() }} messages</li>
+                        <li class="header">You have {{ \App\Notify::where('type','fbnotify')->where('userId',Auth::user()->id)->count() }} messages</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
-                                @foreach(\App\Notify::where('type','fbnotify')->get() as $msg)
+                                @foreach(\App\Notify::where('type','fbnotify')->where('userId',Auth::user()->id)->get() as $msg)
                                     <li><!-- start message -->
                                         <a target="_blank" href="{{$msg->url}}">
                                             <div class="pull-left">
