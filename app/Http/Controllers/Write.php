@@ -32,35 +32,19 @@ class Write extends Controller
 
     public function index()
     {
-        $consumerKey = self::get_value('tuConKey');
-        $consumerSecret = self::get_value('tuConSec');
-        $token = self::get_value('tuToken');
-        $tokenSecret = self::get_value('tuTokenSec');
-
-        $tuClient = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
-        try {
-            $tuBlogName = $tuClient->getUserInfo()->user->blogs;
-            $tuMsg = "success";
-        } catch (Exception $e) {
-            $tuMsg = "error";
-        }
-
-
         $fbPages = FacebookPages::all();
         $fbGroups = facebookGroups::all();
-        if(Data::get('liAccessToken') != ""){
+        if (Data::get('liAccessToken') != "") {
             $liCompanies = LinkedinController::companies()['values'];
-        }else{
+        } else {
             $liCompanies = "";
         }
-
 
         return view('write', compact(
             'l',
             'tuBlogName',
             'fbPages',
             'fbGroups',
-            'tuMsg',
             'liCompanies'
         ));
     }
@@ -71,7 +55,6 @@ class Write extends Controller
         $title = $re->title;
         $content = $re->data;
         $postId = $re->postId;
-
         $write = new Allpost();
         $write->title = $title;
         $write->content = $content;

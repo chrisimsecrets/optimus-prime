@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('img')->nullable();
             $table->string('type')->nullable();
             $table->string('status')->nullable();
+            $table->string('timezone')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

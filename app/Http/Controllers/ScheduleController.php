@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\OptSchedul;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,7 +19,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $data = OptSchedul::where('userId',Auth::user()->id)->get();
+        $data = OptSchedul::where('userId', Auth::user()->id)->get();
         return view('schedule', compact('data'));
     }
 
@@ -62,7 +64,7 @@ class ScheduleController extends Controller
             $schedule->description = $description;
             $schedule->content = $status;
             $schedule->postId = $postId;
-            $schedule->$time = $time;
+            $schedule->time = $time;
             $schedule->fb = $fb;
             $schedule->tw = $tw;
             $schedule->tu = $tu;
@@ -104,21 +106,64 @@ class ScheduleController extends Controller
      * @param Request $re
      * @return string
      */
-    public function sedit(Request $re){
+    public function sedit(Request $re)
+    {
         $id = $re->id;
         $title = $re->title;
         $content = $re->data;
         $type = $re->type;
-        try{
-            OptSchedul::where('id',$id)->update(['title'=>$title,'content'=>$content,'type'=>$type]);
+        try {
+            OptSchedul::where('id', $id)->update(['title' => $title, 'content' => $content, 'type' => $type]);
             return "success";
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function scheduleDay(){
-        return view('scheduleDay');
+    public function scheduleDay()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek()->format('Y-m-d');
+        $endOfWeek = Carbon::now()->endOfWeek()->format('Y-m-d');
+        $datas = OptSchedul::where('content', 'LIKE', '%');
+        $datas->whereBetween('time', array(new DateTime($startOfWeek), new DateTime($endOfWeek)));
+        $data = $datas->get();
+        return view('scheduleDay', compact('data'));
+    }
+
+    public function filter(Request $request)
+    {
+        $datas = OptSchedul::where('content', 'LIKE', '%');
+        $datas->whereBetween('time', array(new DateTime($request->from), new DateTime($request->to)));
+
+        $data = $datas->get();
+        return view('scheduleDay', compact('data'));
+    }
+
+    public function filterThisWeek()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek()->format('Y-m-d');
+        $endOfWeek = Carbon::now()->endOfWeek()->format('Y-m-d');
+        $datas = OptSchedul::where('content', 'LIKE', '%');
+        $datas->whereBetween('time', array(new DateTime($startOfWeek), new DateTime($endOfWeek)));
+        $data = $datas->get();
+        return view('scheduleDay', compact('data'));
+    }
+
+    public function filterThisMonth()
+    {
+        $startOfMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $endOfMonth = Carbon::now()->endOfMonth()->format('Y-m-d');
+        $datas = OptSchedul::where('content', 'LIKE', '%');
+        $datas->whereBetween('time', array(new DateTime($startOfMonth), new DateTime($endOfMonth)));
+        $data = $datas->get();
+        return view('scheduleDay', compact('data'));
+    }
+
+    public function allDays()
+    {
+        $data = OptSchedul::all();
+        return view('scheduleDay', compact('data'));
+
     }
 }

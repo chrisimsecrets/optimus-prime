@@ -48,7 +48,7 @@
 
                 <ul class="treeview-menu" style="display: none">
 
-                    <li><a href="{{ url('/schedule') }}"><i class="fa fa-list-ul"></i>
+                    <li><a href="{{ url('/schedule/day') }}"><i class="fa fa-list-ul"></i>
                             <span>Posts</span></a></li>
 
 

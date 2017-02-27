@@ -6,111 +6,480 @@
         @include('components.navigation')
         @include('components.sidebar')
 
-        <div id="settingspage"></div>
 
         <div class="content-wrapper">
             <section class="content">
+                <div class="row">
+                    <div class="box box-primary" style="padding:20px">
+                        <form action="{{url('/schedule/filter')}}" method="post">
+                            From
+                            <input @if(isset($_POST['from'])) value="{{$_POST['from']}}" @endif type="date" name="from">
+                            To
+                            <input @if(isset($_POST['to'])) value="{{$_POST['to']}}" @endif type="date" name="to">
+
+
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> Filter</button>
+                            <div class="btn-group">
+                                <a href="{{url('/schedule/filter/week')}}" class="btn btn-success"><i
+                                            class="fa fa-filter"></i> This week</a>
+                                <a href="{{url('/schedule/filter/month')}}" class="btn btn-warning"><i
+                                            class="fa fa-filter"></i> This month</a>
+                                <a href="{{url('/schedule/filter/all')}}" class="btn btn-default"><i
+                                            class="fa fa-list"></i> All</a>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
                 <div class="row daysbox">
                     <div class="dayBox">
                         <div class="dayHead">
                             Monday
                         </div>
 
+                        @foreach($data as $d)
+                            @if(\Carbon\Carbon::parse($d->time)->format('l') == "Monday")
+                                <div class="row">
+                                    <div class="sContainer colorFb">
+                                        <span class="sTime">{{$d->time}}</span>
+                                        @if($d->image != "")
+                                            <img src="{{url('/uploads')}}/{{$d->image}}">
+                                        @else
+                                            <br>
+                                        @endif
+                                        <h4>
+                                            @if($d->fb == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->fbg == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->tw == "yes")
+                                                <i class="fa fa-twitter"></i>
+                                            @elseif($d->tu == "yes")
+                                                <i class="fa fa-tumblr"></i>
+                                            @elseif($d->wp == "yes")
+                                                <i class="fa fa-wordpress"></i>
+                                            @elseif($d->instagram == "yes")
+                                                <i class="fa fa-instagram"></i>
+                                            @else
+                                                <i class="fa fa-times"></i>
+                                            @endif
 
+                                            {{$d->title}}</h4>
+                                        <p>
+                                            {{$d->content}}
+                                        </p>
+                                        @if($d->published == "yes")
+                                            <button type="button" class="btn btn-block btn-xs bg-olive">Published
+                                            </button>
+                                        @else
+                                            <button data-id="{{$d->id}}" type="button"
+                                                    class="btn btn-block btn-warning btn-xs scheduled">
+                                                Scheduled
+                                            </button>
+                                            <div id="{{$d->id}}" style="display:none;" align="center">
+                                                <hr>
+                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <hr>
+                                                <div class="btn-group">
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn btnSave  btn-primary btn-xs">Save
+                                                    </button>
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn  btn-danger btn-xs">Close
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="dayBox">
                         <div class="dayHead">
                             Tuesday
                         </div>
+                        @foreach($data as $d)
+                            @if(\Carbon\Carbon::parse($d->time)->format('l') == "Tuesday")
+                                <div class="row">
+                                    <div class="sContainer colorFb">
+                                        <span class="sTime">{{$d->time}}</span>
+                                        @if($d->image != "")
+                                            <img src="{{url('/uploads')}}/{{$d->image}}">
+                                        @else
+                                            <br>
+                                        @endif
+                                        <h4>
+                                            @if($d->fb == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->fbg == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->tw == "yes")
+                                                <i class="fa fa-twitter"></i>
+                                            @elseif($d->tu == "yes")
+                                                <i class="fa fa-tumblr"></i>
+                                            @elseif($d->wp == "yes")
+                                                <i class="fa fa-wordpress"></i>
+                                            @elseif($d->instagram == "yes")
+                                                <i class="fa fa-instagram"></i>
+                                            @else
+                                                <i class="fa fa-times"></i>
+                                            @endif
+
+                                            {{$d->title}}</h4>
+                                        <p>
+                                            {{$d->content}}
+                                        </p>
+                                        @if($d->published == "yes")
+                                            <button type="button" class="btn btn-block btn-xs bg-olive">Published
+                                            </button>
+                                        @else
+                                            <button data-id="{{$d->id}}" type="button"
+                                                    class="btn btn-block btn-warning btn-xs scheduled">
+                                                Scheduled
+                                            </button>
+                                            <div id="{{$d->id}}" style="display:none;" align="center">
+                                                <hr>
+                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <hr>
+                                                <div class="btn-group">
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn btnSave  btn-primary btn-xs">Save
+                                                    </button>
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn  btn-danger btn-xs">Close
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="dayBox">
                         <div class="dayHead">
                             Wednesday
                         </div>
+
+                        @foreach($data as $d)
+                            @if(\Carbon\Carbon::parse($d->time)->format('l') == "Wednesday")
+                                <div class="row">
+                                    <div class="sContainer colorFb">
+                                        <span class="sTime">{{$d->time}}</span>
+                                        @if($d->image != "")
+                                            <img src="{{url('/uploads')}}/{{$d->image}}">
+                                        @else
+                                            <br>
+                                        @endif
+                                        <h4>
+                                            @if($d->fb == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->fbg == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->tw == "yes")
+                                                <i class="fa fa-twitter"></i>
+                                            @elseif($d->tu == "yes")
+                                                <i class="fa fa-tumblr"></i>
+                                            @elseif($d->wp == "yes")
+                                                <i class="fa fa-wordpress"></i>
+                                            @elseif($d->instagram == "yes")
+                                                <i class="fa fa-instagram"></i>
+                                            @else
+                                                <i class="fa fa-times"></i>
+                                            @endif
+
+                                            {{$d->title}}</h4>
+                                        <p>
+                                            {{$d->content}}
+                                        </p>
+                                        @if($d->published == "yes")
+                                            <button type="button" class="btn btn-block btn-xs bg-olive">Published
+                                            </button>
+                                        @else
+                                            <button data-id="{{$d->id}}" type="button"
+                                                    class="btn btn-block btn-warning btn-xs scheduled">
+                                                Scheduled
+                                            </button>
+                                            <div id="{{$d->id}}" style="display:none;" align="center">
+                                                <hr>
+                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <hr>
+                                                <div class="btn-group">
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn btnSave  btn-primary btn-xs">Save
+                                                    </button>
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn  btn-danger btn-xs">Close
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="dayBox">
                         <div class="dayHead">
                             Thursday
                         </div>
+
+                        @foreach($data as $d)
+                            @if(\Carbon\Carbon::parse($d->time)->format('l') == "Thursday")
+                                <div class="row">
+                                    <div class="sContainer colorFb">
+                                        <span class="sTime">{{$d->time}}</span>
+                                        @if($d->image != "")
+                                            <img src="{{url('/uploads')}}/{{$d->image}}">
+                                        @else
+                                            <br>
+                                        @endif
+                                        <h4>
+                                            @if($d->fb == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->fbg == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->tw == "yes")
+                                                <i class="fa fa-twitter"></i>
+                                            @elseif($d->tu == "yes")
+                                                <i class="fa fa-tumblr"></i>
+                                            @elseif($d->wp == "yes")
+                                                <i class="fa fa-wordpress"></i>
+                                            @elseif($d->instagram == "yes")
+                                                <i class="fa fa-instagram"></i>
+                                            @else
+                                                <i class="fa fa-times"></i>
+                                            @endif
+
+                                            {{$d->title}}</h4>
+                                        <p>
+                                            {{$d->content}}
+                                        </p>
+                                        @if($d->published == "yes")
+                                            <button type="button" class="btn btn-block btn-xs bg-olive">Published
+                                            </button>
+                                        @else
+                                            <button data-id="{{$d->id}}" type="button"
+                                                    class="btn btn-block btn-warning btn-xs scheduled">
+                                                Scheduled
+                                            </button>
+                                            <div id="{{$d->id}}" style="display:none;" align="center">
+                                                <hr>
+                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <hr>
+                                                <div class="btn-group">
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn btnSave  btn-primary btn-xs">Save
+                                                    </button>
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn  btn-danger btn-xs">Close
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="dayBox">
                         <div class="dayHead">
                             Friday
                         </div>
-                        <div class="row">
-                            <div class="sContainer colorFb">
-                                <span class="sTime">2017-01-11 12:30</span>
-                                <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-0/p480x480/16684388_1453736817978720_1889951800592650817_n.png?oh=4645b6b4c051d7a56180b0a9c002afeb&oe=59393FEB">
-                                <h4><i class="fa fa-facebook-official"></i> Some Title</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet.
-                                </p>
-                                <button data-id="2" type="button" class="btn btn-block btn-warning btn-xs">Scheduled
-                                </button>
-                                <div id="2" style="display:;"  align="center">
-                                    <hr>
-                                    <input type="text" id="time">
-                                    <hr>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn  btn-primary btn-xs">Save</button>
-                                        <button type="button" class="btn  btn-danger btn-xs">Close</button>
-                                    </div>
+                        @foreach($data as $d)
+                            @if(\Carbon\Carbon::parse($d->time)->format('l') == "Friday")
+                                <div class="row">
+                                    <div class="sContainer colorFb">
+                                        <span class="sTime">{{$d->time}}</span>
+                                        @if($d->image != "")
+                                            <img src="{{url('/uploads')}}/{{$d->image}}">
+                                        @else
+                                            <br>
+                                        @endif
+                                        <h4>
+                                            @if($d->fb == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->fbg == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->tw == "yes")
+                                                <i class="fa fa-twitter"></i>
+                                            @elseif($d->tu == "yes")
+                                                <i class="fa fa-tumblr"></i>
+                                            @elseif($d->wp == "yes")
+                                                <i class="fa fa-wordpress"></i>
+                                            @elseif($d->instagram == "yes")
+                                                <i class="fa fa-instagram"></i>
+                                            @else
+                                                <i class="fa fa-times"></i>
+                                            @endif
 
+                                            {{$d->title}}</h4>
+                                        <p>
+                                            {{$d->content}}
+                                        </p>
+                                        @if($d->published == "yes")
+                                            <button type="button" class="btn btn-block btn-xs bg-olive">Published
+                                            </button>
+                                        @else
+                                            <button data-id="{{$d->id}}" type="button"
+                                                    class="btn btn-block btn-warning btn-xs scheduled">
+                                                Scheduled
+                                            </button>
+                                            <div id="{{$d->id}}" style="display:none;" align="center">
+                                                <hr>
+                                                <input type="datetime-local" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <hr>
+                                                <div class="btn-group">
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn btnSave  btn-primary btn-xs">Save
+                                                    </button>
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn  btn-danger btn-xs">Close
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="dayBox">
                         <div class="dayHead">
                             Saturday
                         </div>
-                        <br>
+                        @foreach($data as $d)
+                            @if(\Carbon\Carbon::parse($d->time)->format('l') == "Saturday")
+                                <div class="row">
+                                    <div class="sContainer colorFb">
+                                        <span class="sTime">{{$d->time}}</span>
+                                        @if($d->image != "")
+                                            <img src="{{url('/uploads')}}/{{$d->image}}">
+                                        @else
+                                            <br>
+                                        @endif
+                                        <h4>
+                                            @if($d->fb == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->fbg == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->tw == "yes")
+                                                <i class="fa fa-twitter"></i>
+                                            @elseif($d->tu == "yes")
+                                                <i class="fa fa-tumblr"></i>
+                                            @elseif($d->wp == "yes")
+                                                <i class="fa fa-wordpress"></i>
+                                            @elseif($d->instagram == "yes")
+                                                <i class="fa fa-instagram"></i>
+                                            @else
+                                                <i class="fa fa-times"></i>
+                                            @endif
+
+                                            {{$d->title}}</h4>
+                                        <p>
+                                            {{$d->content}}
+                                        </p>
+                                        @if($d->published == "yes")
+                                            <button type="button" class="btn btn-block btn-xs bg-olive">Published
+                                            </button>
+                                        @else
+                                            <button data-id="{{$d->id}}" type="button"
+                                                    class="btn btn-block btn-warning btn-xs scheduled">
+                                                Scheduled
+                                            </button>
+                                            <div id="{{$d->id}}" style="display:none;" align="center">
+                                                <hr>
+                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <hr>
+                                                <div class="btn-group">
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn btnSave  btn-primary btn-xs">Save
+                                                    </button>
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn  btn-danger btn-xs">Close
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="dayBoxLast">
                         <div class="dayHead">
                             Sunday
 
                         </div>
-                        <div class="row">
-                            <div class="sContainer colorTw">
-                                <span class="sTime">2017-01-19 12:30</span>
-                                <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-0/p480x480/16684388_1453736817978720_1889951800592650817_n.png?oh=4645b6b4c051d7a56180b0a9c002afeb&oe=59393FEB">
-                                <h4><i class="fa fa-twitter"></i> Some Title</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet.
-                                </p>
-                                <button type="button" class="btn btn-block btn-xs bg-olive">Published</button>
+                        @foreach($data as $d)
+                            @if(\Carbon\Carbon::parse($d->time)->format('l') == "Sunday")
+                                <div class="row">
+                                    <div class="sContainer colorFb">
+                                        <span class="sTime">{{$d->time}}</span>
+                                        @if($d->image != "")
+                                            <img src="{{url('/uploads')}}/{{$d->image}}">
 
-                            </div>
-                        </div>
+                                        @else
+                                            <br>
+                                        @endif
 
-                        <div class="row">
-                            <div class="sContainer colorTw">
-                                <span class="sTime">2017-01-15 3:30</span>
-                                <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-0/p480x480/16684388_1453736817978720_1889951800592650817_n.png?oh=4645b6b4c051d7a56180b0a9c002afeb&oe=59393FEB">
-                                <h4><i class="fa fa-twitter"></i> Some Title</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet.
-                                </p>
-                                <button type="button" class="btn btn-block btn-xs bg-olive">Published</button>
+                                        <h4>
+                                            @if($d->fb == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->fbg == "yes")
+                                                <i class="fa fa-facebook-official"></i>
+                                            @elseif($d->tw == "yes")
+                                                <i class="fa fa-twitter"></i>
+                                            @elseif($d->tu == "yes")
+                                                <i class="fa fa-tumblr"></i>
+                                            @elseif($d->wp == "yes")
+                                                <i class="fa fa-wordpress"></i>
+                                            @elseif($d->instagram == "yes")
+                                                <i class="fa fa-instagram"></i>
+                                            @else
+                                                <i class="fa fa-times"></i>
+                                            @endif
 
-                            </div>
-                        </div>
+                                            {{$d->title}}</h4>
+                                        <p>
+                                            {{$d->content}}
+                                        </p>
+                                        @if($d->published == "yes")
+                                            <button type="button" class="btn btn-block btn-xs bg-olive">Published
+                                            </button>
+                                        @else
+                                            <button data-id="{{$d->id}}" type="button"
+                                                    class="btn btn-block btn-warning btn-xs scheduled">
+                                                Scheduled
+                                            </button>
+                                            <div id="{{$d->id}}" style="display:none;" align="center">
+                                                <hr>
+                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <hr>
+                                                <div class="btn-group">
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn btnSave  btn-primary btn-xs">Save
+                                                    </button>
+                                                    <button data-id="{{$d->id}}" type="button"
+                                                            class="btn  btn-danger btn-xs">Close
+                                                    </button>
+                                                </div>
 
-
-                        <div class="row">
-                            <div class="sContainer colorTw">
-                                <span class="sTime">2017-01-11 01:30</span>
-                                <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-0/p480x480/16684388_1453736817978720_1889951800592650817_n.png?oh=4645b6b4c051d7a56180b0a9c002afeb&oe=59393FEB">
-                                <h4><i class="fa fa-twitter"></i> Some Title</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet.
-                                </p>
-                                <button type="button" class="btn btn-block btn-xs bg-olive">Published</button>
-
-                            </div>
-                        </div>
-
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
 
 
                     </div>
@@ -219,16 +588,55 @@
 
 @section('js')
     <script>
+        var s = $("#time").val();
+        var startDate = new Date(s.replace(/-/g,'/').replace('T',' '));
+
+
         flatpickr("#time", {
             minDate: new Date(), // "today" / "2016-12-20" / 1477673788975
             maxDate: "2017-12-20",
             enableTime: true,
-
+            wrap: true,
             // create an extra input solely for display purposes
             altInput: true,
             altFormat: "F j, Y h:i K",
             time_24hr: false
         });
+        $('.scheduled').click(function () {
+            var id = $(this).attr('data-id');
+            $('#' + id).toggle(200);
+        });
+
+        $('.btn-danger').click(function () {
+            var id = $(this).attr('data-id');
+            $('#' + id).toggle(200);
+        });
+
+        $('.btnSave').click(function () {
+            var id = $(this).attr('data-id');
+            var sTime = $('.time_'+id).val();
+            return alert(sTime);
+            $.ajax({
+                url: '{{url('/schedule/time/update')}}',
+                type: 'POST',
+                data: {
+                    'id': id,
+                    'time': sTime
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        swal("Success", 'Time updated', 'success');
+                    } else {
+                        swal('Error!', data, 'error');
+                    }
+                },
+                error: function (data) {
+                    swal("Error", "Something went wrong check the console message", 'error');
+                    console.log(data.responseText);
+
+                }
+            });
+        })
 
     </script>
 @endsection

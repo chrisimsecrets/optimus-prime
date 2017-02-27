@@ -185,7 +185,7 @@
                                  style="padding-left: 10px" class="form-group">
                                 <div class="btn-group btn-group-xs" data-toggle="buttons">
 
-                                    @if(!empty(\App\Http\Controllers\Data::get('fbAppToken')))
+                                    @if(!empty(\App\Http\Controllers\Data::get('fbAppId')))
                                         <label class="btn btn-primary bg-blue">
                                             <input id="fbCheck" type="checkbox" autocomplete="off"><i
                                                     class="fa fa-facebook"></i>
@@ -284,15 +284,13 @@
                                     <fieldset class="scheduler-border">
                                         Select Tumblr Blog
 
-                                        @if($tuMsg == "error")
-                                            Can't load your Tublr Blogs
-                                        @else
+
                                             <select id="tuBlogName">
-                                                @foreach($tuBlogName as $blog)
-                                                    <option id="">{{$blog->name}}</option>
+                                                @foreach(\App\TuBlogs::where('userId',Auth::user()->id)->get() as $blog)
+                                                    <option id="">{{$blog->blogName}}</option>
                                                 @endforeach
                                             </select>
-                                        @endif
+
                                     </fieldset>
                                 </div>
                             </div>

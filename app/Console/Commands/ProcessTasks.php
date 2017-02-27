@@ -49,14 +49,22 @@ class ProcessTasks extends Command
     public function handle()
     {
         $tasks = OptSchedul::all();
-        
+
         foreach ($tasks as $task) {
             if ($this->carbon->parse($task->time)) {
-                $postTime = $this->carbon->parse($tasks[0]->time);
-                $currentTime = $this->carbon->now();
-                
-                if ($postTime->lt($currentTime)) {
-                    // task will run here
+                $postTime = $task->time;
+                $currentTime = $this->carbon->now()->format('Y-m-d H:i');
+
+                if ($currentTime == $postTime) {
+                    $log = new \App\Notify();
+                    $log->img = "#";
+                    $log->title = "Title here";
+                    $log->body = "Content here";
+                    $log->url = "http://google.com";
+                    $log->type = "message";
+                    $log->userId = "1";
+                    $log->time = Carbon::now();
+                    $log->save();
                 }
             }
         }

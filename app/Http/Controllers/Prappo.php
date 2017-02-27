@@ -10,6 +10,7 @@ use App\Tu;
 use App\User;
 use Carbon\Carbon;
 use DateTime;
+use DateTimeZone;
 use Facebook\Facebook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -282,9 +283,48 @@ class Prappo extends Controller
 
     public function test()
     {
+        /*
+         * Print date start
+         *
+         * */
 
-       $now = Carbon::parse('February 17, 2017 12:00 PM');
-       echo $now->format('l');
+        $now = Carbon::parse(Carbon::now()->format('Y-m-d H:i'));
+        echo $now->format('l');
+
+        /*
+         * Print date end
+         *
+         * */
+//            $carbon = new Carbon();
+////            $carbon->tz('Asia/Dhaka');
+//            $carbon->setTimezone('UTC');
+//
+//            echo $carbon->now()->format('Y-m-d H:i');
+        /*
+         * Timezone change start
+         *
+         * */
+
+//        $timestamp = Carbon::now()->format('Y-m-d H:i');
+//        $date = Carbon::createFromFormat('Y-m-d H:i', $timestamp, 'Asia/Dhaka');
+//        $date->setTimezone('UTC');
+//        echo $date;
+
+        /*
+         * Timezone end
+         *
+         * */
+
+        /*
+         * get the week range
+         *
+         * */
+//        echo "Start of the week ". Carbon::now()->startOfWeek()->format('Y-m-d');
+//        echo "<br>";
+//        echo "End of the week ". Carbon::now()->endOfWeek()->format('Y-m-d');
+
+
+
     }
 
     public static function comment($id, $text)
@@ -325,7 +365,9 @@ class Prappo extends Controller
         }
 
     }
-    public static function convertTime($time){
+
+    public static function convertTime($time)
+    {
         $date = new DateTime();
         $date->setTimestamp($time);
         return $date->format('U = Y-m-d H:i:s');

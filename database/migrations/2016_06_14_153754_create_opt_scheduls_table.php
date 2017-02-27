@@ -36,6 +36,7 @@ class CreateOptSchedulsTable extends Migration
             $table->string('imagetype')->nullable();
             $table->string('sharetype')->nullable();
             $table->string('userId')->nullable();
+            $table->string('published')->nullable();
             $table->timestamps();
         });
     }

@@ -106,6 +106,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/scheduleslog', 'OptLogs@index');
 
         Route::get('/schedule/day','ScheduleController@scheduleDay');
+        Route::post('/schedule/filter','ScheduleController@filter');
+        Route::get('/schedule/filter/week','ScheduleController@filterThisWeek');
+        Route::get('/schedule/filter/month','ScheduleController@filterThisMonth');
+        Route::get('/schedule/filter/all','ScheduleController@allDays');
 
         Route::post('/logdel', 'OptLogs@logDel');
         Route::post('/alllogdel', 'OptLogs@delAll');
