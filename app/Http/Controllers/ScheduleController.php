@@ -133,11 +133,16 @@ class ScheduleController extends Controller
 
     public function filter(Request $request)
     {
+        $days =  $this->getDatesFromRange($request->from,$request->to);
+//        foreach ($days as $day){
+//            echo Carbon::parse($day)->format('jS F ') . "<br>";
+//        }
+//
+//        exit;
         $datas = OptSchedul::where('content', 'LIKE', '%');
         $datas->whereBetween('time', array(new DateTime($request->from), new DateTime($request->to)));
-
         $data = $datas->get();
-        return view('scheduleDay', compact('data'));
+        return view('scheduleFilter', compact('data','days'));
     }
 
     public function filterThisWeek()
@@ -165,5 +170,27 @@ class ScheduleController extends Controller
         $data = OptSchedul::all();
         return view('scheduleDay', compact('data'));
 
+    }
+
+    public function getDatesFromRange($date_time_from, $date_time_to)
+    {
+
+        // cut hours, because not getting last day when hours of time to is less than hours of time_from
+        // see while loop
+        $start = Carbon::createFromFormat('Y-m-d', substr($date_time_from, 0, 10));
+        $end = Carbon::createFromFormat('Y-m-d', substr($date_time_to, 0, 10));
+
+
+        $dates = [];
+
+        while ($start->lte($end)) {
+
+            $dates[] = $start->copy()->format('Y-m-d');
+//            $dates[] = $start->copy()->format('l jS \\of F Y h:i:s A');
+
+            $start->addDay();
+        }
+
+        return $dates;
     }
 }
