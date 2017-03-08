@@ -110,6 +110,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/schedule/filter/week','ScheduleController@filterThisWeek');
         Route::get('/schedule/filter/month','ScheduleController@filterThisMonth');
         Route::get('/schedule/filter/all','ScheduleController@allDays');
+        Route::post('/schedule/time/update','ScheduleController@timeUpdate');
 
         Route::post('/logdel', 'OptLogs@logDel');
         Route::post('/alllogdel', 'OptLogs@delAll');

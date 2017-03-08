@@ -79,6 +79,7 @@ class ScheduleController extends Controller
             $schedule->imagetype = $imagetype;
             $schedule->sharetype = $sharetype;
             $schedule->userId = Auth::user()->id;
+            $schedule->date = Carbon::parse($time)->format('Y-m-d');
             $schedule->save();
             echo "success";
         } catch (\Exception $e) {
@@ -133,36 +134,51 @@ class ScheduleController extends Controller
 
     public function filter(Request $request)
     {
-        $days =  $this->getDatesFromRange($request->from,$request->to);
+
+//        $days =  $this->getDatesFromRange($request->from,$request->to);
+        $data = $this->getDatesFromRange($request->from, $request->to);
+//        foreach (array_chunk($data,7) as $d){
+////            print_r($d);
+//            foreach($d as $a){
+//                print_r($a);
+//            }
+//        }
+
+//        exit;
+//        print_r($data);
+//        exit;
 //        foreach ($days as $day){
 //            echo Carbon::parse($day)->format('jS F ') . "<br>";
 //        }
 //
 //        exit;
-        $datas = OptSchedul::where('content', 'LIKE', '%');
-        $datas->whereBetween('time', array(new DateTime($request->from), new DateTime($request->to)));
-        $data = $datas->get();
-        return view('scheduleFilter', compact('data','days'));
+//        $datas = OptSchedul::where('content', 'LIKE', '%');
+//        $data = $datas->whereBetween('time', array(new DateTime($request->from), new DateTime($request->to)))->orderBy('time','asc')->where('userId',Auth::user()->id)->groupby('date')->get();
+
+
+//        foreach ($data as $d){
+//            echo $d->time . "<br>";
+//        }
+//        exit;
+        return view('scheduleFilter', compact('data', 'days'));
     }
 
     public function filterThisWeek()
     {
         $startOfWeek = Carbon::now()->startOfWeek()->format('Y-m-d');
         $endOfWeek = Carbon::now()->endOfWeek()->format('Y-m-d');
-        $datas = OptSchedul::where('content', 'LIKE', '%');
-        $datas->whereBetween('time', array(new DateTime($startOfWeek), new DateTime($endOfWeek)));
-        $data = $datas->get();
-        return view('scheduleDay', compact('data'));
+
+        $data = $this->getDatesFromRange($startOfWeek, $endOfWeek);
+        return view('scheduleFilter', compact('data'));
     }
 
     public function filterThisMonth()
     {
         $startOfMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
         $endOfMonth = Carbon::now()->endOfMonth()->format('Y-m-d');
-        $datas = OptSchedul::where('content', 'LIKE', '%');
-        $datas->whereBetween('time', array(new DateTime($startOfMonth), new DateTime($endOfMonth)));
-        $data = $datas->get();
-        return view('scheduleDay', compact('data'));
+
+        $data = $this->getDatesFromRange($startOfMonth, $endOfMonth);
+        return view('scheduleFilter', compact('data'));
     }
 
     public function allDays()
@@ -192,5 +208,19 @@ class ScheduleController extends Controller
         }
 
         return $dates;
+    }
+
+    public function timeUpdate(Request $request)
+    {
+        try {
+            OptSchedul::where('id', $request->id)->update([
+                'time' => Carbon::parse($request->time)->format('Y-m-d H:i'),
+                'date' => Carbon::parse($request->time)->format('Y-m-d')
+
+            ]);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 }

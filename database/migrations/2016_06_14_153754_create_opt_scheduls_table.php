@@ -29,6 +29,7 @@ class CreateOptSchedulsTable extends Migration
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('time')->nullable();
+            $table->string('date')->nullable();
             $table->string('pageId')->nullable();
             $table->string('pageToken')->nullable();
             $table->string('groupId')->nullable();

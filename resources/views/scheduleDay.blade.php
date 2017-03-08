@@ -80,7 +80,7 @@
                                             </button>
                                             <div id="{{$d->id}}" style="display:none;" align="center">
                                                 <hr>
-                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}} tt" id="time">
                                                 <hr>
                                                 <div class="btn-group">
                                                     <button data-id="{{$d->id}}" type="button"
@@ -143,7 +143,7 @@
                                             </button>
                                             <div id="{{$d->id}}" style="display:none;" align="center">
                                                 <hr>
-                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <input type="datetime-local" value="{{\Carbon\Carbon::parse($d->time)->format("Y-m-d\TH:i:s")}}" class="time_{{$d->id}}" id="time">
                                                 <hr>
                                                 <div class="btn-group">
                                                     <button data-id="{{$d->id}}" type="button"
@@ -207,7 +207,7 @@
                                             </button>
                                             <div id="{{$d->id}}" style="display:none;" align="center">
                                                 <hr>
-                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <input type="datetime-local" value="{{\Carbon\Carbon::parse($d->time)->format("Y-m-d\TH:i:s")}}" class="time_{{$d->id}}" id="time">
                                                 <hr>
                                                 <div class="btn-group">
                                                     <button data-id="{{$d->id}}" type="button"
@@ -271,7 +271,7 @@
                                             </button>
                                             <div id="{{$d->id}}" style="display:none;" align="center">
                                                 <hr>
-                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <input type="datetime-local" value="{{\Carbon\Carbon::parse($d->time)->format("Y-m-d\TH:i:s")}}" class="time_{{$d->id}}" id="time">
                                                 <hr>
                                                 <div class="btn-group">
                                                     <button data-id="{{$d->id}}" type="button"
@@ -334,7 +334,7 @@
                                             </button>
                                             <div id="{{$d->id}}" style="display:none;" align="center">
                                                 <hr>
-                                                <input type="datetime-local" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <input type="datetime-local" value="{{\Carbon\Carbon::parse($d->time)->format("Y-m-d\TH:i:s")}}" class="time_{{$d->id}}" id="time">
                                                 <hr>
                                                 <div class="btn-group">
                                                     <button data-id="{{$d->id}}" type="button"
@@ -397,7 +397,7 @@
                                             </button>
                                             <div id="{{$d->id}}" style="display:none;" align="center">
                                                 <hr>
-                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <input type="datetime-local" value="{{\Carbon\Carbon::parse($d->time)->format("Y-m-d\TH:i:s")}}" class="time_{{$d->id}}" id="time">
                                                 <hr>
                                                 <div class="btn-group">
                                                     <button data-id="{{$d->id}}" type="button"
@@ -463,7 +463,7 @@
                                             </button>
                                             <div id="{{$d->id}}" style="display:none;" align="center">
                                                 <hr>
-                                                <input type="text" value="{{$d->time}}" class="time_{{$d->id}}" id="time">
+                                                <input type="datetime-local" value="{{\Carbon\Carbon::parse($d->time)->format("Y-m-d\TH:i:s")}}" class="time_{{$d->id}}" id="time">
                                                 <hr>
                                                 <div class="btn-group">
                                                     <button data-id="{{$d->id}}" type="button"
@@ -592,7 +592,7 @@
         var startDate = new Date(s.replace(/-/g,'/').replace('T',' '));
 
 
-        flatpickr("#time", {
+        flatpickr(".tt", {
             minDate: new Date(), // "today" / "2016-12-20" / 1477673788975
             maxDate: "2017-12-20",
             enableTime: true,
@@ -615,7 +615,7 @@
         $('.btnSave').click(function () {
             var id = $(this).attr('data-id');
             var sTime = $('.time_'+id).val();
-            return alert(sTime);
+//            return alert("ID" + id + " and time " +sTime);
             $.ajax({
                 url: '{{url('/schedule/time/update')}}',
                 type: 'POST',

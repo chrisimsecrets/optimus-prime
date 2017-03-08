@@ -304,7 +304,8 @@ class FacebookController extends Controller
 
 
         try {
-            $response = $fb->get("me/accounts?fields=insights,picture,name,fan_count,cover", Data::get('fbAppToken'));
+//            $response = $fb->get("me/accounts?fields=insights,picture,name,fan_count,cover", Data::get('fbAppToken'));
+            $response = $fb->get("273763529635798?fields=insights,picture,name,fan_count,cover", Data::get('fbAppToken'));
             $body = $response->getBody();
             $data = json_decode($body, true);
 
@@ -315,6 +316,13 @@ class FacebookController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
         }
+
+//        foreach($data['insights']['data'] as $d){
+//            echo $d['name'] . "<br>";
+//        }
+
+        print_r($data);
+        exit;
 
         return view('facebookreport', compact('data', 'countryData', 'cityData'));
 
