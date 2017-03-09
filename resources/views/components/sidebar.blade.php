@@ -119,7 +119,7 @@
                         <li><a href="{{ url('/facebook') }}"><i class="fa fa-file"></i> Facebook Pages</a></li>
                         <li><a href="{{ url('/fbgroups') }}"><i class="fa fa-users"></i> Facebook Groups</a></li>
                         <li><a href="{{ url('/conversations') }}"><i class="fa fa-comments"></i> Conversations</a></li>
-                        {{--<li><a href="{{ url('/fbreport') }}"><i class="fa fa-pie-chart"></i> Facebook Report</a></li>--}}
+                        <li><a href="{{ url('/fbreport') }}"><i class="fa fa-pie-chart"></i> Facebook Report</a></li>
                         <li><a href="{{ url('/fbmassgrouppost') }}"><i class="fa fa-bolt"></i> Facebook Mass Group Post</a>
                         </li>
                         <li><a href="{{ url('/facebook/masscomment') }}"><i class="fa fa-comment"></i> Facebook Mass

@@ -27,7 +27,9 @@ class ProfileController extends Controller
         if($newPass == ""){
             User::where('email',Auth::user()->email)->update([
                 'email'=>$email,
-                'name'=>$name
+                'name'=>$name,
+                'timezone' => $re->timezone,
+                'timeFormat' => $re->timeFormat
             ]) ;
 
             return "success";
@@ -41,7 +43,9 @@ class ProfileController extends Controller
                     User::where('email',Auth::user()->email)->update([
                         'email'=>$email,
                         'name'=>$name,
-                        'password'=>bcrypt($newPass)
+                        'password'=>bcrypt($newPass),
+                        'timezone' => $re->timezone,
+                        'timeFormat' => $re->timeFormat
                     ]);
                     return "success";
                 }

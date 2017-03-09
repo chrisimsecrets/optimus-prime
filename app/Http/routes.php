@@ -119,6 +119,7 @@ Route::group(['middleware' => 'web'], function () {
 
         // Report specific routes
         Route::get('/fbreport', 'FacebookController@fbReport');
+        Route::get('/fbreport/{pageId}', 'FacebookController@fbReportSingle');
 
         Route::get('/fbgroups', 'FacebookController@fbGroupIndex');
         Route::get('/tusync', 'Settings@tuSync');

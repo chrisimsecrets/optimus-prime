@@ -285,11 +285,11 @@
                                         Select Tumblr Blog
 
 
-                                            <select id="tuBlogName">
-                                                @foreach(\App\TuBlogs::where('userId',Auth::user()->id)->get() as $blog)
-                                                    <option id="">{{$blog->blogName}}</option>
-                                                @endforeach
-                                            </select>
+                                        <select id="tuBlogName">
+                                            @foreach(\App\TuBlogs::where('userId',Auth::user()->id)->get() as $blog)
+                                                <option id="">{{$blog->blogName}}</option>
+                                            @endforeach
+                                        </select>
 
                                     </fieldset>
                                 </div>
@@ -355,31 +355,31 @@
                                 </button>
 
                                 <button data-step="11" data-intro="Click here to schedule your post" id="addschedule"
-                                class="btn btn-default"><i class="fa fa-calendar"></i> Add
-                                to
-                                schedule
+                                        class="btn btn-default"><i class="fa fa-calendar"></i> Add
+                                    to
+                                    schedule
                                 </button>
                             </div>
                             <div id="ss" style="display: none;" class="form-group">
                                 <div style="padding-left: 10px">
                                     {{--<select class="form-control" id="type">--}}
-                                        {{--<option value="everyMinute">Every Minute</option>--}}
-                                        {{--<option value="everyFiveMinutes">Every Five Minutes</option>--}}
-                                        {{--<option value="everyTenMinutes">Every Ten Minutes</option>--}}
-                                        {{--<option value="everyThirtyMinutes">Every Thirty Minutes</option>--}}
-                                        {{--<option value="hourly">Hourly</option>--}}
-                                        {{--<option value="daily">Daily</option>--}}
-                                        {{--<option value="weekly">Weekly</option>--}}
-                                        {{--<option value="monthly">Monthly</option>--}}
-                                        {{--<option value="quarterly">Quarterly</option>--}}
-                                        {{--<option value="yearly">Yearly</option>--}}
-                                        {{--<option value="fridays">Fridays</option>--}}
-                                        {{--<option value="saturdays">Saturdays</option>--}}
-                                        {{--<option value="sundays">Sundays</option>--}}
-                                        {{--<option value="mondays">Mondays</option>--}}
-                                        {{--<option value="tuesdays">Tuesdays</option>--}}
-                                        {{--<option value="wednesdays">Wednesdays</option>--}}
-                                        {{--<option value="thursdays">Thursdays</option>--}}
+                                    {{--<option value="everyMinute">Every Minute</option>--}}
+                                    {{--<option value="everyFiveMinutes">Every Five Minutes</option>--}}
+                                    {{--<option value="everyTenMinutes">Every Ten Minutes</option>--}}
+                                    {{--<option value="everyThirtyMinutes">Every Thirty Minutes</option>--}}
+                                    {{--<option value="hourly">Hourly</option>--}}
+                                    {{--<option value="daily">Daily</option>--}}
+                                    {{--<option value="weekly">Weekly</option>--}}
+                                    {{--<option value="monthly">Monthly</option>--}}
+                                    {{--<option value="quarterly">Quarterly</option>--}}
+                                    {{--<option value="yearly">Yearly</option>--}}
+                                    {{--<option value="fridays">Fridays</option>--}}
+                                    {{--<option value="saturdays">Saturdays</option>--}}
+                                    {{--<option value="sundays">Sundays</option>--}}
+                                    {{--<option value="mondays">Mondays</option>--}}
+                                    {{--<option value="tuesdays">Tuesdays</option>--}}
+                                    {{--<option value="wednesdays">Wednesdays</option>--}}
+                                    {{--<option value="thursdays">Thursdays</option>--}}
 
                                     {{--</select>--}}
                                     <input type="text" id="time">
@@ -511,7 +511,11 @@
                 // create an extra input solely for display purposes
                 altInput: true,
                 altFormat: "F j, Y h:i K",
-                time_24hr:false
+                @if(Auth::user()->timeFormat == 12)
+                time_24hr: false
+                @else
+                time_24hr: true
+                @endif
             });
 
             $('#caption').hide(200);

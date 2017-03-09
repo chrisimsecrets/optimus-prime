@@ -46,11 +46,16 @@
                                 <div class="form-group">
                                     <label for="timezone">Timezone</label>
                                     <select class="form-control" id="timezone" name="timezone">
+                                        @if(Auth::user()->timezone != "")
+                                            <option value="{{Auth::user()->timezone}}"
+                                                    selected="selected">{{Auth::user()->timezone}}</option>
+                                        @endif
                                         <option value="Pacific/Midway">(UTC-11:00) Midway Island</option>
                                         <option value="Pacific/Samoa">(UTC-11:00) Samoa</option>
                                         <option value="Pacific/Honolulu">(UTC-10:00) Hawaii</option>
                                         <option value="US/Alaska">(UTC-09:00) Alaska</option>
-                                        <option value="America/Los_Angeles">(UTC-08:00) Pacific Time (US &amp; Canada)</option>
+                                        <option value="America/Los_Angeles">(UTC-08:00) Pacific Time (US &amp; Canada)
+                                        </option>
                                         <option value="America/Tijuana">(UTC-08:00) Tijuana</option>
                                         <option value="US/Arizona">(UTC-07:00) Arizona</option>
                                         <option value="America/Chihuahua">(UTC-07:00) Chihuahua</option>
@@ -146,7 +151,7 @@
                                         <option value="Asia/Katmandu">(UTC+05:45) Kathmandu</option>
                                         <option value="Asia/Almaty">(UTC+06:00) Almaty</option>
                                         <option value="Asia/Dhaka">(UTC+06:00) Astana</option>
-                                        <option value="Asia/Dhaka" selected="selected">(UTC+06:00) Dhaka</option>
+                                        <option value="Asia/Dhaka">(UTC+06:00) Dhaka</option>
                                         <option value="Asia/Yekaterinburg">(UTC+06:00) Ekaterinburg</option>
                                         <option value="Asia/Rangoon">(UTC+06:30) Rangoon</option>
                                         <option value="Asia/Bangkok">(UTC+07:00) Bangkok</option>
@@ -181,7 +186,8 @@
                                         <option value="Asia/Vladivostok">(UTC+11:00) Vladivostok</option>
                                         <option value="Pacific/Auckland">(UTC+12:00) Auckland</option>
                                         <option value="Pacific/Fiji">(UTC+12:00) Fiji</option>
-                                        <option value="Pacific/Kwajalein">(UTC+12:00) International Date Line West</option>
+                                        <option value="Pacific/Kwajalein">(UTC+12:00) International Date Line West
+                                        </option>
                                         <option value="Asia/Kamchatka">(UTC+12:00) Kamchatka</option>
                                         <option value="Asia/Magadan">(UTC+12:00) Magadan</option>
                                         <option value="Pacific/Fiji">(UTC+12:00) Marshall Is.</option>
@@ -191,7 +197,13 @@
                                         <option value="Pacific/Tongatapu">(UTC+13:00) Nuku'alofa</option>
                                     </select>
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="timeFormat">Time Format</label>
+                                    <select class="form-control" id="timeFormat">
+                                        <option @if(Auth::user()->timeFormat == 12) selected="selected" @endif value="12">12 Hours</option>
+                                        <option @if(Auth::user()->timeFormat == 24) selected="selected" @endif value="24">24 Hours</option>
+                                    </select>
+                                </div>
                             </div><!-- /.box-body -->
 
                             <div class="box-footer">
@@ -213,30 +225,31 @@
     <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
 @endsection
 @section('js')
-<script>
-    $('#save').click(function () {
-        $.ajax({
-           type:'POST',
-            url:'{{url('/profile')}}',
-            data:{
-                'name':$('#name').val(),
-                'email':$('#email').val(),
-                'oldPass':$('#oldPass').val(),
-                'newPass':$('#newPass').val(),
-                'timezone':$('#timezone').val()
-            },
-            success:function (data) {
-                if(data=='success'){
-                    swal('Success','Profile updated','success');
+    <script>
+        $('#save').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '{{url('/profile')}}',
+                data: {
+                    'name': $('#name').val(),
+                    'email': $('#email').val(),
+                    'oldPass': $('#oldPass').val(),
+                    'newPass': $('#newPass').val(),
+                    'timezone': $('#timezone').val(),
+                    'timeFormat': $('#timeFormat').val()
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        swal('Success', 'Profile updated', 'success');
+                    }
+                    else {
+                        swal('Error', data, 'error');
+                    }
+                },
+                error: function (data) {
+                    swal('Error', data, 'error');
                 }
-                else{
-                    swal('Error',data,'error');
-                }
-            },
-            error:function (data) {
-                swal('Error',data,'error');
-            }
-        });
-    })
-</script>
+            });
+        })
+    </script>
 @endsection

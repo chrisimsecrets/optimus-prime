@@ -288,8 +288,8 @@ class Prappo extends Controller
          *
          * */
 
-        $now = Carbon::parse(Carbon::now()->format('Y-m-d H:i'));
-        echo $now->format('l');
+//        $now = Carbon::parse(Carbon::now()->format('Y-m-d H:i'));
+//        echo $now->format('l');
 
         /*
          * Print date end
@@ -323,7 +323,8 @@ class Prappo extends Controller
 //        echo "<br>";
 //        echo "End of the week ". Carbon::now()->endOfWeek()->format('Y-m-d');
 
-
+        $date = Carbon::parse('2017-03-04T08:00:00+0000')->diffForHumans();
+        echo $date;
 
     }
 

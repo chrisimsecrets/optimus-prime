@@ -34,7 +34,7 @@ class FacebookController extends Controller
         }
 
         $defPage = Data::get('fbDefPage');
-        $fbPages = FacebookPages::where('userId',Auth::user()->id)->get();
+        $fbPages = FacebookPages::where('userId', Auth::user()->id)->get();
         $likes = 0;
         $love = 0;
         $sad = 0;
@@ -77,14 +77,13 @@ class FacebookController extends Controller
     public function fbGroupIndex()
     {
         $message = "";
-        if (facebookGroups::where('userId',Auth::user()->id)->count() <= 0) {
+        if (facebookGroups::where('userId', Auth::user()->id)->count() <= 0) {
             $message = "nogroup";
             return view('fbgroups', compact('message'));
         }
 
 
-
-        if(Setting::where('userId',Auth::user()->id)->value('fbAppSec') == ""){
+        if (Setting::where('userId', Auth::user()->id)->value('fbAppSec') == "") {
             return redirect('/settings');
         }
 
@@ -289,12 +288,52 @@ class FacebookController extends Controller
      */
     public function fbReport()
     {
-        if(Setting::where('userId',Auth::user()->id)->value('fbAppSec') == ""){
+        if (Setting::where('userId', Auth::user()->id)->value('fbAppSec') == "") {
             return redirect('/settings');
         }
 
-        $countryData = array();
-        $cityData = array();
+//        $countryData = array();
+//        $cityData = array();
+//
+//        $fb = new \Facebook\Facebook([
+//            'app_id' => Data::get('fbAppId'),
+//            'app_secret' => Data::get('fbAppSec'),
+//            'default_graph_version' => 'v2.6',
+//        ]);
+//
+//
+//        try {
+////            $response = $fb->get("me/accounts?fields=insights,picture,name,fan_count,cover", Data::get('fbAppToken'));
+//            $response = $fb->get("273763529635798?fields=insights,picture,name,fan_count,cover", Data::get('fbAppToken'));
+//            $body = $response->getBody();
+//            $data = json_decode($body, true);
+//
+//        } catch (FacebookResponseException $e) {
+//            echo 'Graph returned an error: ' . $e->getMessage();
+//            exit;
+//        } catch (FacebookSDKException $e) {
+//            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+//            exit;
+//        }
+
+//        foreach($data['insights']['data'] as $d){
+//            echo $d['name'] . "<br>";
+//        }
+
+//        print_r($data);
+//        exit;
+
+        return view('selectPageForReport');
+
+
+    }
+
+    public function fbReportSingle($pageId)
+    {
+        if (Setting::where('userId', Auth::user()->id)->value('fbAppSec') == "") {
+            return redirect('/settings');
+        }
+
 
         $fb = new \Facebook\Facebook([
             'app_id' => Data::get('fbAppId'),
@@ -305,9 +344,8 @@ class FacebookController extends Controller
 
         try {
 //            $response = $fb->get("me/accounts?fields=insights,picture,name,fan_count,cover", Data::get('fbAppToken'));
-            $response = $fb->get("273763529635798?fields=insights,picture,name,fan_count,cover", Data::get('fbAppToken'));
-            $body = $response->getBody();
-            $data = json_decode($body, true);
+            $data = json_decode($fb->get($pageId . "/insights/page_impressions,page_impressions_unique,page_impressions_paid,page_engaged_users,page_consumptions", Data::get('fbAppToken'))->getBody(), true);
+
 
         } catch (FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -316,17 +354,22 @@ class FacebookController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
         }
-
-//        foreach($data['insights']['data'] as $d){
-//            echo $d['name'] . "<br>";
+//        foreach ($data['data'] as $d) {
+//            echo "===================<br>";
+//            echo ($d['name']."<br>");
+//            echo $d['title']."<br>";
+//            echo $d['description']."<br>";
+//            echo $d['period']."<br>";
+//            echo "<ul>";
+//            foreach ($d['values'] as $values){
+//                echo "<li>".$values['value']."</li>";
+//            }
+//            echo "</ul>";
+//            echo "<br>";
 //        }
+//        print_r($data);
 
-        print_r($data);
-        exit;
-
-        return view('facebookreport', compact('data', 'countryData', 'cityData'));
-
-
+        return view('fbReportViewSingle',compact('data'));
     }
 
     /**
@@ -334,7 +377,7 @@ class FacebookController extends Controller
      */
     public function fbReportView()
     {
-        $datas = FacebookPages::where('userId',Auth::user()->id)->get();
+        $datas = FacebookPages::where('userId', Auth::user()->id)->get();
         return view('facebookreport', compact('datas'));
     }
 
@@ -369,7 +412,7 @@ class FacebookController extends Controller
     public function massSendIndex()
     {
 
-        if(Setting::where('userId',Auth::user()->id)->value('fbAppSec') == ""){
+        if (Setting::where('userId', Auth::user()->id)->value('fbAppSec') == "") {
             return redirect('/settings');
         }
 
@@ -406,7 +449,7 @@ class FacebookController extends Controller
             'app_secret' => Data::get('fbAppSec'),
             'default_graph_version' => 'v2.6',
         ]);
-        $token = FacebookPages::where('pageId',$pageId)->value('pageToken');
+        $token = FacebookPages::where('pageId', $pageId)->value('pageToken');
 
 
         $conCount = 0;
@@ -946,7 +989,7 @@ class FacebookController extends Controller
      */
     public function massComment()
     {
-        $pages = FacebookPublicPages::where('userId',Auth::user()->id)->get();
+        $pages = FacebookPublicPages::where('userId', Auth::user()->id)->get();
         return view('fbmasspage', compact('pages'));
     }
 
@@ -998,7 +1041,7 @@ class FacebookController extends Controller
         $token = Data::get('fbAppToken');
         $pageCount = 0;
         $commentCount = 0;
-        $publicPages = FacebookPublicPages::user('userId',Auth::user()->id)->get();
+        $publicPages = FacebookPublicPages::user('userId', Auth::user()->id)->get();
         foreach ($publicPages as $page) {
             $pageCount++;
             $data = $fb->get($page->pageId . '/feed?limit=1', $token)->getDecodedBody();

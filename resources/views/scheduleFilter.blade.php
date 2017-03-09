@@ -34,10 +34,11 @@
 
                 </div>
                 @foreach(array_chunk($data,7) as $d)
-                    <div class="row daysbox">
+                    <?php $count = count($d) ;?>
+                    <div class="row @if($count < 7) daysboxExtra @else daysbox @endif">
                         @foreach($d as $a)
 
-                            <div class="dayBox">
+                            <div class="@if($count < 7) dayBoxExtra @else dayBox @endif">
                                 <div class="dayHead">
                                     {{--Monday--}}
                                     {{\Carbon\Carbon::parse($a)->format('l')}}
@@ -204,6 +205,15 @@
             border-left: 2px dashed darkgray;
         }
 
+        .dayBoxExtra{
+            position: relative;
+            width: 14.3% !important;
+            padding: 5px;
+            min-height: 150px;
+            border-right: 2px dashed darkgray;
+            border-left: 2px dashed darkgray;
+        }
+
         .dayBoxLast {
             position: relative;
             width: 100%;
@@ -222,6 +232,17 @@
             border-radius: 3px;
 
         }
+
+        .daysboxExtra {
+            display: flex;
+            margin: 5px;
+            justify-content: flex-start;
+            background-color: gainsboro;
+            border-radius: 3px;
+
+        }
+
+
 
         .dayHead {
             /*position: absolute;*/

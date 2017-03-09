@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('type')->nullable();
             $table->string('status')->nullable();
             $table->string('timezone')->nullable();
+            $table->string('timeFormat')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

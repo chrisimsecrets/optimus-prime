@@ -126,10 +126,9 @@ class ScheduleController extends Controller
     {
         $startOfWeek = Carbon::now()->startOfWeek()->format('Y-m-d');
         $endOfWeek = Carbon::now()->endOfWeek()->format('Y-m-d');
-        $datas = OptSchedul::where('content', 'LIKE', '%');
-        $datas->whereBetween('time', array(new DateTime($startOfWeek), new DateTime($endOfWeek)));
-        $data = $datas->get();
-        return view('scheduleDay', compact('data'));
+
+        $data = $this->getDatesFromRange($startOfWeek, $endOfWeek);
+        return view('scheduleFilter', compact('data'));
     }
 
     public function filter(Request $request)
