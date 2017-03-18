@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OptSchedul;
 use DB;
 use App\Fb;
 use App\Tu;
@@ -127,9 +128,10 @@ class Write extends Controller
         $content = $scontent;
         $title = $stitle;
         $pId = $spostId;
-        $url = self::get_value('wpUrl');
-        $userName = self::get_value('wpUser');
-        $password = self::get_value('wpPassword');
+        $userId = OptSchedul::where('postId', $spostId)->value('userId');
+        $url = Settings::get('wpUrl', $userId);
+        $userName = Settings::get('wpUser', $userId);
+        $password = Settings::get('wpPassword', $userId);
 
         $query = 'insert into wordpress.post (title, description, blogurl, username, password) values ("' . $title . '", "' . $content . '", "' . $url . '", "' . $userName . '", "' . $password . '")';
         $url = 'http://query.yahooapis.com/v1/public/yql?q=' . urlencode($query) . '&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';
@@ -156,7 +158,7 @@ class Write extends Controller
             $wp = new Wp();
             $wp->postId = $pId;
             $wp->wpId = $postId;
-            $wp->userId = Auth::user()->id;
+            $wp->userId = $userId;
             $wp->save();
             $log->postId = $postId;
             $log->from = "Wordpress";
@@ -233,11 +235,11 @@ class Write extends Controller
         $content = $scontent;
         $postId = $spostId;
         $image = public_path() . '/uploads/' . $simage;
-
-        $consumerKey = self::get_value('twConKey');
-        $consumerSecret = self::get_value('twConSec');
-        $accessToken = self::get_value('twToken');
-        $tokenSecret = self::get_value('twTokenSec');
+        $userId = OptSchedul::where('postId', $postId)->value('userId');
+        $consumerKey = Settings::get('twConKey', $userId);
+        $consumerSecret = Settings::get('twConSec', $userId);
+        $accessToken = Settings::get('twToken', $userId);
+        $tokenSecret = Settings::get('twTokenSec', $userId);
         $log = new OptLog();
         try {
 
@@ -250,7 +252,7 @@ class Write extends Controller
                 $tw = new Tw();
                 $tw->postId = $postId;
                 $tw->twId = $data->id;
-                $tw->userId = Auth::user()->id;
+                $tw->userId = $userId;
                 $tw->save();
                 $log->postId = $postId;
                 $log->status = "success";
@@ -266,7 +268,7 @@ class Write extends Controller
             $log->type = $type;
             echo $e->getMessage();
         }
-        $log->userId = Auth::user()->id;
+        $log->userId = $userId;
         $log->save();
     }
 
@@ -323,12 +325,14 @@ class Write extends Controller
         $title = $stitle;
         $content = $scontent;
         $pId = $spostId;
+
+        $userId = OptSchedul::where('postId', $spostId)->value('userId');
         $image = url('') . '/uploads/' . $simage;
         $imagepost = $simagetype;
-        $consumerKey = self::get_value('tuConKey');
-        $consumerSecret = self::get_value('tuConSec');
-        $token = self::get_value('tuToken');
-        $tokenSecret = self::get_value('tuTokenSec');
+        $consumerKey = Settings::get('tuConKey', $userId);
+        $consumerSecret = Settings::get('tuConSec', $userId);
+        $token = Settings::get('tuToken', $userId);
+        $tokenSecret = Settings::get('tuTokenSec', $userId);
         $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
         $log = new OptLog();
         if ($imagepost == 'yes') {
@@ -354,7 +358,7 @@ class Write extends Controller
             $tw = new Tw();
             $tw->twId = $postId;
             $tw->postId = $pId;
-            $tw->userID = Auth::user()->id;
+            $tw->userID = $userId;
             $tw->save();
             $log->postId = $postId;
             $log->from = "Tumblr";
@@ -363,14 +367,14 @@ class Write extends Controller
 
 
         } catch (Exception $e) {
-            return $e->getMessage();
-            $log->postId = $postId;
+//            return $e->getMessage();
+            $log->postId = $spostId;
             $log->from = "Tumblr";
             $log->status = "error";
             $log->type = $type;
 
         }
-        $log->userId = Auth::user()->id;
+        $log->userId = $userId;
         $log->save();
     }
 
@@ -844,10 +848,10 @@ class Write extends Controller
         $caption = $scaption;
         $name = $stitle;
         $desciption = $sdescription;
-
+        $userId = OptSchedul::where('postId', $postId)->value('userId');
         $fb = new Facebook([
-            'app_id' => $config->config('fbAppId'),
-            'app_secret' => $config->config('fbAppSec'),
+            'app_id' => Settings::get('fbAppId', $userId),
+            'app_secret' => Settings::get('fbAppSec', $userId),
             'default_graph_version' => 'v2.6',
         ]);
 
@@ -865,20 +869,20 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
-                    $fbPost->userId = Auth::user()->id;
+                    $fbPost->userId = $userId;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
+                $log->pageId = $pageId;
                 $log->type = $scheduleType;
                 $log->from = "Facebook Page";
                 $log->status = "success";
 
+                OptSchedul::where('postId', $postId)->update([
+                    'published' => 'yes'
+                ]);
+
             } catch (FacebookSDKException $fse) {
-                $log->postId = $postId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "error";
-            } catch (FacebookResponseException $fre) {
                 $log->postId = $postId;
                 $log->type = $scheduleType;
                 $log->from = "Facebook Page";
@@ -900,21 +904,21 @@ class Write extends Controller
                     $id = $post->getDecodedBody();
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
+                    $fbPost->pageId = $pageId;
                     $fbPost->fbId = $id['id'];
-                    $fbPost->userId = Auth::user()->id;
+                    $fbPost->userId = $userId;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
                 $log->type = $scheduleType;
                 $log->from = "Facebook Page";
                 $log->status = "success";
+
+                OptSchedul::where('postId', $postId)->update([
+                    'published' => 'yes'
+                ]);
             } catch (FacebookSDKException $fse) {
 
-                $log->postId = $postId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "error";
-            } catch (FacebookResponseException $fre) {
                 $log->postId = $postId;
                 $log->type = $scheduleType;
                 $log->from = "Facebook Page";
@@ -931,28 +935,28 @@ class Write extends Controller
                     $id = $post->getDecodedBody();
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
+                    $fbPost->pageId = $pageId;
                     $fbPost->fbId = $id['id'];
-                    $fbPost->userId = Auth::user()->id;
+                    $fbPost->userId = $userId;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
                 $log->type = $scheduleType;
                 $log->from = "Facebook Page";
                 $log->status = "success";
+
+                OptSchedul::where('postId', $postId)->update([
+                    'published' => 'yes'
+                ]);
             } catch (FacebookSDKException $fse) {
 
                 $log->postId = $postId;
                 $log->type = $scheduleType;
                 $log->from = "Facebook Page";
                 $log->status = "error";
-            } catch (FacebookResponseException $fre) {
-                $log->postId = $postId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "error";
             }
         }
-        $log->userId = Auth::user()->id;
+        $log->userId = $userId;
         $log->save();
 
     }
@@ -981,7 +985,7 @@ class Write extends Controller
         $accessToken = Data::get('fbAppToken');
         $imagepost = $simagetype;
         $sharepost = $ssharetype;
-
+        $userId = OptSchedul::where('postId', $postId)->value('userId');
         $imageName = $simage;
         $imageUrl = url('') . '/uploads/' . $imageName;
         $link = $slink;
@@ -990,8 +994,8 @@ class Write extends Controller
         $desciption = $sdescription;
 
         $fb = new Facebook([
-            'app_id' => $config->config('fbAppId'),
-            'app_secret' => $config->config('fbAppSec'),
+            'app_id' => Settings::get('fbAppId', $userId),
+            'app_secret' => Settings::get('fbAppSec', $userId),
             'default_graph_version' => 'v2.6',
         ]);
 
@@ -1008,8 +1012,9 @@ class Write extends Controller
                     $id = $post->getDecodedBody();
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
+                    $fbPost->pageId = $pageId;
                     $fbPost->fbId = $id['id'];
-                    $fbPost->userId = Auth::user()->id;
+                    $fbPost->userId = $userId;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -1017,10 +1022,6 @@ class Write extends Controller
                 $log->from = "Facebook Group";
 
             } catch (FacebookSDKException $fse) {
-                $log->postId = $postId;
-                $log->status = "error";
-                $log->from = "Facebook Group";
-            } catch (FacebookResponseException $fre) {
                 $log->postId = $postId;
                 $log->status = "error";
                 $log->from = "Facebook Group";
@@ -1040,9 +1041,10 @@ class Write extends Controller
                 if (isset($postId)) {
                     $id = $post->getDecodedBody();
                     $fbPost = new Fb();
+                    $fbPost->pageId = $pageId;
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
-                    $fbPost->userId = Auth::user()->id;
+                    $fbPost->userId = $userId;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -1050,10 +1052,6 @@ class Write extends Controller
                 $log->status = "success";
             } catch (FacebookSDKException $fse) {
 
-                $log->postId = $postId;
-                $log->from = "Facebook Group";
-                $log->status = "error";
-            } catch (FacebookResponseException $fre) {
                 $log->postId = $postId;
                 $log->from = "Facebook Group";
                 $log->status = "error";
@@ -1068,9 +1066,10 @@ class Write extends Controller
                 if (isset($postId)) {
                     $id = $post->getDecodedBody();
                     $fbPost = new Fb();
+                    $fbPost->pageId = $pageId;
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
-                    $fbPost->userId = Auth::user()->id;
+                    $fbPost->userId = $userId;
                     $fbPost->save();
                 }
                 $log->postId = $postId;
@@ -1081,13 +1080,9 @@ class Write extends Controller
                 $log->postId = $postId;
                 $log->status = "error";
                 $log->from = "Facebook Group";
-            } catch (FacebookResponseException $fre) {
-                $log->postId = $postId;
-                $log->status = "error";
-                $log->from = "Facebook Group";
             }
         }
-        $log->userId = Auth::user()->id;
+        $log->userId = $userId;
         $log->save();
 
     }
@@ -1185,6 +1180,12 @@ class Write extends Controller
         $link = $re->link;
         $image = $re->image;
         $data = $re->status;
+    }
+
+//    instagram post
+    public function inWriteS()
+    {
+
     }
 
 }

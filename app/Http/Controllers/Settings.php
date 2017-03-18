@@ -578,5 +578,9 @@ class Settings extends Controller
         return view('config', compact('path'));
     }
 
+    public static function get($valueOf,$userId){
+        return Setting::where('userId',$userId)->value($valueOf);
+    }
+
 
 }
