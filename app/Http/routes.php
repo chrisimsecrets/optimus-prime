@@ -238,6 +238,9 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/youtube/download','Youtube@downloadIndex');
         Route::post('/youtube/download','Youtube@download');
+
+        // plugins
+        Route::get('/plugins','Plugins@index');
     });
 
 

@@ -38895,8 +38895,11 @@ $('#saveschedule').click(function () {
     if ($('#wpCheck').is(':checked')) {
         wp = "yes";
     }
-    if($('#inCheck').is(':checked')){
+    if($('#iCheck').is(':checked')){
         instagram = "yes";
+        if($('#image').val() == ""){
+            return alert("You must upload image to post on Instagram");
+        }
     }if($('#lnCheck').is(':checked')){
         linkedin = "yes";
     }

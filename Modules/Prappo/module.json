@@ -1,0 +1,17 @@
+{
+    "name": "Prappo",
+    "author":"Prappo Prince",
+    "alias": "prappo",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Prappo\\Providers\\PrappoServiceProvider"
+    ],
+    "aliases": [],
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

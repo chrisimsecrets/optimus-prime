@@ -71,13 +71,7 @@ class ProcessTasks extends Command
 //                Test block end
 
                 if ($currentTime == $realPostTime) {
-                    $log = new OptLog();
-                    $log->postId = $task->postId;
-                    $log->type = $currentTime;
-                    $log->from = "Facebook Page";
-                    $log->status = "joke";
-                    $log->userId = $task->userId;
-                    $log->save();
+
 
                     if ($task->fb == "yes") {
 
@@ -98,7 +92,11 @@ class ProcessTasks extends Command
                     }
 
                     if($task->wp == "yes"){
-                        Write::wpWriteS($task->postId,$task->title,$task->content,$realPostTime);
+                        Write::wpWriteS($task->postId,$task->title,$task->content);
+                    }
+
+                    if($task->instagram == "yes"){
+                        Write::inWriteS($task->postId,$task->image,$task->caption);
                     }
 
 

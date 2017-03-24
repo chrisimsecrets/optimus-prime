@@ -34,7 +34,7 @@
 
                 </div>
                 @foreach(array_chunk($data,7) as $d)
-                    <?php $count = count($d) ;?>
+                    <?php $count = count($d);?>
                     <div class="row @if($count < 7) daysboxExtra @else daysbox @endif">
                         @foreach($d as $a)
 
@@ -61,18 +61,22 @@
                                             <h4>
                                                 @if($da->fb == "yes")
                                                     <i class="fa fa-facebook-official"></i>
-                                                @elseif($da->fbg == "yes")
+                                                @endif
+                                                @if($da->fbg == "yes")
                                                     <i class="fa fa-facebook-official"></i>
-                                                @elseif($da->tw == "yes")
+                                                @endif
+                                                @if($da->tw == "yes")
                                                     <i class="fa fa-twitter"></i>
-                                                @elseif($da->tu == "yes")
+                                                @endif
+                                                @if($da->tu == "yes")
                                                     <i class="fa fa-tumblr"></i>
-                                                @elseif($da->wp == "yes")
+                                                @endif
+                                                @if($da->wp == "yes")
                                                     <i class="fa fa-wordpress"></i>
-                                                @elseif($da->instagram == "yes")
+                                                @endif
+                                                @if($da->instagram == "yes")
                                                     <i class="fa fa-instagram"></i>
-                                                @else
-                                                    <i class="fa fa-times"></i>
+
                                                 @endif
 
                                                 {{$da->title}}</h4>
@@ -89,7 +93,9 @@
                                                 </button>
                                                 <div id="{{$da->id}}" style="display:none;" align="center">
                                                     <hr>
-                                                    <input type="datetime-local" value="{{\Carbon\Carbon::parse($da->time)->format("Y-m-d\TH:i:s")}}" class="time_{{$da->id}}" id="time">
+                                                    <input type="datetime-local"
+                                                           value="{{\Carbon\Carbon::parse($da->time)->format("Y-m-d\TH:i:s")}}"
+                                                           class="time_{{$da->id}}" id="time">
                                                     <hr>
                                                     <div class="btn-group">
                                                         <button data-id="{{$da->id}}" type="button"
@@ -205,7 +211,7 @@
             border-left: 2px dashed darkgray;
         }
 
-        .dayBoxExtra{
+        .dayBoxExtra {
             position: relative;
             width: 14.3% !important;
             padding: 5px;
@@ -241,8 +247,6 @@
             border-radius: 3px;
 
         }
-
-
 
         .dayHead {
             /*position: absolute;*/
@@ -308,7 +312,7 @@
 @section('js')
     <script>
         var s = $("#time").val();
-        var startDate = new Date(s.replace(/-/g,'/').replace('T',' '));
+        var startDate = new Date(s.replace(/-/g, '/').replace('T', ' '));
 
 
         flatpickr(".tt", {
@@ -333,7 +337,7 @@
 
         $('.btnSave').click(function () {
             var id = $(this).attr('data-id');
-            var sTime = $('.time_'+id).val();
+            var sTime = $('.time_' + id).val();
 //            return alert("ID" + id + " and time " +sTime);
             $.ajax({
                 url: '{{url('/schedule/time/update')}}',

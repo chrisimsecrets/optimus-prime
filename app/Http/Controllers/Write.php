@@ -104,7 +104,7 @@ class Write extends Controller
 
         $json = json_decode($rawdata, true);
         curl_close($c);
-        $postId = $json['query']['results']['postid'];
+        $postId = $json['query']['results']['postId'];
         if ($postId == "") {
             echo "error";
         } else {
@@ -122,9 +122,9 @@ class Write extends Controller
     }
 
 
-    public static function wpWriteS($spostId, $stitle, $scontent, $type)
+    public static function wpWriteS($spostId, $stitle, $scontent)
     {
-        $log = new OptLog();
+
         $content = $scontent;
         $title = $stitle;
         $pId = $spostId;
@@ -149,10 +149,7 @@ class Write extends Controller
         $postId = $json['query']['results']['postid'];
         if ($postId == "") {
 
-            $log->postId = $postId;
-            $log->status = "error";
-            $log->from = "Wordpress";
-            $log->type = $type;
+
         } else {
             echo $postId;
             $wp = new Wp();
@@ -160,10 +157,12 @@ class Write extends Controller
             $wp->wpId = $postId;
             $wp->userId = $userId;
             $wp->save();
-            $log->postId = $postId;
-            $log->from = "Wordpress";
-            $log->status = "success";
-            $log->type = $type;
+
+
+            OptSchedul::where('postId', $postId)->update([
+                'published' => 'yes'
+            ]);
+
         }
     }
 
@@ -240,36 +239,32 @@ class Write extends Controller
         $consumerSecret = Settings::get('twConSec', $userId);
         $accessToken = Settings::get('twToken', $userId);
         $tokenSecret = Settings::get('twTokenSec', $userId);
-        $log = new OptLog();
+
         try {
 
             $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
 
             $data = $twitter->request($image ? 'statuses/update_with_media' : 'statuses/update', 'POST', array('status' => $content), $image ? array('media[]' => $image) : NULL);
 
-            echo "success";
+            OptSchedul::where('postId', $postId)->update([
+                'published' => 'yes'
+            ]);
+
             if (isset($postId)) {
                 $tw = new Tw();
                 $tw->postId = $postId;
                 $tw->twId = $data->id;
                 $tw->userId = $userId;
                 $tw->save();
-                $log->postId = $postId;
-                $log->status = "success";
-                $log->from = "Twitter";
-                $log->type = $type;
+
             }
 
 
         } catch (\TwitterException $e) {
-            $log->postId = $postId;
-            $log->status = "error";
-            $log->from = "Twitter";
-            $log->type = $type;
+
             echo $e->getMessage();
         }
-        $log->userId = $userId;
-        $log->save();
+
     }
 
     public function tuWrite(Request $re)
@@ -334,7 +329,7 @@ class Write extends Controller
         $token = Settings::get('tuToken', $userId);
         $tokenSecret = Settings::get('tuTokenSec', $userId);
         $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
-        $log = new OptLog();
+
         if ($imagepost == 'yes') {
             $data = array(
                 "type" => "photo",
@@ -360,22 +355,17 @@ class Write extends Controller
             $tw->postId = $pId;
             $tw->userID = $userId;
             $tw->save();
-            $log->postId = $postId;
-            $log->from = "Tumblr";
-            $log->status = "success";
-            $log->type = $type;
+
+
+            OptSchedul::where('postId', $postId)->update([
+                'published' => 'yes'
+            ]);
 
 
         } catch (Exception $e) {
-//            return $e->getMessage();
-            $log->postId = $spostId;
-            $log->from = "Tumblr";
-            $log->status = "error";
-            $log->type = $type;
-
+//
         }
-        $log->userId = $userId;
-        $log->save();
+
     }
 
     public function tuDelete(Request $re)
@@ -835,7 +825,7 @@ class Write extends Controller
     public static function fbWriteS($spostId, $spageId, $spageToken, $stitle, $scaption, $slink, $simage, $sdescription, $scontent, $simagetype, $ssharetype, $scheduleType)
     {
         $config = new Settings();
-        $log = new OptLog();
+
         $postId = $spostId;
         $pageId = $spageId;
         $accessToken = $spageToken;
@@ -868,25 +858,19 @@ class Write extends Controller
                     $id = $post->getDecodedBody();
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
+                    $fbPost->pageId = $pageId;
                     $fbPost->fbId = $id['id'];
                     $fbPost->userId = $userId;
                     $fbPost->save();
                 }
-                $log->postId = $postId;
-                $log->pageId = $pageId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "success";
+
 
                 OptSchedul::where('postId', $postId)->update([
                     'published' => 'yes'
                 ]);
 
             } catch (FacebookSDKException $fse) {
-                $log->postId = $postId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "error";
+
             }
         } else if ($sharepost == 'yes') {
 
@@ -909,20 +893,14 @@ class Write extends Controller
                     $fbPost->userId = $userId;
                     $fbPost->save();
                 }
-                $log->postId = $postId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "success";
+
 
                 OptSchedul::where('postId', $postId)->update([
                     'published' => 'yes'
                 ]);
             } catch (FacebookSDKException $fse) {
 
-                $log->postId = $postId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "error";
+
             }
 
         } else {
@@ -940,24 +918,15 @@ class Write extends Controller
                     $fbPost->userId = $userId;
                     $fbPost->save();
                 }
-                $log->postId = $postId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "success";
+
 
                 OptSchedul::where('postId', $postId)->update([
                     'published' => 'yes'
                 ]);
             } catch (FacebookSDKException $fse) {
 
-                $log->postId = $postId;
-                $log->type = $scheduleType;
-                $log->from = "Facebook Page";
-                $log->status = "error";
             }
         }
-        $log->userId = $userId;
-        $log->save();
 
     }
 
@@ -979,7 +948,7 @@ class Write extends Controller
     public static function fbgWriteS($spostId, $spageId, $stitle, $scaption, $slink, $simage, $sdescription, $scontent, $simagetype, $ssharetype)
     {
         $config = new Settings();
-        $log = new OptLog();
+
         $postId = $spostId;
         $pageId = $spageId;
         $accessToken = Data::get('fbAppToken');
@@ -1017,14 +986,14 @@ class Write extends Controller
                     $fbPost->userId = $userId;
                     $fbPost->save();
                 }
-                $log->postId = $postId;
-                $log->status = "success";
-                $log->from = "Facebook Group";
+
+
+                OptSchedul::where('postId', $postId)->update([
+                    'published' => 'yes'
+                ]);
 
             } catch (FacebookSDKException $fse) {
-                $log->postId = $postId;
-                $log->status = "error";
-                $log->from = "Facebook Group";
+
             }
         } else if ($sharepost == 'yes') {
 
@@ -1047,14 +1016,13 @@ class Write extends Controller
                     $fbPost->userId = $userId;
                     $fbPost->save();
                 }
-                $log->postId = $postId;
-                $log->from = "Facebook Group";
-                $log->status = "success";
+
+
+                OptSchedul::where('postId', $postId)->update([
+                    'published' => 'yes'
+                ]);
             } catch (FacebookSDKException $fse) {
 
-                $log->postId = $postId;
-                $log->from = "Facebook Group";
-                $log->status = "error";
             }
 
         } else {
@@ -1072,18 +1040,18 @@ class Write extends Controller
                     $fbPost->userId = $userId;
                     $fbPost->save();
                 }
-                $log->postId = $postId;
-                $log->from = "Facebook Group";
-                $log->status = "success";
+
+
+                OptSchedul::where('postId', $postId)->update([
+                    'published' => 'yes'
+                ]);
+
             } catch (FacebookSDKException $fse) {
 
-                $log->postId = $postId;
-                $log->status = "error";
-                $log->from = "Facebook Group";
+
             }
         }
-        $log->userId = $userId;
-        $log->save();
+
 
     }
 
@@ -1183,9 +1151,58 @@ class Write extends Controller
     }
 
 //    instagram post
-    public function inWriteS()
+    public static function inWriteS($postId, $image, $caption)
     {
+        $userId = OptSchedul::where('postId', $postId)->value('userId');
+        try {
+            $instagram = new \InstagramAPI\Instagram();
+            $username = Settings::get('inUser', $userId);
+            $password = Settings::get('inPass', $userId);
+            $instagram->setUser($username, $password);
+            $instagram->uploadPhoto(public_path() . "/uploads/" . $image, $caption);
+
+            OptSchedul::where('postId', $postId)->update([
+                'published' => 'yes'
+            ]);
+
+        } catch (\Exception $exception) {
+
+        }
 
     }
+
+
+    public static function lnWriteS($postId, $title, $image,$description,$content,$imagetype,$sharepost,$link){
+//        if ($request->has('image') && $request->sharepost == 'no') {
+//            throw new Exception('Only image posting is not available for linkedin. Rather try Link Post');
+//        }
+        $linkedIn = new LinkedIn(Data::get('liClientId'), Data::get('liClientSecret'));
+        $companies = LinkedinController::companies($linkedIn);
+        $body = [
+            'json' => [
+                'visibility' => [
+                    'code' => 'anyone'
+                ],
+                'comment' => $content
+            ]
+        ];
+
+        if ($sharepost === 'yes') {
+            $body['json']['content'] = [
+                'title' => $title,
+                'description' => $description,
+                'submitted-url' => $link,
+                'submitted-image-url' => asset("uploads/{$image}")
+            ];
+        }
+
+        foreach ($companies['values'] as $company) {
+            $linkedIn->post("/v1/companies/{$company['id']}/shares?format=json", $body);
+        }
+    }
+
+
+
+
 
 }

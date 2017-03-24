@@ -1,0 +1,15 @@
+{
+    "name": "prappo",
+    "description": "",
+    "authors": [
+        {
+            "name": "Prappo Prince",
+            "email": "prappo.prince@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Modules\\Prappo\\": ""
+        }
+    }
+}
