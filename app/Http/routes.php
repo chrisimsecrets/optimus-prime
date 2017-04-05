@@ -7,7 +7,7 @@ Route::get('/', function () {
 Route::any('/hook', 'Hook@fb');
 
 Route::post('/slack/hook', 'Hook@slack');
-
+Route::any('/schedule/fire', 'ScheduleController@fire');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
@@ -83,6 +83,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/insave','Settings@inSave');
         Route::post('/settings/notifications', 'Settings@notifySave');
         Route::post('/save/fb/bot/config', 'Settings@fbBotConfigSave');
+        Route::post('/settings/update/theme','Settings@updateTheme');
 
         // deleting
         Route::post('/fbdel', 'FacebookController@fbDelete');
@@ -116,6 +117,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/alllogdel', 'OptLogs@delAll');
         Route::post('/sdel', 'ScheduleController@sdel');
         Route::post('/sedit', 'ScheduleController@sedit');
+
 
         // Report specific routes
         Route::get('/fbreport', 'FacebookController@fbReport');
@@ -193,6 +195,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/user/{id}', 'UserController@userEdit');
         Route::post('/user/update', 'UserController@userUpdate');
         Route::get('/admin','UserController@adminIndex');
+        Route::get('/admin/options','AdminController@options');
 
         Route::get('/instagram/me','InstagramController@index');
         Route::get('/instagram/followers','InstagramController@followers');
@@ -240,7 +243,29 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/youtube/download','Youtube@download');
 
         // plugins
-        Route::get('/plugins','Plugins@index');
+        Route::get('/plugin/list','Plugins@index');
+        Route::get('/plugin/test','Plugins@test');
+        Route::get('/plugin/add','Plugins@addPlugin');
+        Route::post('/plugin/action','Plugins@action');
+        Route::post('/plugin/upload','Plugins@upload');
+
+        // shop
+
+        Route::get('/shop','ShopController@index');
+
+//        virtual assistant routes
+
+//        Route::post('/getexmsg','SettingsController@getExMessage');
+//        Route::get('/spam/logs','SpamController@logs');
+//        Route::post('/spam/deleteall','SpamController@deleteLogs');
+//        Route::resource('/facebook','FacebookController');
+//        Route::resource('/settings','SettingsController');
+//        Route::resource('/comment','Comments');
+//        Route::resource('/message','Messages');
+//        Route::resource('/spam','SpamController');
+//        Route::resource('/code','ShortCodeController');
+//        Route::resource('/notification','NotificationController');
+//        Route::resource('/spam','SpamController');
     });
 
 

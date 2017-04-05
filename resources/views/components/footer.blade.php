@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <strong>Version</strong> Beta
+        <strong>Version</strong> Poo
     </div>
-    <strong>Developed by </strong><a href="http://trinolab.website" target="_blank">TrinoLab</a>
+    <strong>Developed by </strong><a href="http://trino-lab.com" target="_blank">TrinoLab</a>
 </footer>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\OptSchedul;
+use App\User;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
+
+
     /*this code for next version */
 
     /**
@@ -220,6 +224,63 @@ class ScheduleController extends Controller
             return "success";
         } catch (\Exception $exception) {
             return $exception->getMessage();
+        }
+    }
+
+    public function fire()
+    {
+//        \File::put(base_path('/test.txt'),Carbon::now()->toDateTimeString());
+        $carbon = new Carbon();
+        $tasks = OptSchedul::all();
+
+        foreach ($tasks as $task) {
+            if ($carbon->parse($task->time)) {
+                $postTime = $task->time;
+                $currentTime = $carbon->now()->format('Y-m-d H:i');
+
+                $timezone = User::where('id', $task->userId)->value('timezone');
+
+                $date = Carbon::createFromFormat('Y-m-d H:i', $postTime, $timezone);
+                $date->setTimezone('UTC');
+                $realPostTime = $date->format('Y-m-d H:i');
+
+//                Test block start
+
+
+//                Test block end
+
+                if ($currentTime == $realPostTime) {
+
+
+                    if ($task->fb == "yes") {
+
+                        Write::fbWriteS($task->postId, $task->pageId, $task->pageToken, $task->title, $task->caption, $task->link, $task->image, $task->description, $task->content, $task->imagetype, $task->sharetype, $realPostTime);
+                    }
+
+                    if ($task->fbg == "yes") {
+                        Write::fbgWriteS($task->postId, $task->pageId, $task->title, $task->caption, $task->link, $task->image, $task->description, $task->content, $task->imagetype, $task->sharetype);
+
+                    }
+
+                    if ($task->tw == "yes") {
+                        Write::twWriteS($task->postId, $task->image, $task->content, $realPostTime);
+                    }
+
+                    if ($task->tu == "yes") {
+                        Write::tuWriteS($task->postId, $task->blogName, $task->title, $task->content, $task->image, $task->imagetype, $realPostTime);
+                    }
+
+                    if ($task->wp == "yes") {
+                        Write::wpWriteS($task->postId, $task->title, $task->content);
+                    }
+
+                    if ($task->instagram == "yes") {
+                        Write::inWriteS($task->postId, $task->image, $task->content);
+                    }
+
+
+                }
+            }
         }
     }
 }

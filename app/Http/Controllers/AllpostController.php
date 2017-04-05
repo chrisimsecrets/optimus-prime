@@ -52,4 +52,14 @@ class AllpostController extends Controller
         }
 
     }
+
+    public function delPost(Request $request){
+        try{
+            Allpost::where('userId',Auth::user()->id)->where('id',$request->id)->delete();
+            return "success";
+        }catch (\Exception $exception){
+            return $exception->getMessage();
+        }
+
+    }
 }

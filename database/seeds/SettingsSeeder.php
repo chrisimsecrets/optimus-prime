@@ -51,6 +51,7 @@ class SettingsSeeder extends Seeder
             'email' => 'admin@email.com',
             'password' => bcrypt('123456'),
             'type' => 'admin',
+            'theme' => 'skin-red-light',
         ]);
 
         Setting::create([
@@ -60,5 +61,11 @@ class SettingsSeeder extends Seeder
         \App\Package::create([
             'userId' => User::where('email', 'admin@email.com')->value('id')
         ]);
+
+        \App\SoftwareSettings::create(['key' => 'name']);
+        \App\SoftwareSettings::create(['key' => 'logo']);
+        \App\SoftwareSettings::create(['key' => 'footerText']);
+        \App\SoftwareSettings::create(['key' => 'footerTextLink']);
+        \App\SoftwareSettings::create(['key' => 'footerVersion']);
     }
 }

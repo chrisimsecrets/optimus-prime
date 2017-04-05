@@ -10,6 +10,166 @@
 
         <div class="content-wrapper">
             <section class="content">
+                {{-- Select theme--}}
+                <div id="themSelector" class="row">
+                    <div class="box">
+
+                        <div class="box-header with-border" align="center">
+                            <h3 class="box-title"><i class="fa fa-paint-brush"></i> Themes</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="form-group" id="themes">
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/purple.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-purple"
+                                                   value="skin-purple"
+                                                   @if(Auth::user()->theme == "skin-purple") checked @endif >
+                                            Purple
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/purple-light.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-purple-light"
+                                                   value="skin-purple-light"
+                                                   @if(Auth::user()->theme == "skin-purple-light") checked @endif >
+                                            Purple Light
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/blue.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-blue" value="skin-blue"
+                                                   @if(Auth::user()->theme == "skin-blue") checked @endif >
+                                            Blue
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/blue-light.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-blue-light"
+                                                   value="skin-blue-light"
+                                                   @if(Auth::user()->theme == "skin-blue-light") checked @endif >
+                                            Blue Light
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/green.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-green" value="skin-green"
+                                                   @if(Auth::user()->theme == "skin-green") checked @endif >
+                                            Green
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/green-light.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-green-light"
+                                                   value="skin-green-light"
+                                                   @if(Auth::user()->theme == "skin-green-light") checked @endif >
+                                            Green Light
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/yellow.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-yellow"
+                                                   value="skin-yellow"
+                                                   @if(Auth::user()->theme == "skin-yellow") checked @endif >
+                                            Yellow
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/yellow-light.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-yellow-light"
+                                                   value="skin-yellow-light"
+                                                   @if(Auth::user()->theme == "skin-yellow-light") checked @endif >
+                                            Yellow Light
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/red.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-red" value="skin-red"
+                                                   @if(Auth::user()->theme == "skin-red") checked @endif >
+                                            Red
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/red-light.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-red-light"
+                                                   value="skin-red-light"
+                                                   @if(Auth::user()->theme == "skin-red-light") checked @endif >
+                                            Red Light
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/black.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-black" value="skin-black"
+                                                   @if(Auth::user()->theme == "skin-black") checked @endif >
+                                            Black
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-1">
+                                    <div class="radio">
+                                        <img src="{{url('/images/optimus/themes/black-light.png')}}">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="skin-black-light"
+                                                   value="skin-black-light"
+                                                   @if(Auth::user()->theme == "skin-black-light") checked @endif >
+                                            Black Light
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     {{--tumblr settings--}}
                     @if(\App\Http\Controllers\Data::myPackage('tu'))
@@ -265,36 +425,36 @@
                     @if(\App\Http\Controllers\Data::myPackage('in'))
                         <div class="col-md-6">
 
-                                <div class="box box-primary">
-                                    <div class="box-header with-border" align="center">
-                                        <h3 class="box-title"><i class="fa fa-instagram"></i> Instagram Settings</h3>
-                                    </div><!-- /.box-header -->
-                                    <!-- form start -->
+                            <div class="box box-primary">
+                                <div class="box-header with-border" align="center">
+                                    <h3 class="box-title"><i class="fa fa-instagram"></i> Instagram Settings</h3>
+                                </div><!-- /.box-header -->
+                                <!-- form start -->
 
-                                    <div class="box-body">
-                                        <div class="form-group">
-                                            <label for="inUser">Username</label>
-                                            <input class="form-control" type="text"
-                                                   value="{{ $inUser }}" placeholder="Your Instagram username"
-                                                   id="inUser">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inPass">Password</label>
-                                            <input class="form-control"
-                                                   value="{{ $inPass }}"
-                                                   placeholder="Your instagram client secret"
-                                                   type="password" id="inPass">
-                                        </div>
-
-
-                                    </div><!-- /.box-body -->
-
-                                    <div class="box-footer">
-
-                                        <button id="inSave" class="btn btn-primary">Save</button>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="inUser">Username</label>
+                                        <input class="form-control" type="text"
+                                               value="{{ $inUser }}" placeholder="Your Instagram username"
+                                               id="inUser">
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="inPass">Password</label>
+                                        <input class="form-control"
+                                               value="{{ $inPass }}"
+                                               placeholder="Your instagram client secret"
+                                               type="password" id="inPass">
+                                    </div>
+
+
+                                </div><!-- /.box-body -->
+
+                                <div class="box-footer">
+
+                                    <button id="inSave" class="btn btn-primary">Save</button>
                                 </div>
+                            </div>
 
                         </div>
                     @endif
@@ -306,27 +466,63 @@
 @endsection
 
 @section('js')
-<script>
-    $('#inSave').click(function () {
-        $.ajax({
-            url:'{{url('/insave')}}',
-            type:'POST',
-            data:{
-                'inUser':$('#inUser').val(),
-                'inPass':$('#inPass').val()
-            },success:function (data) {
-                if(data=='success'){
-                    swal('Success','Instagram settings saved','success');
-                    location.reload();
-
-                }else{
-                    swal('Error',data,'error');
+    <script>
+        $('input[name=optionsRadios]').click(function () {
+            var theme = $('input[name=optionsRadios]:checked').val();
+            $.ajax({
+                url: '{{url('/settings/update/theme')}}',
+                type: 'POST',
+                data: {
+                    'theme': theme
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        location.reload();
+                    } else {
+                        console.log(data);
+                    }
                 }
-            },error:function (data) {
-                swal('Error','Something went wrong , Please check console message','error');
-                console.log(data.responseText);
-            }
+            });
+
+        });
+
+        //            alert($('input[name=optionsRadios]:checked').val());
+
+        $('#inSave').click(function () {
+            $.ajax({
+                url: '{{url('/insave')}}',
+                type: 'POST',
+                data: {
+                    'inUser': $('#inUser').val(),
+                    'inPass': $('#inPass').val()
+                }, success: function (data) {
+                    if (data == 'success') {
+                        swal('Success', 'Instagram settings saved', 'success');
+                        location.reload();
+
+                    } else {
+                        swal('Error', data, 'error');
+                    }
+                }, error: function (data) {
+                    swal('Error', 'Something went wrong , Please check console message', 'error');
+                    console.log(data.responseText);
+                }
+            })
         })
-    })
-</script>
+    </script>
 @endsection
+@section('css')
+    <style>
+        .col-md-1 img {
+            width: 60px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
+        }
+        #themSelector{
+            margin: 2px;
+        }
+    </style>
+@endsection
+

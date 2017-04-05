@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -82,5 +83,12 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function options(){
+        if(Auth::user()->type != 'admin'){
+            return "Access denied";
+        }
+        return view('adminOptions');
     }
 }

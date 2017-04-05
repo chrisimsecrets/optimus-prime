@@ -77,7 +77,7 @@ class FollowersController extends Controller
             return $client->getBlogFollowers($blogName, null)->total_users;
         } catch (\Exception $e) {
 //            return $e->getMessage();
-            return "error";
+            return "N/A";
         }
     }
 

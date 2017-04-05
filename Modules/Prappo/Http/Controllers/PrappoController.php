@@ -3,6 +3,7 @@
 namespace Modules\Prappo\Http\Controllers;
 
 use App\User;
+use Badcow\LoremIpsum\Generator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -15,8 +16,34 @@ class PrappoController extends Controller
      */
     public function index()
     {
+//        $generator = new Generator();
+//        $paragraph = $generator->getParagraphs(5);
+//        print_r($paragraph);
+
+        $data = [];
+
+        $plugin1 = [
+            "name"=>"plugin 1",
+            "description" => "bla bal",
+            "link" => "http://google.com",
+            "for" => "optimus prime",
+            "image" => "",
+            "type"=>"free"
+
+        ];
+        $plugin2 =[
+          "name" =>"plugin 2",
+            "description" => "lol lol"
+        ];
+        array_push($data,$plugin1,$plugin2);
+        $json = json_encode($data);
+        print_r($json);
 
 //        return view('prappo::index');
+    }
+
+    public function menu(){
+        return view('prappo::menu');
     }
 
     /**

@@ -47,9 +47,11 @@
     {{--emoji --}}
     <link rel="stylesheet" href="{{url('/opt/emoji/emojionearea.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/style.css')}}">
+    <link rel="stylesheet" href="{{url('/css/custome.css')}}">
     @yield('css')
 </head>
-<body class="hold-transition fixed sidebar-mini skin-red-light">
+{{--<body class="hold-transition fixed sidebar-mini skin-red-light">--}}
+<body class="hold-transition fixed sidebar-mini {{Auth::user()->theme}}">
 
 @yield('content')
 <script>

@@ -1,0 +1,25 @@
+{
+    "name": "badcow/lorem-ipsum",
+    "description": "Lorem ipsum generator.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mathew Tinsley",
+            "email": "tinsley@tinsology.net"
+        },
+        {
+            "name": "Sam Williams",
+            "email": "sam@badcow.co"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.9"
+    },
+    "suggest": {
+        "twig/twig": "Twig is a template language for PHP, released under the new BSD license (code and documentation)."
+    },
+    "autoload": {
+        "psr-4": { "Badcow\\LoremIpsum\\": "lib/" }
+    }
+}

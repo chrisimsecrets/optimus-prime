@@ -207,9 +207,13 @@
     overflow: hidden;
 }
 
-.previewLink iframe, .previewLink img,.previewLink video  {
+.previewLink iframe,.previewLink video  {
     height: 100%;
     width: 100%;
+}
+
+.previewLink img{
+    height: 100%;
 }
 
 #postForm .messageBox {

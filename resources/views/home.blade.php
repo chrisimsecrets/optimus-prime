@@ -12,47 +12,60 @@
 
             <section data-step="1" data-intro="You will see summary of your sites and posts" class="content">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-blue"><i class="fa fa-facebook"></i></span>
+                    {{--Facebook --}}
+                    @if(\App\Http\Controllers\Data::myPackage('fb'))
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-blue"><i class="fa fa-facebook"></i></span>
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">page likes</span>
-                                <span id="dFbLikes" class="info-box-number">Loading ..</span>
-                            </div><!-- /.info-box-content -->
-                        </div><!-- /.info-box -->
-                    </div><!-- /.col -->
+                                <div class="info-box-content">
+                                    <span class="info-box-text">page likes</span>
+                                    <span id="dFbLikes" class="info-box-number">Loading ..</span>
+                                </div><!-- /.info-box-content -->
+                            </div><!-- /.info-box -->
+                        </div><!-- /.col -->
+                    @endif
 
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-purple"><i class="fa fa-tumblr"></i></span>
+                    {{-- Tumblr --}}
+                    @if(\App\Http\Controllers\Data::myPackage('tu'))
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-purple"><i class="fa fa-tumblr"></i></span>
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">followers</span>
-                                <span id="dTuFollowers" class="info-box-number">Loading ..</span>
-                            </div><!-- /.info-box-content -->
-                        </div><!-- /.info-box -->
-                    </div><!-- /.col -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-light-blue"><i class="fa fa-twitter"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">followers</span>
+                                    <span id="dTuFollowers" class="info-box-number">Loading ..</span>
+                                </div><!-- /.info-box-content -->
+                            </div><!-- /.info-box -->
+                        </div><!-- /.col -->
+                    @endif
+                    {{-- Twitter --}}
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">followers</span>
-                                <span id="dTwFollowers" class="info-box-number">Loading ..</span>
-                            </div><!-- /.info-box-content -->
-                        </div><!-- /.info-box -->
-                    </div><!-- /.col -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-light-blue-active"><i class="fa fa-linkedin"></i></span>
+                    @if(\App\Http\Controllers\Data::myPackage('tw'))
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-light-blue"><i class="fa fa-twitter"></i></span>
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">company followers</span>
-                                <span id="companyFollowers" class="info-box-number">Loading ..</span>
-                            </div><!-- /.info-box-content -->
-                        </div><!-- /.info-box -->
-                    </div><!-- /.col -->
+                                <div class="info-box-content">
+                                    <span class="info-box-text">followers</span>
+                                    <span id="dTwFollowers" class="info-box-number">Loading ..</span>
+                                </div><!-- /.info-box-content -->
+                            </div><!-- /.info-box -->
+                        </div><!-- /.col -->
+                    @endif
+                    {{-- Linked --}}
+                    @if(\App\Http\Controllers\Data::myPackage('ln'))
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-light-blue-active"><i class="fa fa-linkedin"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">company followers</span>
+                                    <span id="companyFollowers" class="info-box-number">Loading ..</span>
+                                </div><!-- /.info-box-content -->
+                            </div><!-- /.info-box -->
+                        </div><!-- /.col -->
+                    @endif
                 </div>
 
                 {{-- show how many page or groups exists--}}
@@ -143,69 +156,75 @@
                     <!-- ./col -->
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-light-blue-active">
-                            <div class="inner">
-                                <h3 id="liPostedJobs">0</h3>
+                    {{-- Linkedin--}}
+                    @if(\App\Http\Controllers\Data::myPackage('ln'))
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-light-blue-active">
+                                <div class="inner">
+                                    <h3 id="liPostedJobs">0</h3>
 
-                                <p>Posted Jobs</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-linkedin"></i>
-                            </div>
+                                    <p>Posted Jobs</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-linkedin"></i>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
-                    <!-- ./col -->
+                        <!-- ./col -->
 
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-maroon">
-                            <div class="inner">
-                                <h3 id="liCompanyUpdates">0</h3>
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-maroon">
+                                <div class="inner">
+                                    <h3 id="liCompanyUpdates">0</h3>
 
-                                <p>Company Updates</p>
+                                    <p>Company Updates</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-linkedin"></i>
+                                </div>
+
                             </div>
-                            <div class="icon">
-                                <i class="fa fa-linkedin"></i>
-                            </div>
-
                         </div>
-                    </div>
-                    <!-- ./col -->
+                        <!-- ./col -->
+                    @endif
                     {{--instagram followers--}}
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-gray-active">
-                            <div class="inner">
-                                <h3 id="inFollowers">Loading ..</h3>
+                    @if(\App\Http\Controllers\Data::myPackage('in'))
 
-                                <p>Instagram Followers</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-instagram"></i>
-                            </div>
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-gray-active">
+                                <div class="inner">
+                                    <h3 id="inFollowers">Loading ..</h3>
 
+                                    <p>Instagram Followers</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-instagram"></i>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                    <!-- ./col -->
-                    {{-- instagram following --}}
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-gray-light">
-                            <div class="inner">
-                                <h3 id="inFollosing">Loading..</h3>
+                        <!-- ./col -->
+                        {{-- instagram following --}}
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-gray-light">
+                                <div class="inner">
+                                    <h3 id="inFollosing">Loading..</h3>
 
-                                <p>Instagram Fllowing</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-instagram"></i>
-                            </div>
+                                    <p>Instagram Fllowing</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-instagram"></i>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
-                    <!-- ./col -->
+                @endif
+                <!-- ./col -->
 
                 </div>
 
@@ -273,31 +292,49 @@
     </div>
 @endsection
 @section('js')
-<script>
-    $.ajax({
-        type:'GET',
-        url:'{{url('/instagram/followers/get')}}',
-        data:{},
-        success:function (data) {
-            $('#inFollowers').html(data);
-        },
-        error:function (data) {
-            console.log(data.responseText);
-            $('#inFollowers').html('X');
-        }
-    });
+    <script>
+        @if(\App\Http\Controllers\Data::myPackage('fb'))
+        fbLikes();
+        @endif
+        @if(\App\Http\Controllers\Data::myPackage('tw'))
+        twFollowers();
+        @endif
+        @if(\App\Http\Controllers\Data::myPackage('tu'))
+        tuFollowers();
+        @endif
+        @if(\App\Http\Controllers\Data::myPackage('ln'))
+        liPostedJobs();
 
-    $.ajax({
-        type:'GET',
-        url:'{{url('/instagram/following/get')}}',
-        data:{},
-        success:function (data) {
-            $('#inFollosing').html(data);
-        },
-        error:function (data) {
-            console.log(data.responseText);
-            $('#inFollosing').html('X');
-        }
-    });
-</script>
+        companyFollowers();
+
+        liCompanyUpdates();
+        @endif
+@if(\App\Http\Controllers\Data::myPackage('in'))
+        $.ajax({
+            type: 'GET',
+            url: '{{url('/instagram/followers/get')}}',
+            data: {},
+            success: function (data) {
+                $('#inFollowers').html(data);
+            },
+            error: function (data) {
+                console.log(data.responseText);
+                $('#inFollowers').html('X');
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '{{url('/instagram/following/get')}}',
+            data: {},
+            success: function (data) {
+                $('#inFollosing').html(data);
+            },
+            error: function (data) {
+                console.log(data.responseText);
+                $('#inFollosing').html('X');
+            }
+        });
+        @endif
+    </script>
 @endsection

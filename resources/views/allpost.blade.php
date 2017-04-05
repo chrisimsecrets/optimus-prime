@@ -53,7 +53,7 @@
                                             <i class="fa fa-tumblr"></i>
                                         @endif
                                         @if(\App\Fbgr::where('postId',$post->postId)->exists())
-                                                <i class="fa fa-users"></i>
+                                            <i class="fa fa-users"></i>
                                         @endif
 
                                     </td>
@@ -108,7 +108,7 @@
                     'postId': postId
                 },
                 success: function (data) {
-                swal("Status",data);
+                    swal("Status", data);
                     notify('{{url('/images/optimus/social/logopadding.png')}}', 'Message', data, '#');
                     $('.optdelall').html("<i class='fa fa-times'> Delete from all</i>");
                     location.reload();

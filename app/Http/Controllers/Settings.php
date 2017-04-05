@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\SoftwareSettings;
+use App\User;
 use DB;
 use App\Setting;
 use App\TuBlogs;
@@ -580,6 +582,36 @@ class Settings extends Controller
 
     public static function get($valueOf,$userId){
         return Setting::where('userId',$userId)->value($valueOf);
+    }
+
+    public function updateTheme(Request $request){
+        try{
+            User::where('id',Auth::user()->id)->update([
+                'theme'=>$request->theme
+            ]);
+            return "success";
+        }catch (\Exception $exception){
+            return $exception->getMessage();
+        }
+    }
+
+    public static function getSettings($key){
+        return SoftwareSettings::where('key',$key)->value('value');
+    }
+
+    public static function updateSettings($key,$value){
+        try{
+            SoftwareSettings::where('key',$key)->update([
+                'value'=>$value
+            ]);
+            return "success";
+        }catch (\Exception $exception){
+            return $exception->getMessage();
+        }
+    }
+
+    public static function getName(){
+
     }
 
 

@@ -11,5 +11,9 @@
         "psr-4": {
             "Modules\\Prappo\\": ""
         }
+    },
+    "require": {
+        "athlon1600/youtube-downloader": "^1.0",
+        "badcow/lorem-ipsum": "^1.1"
     }
 }

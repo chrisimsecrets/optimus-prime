@@ -1,10 +1,10 @@
 {
     "name": "Prappo",
-    "author":"Prappo Prince",
+    "author": "Prappo Prince",
     "alias": "prappo",
-    "description": "",
+    "description": "Personal plugin for optimus prime. To learn more <a href='http:\/\/google.com', target='_blank'>Click here<\/a>",
     "keywords": [],
-    "active": 1,
+    "active": 0,
     "order": 0,
     "providers": [
         "Modules\\Prappo\\Providers\\PrappoServiceProvider"
@@ -13,5 +13,7 @@
     "files": [
         "start.php"
     ],
-    "requires": []
+    "requires": [],
+    "position": "all",
+    "for": "public"
 }

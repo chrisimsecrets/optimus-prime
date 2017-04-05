@@ -2,9 +2,10 @@
     <!-- Logo -->
     <a href="{{ url('/home') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><img src="{{ url('/images/optimus/logo-mini.png') }}" alt="Optimus"></span>
+
+        <span class="logo-mini"><img src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') {{ url('/images/optimus/logo-login.png')}} @else {{ url('/images/optimus/logo-mini.png') }} @endif" alt="Optimus"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img src="{{ url('/images/optimus/logo-mini.png') }}" alt="Optimus"><b>Optimus</b></span>
+        <span class="logo-lg"><img src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') {{ url('/images/optimus/logo-login.png')}} @else {{ url('/images/optimus/logo-mini.png') }} @endif" alt="Optimus"><b>Optimus</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

@@ -31,6 +31,10 @@
                         <li><a href="{{ url('/user/add') }}"><i class="fa fa-plus-circle"></i> <span>Add User</span></a>
                         </li>
                         <li><a href="{{ url('/user/list') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+                        <li><a href="{{ url('/admin/options') }}"><i class="fa fa-key"></i>
+                                <span>Admin Options</span></a></li>
+
+                        {!! \App\Http\Controllers\Plugins::menu("admin") !!}
 
                     </ul>
                 </li>
@@ -50,7 +54,6 @@
 
                     <li><a href="{{ url('/schedule/day') }}"><i class="fa fa-list-ul"></i>
                             <span>Posts</span></a></li>
-
 
 
                 </ul>
@@ -127,10 +130,12 @@
                         </li>
                         <li><a href="{{ url('/masssend') }}"><i class="fa fa-send"></i> Facebook Mass Send</a></li>
                         <li><a href="{{ url('scraper') }}"><i class="fa fa-magnet"></i> Facebook Scraper</a></li>
-
+                        {!! \App\Http\Controllers\Plugins::menu("facebook") !!}
 
                     </ul>
                 </li>
+
+
             @endif
             {{--twitter menu--}}
             @if(\App\Http\Controllers\Data::myPackage('tw'))
@@ -152,6 +157,7 @@
                         <li><a href="{{ url('/twitter/autoreply') }}"><i class="fa fa-reply"></i>
                                 <span>Mass Reply</span></a></li>
                         <li><a href="{{ url('/tw/scraper') }}"><i class="fa fa-magnet"></i> Twitter Scraper</a></li>
+                        {!! \App\Http\Controllers\Plugins::menu("twitter") !!}
                     </ul>
 
                 </li>
@@ -168,16 +174,20 @@
                     <ul class="treeview-menu" style="display: none">
                         <li><a href="{{ url('/instagram/me') }}"><i class="fa fa-user"></i> <span>My account</span></a>
                         <li><a href="{{ url('/instagram/home') }}"><i class="fa fa-home"></i> <span>Home</span></a>
-                        <li><a href="{{ url('/instagram/popular') }}"><i class="fa fa-heart"></i><span> Popular Feed</span></a>
-                        <li><a href="{{ url('/instagram/followers') }}"><i class="fa fa-star"></i><span> Followers</span></a>
-                        <li><a href="{{ url('/instagram/following') }}"><i class="fa fa-star"></i><span> Following</span></a>
+                        <li><a href="{{ url('/instagram/popular') }}"><i
+                                        class="fa fa-heart"></i><span> Popular Feed</span></a>
+                        <li><a href="{{ url('/instagram/followers') }}"><i
+                                        class="fa fa-star"></i><span> Followers</span></a>
+                        <li><a href="{{ url('/instagram/following') }}"><i
+                                        class="fa fa-star"></i><span> Following</span></a>
                         <li><a href="{{ url('/instagram/following/activity') }}"><i class="fa fa-users"></i><span> Following Activity</span></a>
                         <li><a href="{{ url('/instagram/auto/follow') }}"><i class="fa fa-user-plus"></i><span> Auto follow</span></a>
                         <li><a href="{{ url('/instagram/auto/unfollow') }}"><i class="fa fa-user-times"></i><span> Auto unfollow</span></a>
                         <li><a href="{{ url('/instagram/auto/comments') }}"><i class="fa fa-comment"></i><span> Auto comment</span></a>
-{{--                        <li><a href="{{ url('/instagram/auto/message') }}"><i class="fa fa-envelope"></i><span> Auto Message</span></a>--}}
+                        {{--                        <li><a href="{{ url('/instagram/auto/message') }}"><i class="fa fa-envelope"></i><span> Auto Message</span></a>--}}
                         <li><a href="{{ url('/instagram/scraper') }}"><i class="fa fa-search"></i> <span>Scraper</span></a>
                         </li>
+                        {!! \App\Http\Controllers\Plugins::menu("instagram") !!}
 
                     </ul>
 
@@ -198,17 +208,39 @@
                         </li>
                         <li><a href="{{ url('/linkedin/mass_comment') }}"><i class="fa fa-comment"></i>
                                 <span>Mass Comment</span></a></li>
+                        {!! \App\Http\Controllers\Plugins::menu("linkedin") !!}
                     </ul>
 
                 </li>
             @endif
             {{--tumblr menu--}}
             @if(\App\Http\Controllers\Data::myPackage('tu'))
-                <li><a href="{{ url('/tumblr') }}"><i class="fa fa-tumblr"></i> <span>Tumblr</span></a></li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-tumblr-square"></i>
+                        <span>Linkedin</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display: none">
+                        <li><a href="{{ url('/tumblr') }}"><i class="fa fa-tumblr"></i> <span>Tumblr</span></a></li>
+                        {!! \App\Http\Controllers\Plugins::menu("tumblr") !!}
+                    </ul>
+                </li>
             @endif
             {{--wordpress menu--}}
             @if(\App\Http\Controllers\Data::myPackage('wp'))
-                <li><a href="{{ url('/wordpress') }}"><i class="fa fa-wordpress"></i> <span>Wordpress</span></a></li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-wordpress"></i>
+                        <span>Linkedin</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display: none">
+                        <li><a href="{{ url('/wordpress') }}"><i class="fa fa-wordpress"></i> <span>Wordpress</span></a>
+                        </li>
+                        {!! \App\Http\Controllers\Plugins::menu("wordpress") !!}
+                    </ul>
+                </li>
             @endif
             {{--<li class="treeview">--}}
             {{--<a href="#">--}}
@@ -238,16 +270,16 @@
 
 
             {{--<li class="treeview">--}}
-                {{--<a href="#">--}}
-                    {{--<i class="fa fa-youtube"></i>--}}
-                    {{--<span>YouTube</span><i class="fa fa-angle-left pull-right"></i>--}}
+            {{--<a href="#">--}}
+            {{--<i class="fa fa-youtube"></i>--}}
+            {{--<span>YouTube</span><i class="fa fa-angle-left pull-right"></i>--}}
 
-                {{--</a>--}}
-                {{--<ul class="treeview-menu" style="display: none;">--}}
-                    {{--<li><a href="{{ url('/youtube/download') }}"><i class="fa fa-download"></i> <span>Download Video</span></a>--}}
-                    {{--</li>--}}
+            {{--</a>--}}
+            {{--<ul class="treeview-menu" style="display: none;">--}}
+            {{--<li><a href="{{ url('/youtube/download') }}"><i class="fa fa-download"></i> <span>Download Video</span></a>--}}
+            {{--</li>--}}
 
-                {{--</ul>--}}
+            {{--</ul>--}}
             {{--</li>--}}
 
             <li class="treeview">
@@ -260,6 +292,8 @@
                     <li><a href="{{ url('/notify') }}"><i class="fa fa-bell-o"></i> <span>All Notifications</span></a>
                     </li>
 
+                    {!! \App\Http\Controllers\Plugins::menu("notifications") !!}
+
                 </ul>
             </li>
 
@@ -271,7 +305,7 @@
                 </a>
                 <ul class="treeview-menu" style="display: none;">
 
-                    <li><a href="{{ url('/settings') }}"><i class="fa fa-gear"></i> <span>Social</span></a></li>
+                    <li><a href="{{ url('/settings') }}"><i class="fa fa-gear"></i> <span>Settings</span></a></li>
                     <li><a href="{{ url('/settings/notifications') }}"><i class="fa fa-bell"></i>
                             <span>Notifications</span></a></li>
                     {{--<li><a href="{{ url('/settings/config') }}"><i class="fa fa-gears"></i>--}}
@@ -283,23 +317,45 @@
 
                 </ul>
             </li>
-            {{--@if(Auth::user()->type == 'admin')--}}
-            {{--<li class="treeview">--}}
-            {{--<a href="#">--}}
-            {{--<i class="fa fa-users"></i>--}}
-            {{--<span>Users</span><i class="fa fa-angle-left pull-right"></i>--}}
 
-            {{--</a>--}}
-            {{--<ul class="treeview-menu" style="display: none;">--}}
-            {{--<li><a href="{{ url('/user/add') }}"><i class="fa fa-user-plus"></i> <span>Add user</span></a>--}}
-            {{--</li>--}}
-            {{--<li><a href="{{ url('/user/list') }}"><i class="fa fa-user"></i><span>User List</span></a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
+            {!! \App\Http\Controllers\Plugins::menu("all") !!}
 
-            {{--@endif--}}
-            <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-            <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+            @if(Auth::user()->type == 'admin')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-puzzle-piece"></i>
+                        <span>Plugins</span><i class="fa fa-angle-left pull-right"></i>
+
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="{{ url('/plugin/add') }}"><i class="fa fa-user-plus"></i>
+                                <span>Add Plugin</span></a>
+                        </li>
+                        <li><a href="{{ url('/plugin/list') }}"><i
+                                        class="fa fa-list-ul"></i><span>Plugin List</span></a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span>Shop</span><i class="fa fa-angle-left pull-right"></i>
+
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="{{ url('/shop') }}"><i class="fa fa-home"></i>
+                                <span>Optimus Shop</span></a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+            @endif
+
+
+
 
         </ul>
     </section>

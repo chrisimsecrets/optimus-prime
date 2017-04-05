@@ -489,6 +489,7 @@
     {{--box-shadow: 0px 0px 0px 0px #000;--}}
     {{--}--}}
 
+
     {{--legend.scheduler-border {--}}
     {{--font-size: 1.2em !important;--}}
     {{--font-weight: bold !important;--}}
