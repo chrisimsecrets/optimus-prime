@@ -6,14 +6,9 @@
         </div>
         <!-- /.direct-chat-info -->
         @foreach($response['participants']['data'] as $par)
-            @if($par['id']==$data['from']['id'])
-                <?php $img = $par['picture']['data']['url']  ?>
-            @else
 
-            @endif
         @endforeach
-        <img class="direct-chat-img" src="{{$img}}"
-             alt="message user image"><!-- /.direct-chat-img -->
+
         <div class="direct-chat-text">
             {{$data['message']}}
         </div>

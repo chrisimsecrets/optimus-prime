@@ -17,7 +17,7 @@ class CreateTusTable extends Migration
             $table->string('postId');
             $table->string('tuId');
             $table->string('blogName');
-            $table->string('reBlogKey');
+            $table->string('reBlogKey')->nullable();
             $table->string('userId');
             $table->timestamps();
         });

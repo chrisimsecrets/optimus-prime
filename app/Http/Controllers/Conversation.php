@@ -95,7 +95,8 @@ class Conversation extends Controller
 
 
         try {
-            $data = $fb->get($pageId . '?fields=id,picture,name,conversations.limit(100){participants{id,name,picture},message_count,snippet,unread_count,senders}', $token)->getDecodedBody();
+            $data = $fb->get($pageId . '?fields=id,picture,name,conversations.limit(1000){participants,message_count,snippet,unread_count,senders}', $token)->getDecodedBody();
+//            $data = $fb->get($pageId . '?fields=id,picture,name,conversations.limit(100){message_count,snippet,unread_count,senders}', $token)->getDecodedBody();
 
         } catch (FacebookSDKException $fsdk) {
             return $fsdk->getMessage() . " [fbc fsdk]";

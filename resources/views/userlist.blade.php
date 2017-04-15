@@ -5,7 +5,7 @@
     <div class="wrapper">
         @include('components.navigation')
         @include('components.sidebar')
-        <div id="allpost"></div>
+
         <div class="content-wrapper">
             <section class="content">
                 <div class="box">

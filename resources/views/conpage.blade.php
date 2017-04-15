@@ -7,75 +7,85 @@
 
         <div class="content-wrapper">
             <section class="content">
-                <div class="col-md-12">
-                    <!-- Widget: user widget style 1 -->
-                    <div class="box box-widget widget-user-2">
-                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-black">
-                            <div class="widget-user-image">
-                                <img class="img-circle" src="{{$data['picture']['data']['url']}}" alt="User Avatar">
-                            </div>
-                            <!-- /.widget-user-image -->
-                            <h3 class="widget-user-username">{{$data['name']}}</h3>
-                            <h5 class="widget-user-desc">Page Id : {{$data['id']}}</h5>
-                        </div>
-                        <div class="box-footer no-padding">
-                            {{-- start--}}
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Conversations of {{$data['name']}} </h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="mytable" class="table table-bordered table-striped" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Participants</th>
+                                <th>Message Counts</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
                             @if(isset($data['conversations']))
                                 @foreach($data['conversations']['data'] as $con)
-                                    <div class="col-md-6">
-                                        <!-- USERS LIST -->
-
-                                        <div class="box">
-                                            <div class="box-header with-border">
-                                                <h3 class="box-title">Participants</h3>
-
-                                                <div class="box-tools pull-right">
-                                                    <span class="label label-success">{{$con['message_count']}}
-                                                        Messages</span>
-                                                    <button type="button" class="btn btn-box-tool"
-                                                            data-widget="collapse"><i
-                                                                class="fa fa-minus"></i>
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                            <!-- /.box-header -->
-                                            <div class="box-body no-padding" style="display: block;">
-                                                <ul class="users-list clearfix">
-                                                    @foreach($con['participants']['data'] as $par)
-                                                        <li>
-                                                            <img src="@if(isset($par['picture']['data']['url'])) {{($par['picture']['data']['url'])}}@else {{url('/images/optimus/social/fb.png')}} @endif"
-                                                                 alt="User Image">
-                                                            <a class="users-list-name" href="http://facebook.com/{{$par['id']}}">{{$par['name']}}</a>
-
-                                                        </li>
+                                    <tr>
+                                        <td>@foreach($con['participants']['data'] as $par)
+                                                <a target="_blank"
+                                                   href="http://facebook.com/{{$par['id']}}">{{$par['name']}} </a> ,
+                                            @endforeach </td>
+                                        <td>{{$con['message_count']}}</td>
+                                        <td><a target="_blank"
+                                               href="{{url('/conversations/')}}/{{$data['id']}}/{{$con['id']}}">Start
+                                                Conversation</a></td>
 
 
-                                                    @endforeach
-
-
-                                                </ul>
-                                                <!-- /.users-list -->
-                                            </div>
-                                            <!-- /.box-body -->
-                                            <div class="box-footer text-center" style="display: block;">
-                                                <a href="{{url('/conversations/')}}/{{$data['id']}}/{{$con['id']}}" class="uppercase"><i class="fa fa-comments"></i> Start conversation</a>
-                                            </div>
-                                            <!-- /.box-footer -->
-                                        </div>
-
-                                        <!--/.box -->
-                                    </div>
+                                    </tr>
                                 @endforeach
-                            @else
-                            <h1 align="center">No conversation found</h1>
                             @endif
-                            {{--end--}}
-                        </div>
+                            </tbody>
+
+                            <tfoot>
+                            <tr>
+                                <th>Participants</th>
+                                <th>Message Counts</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
-                    <!-- /.widget-user -->
                 </div>
+
+                {--End box--}}
+
+                {{--<div class="box box-widget widget-user-2">--}}
+                    {{--<!-- Add the bg color to the header using any of the bg-* classes -->--}}
+                    {{--<div class="widget-user-header bg-yellow">--}}
+                        {{--<div class="widget-user-image">--}}
+                            {{--<img class="img-circle" src="{{$data['picture']['data']['url']}}" alt="User Avatar">--}}
+                        {{--</div>--}}
+                        {{--<!-- /.widget-user-image -->--}}
+                        {{--<h3 class="widget-user-username">{{$data['name']}}</h3>--}}
+                        {{--<h5 class="widget-user-desc">Page Id : {{$data['id']}}</h5>--}}
+                    {{--</div>--}}
+                    {{--<div class="box-footer no-padding">--}}
+                        {{--<ul class="nav nav-stacked">--}}
+                            {{--@if(isset($data['conversations']))--}}
+                                {{--@foreach($data['conversations']['data'] as $con)--}}
+                                    {{--<li><a href="{{url('/conversations/')}}/{{$data['id']}}/{{$con['id']}}">--}}
+                                            {{--Participants--}}
+                                            {{--<div class="pull-left">--}}
+                                                {{--@foreach($con['participants']['data'] as $par)--}}
+                                                    {{--<a class="badge"--}}
+                                                       {{--href="http://facebook.com/{{$par['id']}}">{{$par['name']}}</a>--}}
+                                                {{--@endforeach--}}
+                                            {{--</div>--}}
+                                            {{--<span class="pull-right badge bg-blue">{{$con['message_count']}}</span></a>--}}
+                                    {{--</li>--}}
+                                {{--@endforeach--}}
+                            {{--@endif--}}
+
+                        {{--</ul>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
 
             </section>
         </div>

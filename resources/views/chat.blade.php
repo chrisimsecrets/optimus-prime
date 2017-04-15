@@ -39,14 +39,12 @@
                                         </div>
                                         <!-- /.direct-chat-info -->
                                         @foreach($response['participants']['data'] as $par)
-                                            @if($par['id']==$data['from']['id'])
-                                                <?php $img = $par['picture']['data']['url']  ?>
-                                            @else
 
-                                            @endif
+
+
                                         @endforeach
-                                        <img class="direct-chat-img" src="{{$img}}"
-                                             alt="message user image"><!-- /.direct-chat-img -->
+                                        {{--<img class="direct-chat-img" src="{{$img}}"--}}
+                                             {{--alt="message user image"><!-- /.direct-chat-img -->--}}
                                         <div class="direct-chat-text">
                                             {{$data['message']}}
                                         </div>
@@ -104,8 +102,8 @@
                                 <!-- Add the bg color to the header using any of the bg-* classes -->
                                 <div class="widget-user-header bg-yellow">
                                     <div class="widget-user-image">
-                                        <img class="img-circle" src="{{$par['picture']['data']['url']}}"
-                                             alt="User Avatar">
+                                        {{--<img class="img-circle" src="{{$par['picture']['data']['url']}}"--}}
+                                             {{--alt="User Avatar">--}}
                                     </div>
                                     <!-- /.widget-user-image -->
                                     <h3 class="widget-user-username">{{$par['name']}}</h3>
@@ -191,7 +189,7 @@
 
             }
 
-            setInterval(auto_load, 1000);
+            setInterval(auto_load, 2000);
 
         }
 
