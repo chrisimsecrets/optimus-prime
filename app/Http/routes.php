@@ -252,6 +252,7 @@ Route::group(['middleware' => 'web'], function () {
         // shop
 
         Route::get('/shop','ShopController@index');
+        Route::get('/shop/plugins','ShopController@getPlugins');
 
 //        virtual assistant routes
 

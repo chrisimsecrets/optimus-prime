@@ -68,9 +68,14 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button data-id="{{$d->id}}" class="btn btn-xs btn-danger"><i
+                                        @if($d->status != 'deactive') <button data-id="{{$d->id}}" class="btn btn-xs action btn-danger"><i
                                                     class="fa fa-trash"></i> Deactive
-                                        </button>
+                                        </button> @else
+                                            <button data-id="{{$d->id}}" class="btn action btn-xs btn-success"><i
+                                                        class="fa fa-tint"></i> Active
+                                            </button>
+                                        @endif
+
                                         <a href="{{url('/user')}}/{{$d->id}}" class="btn btn-xs btn-default"><i
                                                     class="fa fa-edit"> Edit</i> </a></td>
 
@@ -104,9 +109,9 @@
 
 @section('js')
     <script>
-        $('.btn-danger').click(function () {
+        $('.action').click(function () {
             var id = $(this).attr('data-id');
-            var action = confirm("Do you want to deactive this user ?");
+            var action = confirm("Are you sure ?");
             if (action) {
 
                 $.ajax({

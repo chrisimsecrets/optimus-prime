@@ -323,15 +323,17 @@ class Prappo extends Controller
 //        echo "<br>";
 //        echo "End of the week ". Carbon::now()->endOfWeek()->format('Y-m-d');
 
-        $postTime = "2017-03-18 01:12";
-        $currentTime = Carbon::now()->format('Y-m-d H:i');
+//        $postTime = "2017-03-18 01:12";
+//        $currentTime = Carbon::now()->format('Y-m-d H:i');
+//
+//        $timezone = User::where('id', '1')->value('timezone');
+//
+//        $date = Carbon::createFromFormat('Y-m-d H:i', $postTime, $timezone);
+//        $date->setTimezone('UTC');
+//        $realPostTime = $date->format('Y-m-d H:i');
+//        echo "Current date $currentTime and Post time $realPostTime";
 
-        $timezone = User::where('id', '1')->value('timezone');
-
-        $date = Carbon::createFromFormat('Y-m-d H:i', $postTime, $timezone);
-        $date->setTimezone('UTC');
-        $realPostTime = $date->format('Y-m-d H:i');
-        echo "Current date $currentTime and Post time $realPostTime";
+        print_r($_SERVER['HTTP_HOST']);
     }
 
     public static function comment($id, $text)

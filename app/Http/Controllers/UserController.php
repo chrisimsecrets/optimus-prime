@@ -35,8 +35,9 @@ class UserController extends Controller
         return view('adduser');
     }
 
-    public function adminDashboard(){
-        if(Auth::user()->type != 'admin'){
+    public function adminDashboard()
+    {
+        if (Auth::user()->type != 'admin') {
             return "forbidden";
         }
         return view('admin');
@@ -87,7 +88,7 @@ class UserController extends Controller
 
             // creating settings data for this user
             $settings = new Setting();
-            $settings->userId = User::where('email',$request->email)->value('id');
+            $settings->userId = User::where('email', $request->email)->value('id');
             $settings->save();
 
             return "success";
@@ -156,7 +157,7 @@ class UserController extends Controller
             'in' => $request->in,
             'fbBot' => $request->fbBot,
             'slackBot' => $request->slackBot,
-            'contacts'=>$request->contacts
+            'contacts' => $request->contacts
         ]);
 
 
@@ -175,9 +176,16 @@ class UserController extends Controller
         }
 
         try {
-            User::where('id', $request->id)->update([
-                'status' => 'deactive'
-            ]);
+            if (User::where('id', $request->id)->value('status') == 'active') {
+                User::where('id', $request->id)->update([
+                    'status' => 'deactive'
+                ]);
+            } else {
+                User::where('id', $request->id)->update([
+                    'status' => 'active'
+                ]);
+            }
+
             return "success";
         } catch (\Exception $e) {
             return $e->getMessage();

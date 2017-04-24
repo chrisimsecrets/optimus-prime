@@ -163,4 +163,6 @@ class Plugins extends Controller
         echo(self::menu());
 
     }
+
+
 }

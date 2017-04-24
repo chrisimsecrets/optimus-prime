@@ -16,9 +16,9 @@ class UserfiController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->type != 'admin') {
-            return "forbidden";
-        }
+//        if (Auth::user()->type != 'admin') {
+//            return "forbidden";
+//        }
         $data = User::all();
 
         return view('userfi::index', compact('data'));
