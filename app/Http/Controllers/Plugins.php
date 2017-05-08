@@ -14,6 +14,12 @@ use ZipArchive;
 
 class Plugins extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
+
     public function index()
     {
         if (Auth::user()->type != "admin") {

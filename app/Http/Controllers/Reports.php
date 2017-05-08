@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class Reports extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
     public function index(){
         return view('reports');
     }

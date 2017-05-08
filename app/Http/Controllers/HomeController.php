@@ -30,6 +30,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        \App::setLocale(CoreController::getLang());
+
     }
 
     /**

@@ -1,14 +1,13 @@
-<div id="lang"></div>
 @extends('layouts.app')
 @section('title','Write')
 
-@section('css')
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="{{ elixir('js/custom.js') }}"></script>
-    <script src="opt/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="opt/sweetalert.css">
+{{--@section('css')--}}
+    {{--<script type="text/javascript" src="https://www.google.com/jsapi"></script>--}}
+    {{--<script src="{{ elixir('js/custom.js') }}"></script>--}}
+    {{--<script src="opt/sweetalert.min.js"></script>--}}
+    {{--<link rel="stylesheet" type="text/css" href="opt/sweetalert.css">--}}
 
-@endsection
+{{--@endsection--}}
 
 @section('content')
     <div class="wrapper">

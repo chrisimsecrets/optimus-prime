@@ -12,6 +12,11 @@ use App\Http\Controllers\Controller;
 
 class FollowersController extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View

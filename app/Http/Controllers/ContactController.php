@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+    }
+
     /**
      * Display a listing of the resource.
      *

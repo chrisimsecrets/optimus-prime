@@ -13,43 +13,48 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function index(){
-        $name = Auth::user()->name;
-        $email = Auth::user()->email;
-        return view('profile',compact('name','email'));
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
     }
 
-    public function update(Request $re){
+    public function index()
+    {
+        $name = Auth::user()->name;
+        $email = Auth::user()->email;
+        return view('profile', compact('name', 'email'));
+    }
+
+    public function update(Request $re)
+    {
         $name = $re->name;
         $email = $re->email;
         $oldPass = $re->oldPass;
         $newPass = $re->newPass;
-        if($newPass == ""){
-            User::where('email',Auth::user()->email)->update([
-                'email'=>$email,
-                'name'=>$name,
+        if ($newPass == "") {
+            User::where('email', Auth::user()->email)->update([
+                'email' => $email,
+                'name' => $name,
                 'timezone' => $re->timezone,
                 'timeFormat' => $re->timeFormat
-            ]) ;
+            ]);
 
             return "success";
-        }
-        else{
-            if($oldPass == ""){
+        } else {
+            if ($oldPass == "") {
                 return "Please input old password";
-            }
-            else{
-                if(Hash::check($oldPass,Auth::user()->password)){
-                    User::where('email',Auth::user()->email)->update([
-                        'email'=>$email,
-                        'name'=>$name,
-                        'password'=>bcrypt($newPass),
+            } else {
+                if (Hash::check($oldPass, Auth::user()->password)) {
+                    User::where('email', Auth::user()->email)->update([
+                        'email' => $email,
+                        'name' => $name,
+                        'password' => bcrypt($newPass),
                         'timezone' => $re->timezone,
                         'timeFormat' => $re->timeFormat
                     ]);
                     return "success";
-                }
-                else{
+                } else {
                     return "Old password didn't match";
                 }
             }

@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Auth;
 class AllpostController extends Controller
 {
 
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+    }
+
     /**
      *  show all posts view
      */

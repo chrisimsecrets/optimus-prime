@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LinkedinController extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */

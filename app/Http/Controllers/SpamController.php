@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SpamController
 {
+
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
     /**
      * Display a listing of the resource.
      *

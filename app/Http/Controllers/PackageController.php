@@ -8,6 +8,11 @@ use App\Http\Requests;
 
 class PackageController extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
     /**
      * Display a listing of the resource.
      *

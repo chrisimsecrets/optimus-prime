@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class OptLogs extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

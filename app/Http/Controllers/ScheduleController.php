@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
 
+    }
 
     /*this code for next version */
 

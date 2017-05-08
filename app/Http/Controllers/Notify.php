@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class Notify extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
     //
     /**
      * @param Request $re

@@ -3,9 +3,13 @@
     <a href="{{ url('/home') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
 
-        <span class="logo-mini"><img src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') {{ url('/images/optimus/logo-login.png')}} @else {{ url('/images/optimus/logo-mini.png') }} @endif" alt="Optimus"></span>
+        <span class="logo-mini"><img
+                    src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') {{ url('/images/optimus/logo-login.png')}} @else {{ url('/images/optimus/logo-mini.png') }} @endif"
+                    alt="Optimus"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') {{ url('/images/optimus/logo-login.png')}} @else {{ url('/images/optimus/logo-mini.png') }} @endif" alt="Optimus"><b>Optimus</b></span>
+        <span class="logo-lg"><img
+                    src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') {{ url('/images/optimus/logo-login.png')}} @else {{ url('/images/optimus/logo-mini.png') }} @endif"
+                    alt="Optimus"><b>Optimus</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -17,15 +21,65 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                {{--<li class="dropdown messages-menu">--}}
+                {{-- Language settings--}}
 
-                    {{--<a id="intro" href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                        {{--<i class="fa fa-question"></i>--}}
-                        {{--Help--}}
-                    {{--</a>--}}
+                <li class="dropdown messages-menu">
 
-                {{--</li>--}}
-                <!-- Messages: style can be found in dropdown.less-->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-language"></i>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">Select your language</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+
+                                <li>
+                                    <a target="_blank" href="#">
+                                        <div class="pull-left">
+                                            <span class="flag-icon flag-icon-gb"></span>
+
+                                        </div>
+                                        <h4>
+                                            English
+
+                                        </h4>
+
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a target="_blank" href="#">
+                                        <div class="pull-left">
+                                            <span class="flag-icon flag-icon-bd"></span>
+
+                                        </div>
+                                        <h4>
+                                            Bangla
+
+                                        </h4>
+
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+                        @if(Auth::user()->type == 'admin')
+                            <li class="footer"><a href="{{ url('/language/add') }}">Add new language</a></li>
+                        @endif
+                    </ul>
+                </li>
+            {{--<li class="dropdown messages-menu">--}}
+
+            {{--<a id="intro" href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
+            {{--<i class="fa fa-question"></i>--}}
+            {{--Help--}}
+            {{--</a>--}}
+
+            {{--</li>--}}
+            <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -33,7 +87,10 @@
                         <span class="label label-success">{{ \App\Notify::where('type','message')->where('userId',Auth::user()->id)->count() }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have {{ \App\Notify::where('type','message')->where('userId',Auth::user()->id)->count() }} messages</li>
+                        <li class="header">You
+                            have {{ \App\Notify::where('type','message')->where('userId',Auth::user()->id)->count() }}
+                            messages
+                        </li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -67,7 +124,10 @@
                         <span class="label label-warning">{{ \App\Notify::where('type','fbnotify')->where('userId',Auth::user()->id)->count() }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have {{ \App\Notify::where('type','fbnotify')->where('userId',Auth::user()->id)->count() }} messages</li>
+                        <li class="header">You
+                            have {{ \App\Notify::where('type','fbnotify')->where('userId',Auth::user()->id)->count() }}
+                            messages
+                        </li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">

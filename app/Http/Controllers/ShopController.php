@@ -10,6 +10,11 @@ use Nwidart\Modules\Facades\Module;
 
 class ShopController extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
     public function index(){
         if(Auth::user()->type != "admin"){
             return "Access denied";

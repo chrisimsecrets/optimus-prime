@@ -7,7 +7,7 @@
 
         <div class="content-wrapper">
             <section class="content-header">
-                <h1>Dashboard</h1>
+                <h1>{{trans('dashboard.Dashboard')}}</h1>
             </section>
 
             <section data-step="1" data-intro="You will see summary of your sites and posts" class="content">
@@ -19,7 +19,7 @@
                                 <span class="info-box-icon bg-blue"><i class="fa fa-facebook"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text">page likes</span>
+                                    <span class="info-box-text">{{trans('dashboard.page likes')}}</span>
                                     <span id="dFbLikes" class="info-box-number">Loading ..</span>
                                 </div><!-- /.info-box-content -->
                             </div><!-- /.info-box -->

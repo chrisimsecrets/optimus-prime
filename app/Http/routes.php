@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CoreController;
+
 Route::get('/', function () {
     return redirect('home');
 });
@@ -12,7 +14,9 @@ Route::any('/schedule/fire', 'ScheduleController@fire');
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+
     Route::group(['middleware' => 'auth'], function () {
+
         Route::resource('/contact','ContactController');
 
         Route::get('/prappo', 'Prappo@test');
@@ -194,8 +198,12 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/user/list', 'UserController@userList');
         Route::get('/user/{id}', 'UserController@userEdit');
         Route::post('/user/update', 'UserController@userUpdate');
+
+//        admin controllers
         Route::get('/admin','UserController@adminIndex');
         Route::get('/admin/options','AdminController@options');
+        Route::get('/language/add','AdminController@addLanguageIndex');
+        Route::post('/language/add','AdminController@addLanguage');
 
         Route::get('/instagram/me','InstagramController@index');
         Route::get('/instagram/followers','InstagramController@followers');

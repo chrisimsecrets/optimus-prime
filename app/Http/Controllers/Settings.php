@@ -19,6 +19,11 @@ use Facebook\Exceptions\FacebookSDKException;
 
 class Settings extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

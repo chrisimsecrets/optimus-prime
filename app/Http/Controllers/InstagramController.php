@@ -15,6 +15,7 @@ class InstagramController extends Controller
 
     public function __construct()
     {
+        \App::setLocale(CoreController::getLang());
         $this->instagram = new \InstagramAPI\Instagram();
         $username = Data::get('inUser');
         $password = Data::get('inPass');
@@ -25,6 +26,9 @@ class InstagramController extends Controller
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
+
+
+
 
 
     }
@@ -375,27 +379,26 @@ class InstagramController extends Controller
             return "Commented on $count self posts";
         } elseif ($request->type == "hashtag") {
             $datas = $insta->getHashtagFeed($request->tag);
-            foreach ($datas->ranked_items as $data){
-                $insta->comment($data->id,$request->comment);
+            foreach ($datas->ranked_items as $data) {
+                $insta->comment($data->id, $request->comment);
                 $count++;
             }
             return "Commented on $count hashtag posts";
         }
     }
 
-    public function scraper(Request $request){
+    public function scraper(Request $request)
+    {
         $insta = $this->instagram;
-        if($request->type == "tag"){
+        if ($request->type == "tag") {
             $datas = $insta->getHashtagFeed($request->data);
-            return view('instaGetHashTagFeed',compact('datas'));
-        }
-        elseif ($request->type == "user"){
+            return view('instaGetHashTagFeed', compact('datas'));
+        } elseif ($request->type == "user") {
             $datas = $insta->searchUsers($request->data);
-            return view('instaSearchUsers',compact('datas'));
-        }
-        elseif($request->type == "location"){
+            return view('instaSearchUsers', compact('datas'));
+        } elseif ($request->type == "location") {
             $datas = $insta->searchFBLocation($request->data);
-            return view('instaSearchLocation',compact('datas'));
+            return view('instaSearchLocation', compact('datas'));
         }
     }
 

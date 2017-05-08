@@ -20,6 +20,12 @@ use Illuminate\Support\Facades\Auth;
 
 class FacebookController extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -369,7 +375,7 @@ class FacebookController extends Controller
 //        }
 //        print_r($data);
 
-        return view('fbReportViewSingle',compact('data'));
+        return view('fbReportViewSingle', compact('data'));
     }
 
     /**

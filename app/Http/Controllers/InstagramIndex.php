@@ -8,6 +8,11 @@ use App\Http\Requests;
 
 class InstagramIndex extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
     /**
      * Auto follow page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

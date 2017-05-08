@@ -25,6 +25,11 @@ use Facebook\Exceptions\FacebookSDKException;
 
 class Write extends Controller
 {
+    public function __construct()
+    {
+        \App::setLocale(CoreController::getLang());
+
+    }
 
     public static function get_value($field)
     {
@@ -33,10 +38,15 @@ class Write extends Controller
 
     public function index()
     {
-        $fbPages = FacebookPages::all();
-        $fbGroups = facebookGroups::all();
+        $fbPages = FacebookPages::where('userId',Auth::user()->id)->get();
+        $fbGroups = facebookGroups::where('userId',Auth::user()->id)->get();
         if (Data::get('liAccessToken') != "") {
-            $liCompanies = LinkedinController::companies()['values'];
+            try {
+                $liCompanies = LinkedinController::companies()['values'];
+            } catch (Exception $exception) {
+                $liCompanies = "";
+            }
+
         } else {
             $liCompanies = "";
         }
@@ -1172,7 +1182,8 @@ class Write extends Controller
     }
 
 
-    public static function lnWriteS($postId, $title, $image,$description,$content,$imagetype,$sharepost,$link){
+    public static function lnWriteS($postId, $title, $image, $description, $content, $imagetype, $sharepost, $link)
+    {
 //        if ($request->has('image') && $request->sharepost == 'no') {
 //            throw new Exception('Only image posting is not available for linkedin. Rather try Link Post');
 //        }
@@ -1200,9 +1211,6 @@ class Write extends Controller
             $linkedIn->post("/v1/companies/{$company['id']}/shares?format=json", $body);
         }
     }
-
-
-
 
 
 }

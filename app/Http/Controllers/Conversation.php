@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Conversation extends Controller
 {
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View|string
      */

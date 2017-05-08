@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('timezone')->nullable();
             $table->string('timeFormat')->nullable();
             $table->string('theme')->nullable();
-            
+            $table->string('lang')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
