@@ -204,6 +204,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/admin/options','AdminController@options');
         Route::get('/language/add','AdminController@addLanguageIndex');
         Route::post('/language/add','AdminController@addLanguage');
+        Route::post('/language/change','AdminController@changeLanguage');
 
         Route::get('/instagram/me','InstagramController@index');
         Route::get('/instagram/followers','InstagramController@followers');

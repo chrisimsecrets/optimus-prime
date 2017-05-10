@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Lang;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -126,5 +127,17 @@ class AdminController extends Controller
             return $exception->getMessage();
         }
 
+    }
+
+    public function changeLanguage(Request $request)
+    {
+        try {
+            User::where('id', Auth::user()->id)->update([
+                'lang' => $request->lang
+            ]);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 }

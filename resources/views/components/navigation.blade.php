@@ -36,7 +36,7 @@
                             <ul class="menu">
 
                                 <li>
-                                    <a target="_blank" href="#">
+                                    <a data-id="gb" class="lang"  href="#">
                                         <div class="pull-left">
                                             <span class="flag-icon flag-icon-gb"></span>
 
@@ -50,7 +50,7 @@
                                 </li>
 
                                 <li>
-                                    <a target="_blank" href="#">
+                                    <a data-id="bd" class="lang"  href="#">
                                         <div class="pull-left">
                                             <span class="flag-icon flag-icon-bd"></span>
 

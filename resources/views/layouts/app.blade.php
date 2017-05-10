@@ -39,7 +39,7 @@
     {{--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-ios.min.css">--}}
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -57,7 +57,7 @@
 
 @yield('content')
 <script>
-    function appPath(){
+    function appPath() {
         return "{{url('/')}}";
     }
 </script>
@@ -82,7 +82,7 @@
 
 <script>
 
-     $(document).ready(function () {
+    $(document).ready(function () {
 
         $('#intro').click(function () {
             introJs().start();
@@ -178,6 +178,29 @@
 
     });
     @endif
+
+    $('.lang').click(function () {
+        var lang = $(this).attr('data-id');
+        $.ajax({
+            type: 'POST',
+            url: '{{url('/language/change')}}',
+            data: {
+                'lang': lang
+            },
+            success: function (data) {
+                if (data == "success") {
+                    location.reload();
+                } else {
+                    alert(data);
+                }
+            },
+            error: function (data) {
+                alert("Something went wrong , Please check console message or log");
+                console.log(data.responseText);
+            }
+        });
+        alert("Changing language");
+    })
 </script>
 @yield('js')
 <script>
