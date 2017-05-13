@@ -20,7 +20,7 @@
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">{{trans('dashboard.page likes')}}</span>
-                                    <span id="dFbLikes" class="info-box-number">Loading ..</span>
+                                    <span id="dFbLikes" class="info-box-number">{{trans('dashboard.Loading')}}</span>
                                 </div><!-- /.info-box-content -->
                             </div><!-- /.info-box -->
                         </div><!-- /.col -->
@@ -33,8 +33,8 @@
                                 <span class="info-box-icon bg-purple"><i class="fa fa-tumblr"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text">followers</span>
-                                    <span id="dTuFollowers" class="info-box-number">Loading ..</span>
+                                    <span class="info-box-text">{{trans('dashboard.followers')}}</span>
+                                    <span id="dTuFollowers" class="info-box-number">{{trans('dashboard.Loading')}}</span>
                                 </div><!-- /.info-box-content -->
                             </div><!-- /.info-box -->
                         </div><!-- /.col -->
@@ -47,8 +47,8 @@
                                 <span class="info-box-icon bg-light-blue"><i class="fa fa-twitter"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text">followers</span>
-                                    <span id="dTwFollowers" class="info-box-number">Loading ..</span>
+                                    <span class="info-box-text">{{trans('dashboard.followers')}}</span>
+                                    <span id="dTwFollowers" class="info-box-number">{{trans('dashboard.Loading')}}</span>
                                 </div><!-- /.info-box-content -->
                             </div><!-- /.info-box -->
                         </div><!-- /.col -->
@@ -60,8 +60,8 @@
                                 <span class="info-box-icon bg-light-blue-active"><i class="fa fa-linkedin"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text">company followers</span>
-                                    <span id="companyFollowers" class="info-box-number">Loading ..</span>
+                                    <span class="info-box-text">{{trans('dashboard.company followers')}}</span>
+                                    <span id="companyFollowers" class="info-box-number">{{trans('dashboard.followers')}}</span>
                                 </div><!-- /.info-box-content -->
                             </div><!-- /.info-box -->
                         </div><!-- /.col -->
@@ -97,7 +97,7 @@
                             <div class="inner">
                                 <h3>{{$logs}}</h3>
 
-                                <p>Total Logs</p>
+                                <p>{{trans('dashboard.Total Logs')}}</p>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-bell"></i>
@@ -113,7 +113,7 @@
                             <div class="inner">
                                 <h3>{{$tuBlogs}}</h3>
 
-                                <p>Tumblr Blogs</p>
+                                <p>{{trans('dashboard.Tumblr')}} {{trans('dashboard.Blogs')}}</p>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-tumblr"></i>
@@ -129,7 +129,7 @@
                             <div class="inner">
                                 <h3>{{$fbPages}}</h3>
 
-                                <p>Facebook Pages</p>
+                                <p>{{trans('dashboard.Facebook')}}{{trans('dashboard.Pages')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-facebook"></i>
@@ -145,7 +145,7 @@
                             <div class="inner">
                                 <h3>{{$fbGroups}}</h3>
 
-                                <p>Facebook Groups</p>
+                                <p>{{trans('dashboard.Facebook')}} {{trans('dashboard.Groups')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-facebook"></i>
@@ -164,7 +164,7 @@
                                 <div class="inner">
                                     <h3 id="liPostedJobs">0</h3>
 
-                                    <p>Posted Jobs</p>
+                                    <p>{{trans('dashboard.Posted Jobs')}}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-linkedin"></i>
@@ -180,7 +180,7 @@
                                 <div class="inner">
                                     <h3 id="liCompanyUpdates">0</h3>
 
-                                    <p>Company Updates</p>
+                                    <p>{{trans('dashboard.Company Updates')}}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-linkedin"></i>
@@ -197,7 +197,7 @@
                             <!-- small box -->
                             <div class="small-box bg-gray-active">
                                 <div class="inner">
-                                    <h3 id="inFollowers">Loading ..</h3>
+                                    <h3 id="inFollowers">{{trans('dashboard.Loading')}}</h3>
 
                                     <p>Instagram Followers</p>
                                 </div>
@@ -213,9 +213,9 @@
                             <!-- small box -->
                             <div class="small-box bg-gray-light">
                                 <div class="inner">
-                                    <h3 id="inFollosing">Loading..</h3>
+                                    <h3 id="inFollosing">{{trans('dashboard.Loading')}}</h3>
 
-                                    <p>Instagram Fllowing</p>
+                                    <p>{{trans('dashboard.Instagram')}} {{trans('dashboard.Fllowing')}} </p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-instagram"></i>
@@ -235,7 +235,7 @@
                         <div class="description-block border-right">
                             <span class="description-percentage text-blue"><i class="fa fa-facebook"></i></span>
                             <h2 class="description-header">{{$fbPostCount}}</h2>
-                            <span class="description-text">Facebook page Post</span>
+                            <span class="description-text">{{trans('dashboard.Facebook page Post')}}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
@@ -244,7 +244,7 @@
                         <div class="description-block border-right">
                             <span class="description-percentage text-black"><i class="fa fa-tumblr"></i></span>
                             <h2 class="description-header">{{$tuPostCount}}</h2>
-                            <span class="description-text">Tumblr Posts</span>
+                            <span class="description-text">{{trans('dashboard.Tumblr Posts')}}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
@@ -253,7 +253,7 @@
                         <div class="description-block border-right">
                             <span class="description-percentage text-black"><i class="fa fa-wordpress"></i></span>
                             <h2 class="description-header">{{$wpPostCount}}</h2>
-                            <span class="description-text">Wordpress Count</span>
+                            <span class="description-text">{{trans('dashboard.Wordpress Count')}}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
@@ -262,7 +262,7 @@
                         <div class="description-block">
                             <span class="description-percentage text-red"><i class="fa fa-twitter"></i></span>
                             <h2 class="description-header">{{$twPostCount}}</h2>
-                            <span class="description-text">Twitter Posts</span>
+                            <span class="description-text">{{trans('dashboard.Twitter Posts')}}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
@@ -271,7 +271,7 @@
                         <div class="description-block">
                             <span class="description-percentage text-yellow"><i class="fa fa-facebook"></i></span>
                             <h2 class="description-header">{{$fbgCount}}</h2>
-                            <span class="description-text">Facebook Group Post</span>
+                            <span class="description-text">{{trans('dashboard.Facebook Group Post')}}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
@@ -280,7 +280,7 @@
                         <div class="description-block">
                             <span class="description-percentage text-green"><i class="fa fa-file"></i></span>
                             <h2 class="description-header">{{$allPost}}</h2>
-                            <span class="description-text">All Posts</span>
+                            <span class="description-text">{{trans('dashboard.All Posts')}}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
