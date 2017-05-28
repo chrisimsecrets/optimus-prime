@@ -21,18 +21,18 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-th"></i>
-                        <span>Admin Panel</span>
+                        <span>{{trans('sidebar.Admin Panel')}}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
 
                     <ul class="treeview-menu" style="display: none">
                         <li><a href="{{ url('/admin') }}"><i class="fa fa-dashboard"></i>
-                                <span>Admin Dashboard</span></a></li>
-                        <li><a href="{{ url('/user/add') }}"><i class="fa fa-plus-circle"></i> <span>Add User</span></a>
+                                <span>{{trans('sidebar.Admin Dashboard')}}</span></a></li>
+                        <li><a href="{{ url('/user/add') }}"><i class="fa fa-plus-circle"></i> <span>{{trans('sidebar.Add User')}}</span></a>
                         </li>
-                        <li><a href="{{ url('/user/list') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+                        <li><a href="{{ url('/user/list') }}"><i class="fa fa-users"></i> <span>{{trans('sidebar.Users')}}</span></a></li>
                         <li><a href="{{ url('/admin/options') }}"><i class="fa fa-key"></i>
-                                <span>Admin Options</span></a></li>
+                                <span>{{trans('sidebar.Admin Options')}}</span></a></li>
 
                         {!! \App\Http\Controllers\Plugins::menu("admin") !!}
 
@@ -40,20 +40,20 @@
                 </li>
 
             @endif
-            <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
-            <li><a href="{{ url('/write') }}"><i class="fa fa-edit"></i> <span>Write</span></a></li>
-            <li><a href="{{ url('/allpost') }}"><i class="fa fa-copy"></i> <span>All posts</span></a></li>
+            <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>{{trans('sidebar.Dashboard')}}</span> </a></li>
+            <li><a href="{{ url('/write') }}"><i class="fa fa-edit"></i> <span>{{trans('sidebar.Write')}}</span></a></li>
+            <li><a href="{{ url('/allpost') }}"><i class="fa fa-copy"></i> <span>{{trans('sidebar.All posts')}}</span></a></li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-clock-o"></i>
-                    <span>Schedule</span>
+                    <span>{{trans('sidebar.Schedule')}}</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
 
                 <ul class="treeview-menu" style="display: none">
 
                     <li><a href="{{ url('/schedule/day') }}"><i class="fa fa-list-ul"></i>
-                            <span>Posts</span></a></li>
+                            <span>{{trans('sidebar.Posts')}}</span></a></li>
 
 
                 </ul>
@@ -63,16 +63,16 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-list-ul"></i>
-                        <span>Contacts</span>
+                        <span>{{trans('sidebar.Contacts')}}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
 
                     <ul class="treeview-menu" style="display: none">
 
                         <li><a href="{{ url('/contact/create') }}"><i class="fa fa-user-plus"></i>
-                                <span>New Contact</span></a></li>
+                                <span>{{trans('sidebar.New Contact')}}</span></a></li>
 
-                        <li><a href="{{ url('/contact') }}"><i class="fa fa-list-alt"></i> <span>Contact List</span></a>
+                        <li><a href="{{ url('/contact') }}"><i class="fa fa-list-alt"></i> <span>{{trans('sidebar.Contact List')}}</span></a>
                         </li>
 
                     </ul>
@@ -83,16 +83,16 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-comment"></i>
-                    <span>Chat Bot</span>
+                    <span>{{trans('sidebar.Chat Bot')}}</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
 
                 <ul class="treeview-menu" style="display: none">
                     @if(\App\Http\Controllers\Data::myPackage('fbBot'))
-                        <li><a href="{{ url('/fb/bot') }}"><i class="fa fa-facebook"></i> <span>FB</span></a></li>
+                        <li><a href="{{ url('/fb/bot') }}"><i class="fa fa-facebook"></i> <span>{{trans('sidebar.FB')}}</span></a></li>
                     @endif
                     @if(\App\Http\Controllers\Data::myPackage('slackBot'))
-                        <li><a href="{{ url('/slack/bot') }}"><i class="fa fa-slack"></i> <span>Slack</span></a></li>
+                        <li><a href="{{ url('/slack/bot') }}"><i class="fa fa-slack"></i> <span>{{trans('sidebar.Slack')}}</span></a></li>
                     @endif
                 </ul>
             </li>
@@ -115,21 +115,20 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-facebook"></i>
-                        <span>Facebook</span>
+                        <span>{{trans('sidebar.Facebook')}}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
-                        <li><a href="{{ url('/facebook') }}"><i class="fa fa-file"></i> Facebook Pages</a></li>
-                        <li><a href="{{ url('/fbgroups') }}"><i class="fa fa-users"></i> Facebook Groups</a></li>
-                        <li><a href="{{ url('/conversations') }}"><i class="fa fa-comments"></i> Conversations</a></li>
-                        <li><a href="{{ url('/fbreport') }}"><i class="fa fa-pie-chart"></i> Facebook Report</a></li>
-                        <li><a href="{{ url('/fbmassgrouppost') }}"><i class="fa fa-bolt"></i> Facebook Mass Group Post</a>
+                        <li><a href="{{ url('/facebook') }}"><i class="fa fa-file"></i>{{trans('sidebar.Facebook Pages')}} </a></li>
+                        <li><a href="{{ url('/fbgroups') }}"><i class="fa fa-users"></i>{{trans('sidebar.Facebook Groups')}} </a></li>
+                        <li><a href="{{ url('/conversations') }}"><i class="fa fa-comments"></i>{{trans('sidebar.Conversations')}} </a></li>
+                        <li><a href="{{ url('/fbreport') }}"><i class="fa fa-pie-chart"></i>{{trans('sidebar.Facebook Report')}} </a></li>
+                        <li><a href="{{ url('/fbmassgrouppost') }}"><i class="fa fa-bolt"></i>{{trans('sidebar.Facebook Mass Group Post')}} </a>
                         </li>
-                        <li><a href="{{ url('/facebook/masscomment') }}"><i class="fa fa-comment"></i> Facebook Mass
-                                Comment</a>
+                        <li><a href="{{ url('/facebook/masscomment') }}"><i class="fa fa-comment"></i>{{trans('sidebar.Facebook Mass Comment')}} </a>
                         </li>
-                        <li><a href="{{ url('/masssend') }}"><i class="fa fa-send"></i> Facebook Mass Send</a></li>
-                        <li><a href="{{ url('scraper') }}"><i class="fa fa-magnet"></i> Facebook Scraper</a></li>
+                        <li><a href="{{ url('/masssend') }}"><i class="fa fa-send"></i>{{trans('sidebar.Facebook Mass Send')}} </a></li>
+                        <li><a href="{{ url('scraper') }}"><i class="fa fa-magnet"></i>{{trans('sidebar.Facebook Scraper')}} </a></li>
                         {!! \App\Http\Controllers\Plugins::menu("facebook") !!}
 
                     </ul>
@@ -142,21 +141,21 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-twitter"></i>
-                        <span>Twitter</span>
+                        <span>{{trans('sidebar.Twitter')}}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none">
-                        <li><a href="{{ url('/twitter') }}"><i class="fa fa-twitter"></i> <span>My account</span></a>
+                        <li><a href="{{ url('/twitter') }}"><i class="fa fa-twitter"></i> <span>{{trans('sidebar.My account')}}</span></a>
                         </li>
-                        <li><a href="{{ url('/twitter/message/send') }}"><i class="fa fa-envelope"></i> <span>Send Direct Message</span></a>
+                        <li><a href="{{ url('/twitter/message/send') }}"><i class="fa fa-envelope"></i> <span>{{trans('sidebar.Send Direct Message')}}</span></a>
                         </li>
                         <li><a href="{{ url('/twitter/masssend') }}"><i class="fa fa-envelope"></i>
-                                <span>Mass Message Send</span></a></li>
+                                <span>{{trans('sidebar.Mass Message Send')}}</span></a></li>
                         <li><a href="{{ url('/twitter/autoretweet') }}"><i class="fa fa-retweet"></i>
-                                <span>Mass Retweet</span></a></li>
+                                <span>{{trans('sidebar.Mass Retweet')}}</span></a></li>
                         <li><a href="{{ url('/twitter/autoreply') }}"><i class="fa fa-reply"></i>
-                                <span>Mass Reply</span></a></li>
-                        <li><a href="{{ url('/tw/scraper') }}"><i class="fa fa-magnet"></i> Twitter Scraper</a></li>
+                                <span>{{trans('sidebar.Mass Reply')}}</span></a></li>
+                        <li><a href="{{ url('/tw/scraper') }}"><i class="fa fa-magnet"></i>{{trans('sidebar.Twitter Scraper')}} </a></li>
                         {!! \App\Http\Controllers\Plugins::menu("twitter") !!}
                     </ul>
 
@@ -168,24 +167,24 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-instagram"></i>
-                        <span>Instagram</span>
+                        <span>{{trans('sidebar.Instagram')}}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none">
-                        <li><a href="{{ url('/instagram/me') }}"><i class="fa fa-user"></i> <span>My account</span></a>
-                        <li><a href="{{ url('/instagram/home') }}"><i class="fa fa-home"></i> <span>Home</span></a>
+                        <li><a href="{{ url('/instagram/me') }}"><i class="fa fa-user"></i> <span>{{trans('sidebar.My account')}}</span></a>
+                        <li><a href="{{ url('/instagram/home') }}"><i class="fa fa-home"></i> <span>{{trans('sidebar.Home')}}</span></a>
                         <li><a href="{{ url('/instagram/popular') }}"><i
-                                        class="fa fa-heart"></i><span> Popular Feed</span></a>
+                                        class="fa fa-heart"></i><span>{{trans('sidebar.Popular Feed')}} </span></a>
                         <li><a href="{{ url('/instagram/followers') }}"><i
-                                        class="fa fa-star"></i><span> Followers</span></a>
+                                        class="fa fa-star"></i><span>{{trans('sidebar.Followers')}} </span></a>
                         <li><a href="{{ url('/instagram/following') }}"><i
-                                        class="fa fa-star"></i><span> Following</span></a>
-                        <li><a href="{{ url('/instagram/following/activity') }}"><i class="fa fa-users"></i><span> Following Activity</span></a>
-                        <li><a href="{{ url('/instagram/auto/follow') }}"><i class="fa fa-user-plus"></i><span> Auto follow</span></a>
-                        <li><a href="{{ url('/instagram/auto/unfollow') }}"><i class="fa fa-user-times"></i><span> Auto unfollow</span></a>
-                        <li><a href="{{ url('/instagram/auto/comments') }}"><i class="fa fa-comment"></i><span> Auto comment</span></a>
+                                        class="fa fa-star"></i><span>{{trans('sidebar.Following')}} </span></a>
+                        <li><a href="{{ url('/instagram/following/activity') }}"><i class="fa fa-users"></i><span>{{trans('sidebar.Following Activity')}} </span></a>
+                        <li><a href="{{ url('/instagram/auto/follow') }}"><i class="fa fa-user-plus"></i><span>{{trans('sidebar.Auto follow')}} </span></a>
+                        <li><a href="{{ url('/instagram/auto/unfollow') }}"><i class="fa fa-user-times"></i><span>{{trans('sidebar.Auto unfollow')}} </span></a>
+                        <li><a href="{{ url('/instagram/auto/comments') }}"><i class="fa fa-comment"></i><span>{{trans('sidebar.Auto comment')}} </span></a>
                         {{--                        <li><a href="{{ url('/instagram/auto/message') }}"><i class="fa fa-envelope"></i><span> Auto Message</span></a>--}}
-                        <li><a href="{{ url('/instagram/scraper') }}"><i class="fa fa-search"></i> <span>Scraper</span></a>
+                        <li><a href="{{ url('/instagram/scraper') }}"><i class="fa fa-search"></i> <span>{{trans('sidebar.Scraper')}}</span></a>
                         </li>
                         {!! \App\Http\Controllers\Plugins::menu("instagram") !!}
 
@@ -199,15 +198,15 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-linkedin"></i>
-                        <span>Linkedin</span>
+                        <span>{{trans('sidebar.Linkedin')}}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none">
                         <li><a href="{{ url('/linkedin/updates') }}"><i class="fa fa-refresh"></i>
-                                <span>All updates</span></a>
+                                <span>{{trans('sidebar.All updates')}}</span></a>
                         </li>
                         <li><a href="{{ url('/linkedin/mass_comment') }}"><i class="fa fa-comment"></i>
-                                <span>Mass Comment</span></a></li>
+                                <span>{{trans('sidebar.Mass Comment')}}</span></a></li>
                         {!! \App\Http\Controllers\Plugins::menu("linkedin") !!}
                     </ul>
 
@@ -218,11 +217,11 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-tumblr-square"></i>
-                        <span>Linkedin</span>
+                        <span>{{trans('sidebar.Tumblr')}}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none">
-                        <li><a href="{{ url('/tumblr') }}"><i class="fa fa-tumblr"></i> <span>Tumblr</span></a></li>
+                        <li><a href="{{ url('/tumblr') }}"><i class="fa fa-tumblr"></i> <span>{{trans('sidebar.Tumblr')}}</span></a></li>
                         {!! \App\Http\Controllers\Plugins::menu("tumblr") !!}
                     </ul>
                 </li>
@@ -232,11 +231,11 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-wordpress"></i>
-                        <span>Linkedin</span>
+                        <span>{{trans('sidebar.Wordpress')}} </span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none">
-                        <li><a href="{{ url('/wordpress') }}"><i class="fa fa-wordpress"></i> <span>Wordpress</span></a>
+                        <li><a href="{{ url('/wordpress') }}"><i class="fa fa-wordpress"></i> <span>{{trans('sidebar.Wordpress')}}</span></a>
                         </li>
                         {!! \App\Http\Controllers\Plugins::menu("wordpress") !!}
                     </ul>
@@ -285,11 +284,11 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-bell"></i>
-                    <span>Notifications</span><i class="fa fa-angle-left pull-right"></i>
+                    <span>{{trans('sidebar.Add User')}}Notifications</span><i class="fa fa-angle-left pull-right"></i>
 
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li><a href="{{ url('/notify') }}"><i class="fa fa-bell-o"></i> <span>All Notifications</span></a>
+                    <li><a href="{{ url('/notify') }}"><i class="fa fa-bell-o"></i> <span>{{trans('sidebar.Add User')}}All Notifications</span></a>
                     </li>
 
                     {!! \App\Http\Controllers\Plugins::menu("notifications") !!}
@@ -300,19 +299,19 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-gear"></i>
-                    <span>Settings</span><i class="fa fa-angle-left pull-right"></i>
+                    <span>{{trans('sidebar.Add User')}}Settings</span><i class="fa fa-angle-left pull-right"></i>
 
                 </a>
                 <ul class="treeview-menu" style="display: none;">
 
-                    <li><a href="{{ url('/settings') }}"><i class="fa fa-gear"></i> <span>Settings</span></a></li>
+                    <li><a href="{{ url('/settings') }}"><i class="fa fa-gear"></i> <span>{{trans('sidebar.Add User')}}Settings</span></a></li>
                     <li><a href="{{ url('/settings/notifications') }}"><i class="fa fa-bell"></i>
-                            <span>Notifications</span></a></li>
+                            <span>{{trans('sidebar.Add User')}}Notification</span></a></li>
                     {{--<li><a href="{{ url('/settings/config') }}"><i class="fa fa-gears"></i>--}}
                     {{--<span>Configurations</span></a>--}}
                     {{--</li>--}}
 
-                    <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>{{trans('sidebar.Add User')}}Profile</span></a></li>
 
 
                 </ul>
@@ -324,7 +323,7 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-puzzle-piece"></i>
-                        <span>Plugins</span><i class="fa fa-angle-left pull-right"></i>
+                        <span>{{trans('sidebar.Add User')}}Plugins</span><i class="fa fa-angle-left pull-right"></i>
 
                     </a>
                     <ul class="treeview-menu" style="display: none;">
@@ -332,19 +331,19 @@
                                 <span>Add Plugin</span></a>
                         </li>
                         <li><a href="{{ url('/plugin/list') }}"><i
-                                        class="fa fa-list-ul"></i><span>Plugin List</span></a></li>
+                                        class="fa fa-list-ul"></i><span>{{trans('sidebar.Add User')}}Plugin List</span></a></li>
                     </ul>
                 </li>
 
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-shopping-bag"></i>
-                        <span>Shop</span><i class="fa fa-angle-left pull-right"></i>
+                        <span>{{trans('sidebar.Add User')}}Shop</span><i class="fa fa-angle-left pull-right"></i>
 
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li><a href="{{ url('/shop') }}"><i class="fa fa-home"></i>
-                                <span>Optimus Shop</span></a>
+                                <span>{{trans('sidebar.Add User')}} Plugin Shop</span></a>
                         </li>
 
                     </ul>

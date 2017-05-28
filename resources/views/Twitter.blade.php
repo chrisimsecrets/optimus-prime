@@ -14,26 +14,26 @@
                         <div class="box box-primary">
                             <div class="box-body box-profile">
                                 <img class="profile-user-img img-responsive img-circle"
-                                     src="{{$me[0]->user->profile_image_url}}" alt="User profile picture">
-                                <h3 class="profile-username text-center">{{$me[0]->user->name}}</h3>
+                                     src="@if(isset($me[0])){{$me[0]->user->profile_image_url}}@endif" alt="User profile picture">
+                                <h3 class="profile-username text-center">@if(isset($me[0])){{$me[0]->user->name}}@endif</h3>
                                 <ul class="list-group list-group-unbordered">
                                     <li class="list-group-item">
-                                        <b>Followers</b> <a class="pull-right">{{ $me[0]->user->followers_count }}</a>
+                                        <b>Followers</b> <a class="pull-right">@if(isset($me[0])){{ $me[0]->user->followers_count }}@endif</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Friends</b> <a class="pull-right">{{ $me[0]->user->friends_count }}</a>
-                                    </li>
-
-                                    <li class="list-group-item">
-                                        <b>Favourites</b> <a class="pull-right">{{ $me[0]->user->favourites_count }}</a>
+                                        <b>Friends</b> <a class="pull-right">@if(isset($me[0])){{ $me[0]->user->friends_count }}@endif</a>
                                     </li>
 
                                     <li class="list-group-item">
-                                        <b>Statuses</b> <a class="pull-right">{{ $me[0]->user->statuses_count }}</a>
+                                        <b>Favourites</b> <a class="pull-right">@if(isset($me[0])){{ $me[0]->user->favourites_count }}@endif</a>
                                     </li>
 
                                     <li class="list-group-item">
-                                        <b>Listed</b> <a class="pull-right">{{ $me[0]->user->listed_count }}</a>
+                                        <b>Statuses</b> <a class="pull-right">@if(isset($me[0])){{ $me[0]->user->statuses_count }}@endif</a>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <b>Listed</b> <a class="pull-right">@if(isset($me[0])){{ $me[0]->user->listed_count }}@endif</a>
                                     </li>
 
                                 </ul>
@@ -47,7 +47,7 @@
                                 <h3 class="box-title">Description</h3>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <strong><i class="fa fa-book margin-r-5"></i>{{$me[0]->user->description}}</strong>
+                                <strong><i class="fa fa-book margin-r-5"></i>@if(isset($me[0])){{$me[0]->user->description}}@endif</strong>
 
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
