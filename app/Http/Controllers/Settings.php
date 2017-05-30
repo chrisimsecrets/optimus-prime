@@ -615,9 +615,11 @@ class Settings extends Controller
         }
     }
 
-    public static function getName(){
+    public static function getSoftwareSettings($keyName){
 
+        return SoftwareSettings::where('key',$keyName)->value('value');
     }
+
 
 
 }

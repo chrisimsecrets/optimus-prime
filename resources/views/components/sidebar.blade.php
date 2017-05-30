@@ -5,7 +5,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ url('/images/admin-lte/avatar.png') }}" class="img-circle" alt="User Image">
+                <img @if(Auth::user()->img == "") src="{{ url('/images/admin-lte/avatar.png') }}" @else src="{{url('/uploads')}}/{{Auth::user()->img}}" @endif class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ \Auth::user()->name }}</p>
@@ -284,11 +284,11 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-bell"></i>
-                    <span>{{trans('sidebar.Add User')}}Notifications</span><i class="fa fa-angle-left pull-right"></i>
+                    <span>{{trans('sidebar.Notifications')}}</span><i class="fa fa-angle-left pull-right"></i>
 
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li><a href="{{ url('/notify') }}"><i class="fa fa-bell-o"></i> <span>{{trans('sidebar.Add User')}}All Notifications</span></a>
+                    <li><a href="{{ url('/notify') }}"><i class="fa fa-bell-o"></i> <span>{{trans('sidebar.All Notifications')}}</span></a>
                     </li>
 
                     {!! \App\Http\Controllers\Plugins::menu("notifications") !!}
@@ -299,19 +299,19 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-gear"></i>
-                    <span>{{trans('sidebar.Add User')}}Settings</span><i class="fa fa-angle-left pull-right"></i>
+                    <span>{{trans('sidebar.Settings')}}</span><i class="fa fa-angle-left pull-right"></i>
 
                 </a>
                 <ul class="treeview-menu" style="display: none;">
 
-                    <li><a href="{{ url('/settings') }}"><i class="fa fa-gear"></i> <span>{{trans('sidebar.Add User')}}Settings</span></a></li>
+                    <li><a href="{{ url('/settings') }}"><i class="fa fa-gear"></i> <span>{{trans('sidebar.Settings')}}</span></a></li>
                     <li><a href="{{ url('/settings/notifications') }}"><i class="fa fa-bell"></i>
-                            <span>{{trans('sidebar.Add User')}}Notification</span></a></li>
+                            <span>{{trans('sidebar.Notification')}}</span></a></li>
                     {{--<li><a href="{{ url('/settings/config') }}"><i class="fa fa-gears"></i>--}}
                     {{--<span>Configurations</span></a>--}}
                     {{--</li>--}}
 
-                    <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>{{trans('sidebar.Add User')}}Profile</span></a></li>
+                    <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>{{trans('sidebar.Profile')}}</span></a></li>
 
 
                 </ul>
@@ -323,27 +323,27 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-puzzle-piece"></i>
-                        <span>{{trans('sidebar.Add User')}}Plugins</span><i class="fa fa-angle-left pull-right"></i>
+                        <span>{{trans('sidebar.Plugins')}}</span><i class="fa fa-angle-left pull-right"></i>
 
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li><a href="{{ url('/plugin/add') }}"><i class="fa fa-user-plus"></i>
-                                <span>Add Plugin</span></a>
+                                <span>{{trans('sidebar.Add Plugin')}}</span></a>
                         </li>
                         <li><a href="{{ url('/plugin/list') }}"><i
-                                        class="fa fa-list-ul"></i><span>{{trans('sidebar.Add User')}}Plugin List</span></a></li>
+                                        class="fa fa-list-ul"></i><span>{{trans('sidebar.Plugin List')}}</span></a></li>
                     </ul>
                 </li>
 
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-shopping-bag"></i>
-                        <span>{{trans('sidebar.Add User')}}Shop</span><i class="fa fa-angle-left pull-right"></i>
+                        <span>{{trans('sidebar.Shop')}}</span><i class="fa fa-angle-left pull-right"></i>
 
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li><a href="{{ url('/shop') }}"><i class="fa fa-home"></i>
-                                <span>{{trans('sidebar.Add User')}} Plugin Shop</span></a>
+                                <span>{{trans('sidebar.Plugin Shop')}} </span></a>
                         </li>
 
                     </ul>

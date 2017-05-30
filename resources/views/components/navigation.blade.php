@@ -4,11 +4,11 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
 
         <span class="logo-mini"><img
-                    src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') {{ url('/images/optimus/logo-login.png')}} @else {{ url('/images/optimus/logo-mini.png') }} @endif"
+                    src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') @if(\App\Http\Controllers\Settings::getSettings('logo')==""){{ url('/images/optimus/logo-login.png')}} @else {{url('/uploads')}}/{{\App\Http\Controllers\Settings::getSoftwareSettings('logo')}} @endif @else {{ url('/images/optimus/logo-mini.png') }} @endif"
                     alt="Optimus"></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><img
-                    src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') {{ url('/images/optimus/logo-login.png')}} @else {{ url('/images/optimus/logo-mini.png') }} @endif"
+                    src="@if(Auth::user()->theme == 'skin-black' || Auth::user()->theme == 'skin-black-light') @if(\App\Http\Controllers\Settings::getSettings('logo')=="") {{ url('/images/optimus/logo-login.png')}} @else {{url('/uploads')}}/{{\App\Http\Controllers\Settings::getSoftwareSettings('logo')}} @endif @else {{ url('/images/optimus/logo-mini.png') }} @endif"
                     alt="Optimus"><b>Optimus</b></span>
     </a>
 
@@ -30,7 +30,7 @@
 
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">Select your language</li>
+                        <li class="header">{{trans('navigation.Select your language')}}</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -114,7 +114,7 @@
                                 <li>
                             </ul>
                         </li>
-                        <li class="footer"><a href="{{ url('/notify') }}">See All Messages</a></li>
+                        <li class="footer"><a href="{{ url('/notify') }}">{{trans('navigation.See All Messages')}}</a></li>
                     </ul>
                 </li>
                 <!-- Notifications: style can be found in dropdown.less -->
@@ -151,20 +151,21 @@
                                 <li>
                             </ul>
                         </li>
-                        <li class="footer"><a href="{{ url('/notify') }}">See All Notifications</a></li>
+                        <li class="footer"><a href="{{ url('/notify') }}">{{trans('navigation.See All Notifications')}}</a></li>
                     </ul>
                 </li>
 
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ url('/images/admin-lte/avatar.png') }}" class="user-image" alt="User Image">
+                        <img @if(Auth::user()->img == "") src="{{ url('/images/admin-lte/avatar.png') }}" @else src="{{url('/uploads')}}/{{Auth::user()->img}}" @endif class="user-image" alt="User Image">
                         <span class="hidden-xs">{{ \Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{ url('/images/admin-lte/avatar.png') }}" class="img-circle"
+
+                            <img @if(Auth::user()->img == "") src="{{ url('/images/admin-lte/avatar.png') }}" @else src="{{url('/uploads')}}/{{Auth::user()->img}}" @endif class="img-circle"
                                  alt="User Image">
                             <p>
                                 {{ \Auth::user()->name }}
@@ -175,10 +176,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{url('/profile')}}" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{url('/profile')}}" class="btn btn-default btn-flat">{{trans('navigation.Profile')}}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">{{trans('navigation.Sign out')}}</a>
                             </div>
                         </li>
                     </ul>

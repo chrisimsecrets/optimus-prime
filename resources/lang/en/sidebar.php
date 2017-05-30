@@ -46,6 +46,17 @@ return [
     "All updates"=>"All updates",
     "Mass Comment"=>"Mass Comment",
     "Tumblr"=>"Tumblr",
-    
+    "Wordpress"=>"Wordpress",
+    "Notifications"=>"Notifications",
+    "All Notifications"=>"All Notifications",
+    "Settings"=>"Settings",
+    "Notification"=>"Notification",
+    "Profile"=>"Profile",
+    "Plugins"=>"Plugins",
+    "Add Plugin"=>"Add Plugin",
+    "Plugin List"=>"Plugin List",
+    "Shop"=>"Shop",
+    "Plugin Shop"=>"Plugin Shop",
+
 
 ];
