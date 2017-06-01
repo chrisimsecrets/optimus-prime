@@ -115,7 +115,27 @@ class UserController extends Controller
         }
         $name = User::where('id', $id)->value('name');
         $email = User::where('id', $id)->value('email');
-        return view('useredit', compact('name', 'email', 'id'));
+
+//        get plugins list
+
+        if (Auth::user()->type != "admin") {
+            return "unauthorized";
+        }
+        $plugins = [];
+        $modules = glob(base_path('Modules/') . "*");
+        foreach ($modules as $module) {
+            if (strpos($module, '.') !== false || strpos($module, '__') !== false) {
+//                not folder
+            } else {
+                $content = file_get_contents($module . "/module.json");
+                $json = json_decode($content, true);
+                array_push($plugins, $json);
+            }
+
+
+        }
+
+        return view('useredit', compact('name', 'email', 'id','plugins'));
     }
 
     /**
