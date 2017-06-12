@@ -257,11 +257,15 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/plugin/add','Plugins@addPlugin');
         Route::post('/plugin/action','Plugins@action');
         Route::post('/plugin/upload','Plugins@upload');
+        Route::post('/plugin/active/for/user','Plugins@activePluginForUser');
 
         // shop
 
         Route::get('/shop','ShopController@index');
         Route::get('/shop/plugins','ShopController@getPlugins');
+
+//        pinterest rotues
+        Route::get('/pinterest','PinterestController@index');
 
 //        virtual assistant routes
 

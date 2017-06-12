@@ -193,6 +193,8 @@
                 </li>
             @endif
 
+            {{-- Pinterest menu --}}
+
             {{--linkedin menu--}}
             @if(\App\Http\Controllers\Data::myPackage('ln'))
                 <li class="treeview">

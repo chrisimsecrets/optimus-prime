@@ -1,0 +1,21 @@
+{
+    "name": "eden/core",
+    "type": "library",
+    "description": "Eden Core component full of secret sauce",
+    "keywords": ["eden", "library"],
+    "homepage": "http://eden-php.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Blanquera",
+            "email": "cblanquera@openovate.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.1"
+    },
+    "autoload": {
+         "psr-4": { "Eden\\Core\\": "src/" },
+		 "classmap": [ "src/Decorator.php" ]
+    }
+}

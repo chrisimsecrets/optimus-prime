@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PluginsRecord;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -89,25 +90,31 @@ class Plugins extends Controller
             if (strpos($module, '.') !== false || strpos($module, '__') !== false) {
 //                not folder
             } else {
+//                get plugin content
+
                 $moduleJson = file_get_contents($module . "/module.json");
                 $json = json_decode($moduleJson, true);
-                $menuPosition = $json['position'];
-                if ($json['active'] == 1) {
-                    // if plugin made for admin
-                    if ($json['for'] == "admin") {
-                        if (Auth::user()->type == "admin") {
+
+
+                if (self::check($json['name'],Auth::user()->id)) {
+                    $menuPosition = $json['position'];
+                    if ($json['active'] == 1) {
+                        // if plugin made for admin
+                        if ($json['for'] == "admin") {
+                            if (Auth::user()->type == "admin") {
+                                if ($menuPosition == $position) {
+                                    $content = file_get_contents($module . "/menu.php");
+                                    $data .= $content;
+                                }
+                            }
+                        } else {
                             if ($menuPosition == $position) {
                                 $content = file_get_contents($module . "/menu.php");
                                 $data .= $content;
                             }
                         }
-                    } else {
-                        if ($menuPosition == $position) {
-                            $content = file_get_contents($module . "/menu.php");
-                            $data .= $content;
-                        }
-                    }
 
+                    }
                 }
 
 
@@ -168,6 +175,34 @@ class Plugins extends Controller
 //        include(base_path('Modules/Prappo/menu.php'));
         echo(self::menu());
 
+    }
+
+    public static function check($pluginName,$userId)
+    {
+        if (PluginsRecord::where('userId', $userId)->where('pluginName', $pluginName)->exists()) {
+            return true;
+        }
+    }
+
+    public function activePluginForUser(Request $request)
+    {
+        if ($request->action == "enable") {
+            if (!PluginsRecord::where('userId', $request->userId)->where('pluginName', $request->pluginName)->exists()) {
+                $record = new PluginsRecord();
+                $record->userId = $request->userId;
+                $record->pluginName = $request->pluginName;
+                $record->save();
+                return "success";
+
+            }
+        } else {
+            try {
+                PluginsRecord::where('userId', $request->userId)->where('pluginName', $request->pluginName)->delete();
+                return "success";
+            } catch (\Exception $exception) {
+                return $exception->getMessage();
+            }
+        }
     }
 
 

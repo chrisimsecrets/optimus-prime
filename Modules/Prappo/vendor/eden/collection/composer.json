@@ -1,0 +1,24 @@
+{
+    "name": "eden/collection",
+    "type": "library",
+    "description": "Eden generic collection component",
+    "keywords": ["eden", "library"],
+    "homepage": "http://eden-php.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Blanquera",
+            "email": "cblanquera@openovate.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.1",
+		"eden/core": "4.*",
+		"eden/string": "4.*",
+		"eden/array": "4.*",
+        "eden/model": "4.*"
+    },
+    "autoload": {
+         "psr-4": { "Eden\\Collection\\": "src/" }
+    }
+}

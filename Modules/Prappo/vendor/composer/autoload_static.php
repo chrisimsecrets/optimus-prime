@@ -15,6 +15,14 @@ class ComposerStaticInitceda938f7d72fe06a19e9cbfc947a626
         array (
             'Modules\\Prappo\\' => 15,
         ),
+        'E' => 
+        array (
+            'Eden\\Sqlite\\' => 12,
+            'Eden\\Sql\\' => 9,
+            'Eden\\Model\\' => 11,
+            'Eden\\Core\\' => 10,
+            'Eden\\Collection\\' => 16,
+        ),
         'B' => 
         array (
             'Badcow\\LoremIpsum\\' => 18,
@@ -26,10 +34,42 @@ class ComposerStaticInitceda938f7d72fe06a19e9cbfc947a626
         array (
             0 => __DIR__ . '/../..' . '/',
         ),
+        'Eden\\Sqlite\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/eden/sqlite/src',
+        ),
+        'Eden\\Sql\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/eden/sql/src',
+        ),
+        'Eden\\Model\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/eden/model/src',
+        ),
+        'Eden\\Core\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/eden/core/src',
+        ),
+        'Eden\\Collection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/eden/collection/src',
+        ),
         'Badcow\\LoremIpsum\\' => 
         array (
             0 => __DIR__ . '/..' . '/badcow/lorem-ipsum/lib',
         ),
+    );
+
+    public static $classMap = array (
+        'Eden' => __DIR__ . '/..' . '/eden/core/src/Decorator.php',
+        'Eden_Array_Argument' => __DIR__ . '/..' . '/eden/array/src/Argument.php',
+        'Eden_Array_Base' => __DIR__ . '/..' . '/eden/array/src/Base.php',
+        'Eden_Array_Exception' => __DIR__ . '/..' . '/eden/array/src/Exception.php',
+        'Eden_Array_Index' => __DIR__ . '/..' . '/eden/array/src/Index.php',
+        'Eden_String_Argument' => __DIR__ . '/..' . '/eden/string/src/Argument.php',
+        'Eden_String_Base' => __DIR__ . '/..' . '/eden/string/src/Base.php',
+        'Eden_String_Exception' => __DIR__ . '/..' . '/eden/string/src/Exception.php',
+        'Eden_String_Index' => __DIR__ . '/..' . '/eden/string/src/Index.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -37,6 +77,7 @@ class ComposerStaticInitceda938f7d72fe06a19e9cbfc947a626
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitceda938f7d72fe06a19e9cbfc947a626::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitceda938f7d72fe06a19e9cbfc947a626::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitceda938f7d72fe06a19e9cbfc947a626::$classMap;
 
         }, null, ClassLoader::class);
     }

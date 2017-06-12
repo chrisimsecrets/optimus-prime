@@ -6,4 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Eden' => $vendorDir . '/eden/core/src/Decorator.php',
+    'Eden_Array_Argument' => $vendorDir . '/eden/array/src/Argument.php',
+    'Eden_Array_Base' => $vendorDir . '/eden/array/src/Base.php',
+    'Eden_Array_Exception' => $vendorDir . '/eden/array/src/Exception.php',
+    'Eden_Array_Index' => $vendorDir . '/eden/array/src/Index.php',
+    'Eden_String_Argument' => $vendorDir . '/eden/string/src/Argument.php',
+    'Eden_String_Base' => $vendorDir . '/eden/string/src/Base.php',
+    'Eden_String_Exception' => $vendorDir . '/eden/string/src/Exception.php',
+    'Eden_String_Index' => $vendorDir . '/eden/string/src/Index.php',
 );

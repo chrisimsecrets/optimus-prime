@@ -19,8 +19,9 @@ class ShopController extends Controller
         if(Auth::user()->type != "admin"){
             return "Access denied";
         }
+        $content = file_get_contents('https://trinolab.github.io/shop/optimus-prime/');
 
-        return view('shop');
+        return view('shop',compact('content'));
     }
 
     public function getPlugins(){

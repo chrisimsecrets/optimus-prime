@@ -4,7 +4,7 @@
     "alias": "prappo",
     "description": "Personal plugin for optimus prime. To learn more <a href='http:\/\/google.com', target='_blank'>Click here<\/a>",
     "keywords": [],
-    "active": 0,
+    "active": 1,
     "order": 0,
     "providers": [
         "Modules\\Prappo\\Providers\\PrappoServiceProvider"

@@ -19,7 +19,9 @@
         "guzzlehttp/guzzle": "^6.2",
         "mgp25/instagram-php": "v1.6.0.2",
         "athlon1600/youtube-downloader": "^1.0",
-        "nwidart/laravel-modules": "^1.19"
+        "nwidart/laravel-modules": "^1.19",
+        "eden/sqlite": "^4.0",
+        "seregazhuk/pinterest-bot": "^5.4"
 
 
     },

@@ -2,6 +2,7 @@
 
 namespace Modules\Userfi\Http\Controllers;
 
+use App\Http\Controllers\Plugins;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -10,6 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class UserfiController extends Controller
 {
+    function __construct()
+    {
+        if (!Plugins::check('Userfi')) {
+            exit;
+        }
+
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response

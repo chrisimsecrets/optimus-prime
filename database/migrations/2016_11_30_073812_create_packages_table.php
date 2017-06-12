@@ -22,8 +22,15 @@ class CreatePackagesTable extends Migration
             $table->string('ln')->nullable();
             $table->string('in')->nullable();
             $table->string('fbBot')->nullable();
+            $table->string('pinterest')->nullable();
+            $table->string('youtube')->nullable();
             $table->string('slackBot')->nullable();
             $table->string('contacts')->nullable();
+            $table->string('pack1')->nullable();
+            $table->string('pack2')->nullable();
+            $table->string('pack3')->nullable();
+            $table->string('pack4')->nullable();
+            $table->string('pack5')->nullable();
             $table->timestamps();
         });
     }

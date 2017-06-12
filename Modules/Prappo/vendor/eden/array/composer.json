@@ -1,0 +1,24 @@
+{
+    "name": "eden/array",
+    "type": "library",
+    "description": "Autoloading, error and exception handler",
+    "keywords": ["eden", "library"],
+    "homepage": "http://eden-php.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Blanquera",
+            "email": "cblanquera@openovate.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.1",
+		"eden/core": "4.*"
+    },
+    "autoload": {
+         "classmap": [
+		 	"src/"
+		 ]
+    }
+}

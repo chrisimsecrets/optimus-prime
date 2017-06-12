@@ -1,19 +1,19 @@
 {
-  "name": "Userfi",
-  "alias": "userfi",
-  "author": "Prappo Prince",
-  "description": "Userif is advance user management system that will allow you to manage your user",
-  "keywords": [],
-  "active": 1,
-  "order": 0,
-  "providers": [
-    "Modules\\Userfi\\Providers\\UserfiServiceProvider"
-  ],
-  "aliases": {},
-  "files": [
-    "start.php"
-  ],
-  "requires": [],
-  "position": "admin",
-  "for":"admin"
+    "name": "Userfi",
+    "alias": "userfi",
+    "author": "Prappo Prince",
+    "description": "Userif is advance user management system that will allow you to manage your user",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Userfi\\Providers\\UserfiServiceProvider"
+    ],
+    "aliases": [],
+    "files": [
+        "start.php"
+    ],
+    "requires": [],
+    "position": "admin",
+    "for": "admin"
 }

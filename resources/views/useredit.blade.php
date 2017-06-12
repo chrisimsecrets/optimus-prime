@@ -14,7 +14,8 @@
                     <div class="col-md-6">
                         <div class="box box-primary">
                             <div class="box-header with-border" align="center">
-                                <h3 class="box-title"><i class="fa fa-refresh"></i> Update User Information/Packages/Features</h3>
+                                <h3 class="box-title"><i class="fa fa-refresh"></i> Update User
+                                    Information/Packages/Features</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
 
@@ -91,6 +92,15 @@
                                             <i class="fa fa-instagram"></i> Instagram
                                         </label>
                                     </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="pinterest" type="checkbox"
+                                                   @if(\App\Http\Controllers\Data::hasPackage($id,'pinterest')) checked @endif>
+                                            <i class="fa fa-pinterest"></i> Pinterest
+                                        </label>
+                                    </div>
+
                                     <div class="checkbox">
                                         <label>
                                             <input id="fbBot" type="checkbox"
@@ -115,26 +125,40 @@
                                     {{--</div>--}}
 
                                 </div>
+                                <div class="box-footer">
+                                    <button id="save" class="btn btn-success"><i class="fa fa-save"></i> Save Packages
+                                    </button>
+                                </div>
 
                                 {{-- Available plugins list--}}
                                 <hr>
-                                <div class="form-group">
+                                <div id="plugins" class="form-group">
                                     <div class="form-group">
                                         <label>Available features</label>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Select features for this users</label>
+                                        <label>Select more Packages/features for this users</label>
                                     </div>
                                     @foreach($plugins as $plugin)
-                                        <div class="checkbox">
-
-                                            <label>
-                                                <input id="fb" type="checkbox">
-                                                <kbd>{{$plugin['name']}}</kbd> <br>{!! $plugin['description'] !!}
-                                            </label>
+                                        <div class="box @if(\App\Http\Controllers\Plugins::check($plugin['name'],$id)) box-success @endif">
 
 
+                                            <div class="box-header">
+
+                                                <kbd>{{$plugin['name']}}</kbd> <br>
+                                            </div>
+
+                                            <div class="box-body">
+                                                {!! $plugin['description'] !!}
+                                            </div>
+                                            <div class="box-footer">
+
+                                                <div class="btn-group-xs">
+                                                    <button data-id="{{$plugin['name']}}" @if(!\App\Http\Controllers\Plugins::check($plugin['name'],$id)) disabled @endif class="btn btn-danger btn-disable">Disable</button>
+                                                    <button data-id="{{$plugin['name']}}" @if(\App\Http\Controllers\Plugins::check($plugin['name'],$id)) disabled @endif class="btn btn-primary btn-enable">Enable</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endforeach
 
@@ -142,9 +166,6 @@
 
                             </div><!-- /.box-body -->
 
-                            <div class="box-footer">
-                                <button id="save" class="btn btn-primary">Save</button>
-                            </div>
 
                         </div>
                     </div>
@@ -162,7 +183,7 @@
 @endsection
 @section('js')
     <script>
-        var fb = "no", tw = "no", tu = "no", wp = "no", ln = "no", ins = "no", fbBot = "no", slackBot = "no", contacts = "no";
+        var fb = "no", tw = "no", tu = "no", wp = "no", ln = "no", ins = "no", fbBot = "no", slackBot = "no", contacts = "no", pinterest = "no";
         if ($('#fb').is(':checked')) {
             fb = 'yes';
         }
@@ -189,6 +210,9 @@
         }
         if ($('#contacts').is(':checked')) {
             contacts = "yes";
+        }
+        if ($('#pinterest').is(':checked')) {
+            pinterest = "yes";
         }
 
         //        changing stuff
@@ -262,9 +286,21 @@
             } else {
                 contacts = "no";
             }
-        })
+        });
+
+        $('#pinterest').on('change', function () {
+            if (this.checked) {
+                pinterest = "yes";
+            } else {
+                pinterest = "no";
+            }
+        });
+
+
+
 
         $('#save').click(function () {
+
             $.ajax({
                 type: 'POST',
                 url: '{{url('/user/update')}}',
@@ -279,6 +315,7 @@
                     'wp': wp,
                     'in': ins,
                     'ln': ln,
+                    'pinterest': pinterest,
                     'fbBot': fbBot,
                     'slackBot': slackBot,
                     'contacts': contacts
@@ -297,6 +334,57 @@
                     swal('Error', data, 'error');
                 }
             });
-        })
+        });
+        $('.btn-enable').click(function () {
+            var pluginName = $(this).attr('data-id');
+            var userId = "{{$id}}";
+            $.ajax({
+                type:'POST',
+                url:'{{url('/plugin/active/for/user')}}',
+                data:{
+                    'pluginName':pluginName,
+                    'userId':userId,
+                    'action':'enable'
+                },
+                success:function (data) {
+                    if(data=="success"){
+                        swal("Success","Done !","success");
+                        location.reload();
+                    }else{
+                        swal("Error !",data,"error");
+                    }
+                },
+                error:function (data) {
+                    swal("Error !","Something went wrong, Please check console message","error");
+                    console.log(data.responseText);
+                }
+            });
+        });
+
+        $('.btn-disable').click(function () {
+            var pluginName = $(this).attr('data-id');
+            var userId = "{{$id}}";
+            $.ajax({
+                type:'POST',
+                url:'{{url('/plugin/active/for/user')}}',
+                data:{
+                    'pluginName':pluginName,
+                    'userId':userId,
+                    'action':'disable'
+                },
+                success:function (data) {
+                    if(data=="success"){
+                        swal("Success","Done !","success");
+                        location.reload();
+                    }else{
+                        swal("Error !",data,"error");
+                    }
+                },
+                error:function (data) {
+                    swal("Error !","Something went wrong, Please check console message","error");
+                    console.log(data.responseText);
+                }
+            });
+        });
     </script>
 @endsection

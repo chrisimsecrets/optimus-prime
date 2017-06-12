@@ -14,6 +14,8 @@
     },
     "require": {
         "athlon1600/youtube-downloader": "^1.0",
-        "badcow/lorem-ipsum": "^1.1"
+        "badcow/lorem-ipsum": "^1.1",
+        "eden/sqlite": "^4.0",
+        "gabordemooij/redbean": "dev-master"
     }
 }

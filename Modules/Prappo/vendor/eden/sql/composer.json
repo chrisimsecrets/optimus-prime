@@ -1,0 +1,26 @@
+{
+    "name": "eden/sql",
+    "type": "library",
+    "description": "SQL core methods for MySQL, Posgres and SQLite",
+    "keywords": ["eden", "library"],
+    "homepage": "http://eden-php.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Blanquera",
+            "email": "cblanquera@openovate.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.1",
+        "php": ">=5.4.1",
+		"eden/core": "4.*",
+		"eden/string": "4.*",
+		"eden/array": "4.*",
+        "eden/model": "4.*",
+        "eden/collection": "4.*"
+    },
+    "autoload": {
+         "psr-4": { "Eden\\Sql\\": "src/" }
+    }
+}
