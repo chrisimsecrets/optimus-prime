@@ -22,6 +22,10 @@ class TumblrController extends Controller
      */
     public function index(){
 
+        if(!Data::myPackage('tu')){
+            return view('errors.404');
+        }
+
         if(Data::get('tuTokenSec') == "" || Data::get('tuConSec')==""){
             return redirect('/settings');
         }

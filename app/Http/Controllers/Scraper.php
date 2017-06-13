@@ -21,6 +21,10 @@ class Scraper extends Controller
     public function index()
     {
 
+        if(!Data::myPackage('fb')){
+            return view('errors.404');
+        }
+
         if (Data::get('fbAppSec') == "") {
             return redirect('/settings');
         }
@@ -33,6 +37,11 @@ class Scraper extends Controller
      */
     public function twScraper()
     {
+
+        if(!Data::myPackage('fb')){
+            return view('errors.404');
+        }
+
         if(Data::get('twTokenSec')==""){
             return redirect('/settings');
         }

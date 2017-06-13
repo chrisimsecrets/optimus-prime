@@ -15,6 +15,10 @@ class InstagramController extends Controller
 
     public function __construct()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         \App::setLocale(CoreController::getLang());
         $this->instagram = new \InstagramAPI\Instagram();
         $username = Data::get('inUser');
@@ -28,9 +32,6 @@ class InstagramController extends Controller
         }
 
 
-
-
-
     }
 
     /**
@@ -39,6 +40,10 @@ class InstagramController extends Controller
      */
     public function index()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         $i = $this->instagram;
         $datas = $i->getSelfUserFeed();
         return view('instagram', compact('datas'));
@@ -50,6 +55,12 @@ class InstagramController extends Controller
      */
     public function home()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+
+
+        }
+
         $datas = $this->instagram->timelineFeed();
 
         return view('instagramTimeline', compact('datas'));
@@ -62,6 +73,9 @@ class InstagramController extends Controller
      */
     public function popular()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
 
         $i = $this->instagram;
         $datas = $i->getPopularFeed();
@@ -75,6 +89,10 @@ class InstagramController extends Controller
      */
     public function getFollowers()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         try {
             return $this->instagram->getSelfUsernameInfo()->user->follower_count;
         } catch (\Exception $exception) {
@@ -89,6 +107,10 @@ class InstagramController extends Controller
      */
     public function getFollowing()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         try {
             return $this->instagram->getSelfUsernameInfo()->user->following_count;
         } catch (\Exception $exception) {
@@ -103,6 +125,10 @@ class InstagramController extends Controller
      */
     public function getFollowingUserActivity()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         $data = $this->instagram->getFollowingRecentActivity();
         $datas = $data->fullResponse->stories;
 //        print_r($datas->fullResponse->stories);
@@ -268,11 +294,19 @@ class InstagramController extends Controller
 
     public function getMediaInfoIndex()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         return view('instagramMediaInfo');
     }
 
     public function getMediaInfo($mediaId)
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         $datas = $this->instagram->mediaInfo($mediaId);
 //        print_r($datas);
 //        exit;
@@ -282,6 +316,10 @@ class InstagramController extends Controller
 
     public function followers()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         $datas = $this->instagram->getSelfUserFollowers();
 
         return view('instagramFollowers', compact('datas'));
@@ -289,6 +327,10 @@ class InstagramController extends Controller
 
     public function following()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
         $datas = $this->instagram->getSelfUsersFollowing();
 
         return view('instagramFollowing', compact('datas'));
@@ -296,6 +338,12 @@ class InstagramController extends Controller
 
     public function followBack()
     {
+
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
+
         $insta = $this->instagram;
         $datas = $insta->getSelfUserFollowers();
         $count = 0;
@@ -334,6 +382,11 @@ class InstagramController extends Controller
 
     public function unfollowAll()
     {
+        if(!Data::myPackage('in')){
+            return view('errors.404');
+        }
+
+
         $insta = $this->instagram;
         $datas = $insta->getSelfUsersFollowing();
         $count = 0;

@@ -21,6 +21,10 @@ class WordpressController extends Controller
      */
     public function index()
     {
+        if(!Data::myPackage('wp')){
+            return view('errors.404');
+        }
+
         $data = Wp::where('userId',Auth::user()->id)->get();
         return view('Wordpress', compact('data'));
     }

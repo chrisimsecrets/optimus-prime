@@ -71,6 +71,10 @@ class LinkedinController extends Controller
      */
     public function massComment()
     {
+        if(!Data::myPackage('ln')){
+            return view('errors.404');
+        }
+
         if (!Data::get('liAccessToken')) {
             return redirect('/settings');
         }
@@ -191,6 +195,11 @@ class LinkedinController extends Controller
      */
     public function updates()
     {
+        if(!Data::myPackage('ln')){
+            return view('errors.404');
+        }
+
+
         if (Data::get('liAccessToken')=="") {
             return redirect('/settings');
         }
