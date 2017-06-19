@@ -194,7 +194,23 @@
             @endif
 
             {{-- Pinterest menu --}}
+            @if(\App\Http\Controllers\Data::myPackage('pinterest'))
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pinterest"></i>
+                        <span>{{trans('sidebar.Pinterest')}}</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display: none">
+                        <li><a href="{{ url('/pinterest/scraper') }}"><i class="fa fa-search"></i>
+                                <span>{{trans('sidebar.Scraper')}}</span></a>
+                        </li>
 
+                        {!! \App\Http\Controllers\Plugins::menu("pinterest") !!}
+                    </ul>
+
+                </li>
+            @endif
             {{--linkedin menu--}}
             @if(\App\Http\Controllers\Data::myPackage('ln'))
                 <li class="treeview">

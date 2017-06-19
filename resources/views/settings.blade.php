@@ -459,6 +459,43 @@
                         </div>
                     @endif
                 </div>
+            <div class="row">
+                {{-- linkedin settings--}}
+                @if(\App\Http\Controllers\Data::myPackage('pinterest'))
+                    <div class="col-md-6">
+
+                            <div class="box box-primary">
+                                <div class="box-header with-border" align="center">
+                                    <h3 class="box-title"><i class="fa fa-pinterest"></i> Pinterest Settings</h3>
+                                </div><!-- /.box-header -->
+                                <!-- form start -->
+
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="pinUser">Pinterest Username</label>
+                                        <input class="form-control" type="text"
+                                               value="{{ $pinUser }}" placeholder="Your Pinterest User name"
+                                               id="pinUser">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pinPass">Pinterest Password</label>
+                                        <input class="form-control"
+                                               value="{{ $pinPass }}"
+                                               placeholder="Your Pinterest password"
+                                               type="password" id="pinPass">
+                                    </div>
+
+
+                                <div class="box-footer">
+
+                                    <button id="pinSave" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                @endif
+            </div>
             </section>{{--End content--}}
         </div>{{--End content-wrapper--}}
         @include('components.footer')
@@ -508,7 +545,29 @@
                     console.log(data.responseText);
                 }
             })
-        })
+        });
+
+        $('#pinSave').click(function () {
+            $.ajax({
+                url:'{{url('/pinsave')}}',
+                type:'POST',
+                data:{
+                    'pinUser':$('#pinUser').val(),
+                    'pinPass':$('#pinPass').val()
+                },
+                success:function (data) {
+                    if(data=="success"){
+                        alert("Saved");
+                    }else{
+                        alert(data);
+                    }
+                },
+                error:function (data) {
+                    alert("Something went wrong, Please check console message");
+                    console.log(data.responseText);
+                }
+            });
+        });
     </script>
 @endsection
 @section('css')

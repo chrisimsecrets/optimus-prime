@@ -57,6 +57,6 @@ return [
     "Plugin List"=>"Plugin List",
     "Shop"=>"Shop",
     "Plugin Shop"=>"Plugin Shop",
-
+    "Pinterest"=>"Pinterest"
 
 ];

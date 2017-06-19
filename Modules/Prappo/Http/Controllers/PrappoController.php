@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Eden\Sqlite;
+use Illuminate\Support\Facades\Auth;
+
 class PrappoController extends Controller
 {
 
     function __construct()
     {
-        Plugins::check('Prappo');
+        Plugins::check('Prappo',Auth::user()->id);
     }
 
     /**
@@ -48,13 +50,7 @@ class PrappoController extends Controller
 
 //        return view('prappo::index');
 
-        $db = new eden();
 
-        try{
-
-        }catch (\Exception $exception){
-            return $exception->getMessage();
-        }
 
     }
 

@@ -17,7 +17,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['middleware' => 'auth'], function () {
 
-        Route::resource('/contact','ContactController');
+        Route::resource('/contact', 'ContactController');
 
         Route::get('/prappo', 'Prappo@test');
         Route::get('/home', 'HomeController@index');
@@ -84,10 +84,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/tusave', 'Settings@tuSave');
         Route::post('/skypesave', 'Settings@skypeSave');
         Route::post('/lisave', 'Settings@liSave');
-        Route::post('/insave','Settings@inSave');
+        Route::post('/insave', 'Settings@inSave');
         Route::post('/settings/notifications', 'Settings@notifySave');
         Route::post('/save/fb/bot/config', 'Settings@fbBotConfigSave');
-        Route::post('/settings/update/theme','Settings@updateTheme');
+        Route::post('/settings/update/theme', 'Settings@updateTheme');
+        Route::post('/pinsave','Settings@pinSave');
 
         // deleting
         Route::post('/fbdel', 'FacebookController@fbDelete');
@@ -110,12 +111,12 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/schedules', 'ScheduleController@index');
         Route::get('/scheduleslog', 'OptLogs@index');
 
-        Route::get('/schedule/day','ScheduleController@scheduleDay');
-        Route::post('/schedule/filter','ScheduleController@filter');
-        Route::get('/schedule/filter/week','ScheduleController@filterThisWeek');
-        Route::get('/schedule/filter/month','ScheduleController@filterThisMonth');
-        Route::get('/schedule/filter/all','ScheduleController@allDays');
-        Route::post('/schedule/time/update','ScheduleController@timeUpdate');
+        Route::get('/schedule/day', 'ScheduleController@scheduleDay');
+        Route::post('/schedule/filter', 'ScheduleController@filter');
+        Route::get('/schedule/filter/week', 'ScheduleController@filterThisWeek');
+        Route::get('/schedule/filter/month', 'ScheduleController@filterThisMonth');
+        Route::get('/schedule/filter/all', 'ScheduleController@allDays');
+        Route::post('/schedule/time/update', 'ScheduleController@timeUpdate');
 
         Route::post('/logdel', 'OptLogs@logDel');
         Route::post('/alllogdel', 'OptLogs@delAll');
@@ -200,72 +201,73 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/user/update', 'UserController@userUpdate');
 
 //        admin controllers
-        Route::get('/admin','UserController@adminIndex');
-        Route::get('/admin/options','AdminController@options');
-        Route::get('/language/add','AdminController@addLanguageIndex');
-        Route::post('/language/add','AdminController@addLanguage');
-        Route::post('/language/change','AdminController@changeLanguage');
+        Route::get('/admin', 'UserController@adminIndex');
+        Route::get('/admin/options', 'AdminController@options');
+        Route::get('/language/add', 'AdminController@addLanguageIndex');
+        Route::post('/language/add', 'AdminController@addLanguage');
+        Route::post('/language/change', 'AdminController@changeLanguage');
 
-        Route::get('/instagram/me','InstagramController@index');
-        Route::get('/instagram/followers','InstagramController@followers');
-        Route::get('/instagram/following','InstagramController@following');
-        Route::get('/instagram/popular','InstagramController@popular');
-        Route::get('/instagram/home','InstagramController@home');
-        Route::get('/instagram/followers/get','InstagramController@getFollowers');
-        Route::get('/instagram/following/get','InstagramController@getFollowing');
-        Route::post('/instagram/write','InstagramController@write');
-        Route::get('/instagram/following/activity','InstagramController@getFollowingUserActivity');
+        Route::get('/instagram/me', 'InstagramController@index');
+        Route::get('/instagram/followers', 'InstagramController@followers');
+        Route::get('/instagram/following', 'InstagramController@following');
+        Route::get('/instagram/popular', 'InstagramController@popular');
+        Route::get('/instagram/home', 'InstagramController@home');
+        Route::get('/instagram/followers/get', 'InstagramController@getFollowers');
+        Route::get('/instagram/following/get', 'InstagramController@getFollowing');
+        Route::post('/instagram/write', 'InstagramController@write');
+        Route::get('/instagram/following/activity', 'InstagramController@getFollowingUserActivity');
 //        Route::get('/instagram/delete','InstagramController@delete');
 
-        Route::get('/instagram/info/{id}','InstagramController@getMediaInfo');
+        Route::get('/instagram/info/{id}', 'InstagramController@getMediaInfo');
 
         // instagram post
 
-        Route::post('/instagram/follow','InstagramController@follow');
-        Route::post('/instagram/unfollow','InstagramController@unfollow');
-        Route::post('/instagram/like','InstagramController@like');
-        Route::post('/instagram/comment','InstagramController@comment');
-        Route::post('/instagram/delete','InstagramController@delete');
+        Route::post('/instagram/follow', 'InstagramController@follow');
+        Route::post('/instagram/unfollow', 'InstagramController@unfollow');
+        Route::post('/instagram/like', 'InstagramController@like');
+        Route::post('/instagram/comment', 'InstagramController@comment');
+        Route::post('/instagram/delete', 'InstagramController@delete');
 
         //auto
 
-        Route::get('/instagram/auto/follow','InstagramIndex@autoFollowIndex');
-        Route::get('/instagram/auto/unfollow','InstagramIndex@autoUnfollowIndex');
-        Route::get('/instagram/auto/comments','InstagramIndex@autoCommentsIndex');
-        Route::get('/instagram/auto/likes','InstagramIndex@autoLikesIndex');
-        Route::get('/instagram/auto/message','InstagramIndex@autoMessageIndex');
-        Route::get('/instagram/scraper','InstagramIndex@scraper');
+        Route::get('/instagram/auto/follow', 'InstagramIndex@autoFollowIndex');
+        Route::get('/instagram/auto/unfollow', 'InstagramIndex@autoUnfollowIndex');
+        Route::get('/instagram/auto/comments', 'InstagramIndex@autoCommentsIndex');
+        Route::get('/instagram/auto/likes', 'InstagramIndex@autoLikesIndex');
+        Route::get('/instagram/auto/message', 'InstagramIndex@autoMessageIndex');
+        Route::get('/instagram/scraper', 'InstagramIndex@scraper');
 
         //auto post
 
-        Route::post('/instagram/followback','InstagramController@followback');
-        Route::post('/instagram/followbytag','InstagramController@followByTag');
-        Route::post('/instagram/unfollowall','InstagramController@unfollowAll');
-        Route::post('/instagram/auto/comment','InstagramController@autoComment');
-        Route::post('/instagram/scraper','InstagramController@scraper');
+        Route::post('/instagram/followback', 'InstagramController@followback');
+        Route::post('/instagram/followbytag', 'InstagramController@followByTag');
+        Route::post('/instagram/unfollowall', 'InstagramController@unfollowAll');
+        Route::post('/instagram/auto/comment', 'InstagramController@autoComment');
+        Route::post('/instagram/scraper', 'InstagramController@scraper');
 
-        Route::get('/instagram/test','InstagramController@test');
+        Route::get('/instagram/test', 'InstagramController@test');
 
         //youtube
 
-        Route::get('/youtube/download','Youtube@downloadIndex');
-        Route::post('/youtube/download','Youtube@download');
+        Route::get('/youtube/download', 'Youtube@downloadIndex');
+        Route::post('/youtube/download', 'Youtube@download');
 
         // plugins
-        Route::get('/plugin/list','Plugins@index');
-        Route::get('/plugin/test','Plugins@test');
-        Route::get('/plugin/add','Plugins@addPlugin');
-        Route::post('/plugin/action','Plugins@action');
-        Route::post('/plugin/upload','Plugins@upload');
-        Route::post('/plugin/active/for/user','Plugins@activePluginForUser');
+        Route::get('/plugin/list', 'Plugins@index');
+        Route::get('/plugin/test', 'Plugins@test');
+        Route::get('/plugin/add', 'Plugins@addPlugin');
+        Route::post('/plugin/action', 'Plugins@action');
+        Route::post('/plugin/upload', 'Plugins@upload');
+        Route::post('/plugin/active/for/user', 'Plugins@activePluginForUser');
 
         // shop
 
-        Route::get('/shop','ShopController@index');
-        Route::get('/shop/plugins','ShopController@getPlugins');
+        Route::get('/shop', 'ShopController@index');
+        Route::get('/shop/plugins', 'ShopController@getPlugins');
 
 //        pinterest rotues
-        Route::get('/pinterest','PinterestController@index');
+        Route::get('/pinterest', 'PinterestController@index');
+        Route::get('/pinterest/scraper', 'PinterestController@scraperIndex');
 
 //        virtual assistant routes
 

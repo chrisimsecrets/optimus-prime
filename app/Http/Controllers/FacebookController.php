@@ -495,7 +495,7 @@ class FacebookController extends Controller
         $msgCount = 0;
 
         try {
-            $response = $fb->get($pageId . '?fields=conversations', $token)->getDecodedBody();
+            $response = $fb->get($pageId . '?fields=conversations.limit(2000)', $token)->getDecodedBody();
             foreach ($response['conversations']['data'] as $conNo => $conversation) {
                 $conId = $conversation['id'];
                 try {
@@ -1084,7 +1084,7 @@ class FacebookController extends Controller
         $token = Data::get('fbAppToken');
         $pageCount = 0;
         $commentCount = 0;
-        $publicPages = FacebookPublicPages::user('userId', Auth::user()->id)->get();
+        $publicPages = FacebookPublicPages::where('userId', Auth::user()->id)->get();
         foreach ($publicPages as $page) {
             $pageCount++;
             $data = $fb->get($page->pageId . '/feed?limit=1', $token)->getDecodedBody();

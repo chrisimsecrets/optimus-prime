@@ -53,7 +53,7 @@
     @yield('css')
 </head>
 {{--<body class="hold-transition fixed sidebar-mini skin-red-light">--}}
-<body class="hold-transition fixed sidebar-mini {{Auth::user()->theme}}">
+<body class="hold-transition fixed sidebar-mini @if(Auth::user()->theme == "") skin-red @else {{Auth::user()->theme}} @endif">
 
 @yield('content')
 <script>

@@ -46,6 +46,8 @@ class CreateSettingsTable extends Migration
             $table->string('exMsg')->nullable();
             $table->string('slackBotMatchAcc')->nullable();
             $table->string('userId')->nullable();
+            $table->string('pinUser')->nullable();
+            $table->string('pinPass')->nullable();
             $table->string('lang')->nullable();
             $table->timestamps();
         });

@@ -174,19 +174,22 @@ class UserController extends Controller
             }
         }
 
-
-        Package::where('userId', $request->id)->update([
-            'fb' => $request->fb,
-            'tw' => $request->tw,
-            'tu' => $request->tu,
-            'wp' => $request->wp,
-            'ln' => $request->ln,
-            'in' => $request->in,
-            'fbBot' => $request->fbBot,
-            'pinterest'=>$request->pinterest,
-            'slackBot' => $request->slackBot,
-            'contacts' => $request->contacts
-        ]);
+        try {
+            Package::where('userId', $request->id)->update([
+                'fb' => $request->fb,
+                'tw' => $request->tw,
+                'tu' => $request->tu,
+                'wp' => $request->wp,
+                'ln' => $request->ln,
+                'in' => $request->in,
+                'fbBot' => $request->fbBot,
+                'pinterest' => $request->pinterest,
+                'slackBot' => $request->slackBot,
+                'contacts' => $request->contacts
+            ]);
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
 
 
         return "success";

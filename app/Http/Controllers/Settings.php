@@ -71,6 +71,10 @@ class Settings extends Controller
         $inUser = Data::get('inUser');
         $inPass = Data::get('inPass');
 
+        // Pinterest
+
+        $pinUser = Data::get('pinUser');
+        $pinPass = Data::get('pinPass');
 
 
         try {
@@ -137,7 +141,9 @@ class Settings extends Controller
             'liAccessToken',
             'liLoginUrl',
             'inUser',
-            'inPass'
+            'inPass',
+            'pinUser',
+            'pinPass'
         ));
     }
 
@@ -266,7 +272,7 @@ class Settings extends Controller
             ]);
             return "success";
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
@@ -565,13 +571,13 @@ class Settings extends Controller
 
     public function fbBotConfigSave(Request $request)
     {
-        try{
-            Setting::where('userId',Auth::user()->id)->update([
-               'exMsg'=>$request->exMsg,
-                'matchAcc'=>$request->matchAcc
+        try {
+            Setting::where('userId', Auth::user()->id)->update([
+                'exMsg' => $request->exMsg,
+                'matchAcc' => $request->matchAcc
             ]);
             return "success";
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
@@ -585,41 +591,60 @@ class Settings extends Controller
         return view('config', compact('path'));
     }
 
-    public static function get($valueOf,$userId){
-        return Setting::where('userId',$userId)->value($valueOf);
+    public static function get($valueOf, $userId)
+    {
+        return Setting::where('userId', $userId)->value($valueOf);
     }
 
-    public function updateTheme(Request $request){
-        try{
-            User::where('id',Auth::user()->id)->update([
-                'theme'=>$request->theme
+    public function updateTheme(Request $request)
+    {
+        try {
+            User::where('id', Auth::user()->id)->update([
+                'theme' => $request->theme
             ]);
             return "success";
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
 
-    public static function getSettings($key){
-        return SoftwareSettings::where('key',$key)->value('value');
+    public static function getSettings($key)
+    {
+        return SoftwareSettings::where('key', $key)->value('value');
     }
 
-    public static function updateSettings($key,$value){
-        try{
-            SoftwareSettings::where('key',$key)->update([
-                'value'=>$value
+    public static function updateSettings($key, $value)
+    {
+        try {
+            SoftwareSettings::where('key', $key)->update([
+                'value' => $value
             ]);
             return "success";
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
 
-    public static function getSoftwareSettings($keyName){
+    public static function getSoftwareSettings($keyName)
+    {
 
-        return SoftwareSettings::where('key',$keyName)->value('value');
+        return SoftwareSettings::where('key', $keyName)->value('value');
     }
 
+    // Pinterest settings
+
+    public function pinSave(Request $request)
+    {
+        try {
+            Setting::where('userId', Auth::user()->id)->update([
+                'pinUser' => $request->pinUser,
+                'pinPass' => $request->pinPass
+            ]);
+            return "success";
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
 
 
 }

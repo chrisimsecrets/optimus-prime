@@ -44,9 +44,9 @@
                     <div class="col-xs-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                     </div>
-                    {{--<div class="col-xs-4">--}}
-                        {{--<a href="{{ url('/register') }}" class="btn btn-primary btn-block btn-flat">Register</a>--}}
-                    {{--</div>--}}
+                    <div class="col-xs-4">
+                        <a href="{{ url('/register') }}" class="btn btn-primary btn-block btn-flat">Register</a>
+                    </div>
                 </div>
             </form>
         </div>

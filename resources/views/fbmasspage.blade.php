@@ -52,7 +52,8 @@
                                                 {{$page->pageId}}
                                             </td>
                                             <td>
-                                                <button data-name="{{$page->pageName}}" data-id="{{$page->pageId}}" class="btn badge bg-green"><i
+                                                <button data-name="{{$page->pageName}}" data-id="{{$page->pageId}}"
+                                                        class="btn badge bg-green"><i
                                                             class="fa fa-comment"></i> Mass Comment
                                                 </button>
                                                 <button data-id="{{$page->id}}" class="btn badge bg-red"><i
@@ -101,10 +102,10 @@
     </div>
 
 @endsection
-@section('css')
-    <script src="{{url('/opt/sweetalert.min.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">
-@endsection
+{{--@section('css')--}}
+    {{--<script src="{{url('/opt/sweetalert.min.js')}}"></script>--}}
+    {{--<link rel="stylesheet" type="text/css" href="{{url('/opt/sweetalert.css')}}">--}}
+{{--@endsection--}}
 
 @section('js')
     <script>
@@ -148,33 +149,28 @@
         });
         $('.bg-red').click(function () {
             var id = $(this).attr('data-id');
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this data!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-            }, function () {
-                $.ajax({
-                    type: 'POST',
-                    url: '{{url('/delete/fbpublicpage')}}',
-                    data: {
-                        'id': id
-                    },
-                    success: function (data) {
-                        if (data == 'success') {
-                            swal('Success', 'Page deleted', 'success');
-                            location.reload();
-                        }
-                        else {
-                            swal('Error', data, 'error');
-                        }
+
+            $.ajax({
+                type: 'POST',
+                url: '{{url('/delete/fbpublicpage')}}',
+                data: {
+                    'id': id
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        alert('Page deleted');
+                        location.reload();
                     }
-                });
+                    else {
+                        alert(data);
+                    }
+                },
+                error: function (data) {
+                    alert("Something went wrong, Please check console message");
+                    console.log(data.responseText);
+                }
             });
+
         });
 
         $('.bg-green').click(function () {
@@ -182,7 +178,7 @@
             var pageName = $(this).attr('data-name');
             swal({
                 title: "Comment",
-                text: "Write comment on "+pageName+"'s last 10 post",
+                text: "Write comment on " + pageName + "'s last 10 post",
                 type: "input",
                 showCancelButton: true,
                 closeOnConfirm: false,
@@ -196,16 +192,16 @@
                     return false
                 }
                 $.ajax({
-                   type:'POST',
-                    url:'{{url('/facebook/page/masscomment')}}',
-                    data:{
-                        'id':id,
-                        'text':inputValue
+                    type: 'POST',
+                    url: '{{url('/facebook/page/masscomment')}}',
+                    data: {
+                        'id': id,
+                        'text': inputValue
                     },
-                    success:function (data) {
+                    success: function (data) {
                         swal(data);
                     },
-                    erro:function (data) {
+                    erro: function (data) {
                         swal(data);
                     }
                 });
