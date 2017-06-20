@@ -55,3 +55,27 @@
         @include('components.footer')
     </div>{{--End wrapper--}}
 @endsection
+@section('js')
+    <script>
+        $('#search').click(function () {
+            $('#wait').show(100);
+            $('#scraper').html('');
+            $.ajax({
+                type: 'POST',
+                url: '{{url('/pinterest/search')}}',
+                data: {
+                    'type': $('#type').val(),
+                    'data': $('#query').val()
+                }, success: function (data) {
+                    $('#wait').hide(200);
+                    $('#scraper').html(data);
+
+                }, error: function (data) {
+                    $('#wait').hide(200);
+                    $('#scraper').html("<h3 style='color:red'>Something went wrong please check console message</h3>");
+                    console.log(data.responseText);
+                }
+            });
+        })
+    </script>
+@endsection
