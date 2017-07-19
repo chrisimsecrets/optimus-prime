@@ -333,7 +333,9 @@ class Prappo extends Controller
 //        $realPostTime = $date->format('Y-m-d H:i');
 //        echo "Current date $currentTime and Post time $realPostTime";
 
-        print_r($_SERVER['HTTP_HOST']);
+//        print_r($_SERVER['HTTP_HOST']);
+
+
     }
 
     public static function comment($id, $text)

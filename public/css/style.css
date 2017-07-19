@@ -200,10 +200,10 @@
 .previewLink {
     width: 100%;
     height: 100%;
-    background: #eeeeee;
+    /*background: #eeeeee;*/
     clear: both;
     border: 1px solid #ededed;
-    max-height: 300px;
+    max-height: 600px;
     overflow: hidden;
 }
 
