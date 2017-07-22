@@ -281,61 +281,10 @@ class Prappo extends Controller
         return 'https://api.skype.com/users/' . $user . '/profile/avatar';
     }
 
-    public function test()
-    {
-        /*
-         * Print date start
-         *
-         * */
-
-//        $now = Carbon::parse(Carbon::now()->format('Y-m-d H:i'));
-//        echo $now->format('l');
-
-        /*
-         * Print date end
-         *
-         * */
-//            $carbon = new Carbon();
-////            $carbon->tz('Asia/Dhaka');
-//            $carbon->setTimezone('UTC');
-//
-//            echo $carbon->now()->format('Y-m-d H:i');
-        /*
-         * Timezone change start
-         *
-         * */
-
-//        $timestamp = Carbon::now()->format('Y-m-d H:i');
-//        $date = Carbon::createFromFormat('Y-m-d H:i', $timestamp, 'Asia/Dhaka');
-//        $date->setTimezone('UTC');
-//        echo $date;
-
-        /*
-         * Timezone end
-         *
-         * */
-
-        /*
-         * get the week range
-         *
-         * */
-//        echo "Start of the week ". Carbon::now()->startOfWeek()->format('Y-m-d');
-//        echo "<br>";
-//        echo "End of the week ". Carbon::now()->endOfWeek()->format('Y-m-d');
-
-//        $postTime = "2017-03-18 01:12";
-//        $currentTime = Carbon::now()->format('Y-m-d H:i');
-//
-//        $timezone = User::where('id', '1')->value('timezone');
-//
-//        $date = Carbon::createFromFormat('Y-m-d H:i', $postTime, $timezone);
-//        $date->setTimezone('UTC');
-//        $realPostTime = $date->format('Y-m-d H:i');
-//        echo "Current date $currentTime and Post time $realPostTime";
-
-//        print_r($_SERVER['HTTP_HOST']);
 
 
+    public function prappo(){
+        return "this is prappo";
     }
 
     public static function comment($id, $text)

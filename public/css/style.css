@@ -161,7 +161,7 @@
 
 .postDetails {
     overflow: hidden;
-    border: solid 1px #ededed;
+    /*border: solid 1px #ededed;*/
     border-top: none;
 }
 
@@ -204,6 +204,7 @@
     clear: both;
     border: 1px solid #ededed;
     max-height: 600px;
+    max-width: 500px;
     overflow: hidden;
 }
 
@@ -213,7 +214,8 @@
 }
 
 .previewLink img{
-    height: 100%;
+    height: 600px;
+    width: 500px;
 }
 
 #postForm .messageBox {

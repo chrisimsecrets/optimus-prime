@@ -19,14 +19,13 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::resource('/contact', 'ContactController');
 
-        Route::get('/prappo', 'Prappo@test');
+        Route::get('/prappo', 'Prappo@prappo');
         Route::get('/home', 'HomeController@index');
         Route::get('/write', 'Write@index');
         Route::get('/posttest', 'Write@postTest');
 
         // OAuth 2 callback urls
         Route::get('/fbconnect', 'Settings@fbconnect');
-        Route::get('/linkedin/callback', 'LinkedinController@callback');
 
         // settings pages
         Route::get('/settings', 'Settings@index');
@@ -105,7 +104,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/tudel', 'Write@tuDelete');
         Route::post('/tureblog', 'Write@tuReblog');
 
+//        Image upload
+
         Route::post('/iup', 'ImageUpload@iup');
+        Route::post('/content/upload','ImageUpload@contentUpload');
+        Route::post('/content/list','ImageUpload@showImages');
 
         Route::post('/addschedule', 'ScheduleController@addSchedule');
         Route::get('/schedules', 'ScheduleController@index');

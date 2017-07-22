@@ -14,14 +14,15 @@ class PinterestController extends Controller
 
     public function index()
     {
-        $pinterest = PinterestBot::create();
-        $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
-//        $pins = $pinterest->pins->search('food')->toArray();
-//        $searchInPins = $pinterest->pins->searchInMyPins('islam')->toArray();
-//        $searchInPeople = $pinterest->pinners->search('food')->toArray();
-    $boards = $pinterest->boards->search('food')->toArray();
+//        $pinterest = PinterestBot::create();
+//        $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
+////        $pins = $pinterest->pins->search('food')->toArray();
+////        $searchInPins = $pinterest->pins->searchInMyPins('islam')->toArray();
+////        $searchInPeople = $pinterest->pinners->search('food')->toArray();
+//    $boards = $pinterest->boards->search('food')->toArray();
+//
+//        print_r($boards);
 
-        print_r($boards);
     }
 
     public function scraperIndex()
