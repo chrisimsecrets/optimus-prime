@@ -14,14 +14,14 @@ class PinterestController extends Controller
 
     public function index()
     {
-//        $pinterest = PinterestBot::create();
-//        $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
-////        $pins = $pinterest->pins->search('food')->toArray();
-////        $searchInPins = $pinterest->pins->searchInMyPins('islam')->toArray();
-////        $searchInPeople = $pinterest->pinners->search('food')->toArray();
-//    $boards = $pinterest->boards->search('food')->toArray();
-//
-//        print_r($boards);
+        $pinterest = PinterestBot::create();
+        $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
+//        $pins = $pinterest->pins->search('food')->toArray();
+//        $searchInPins = $pinterest->pins->searchInMyPins('islam')->toArray();
+//        $searchInPeople = $pinterest->pinners->search('food')->toArray();
+//        $boards = $pinterest->boards->search('marketing stuff')->toArray();
+        $myBoards = $pinterest->boards->forUser('uncrate');
+        print_r($myBoards);
 
     }
 
@@ -101,17 +101,17 @@ class PinterestController extends Controller
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-red-active">
-              <h3 class="widget-user-username">'.$pin['full_name'].'</h3>
-              <h5 class="widget-user-desc">'.$pin['username'].'</h5>
+              <h3 class="widget-user-username">' . $pin['full_name'] . '</h3>
+              <h5 class="widget-user-desc">' . $pin['username'] . '</h5>
             </div>
             <div class="widget-user-image">
-              <img class="img-circle" src="'.$pin['image_medium_url'].'" alt="User Avatar">
+              <img class="img-circle" src="' . $pin['image_medium_url'] . '" alt="User Avatar">
             </div>
             <div class="box-footer">
               <div class="row">
                 <div class="col-sm-6 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">'.$pin['pin_count'].'</h5>
+                    <h5 class="description-header">' . $pin['pin_count'] . '</h5>
                     <span class="description-text">Pins</span>
                   </div>
                   <!-- /.description-block -->
@@ -119,7 +119,7 @@ class PinterestController extends Controller
                 <!-- /.col -->
                 <div class="col-sm-6 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">'.$pin['follower_count'].'</h5>
+                    <h5 class="description-header">' . $pin['follower_count'] . '</h5>
                     <span class="description-text">FOLLOWERS</span>
                   </div>
                   <!-- /.description-block -->
@@ -130,13 +130,13 @@ class PinterestController extends Controller
               </div>
               <!-- /.row -->
               <div align="center" class="box-footer">
-              <img src="'.$pin['pin_thumbnail_urls']['1'].'">
-              <img src="'.$pin['pin_thumbnail_urls']['2'].'">
-              <img src="'.$pin['pin_thumbnail_urls']['3'].'">
-              <img src="'.$pin['pin_thumbnail_urls']['4'].'">
+              <img src="' . $pin['pin_thumbnail_urls']['1'] . '">
+              <img src="' . $pin['pin_thumbnail_urls']['2'] . '">
+              <img src="' . $pin['pin_thumbnail_urls']['3'] . '">
+              <img src="' . $pin['pin_thumbnail_urls']['4'] . '">
               </div>
               <div align="center" class="box-footer">
-              <a class="btn btn-xs btn-primary" target="_blank" href="https://www.pinterest.com/'.$pin['username'].'"><i class="fa fa-user"></i> View Profile</a>
+              <a class="btn btn-xs btn-primary" target="_blank" href="https://www.pinterest.com/' . $pin['username'] . '"><i class="fa fa-user"></i> View Profile</a>
               </div>
             </div>
           </div>
@@ -148,7 +148,45 @@ class PinterestController extends Controller
 
             }
         } elseif ($request->type == "boards") {
+            $boards = $pinterest->boards->search($request->data)->toArray();
+            foreach ($boards as $board) {
+                echo "<div class='row'>";
+                echo '
+                <div class="col-md-12">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-red">
+              <div class="widget-user-image">
+                <img class="img-circle" src="' . $board['owner']['image_medium_url'] . '" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username">' . $board['owner']['full_name'] . '</h3>
+              <h5 class="widget-user-desc">@' . $board['owner']['username'] . '</h5>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a target="_blank" href="https://www.pinterest.com' . $board['url'] . '">URL <span class="pull-right badge bg-blue">https://www.pinterest.com' . $board['url'] . '</span></a></li>
+                <li>
+                ' .
+                    '<img style="padding:5px" src="' . $board['pin_thumbnail_urls'][0] . '">' .
+                    '<img style="padding:5px" src="' . $board['pin_thumbnail_urls'][1] . '">' .
+                    '<img style="padding:5px" src="' . $board['pin_thumbnail_urls'][2] . '">' .
+                    '<img style="padding:5px" src="' . $board['pin_thumbnail_urls'][3] . '">' .
+                    '<img style="padding:5px" src="' . $board['pin_thumbnail_urls'][4] . '">' .
 
+
+                    '</li>
+                
+              </ul>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
+                
+                ';
+                echo "</div>";
+            }
         } elseif ($request->type == "inMyPin") {
 
         }

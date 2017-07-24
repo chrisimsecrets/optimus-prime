@@ -109,6 +109,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/iup', 'ImageUpload@iup');
         Route::post('/content/upload','ImageUpload@contentUpload');
         Route::post('/content/list','ImageUpload@showImages');
+        Route::post('/content/delete','ImageUpload@deleteImage');
 
         Route::post('/addschedule', 'ScheduleController@addSchedule');
         Route::get('/schedules', 'ScheduleController@index');

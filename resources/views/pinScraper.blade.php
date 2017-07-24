@@ -24,7 +24,6 @@
                                     <option value="pins">Pins</option>
                                     <option value="peoples">People</option>
                                     <option value="boards">Boards</option>
-                                    <option value="inMyPin">In my Pin</option>
 
 
                                 </select>
