@@ -21,7 +21,8 @@ class PinterestController extends Controller
 //        $searchInPeople = $pinterest->pinners->search('food')->toArray();
 //        $boards = $pinterest->boards->search('marketing stuff')->toArray();
         $myBoards = $pinterest->boards->forUser('uncrate');
-        print_r($myBoards);
+        $me = $pinterest->user->profile();
+        print_r($me);
 
     }
 
