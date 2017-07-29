@@ -202,16 +202,17 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none">
-                        <li><a href="{{ url('/pinterest/me') }}"><i class="fa fa-user"></i>
-                                <span>Profile</span></a>
-                        </li>
-                        <li><a href="{{ url('/pinterest/home') }}"><i class="fa fa-home"></i>
-                                <span>Home</span></a>
-                        </li>
+
 
                         <li><a href="{{ url('/pinterest/pins') }}"><i class="fa fa-map-pin"></i>
                                 <span>My Pins</span></a>
                         </li>
+
+                        <li><a href="{{ url('/pinterest/home') }}"><i class="fa fa-home"></i>
+                                <span>Home</span></a>
+                        </li>
+
+
 
                         <li><a href="{{ url('/pinterest/inbox') }}"><i class="fa fa-envelope"></i>
                                 <span>Inbox</span></a>

@@ -20,8 +20,8 @@ class PinterestController extends Controller
 //        $searchInPins = $pinterest->pins->searchInMyPins('islam')->toArray();
 //        $searchInPeople = $pinterest->pinners->search('food')->toArray();
 //        $boards = $pinterest->boards->search('marketing stuff')->toArray();
-        $myBoards = $pinterest->boards->forUser('uncrate');
-        $me = $pinterest->user->profile();
+//        $myBoards = $pinterest->boards->forUser('uncrate');
+        $me = $pinterest->pins->feed()->toArray();
         print_r($me);
 
     }
@@ -34,6 +34,8 @@ class PinterestController extends Controller
 
         return view('pinScraper');
     }
+
+
 
     public function scraper(Request $request)
     {

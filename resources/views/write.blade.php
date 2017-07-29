@@ -208,7 +208,7 @@
                                     @endif
 
                                     @if(!empty(\App\Http\Controllers\Data::get('inPass')))
-                                        <label class="btn btn-primary bg-light-blue">
+                                        <label class="btn btn-danger bg-red-gradient">
                                             <input id="iCheck" type="checkbox" autocomplete="off"><i
                                                     class="fa fa-instagram"></i>
                                             Instagram
@@ -245,6 +245,15 @@
                                             <input id="linkedinCheck" type="checkbox" autocomplete="off"><i
                                                     class="fa fa-linkedin"></i>
                                             Linkedin
+                                        </label>
+                                    @endif
+
+
+                                    @if(!empty(\App\Http\Controllers\Data::get('pinPass')))
+                                        <label class="btn btn-danger bg-red">
+                                            <input id="pinCheck" type="checkbox" autocomplete="off"><i
+                                                    class="fa fa-pinterest"></i>
+                                            Pinterest
                                         </label>
                                     @endif
 
