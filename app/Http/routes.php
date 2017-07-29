@@ -273,6 +273,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/pinterest', 'PinterestController@index');
         Route::get('/pinterest/scraper', 'PinterestController@scraperIndex');
         Route::post('/pinterest/search', 'PinterestController@scraper');
+        Route::get('/pinterest/home','PinterestController@home');
+        Route::post('/pinterest/write','PinterestController@write');
 
 //        virtual assistant routes
 

@@ -39061,6 +39061,19 @@ $("#linkedinCheck").change(function () {
     }
 });
 
+$("#pinCheck").change(function () {
+    if (this.checked) {
+        $('#pinl').show(400);
+        $('#urlOption').show(300);
+        count = count + 1;
+
+    } else {
+        $('#pinl').hide(400);
+        $('#urlOption').hide(300);
+        count = count - 1;
+    }
+});
+
 
 $('#write').click(function () {
 
@@ -39373,7 +39386,8 @@ $('#write').click(function () {
             type: 'POST',
             url: appPath() + '/skype/masssend',
             data: {
-                'message': data
+                'message': data,
+
 
             },
             success: function (data) {
@@ -39391,6 +39405,42 @@ $('#write').click(function () {
                 if (count == 0) {
                     loading.hide(100);
                 }
+            }
+        });
+    }
+
+    if ($('#pinCheck').is(":checked")) {
+
+        $.ajax({
+            type: 'POST',
+            url: appPath() + '/pinterest/write',
+            data: {
+                'message': data,
+                'image': image,
+                'boardId': $('#boardId').val(),
+                'url': $('#pinUrl').val()
+
+            },
+            success: function (data) {
+
+                if (data == 'success') {
+                    $('#pinMsgSu').html(data);
+                    $('#pinMsgSu').show(300);
+                }
+                else {
+                    $('#pinMsgEr').html(data);
+                    $('#pinMsgEr').show(300);
+                }
+                console.log(data);
+                count = count - 1;
+                if (count == 0) {
+                    loading.hide(100);
+                }
+            },
+            error: function (data) {
+
+                $('#pinMsger').show(300);
+                console.log(data.responseText);
             }
         });
     }

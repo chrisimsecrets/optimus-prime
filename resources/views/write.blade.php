@@ -144,6 +144,26 @@
                                     <br>
                                 </div>
 
+                                <div style="display: none" id="urlOption"
+                                     class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            @if($boards == 'Not available')
+                                                {{$boards}}
+                                            @else
+                                                Select Board
+                                                <select id="boardId">
+                                                    @foreach($boards as $board)
+                                                        <option value="{{$board['id']}}">{{$board['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            @endif
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                </div>
+
 
                                 <div data-step="7"
                                      data-intro="Select your post type. Image post is not available for wordpress, skype, linkedin. And link post is available only for facebook & linkedin. Maybe later we can add link post feature for others"
@@ -285,6 +305,9 @@
                                             class="fa fa-skype"></i> Skype selected</span>
                                 <span style="display: none" id="linkedinl" class="label label-default"><i
                                             class="fa fa-linkedin"></i> Linkedin selected</span>
+
+                                <span style="display: none" id="pinl" class="label label-default"><i
+                                            class="fa fa-pinterest"></i> Pinterest selected</span>
                             </div>
                             <div class="form-group" style="padding-left:10px">
 
@@ -457,6 +480,10 @@
                                                   class="label label-success"><i
                                                         class="fa fa-linkedin"></i> Successfully wrote on linkedin</span>
 
+                                            <span id="pinMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-pinterest"></i> Successfully posted on Pinterest</span>
+
                                             <span id="fbMsgEr" style="display: none"
                                                   class="label label-danger"><i
                                                         class="fa fa-facebook"></i> Error occurred while trying to write on facebook page</span>
@@ -482,11 +509,15 @@
 
                                             <span id="tuMsgEr" style="display: none"
                                                   class="label label-danger"><i
-                                                        class="fa fa-tumblr"></i> Error occurred while trying to write on tumblr</span>
+                                                        class="fa fa-tumblr"></i> Error occurred while trying to write on Tumblr</span>
 
                                             <span id="liMsgEr" style="display: none"
                                                   class="label label-danger"><i
-                                                        class="fa fa-linkedin"></i> Error occurred while trying to write on linkedin</span>
+                                                        class="fa fa-linkedin"></i> Error occurred while trying to write on Pinterest</span>
+
+                                            <span id="pinMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-pinterest"></i> Error occurred while trying to write on Pinterest</span>
                                         </div>
                                     </div>
                                 </div>
@@ -958,11 +989,6 @@
                     }
                 });
             });
-
-
-
-
-
 
 
 //========================================================================

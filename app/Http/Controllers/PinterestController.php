@@ -21,8 +21,20 @@ class PinterestController extends Controller
 //        $searchInPeople = $pinterest->pinners->search('food')->toArray();
 //        $boards = $pinterest->boards->search('marketing stuff')->toArray();
 //        $myBoards = $pinterest->boards->forUser('uncrate');
-        $me = $pinterest->pins->feed()->toArray();
-        print_r($me);
+//        $me = $pinterest->boards->forMe();
+//        print_r($me);
+
+
+        // Get lists of your boards
+        $boards = $pinterest->boards->forMe();
+        print_r($boards);
+
+// Create a pin
+//        $pinterest->pins->create('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png', $boards[0]['id'], 'Pin description');
+
+// Wait 5 seconds
+//        $pinterest->wait(5);
+
 
     }
 
@@ -35,6 +47,40 @@ class PinterestController extends Controller
         return view('pinScraper');
     }
 
+
+    public function home()
+    {
+        if (!Data::myPackage('pinterest')) {
+            return view('errors.404');
+        }
+
+        $pinterest = PinterestBot::create();
+        $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
+        $pins = $pinterest->pins->feed()->toArray();
+        print_r($pins);
+
+
+    }
+
+    public function write(Request $request)
+    {
+        try {
+            $pinterest = PinterestBot::create();
+            $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
+//            $pinterest->pins->create(public_path('/uploads') . '/' . $request->image, $request->boardId, $request->message, $request->siteUrl);
+            $boards = $pinterest->boards->forMe();
+
+// Create a pin
+            $pinterest->pins->create(public_path('/uploads') . '/' . $request->image, $request->boardId, $request->message);
+
+// Wait 5 seconds
+            $pinterest->wait(5);
+            return "success";
+
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
 
 
     public function scraper(Request $request)
@@ -196,11 +242,6 @@ class PinterestController extends Controller
 
     }
 
-
-    public function write(Request $request)
-    {
-
-    }
 
     public function autoFollow()
     {

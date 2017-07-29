@@ -11,6 +11,7 @@ use App\Wp;
 use App\Fbgr;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use seregazhuk\PinterestBot\Factories\PinterestBot;
 use Tumblr\API;
 use App\OptLog;
 use App\Allpost;
@@ -51,12 +52,21 @@ class Write extends Controller
             $liCompanies = "";
         }
 
+        if(Data::get('pinPass')==""){
+            $boards = "Not available";
+        }else{
+            $pinterest = PinterestBot::create();
+            $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
+            $boards = $pinterest->boards->forMe();
+        }
+
         return view('write', compact(
             'l',
             'tuBlogName',
             'fbPages',
             'fbGroups',
-            'liCompanies'
+            'liCompanies',
+            'boards'
         ));
     }
 
