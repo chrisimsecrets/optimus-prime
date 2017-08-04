@@ -38993,6 +38993,10 @@ $('#iCheck').change(function () {
     if (this.checked) {
         $('#inl').show(400);
         count = count + 1;
+
+        $('#imagetype').prop('checked',true);
+        $('#imgoption').show(200);
+
     }
     else {
         $('#inl').hide(400);
@@ -39066,6 +39070,10 @@ $("#pinCheck").change(function () {
         $('#pinl').show(400);
         $('#urlOption').show(300);
         count = count + 1;
+
+        $('#imagetype').prop('checked',true);
+        $('#imgoption').show(200);
+        
 
     } else {
         $('#pinl').hide(400);
@@ -39926,7 +39934,7 @@ $('#saveschedule').click(function () {
     var tw = "no";
     var tu = "no";
     var wp = "no";
-
+    var pinterest = "no";
     var instagram = "no";
     var linkedin = "no";
     var imagetype = "no";
@@ -39961,6 +39969,14 @@ $('#saveschedule').click(function () {
             return alert("You must upload image to post on Instagram");
         }
     }
+
+    if ($('#pinCheck').is(':checked')) {
+        pinterest = "yes";
+        if ($('#image').val() == "") {
+            return alert("You must upload image to post on Pinterest");
+        }
+    }
+
     if ($('#lnCheck').is(':checked')) {
         linkedin = "yes";
     }
@@ -39997,7 +40013,8 @@ $('#saveschedule').click(function () {
             'wp': wp,
             'instagram': instagram,
             'linkedin': linkedin,
-            'blogName': blogName
+            'blogName': blogName,
+            'pinterest':pinterest
 
         },
         success: function (data) {
