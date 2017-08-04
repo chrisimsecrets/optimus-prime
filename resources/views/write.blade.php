@@ -151,7 +151,7 @@
                                             @if($boards == 'Not available')
                                                 {{$boards}}
                                             @else
-                                                Select Board
+                                                Select <Board></Board>
                                                 <select id="boardId">
                                                     @foreach($boards as $board)
                                                         <option value="{{$board['id']}}">{{$board['name']}}</option>
