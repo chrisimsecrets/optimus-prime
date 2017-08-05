@@ -39073,7 +39073,7 @@ $("#pinCheck").change(function () {
 
         $('#imagetype').prop('checked',true);
         $('#imgoption').show(200);
-        
+
 
     } else {
         $('#pinl').hide(400);

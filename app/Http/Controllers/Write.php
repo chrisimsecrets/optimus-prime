@@ -39,8 +39,9 @@ class Write extends Controller
 
     public function index()
     {
-        $fbPages = FacebookPages::where('userId',Auth::user()->id)->get();
-        $fbGroups = facebookGroups::where('userId',Auth::user()->id)->get();
+        $fbPages = FacebookPages::where('userId', Auth::user()->id)->get();
+        $fbGroups = facebookGroups::where('userId', Auth::user()->id)->get();
+        $boards = "Not available";
         if (Data::get('liAccessToken') != "") {
             try {
                 $liCompanies = LinkedinController::companies()['values'];
@@ -51,14 +52,16 @@ class Write extends Controller
         } else {
             $liCompanies = "";
         }
-
-        if(Data::get('pinPass')==""){
-            $boards = "Not available";
-        }else{
-            $pinterest = PinterestBot::create();
-            $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
-            $boards = $pinterest->boards->forMe();
+        if (\App\Http\Controllers\Data::myPackage('pinterest')) {
+            if (Data::get('pinPass') == "") {
+                $boards = "Not available";
+            } else {
+                $pinterest = PinterestBot::create();
+                $pinterest->auth->login(Data::get('pinUser'), Data::get('pinPass'));
+                $boards = $pinterest->boards->forMe();
+            }
         }
+
 
         return view('write', compact(
             'l',

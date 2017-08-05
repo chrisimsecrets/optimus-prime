@@ -47,6 +47,7 @@ class ImageUpload extends Controller
             $jpgImage = imagecreatefrompng(public_path() . '/uploads/' . $fileName . '.png');
             imagejpeg($jpgImage, public_path() . '/uploads/' . $fileName . '.jpg', 90);
             imagedestroy($jpgImage);
+            \File::delete(public_path() . '/uploads/' . $fileName . '.png');
             return response()->json([
                 "status" => "success",
                 "fileName" => $fileName . '.jpg'

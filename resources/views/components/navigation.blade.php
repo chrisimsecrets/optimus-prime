@@ -25,51 +25,53 @@
 
                 <li class="dropdown messages-menu">
 
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-language"></i>
+                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
+                        {{--<i class="fa fa-language"></i>--}}
 
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">{{trans('navigation.Select your language')}}</li>
-                        <li>
-                            <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
+                    {{--</a>--}}
 
-                                <li>
-                                    <a data-id="gb" class="lang"  href="#">
-                                        <div class="pull-left">
-                                            <span class="flag-icon flag-icon-gb"></span>
+                    {{-- language menu--}}
+                    {{--<ul class="dropdown-menu">--}}
+                        {{--<li class="header">{{trans('navigation.Select your language')}}</li>--}}
+                        {{--<li>--}}
+                            {{--<!-- inner menu: contains the actual data -->--}}
+                            {{--<ul class="menu">--}}
 
-                                        </div>
-                                        <h4>
-                                            English
+                                {{--<li>--}}
+                                    {{--<a data-id="gb" class="lang"  href="#">--}}
+                                        {{--<div class="pull-left">--}}
+                                            {{--<span class="flag-icon flag-icon-gb"></span>--}}
 
-                                        </h4>
+                                        {{--</div>--}}
+                                        {{--<h4>--}}
+                                            {{--English--}}
 
-                                    </a>
-                                </li>
+                                        {{--</h4>--}}
 
-                                <li>
-                                    <a data-id="bd" class="lang"  href="#">
-                                        <div class="pull-left">
-                                            <span class="flag-icon flag-icon-bd"></span>
+                                    {{--</a>--}}
+                                {{--</li>--}}
 
-                                        </div>
-                                        <h4>
-                                            Bangla
+                                {{--<li>--}}
+                                    {{--<a data-id="bd" class="lang"  href="#">--}}
+                                        {{--<div class="pull-left">--}}
+                                            {{--<span class="flag-icon flag-icon-bd"></span>--}}
 
-                                        </h4>
+                                        {{--</div>--}}
+                                        {{--<h4>--}}
+                                            {{--Bangla--}}
 
-                                    </a>
-                                </li>
+                                        {{--</h4>--}}
+
+                                    {{--</a>--}}
+                                {{--</li>--}}
 
 
-                            </ul>
-                        </li>
-                        @if(Auth::user()->type == 'admin')
-                            <li class="footer"><a href="{{ url('/language/add') }}">Add new language</a></li>
-                        @endif
-                    </ul>
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--@if(Auth::user()->type == 'admin')--}}
+                            {{--<li class="footer"><a href="{{ url('/language/add') }}">Add new language</a></li>--}}
+                        {{--@endif--}}
+                    {{--</ul>--}}
                 </li>
             {{--<li class="dropdown messages-menu">--}}
 
